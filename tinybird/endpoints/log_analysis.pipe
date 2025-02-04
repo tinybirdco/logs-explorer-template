@@ -1,0 +1,51 @@
+
+DESCRIPTION >
+    Analyze logs with filtering capabilities by time range, service, level and environment
+
+NODE log_analysis_node
+SQL >
+    %
+    SELECT
+        timestamp,
+        request_id,
+        request_method,
+        status_code,
+        service,
+        request_path,
+        level,
+        message
+    FROM logs
+    WHERE 1=1
+    {% if defined(start_date) and start_date != '' %}
+        AND timestamp >= {{DateTime(start_date, '2024-01-01 00:00:00')}}
+    {% end %}
+    {% if defined(end_date) and end_date != '' %}
+        AND timestamp <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
+    {% end %}
+    {% if defined(service) and service != '' %}
+        AND service in {{Array(service)}}
+    {% end %}
+    {% if defined(level) and level != '' %}
+        AND level in {{Array(level)}}
+    {% end %}
+    {% if defined(environment) and environment != '' %}
+        AND environment in {{Array(environment)}}
+    {% end %}
+    {% if defined(request_method) and request_method != '' %}
+        AND request_method in {{Array(request_method)}}
+    {% end %}
+    {% if defined(status_code) and status_code != '' %}
+        AND status_code in {{Array(status_code)}}
+    {% end %}
+    {% if defined(request_path) and request_path != '' %}
+        AND request_path in {{Array(request_path)}}
+    {% end %}
+    {% if defined(user_agent) and user_agent != '' %}
+        AND user_agent in {{Array(user_agent)}}
+    {% end %}
+    ORDER BY timestamp DESC
+    LIMIT {{Int32(page_size, 100)}}
+    OFFSET {{Int32(page, 0)}} * {{Int32(page_size, 100)}}
+
+TYPE endpoint
+        

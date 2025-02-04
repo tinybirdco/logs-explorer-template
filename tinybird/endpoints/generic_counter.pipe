@@ -1,0 +1,23 @@
+DESCRIPTION >
+    This pipe is used to have a counter for each category of each dimension
+    
+NODE count_attributes
+SQL >
+%
+    SELECT
+        toString({{column(column_name, 'level')}}) as category,
+        COUNT() as count
+    FROM
+        logs
+    WHERE 1=1
+    {% if defined(start_date) %}
+        AND timestamp >= {{DateTime(start_date, '2024-01-01 00:00:00')}}
+    {% end %}
+    {% if defined(end_date) %}
+        AND timestamp <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
+    {% end %}
+    GROUP BY {{column(column_name, 'level')}}
+    ORDER BY count DESC
+    LIMIT 5
+
+TYPE endpoint

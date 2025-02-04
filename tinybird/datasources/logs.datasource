@@ -1,0 +1,24 @@
+
+DESCRIPTION >
+    Raw logs datasource to store application logs
+
+SCHEMA >
+    `timestamp` DateTime64(3) `json:$.timestamp`,
+    `level` LowCardinality(String) `json:$.level`,
+    `service` LowCardinality(String) `json:$.service`,
+    `message` String `json:$.message`,
+    `request_id` String `json:$.request_id`,
+    `environment` LowCardinality(String) `json:$.environment`,
+    `status_code` UInt16 `json:$.status_code`,
+    `response_time` UInt32 `json:$.response_time`,
+    `request_method` LowCardinality(String) `json:$.request_method`,
+    `request_path` String `json:$.request_path`,
+    `host` LowCardinality(String) `json:$.host`,
+    `user_agent` LowCardinality(String) `json:$.user_agent`
+    
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
+ENGINE_SORTING_KEY "timestamp, service, level"
+ENGINE_TTL "toDateTime(timestamp) + INTERVAL 180 DAY"
+        

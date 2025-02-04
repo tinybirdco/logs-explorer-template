@@ -1,0 +1,34 @@
+
+DESCRIPTION >
+    Monitor error rates and response times by service
+
+NODE error_monitoring_node
+SQL >
+    %
+    SELECT
+        service,
+        toStartOfHour(timestamp) as hour,
+        countIf(level = 'ERROR') as error_count,
+        count() as total_requests,
+        round(countIf(level = 'ERROR') * 100.0 / count(), 2) as error_rate,
+        avg(response_time) as avg_response_time,
+        max(response_time) as max_response_time
+    FROM logs
+    WHERE 1=1
+    {% if defined(start_date) %}
+        AND timestamp >= {{DateTime(start_date, '2024-01-01 00:00:00')}}
+    {% end %}
+    {% if defined(end_date) %}
+        AND timestamp <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
+    {% end %}
+    {% if defined(service) %}
+        AND service = {{String(service, 'all')}}
+    {% end %}
+    {% if defined(environment) %}
+        AND environment = {{String(environment, 'production')}}
+    {% end %}
+    GROUP BY service, hour
+    ORDER BY hour DESC, error_rate DESC
+
+TYPE endpoint
+        
