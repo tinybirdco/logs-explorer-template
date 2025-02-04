@@ -1,3 +1,4 @@
+TOKEN read_pipes READ
 
 DESCRIPTION >
     Analyze logs with filtering capabilities by time range, service, level and environment
