@@ -27,7 +27,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder }: LogTableP
   return (
     <div className="rounded-md border">
       <div className="relative h-[calc(100vh-140px)]">
-        <div className="absolute top-0 w-full bg-white z-10">
+        <div className="sticky top-0 w-full bg-white z-10">
           <Table className="table-fixed w-full">
             <TableHeader>
               <TableRow>
@@ -59,7 +59,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder }: LogTableP
             </TableHeader>
           </Table>
         </div>
-        <div className="overflow-y-auto h-full pt-12">
+        <div className="overflow-y-auto h-full">
           <Table className="table-fixed w-full">
             <TableBody>
               {logs?.map((log, index) => (
