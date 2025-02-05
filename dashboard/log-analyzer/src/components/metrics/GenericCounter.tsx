@@ -9,6 +9,7 @@ import { ChevronDown, Search, X } from "lucide-react";
 import { useSearchParams } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 
 interface GenericCounterProps {
   columnName: string;
@@ -40,6 +41,8 @@ export function GenericCounter({
   const currentParams = searchParams.get(columnName);
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
+
+  useDefaultDateRange();
 
   // Initialize selected from URL params
   useEffect(() => {

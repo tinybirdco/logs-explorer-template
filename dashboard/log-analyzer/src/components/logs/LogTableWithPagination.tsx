@@ -7,6 +7,7 @@ import { Loader2 } from 'lucide-react';
 import { logAnalysisApi } from '@/lib/tinybird';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
+import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 
 interface LogTableWithPaginationProps {
   pageSize: number;
@@ -115,6 +116,8 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   const { observerRef, isLoading } = useInfiniteScroll(
     () => loadMore(setIsLoading => setIsLoading)
   );
+
+  useDefaultDateRange();
 
   return (
     <div className="h-[calc(100vh-64px)] overflow-auto">

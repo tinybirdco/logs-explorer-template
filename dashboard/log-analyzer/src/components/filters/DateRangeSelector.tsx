@@ -3,6 +3,7 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCallback } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 
 function formatDate(date: Date) {
   return date.toISOString().split('.')[0].replace('T', ' ').replace('Z', '');
@@ -12,6 +13,7 @@ export function DateRangeSelector() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  useDefaultDateRange();
 
   const handleTimeRangeChange = useCallback((value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -32,7 +34,7 @@ export function DateRangeSelector() {
         startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
         break;
       default:
-        startDate = new Date(now.getTime() - 30 * 60 * 1000);
+        startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
     }
 
     params.set('start_date', formatDate(startDate));
