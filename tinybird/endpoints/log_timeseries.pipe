@@ -63,7 +63,7 @@ SQL >
             toStartOfMinute(timestamp) as date,
         {% end %}
         countIf(level = 'ERROR') as error_count,
-        count() as total_requests,
+        countIf(level != 'ERROR') as total_requests,
         round(countIf(level = 'ERROR') * 100.0 / count(), 2) as error_rate,
         round(avg(response_time), 2) as avg_response_time,
         round(max(response_time), 2) as max_response_time
@@ -71,25 +71,25 @@ SQL >
     WHERE 1=1
         AND timestamp >= {{DateTime(start_date)}}
         AND timestamp <= {{DateTime(end_date)}}
-    {% if defined(service) and service != '' %}
+    {% if defined(service) and service != [''] %}
         AND service in {{Array(service)}}
     {% end %}
-    {% if defined(level) and level != '' %}
+    {% if defined(level) and level != [''] %}
         AND level in {{Array(level)}}
     {% end %}
-    {% if defined(environment) and environment != '' %}
+    {% if defined(environment) and environment != [''] %}
         AND environment in {{Array(environment)}}
     {% end %}
-    {% if defined(request_method) and request_method != '' %}
+    {% if defined(request_method) and request_method != [''] %}
         AND request_method in {{Array(request_method)}}
     {% end %}
-    {% if defined(status_code) and status_code != '' %}
+    {% if defined(status_code) and status_code != [''] %}
         AND status_code in {{Array(status_code)}}
     {% end %}
-    {% if defined(request_path) and request_path != '' %}
+    {% if defined(request_path) and request_path != [''] %}
         AND request_path in {{Array(request_path)}}
     {% end %}
-    {% if defined(user_agent) and user_agent != '' %}
+    {% if defined(user_agent) and user_agent != [''] %}
         AND user_agent in {{Array(user_agent)}}
     {% end %}
     GROUP BY date
@@ -106,7 +106,7 @@ SQL >
       {{ error('end_date (DateTime) query param is required') }}
     {% end %}
     SELECT
-        formatDateTime(date, '%FT%T.000%z') as date,
+        date,
         error_count,
         total_requests,
         error_rate,

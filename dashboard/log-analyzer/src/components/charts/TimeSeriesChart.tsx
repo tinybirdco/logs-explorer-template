@@ -1,7 +1,36 @@
-export function TimeSeriesChart() {
-  return (
-    <div className="w-full h-full p-4">
-      {/* Chart will be implemented in next step */}
-    </div>
-  );
-} 
+'use client'
+
+import { BarChart } from '@tinybirdco/charts'
+
+export function TimeSeriesChart(params: {
+  token?: string
+  start_date?: string
+  end_date?: string
+  request_path?: string[]
+  user_agent?: string[]
+  status_code?: string[]
+  service?: string[]
+  level?: string[]
+  environment?: string[]
+  request_method?: string[]
+}) {
+  return <BarChart 
+    endpoint={`${process.env.NEXT_PUBLIC_TINYBIRD_API_URL}/v0/pipes/log_timeseries.json`}
+    token={params.token ?? ''}
+    index="date"
+    categories={['total_requests', 'error_count']}
+    height="200px"
+    params={{
+      ...params,
+      request_path: params.request_path?.join(',') ?? '',
+      user_agent: params.user_agent?.join(',') ?? '',
+      status_code: params.status_code?.join(',') ?? '',
+      service: params.service?.join(',') ?? '',
+      level: params.level?.join(',') ?? '',
+      environment: params.environment?.join(',') ?? '',
+      request_method: params.request_method?.join(',') ?? '',
+    }}
+    stacked={true}
+    colorPalette={['#000000', '#ff0000']}
+  />
+}
