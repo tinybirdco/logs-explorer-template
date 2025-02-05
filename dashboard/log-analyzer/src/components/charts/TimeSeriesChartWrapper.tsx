@@ -30,7 +30,7 @@ export function TimeSeriesChartWrapper({ token }: TimeSeriesChartWrapperProps) {
 
   if (!token) {
     return <div className="flex items-center justify-center h-full">
-      "Missing API token"
+      Missing API token
     </div>;
   }
 
