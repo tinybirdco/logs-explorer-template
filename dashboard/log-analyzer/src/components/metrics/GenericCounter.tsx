@@ -11,8 +11,6 @@ import { useSearchParams } from 'next/navigation';
 interface GenericCounterProps {
   columnName: string;
   title: string;
-  startDate?: string;
-  endDate?: string;
   onSelectionChange?: (selected: string[]) => void;
 }
 
@@ -23,9 +21,7 @@ interface CountData {
 
 export function GenericCounter({ 
   columnName, 
-  title, 
-  startDate, 
-  endDate,
+  title,
   onSelectionChange 
 }: GenericCounterProps) {
   const searchParams = useSearchParams();
@@ -36,6 +32,8 @@ export function GenericCounter({
   const [isOpen, setIsOpen] = useState(true);
   const initializedRef = useRef(false);
   const currentParams = searchParams.get(columnName);
+  const startDate = searchParams.get('start_date');
+  const endDate = searchParams.get('end_date');
 
   // Initialize selected from URL params
   useEffect(() => {
@@ -52,8 +50,8 @@ export function GenericCounter({
         setIsLoading(true);
         const response = await genericCounterApi({ 
           column_name: columnName,
-          start_date: startDate,
-          end_date: endDate,
+          start_date: startDate || undefined,
+          end_date: endDate || undefined,
         });
         setData(response.data);
       } catch (err) {
@@ -63,7 +61,9 @@ export function GenericCounter({
       }
     }
 
-    fetchData();
+    if (startDate && endDate) {
+      fetchData();
+    }
   }, [columnName, startDate, endDate]);
 
   const handleCheckboxChange = (category: string) => {

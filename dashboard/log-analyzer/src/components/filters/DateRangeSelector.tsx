@@ -42,7 +42,7 @@ export function DateRangeSelector() {
   }, [pathname, router, searchParams]);
 
   return (
-    <Select defaultValue="30m" onValueChange={handleTimeRangeChange}>
+    <Select defaultValue="7d" onValueChange={handleTimeRangeChange}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Time Range" />
       </SelectTrigger>

@@ -2,6 +2,7 @@
 
 import { SearchBar } from "@/components/filters/SearchBar";
 import { DateRangeSelector } from "@/components/filters/DateRangeSelector";
+import { RefreshButton } from "@/components/filters/RefreshButton";
 
 export default function TopBar() {
   return (
@@ -9,6 +10,7 @@ export default function TopBar() {
       <div className="flex items-center space-x-4">
         <SearchBar />
         <DateRangeSelector />
+        <RefreshButton />
       </div>
     </div>
   );
