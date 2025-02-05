@@ -3,7 +3,6 @@
 import { GenericCounter } from "@/components/metrics/GenericCounter";
 import { useCallback, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useLogs } from "@/contexts/LogContext";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,63 +11,22 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { fetchLogs } = useLogs();
   const [isCollapsed, setIsCollapsed] = useState(false);
   
-  // Update URL with new filters and fetch logs
-  const updateFilters = useCallback((filters: Record<string, string[]>) => {
-    const params = new URLSearchParams(searchParams.toString());
-    
-    // Update each filter in the URL
-    Object.entries(filters).forEach(([key, values]) => {
-      if (values.length > 0) {
-        params.set(key, values.join(','));
-      } else {
-        params.delete(key);
-      }
-    });
-    
-    router.replace(`${pathname}?${params.toString()}`);
-
-    // Only include non-empty filters
-    const nonEmptyFilters: Record<string, string[]> = {};
-    Object.entries(filters).forEach(([key, values]) => {
-      if (values && values.length > 0) {
-        nonEmptyFilters[key] = values;
-      }
-    });
-
-    // Convert status_code to numbers if present
-    if (nonEmptyFilters.status_code) {
-      fetchLogs({
-        ...nonEmptyFilters,
-        status_code: nonEmptyFilters.status_code.map(Number),
-      });
-    } else {
-      fetchLogs(nonEmptyFilters);
-    }
-  }, [pathname, router, searchParams, fetchLogs]);
-
-  // Create handler factory for each filter type
-  const createFilterHandler = (paramName: string) => {
+  // Update URL with new filters
+  const createFilterHandler = useCallback((filterName: string) => {
     return (selected: string[]) => {
-      const currentParams = new URLSearchParams(searchParams.toString());
-      const filters: Record<string, string[]> = {
-        service: currentParams.get('service')?.split(',').filter(Boolean) || [],
-        level: currentParams.get('level')?.split(',').filter(Boolean) || [],
-        environment: currentParams.get('environment')?.split(',').filter(Boolean) || [],
-        request_method: currentParams.get('request_method')?.split(',').filter(Boolean) || [],
-        status_code: currentParams.get('status_code')?.split(',').filter(Boolean) || [],
-        request_path: currentParams.get('request_path')?.split(',').filter(Boolean) || [],
-        user_agent: currentParams.get('user_agent')?.split(',').filter(Boolean) || [],
-      };
-
-      // Update the specific filter
-      filters[paramName] = selected;
-
-      updateFilters(filters);
+      const params = new URLSearchParams(searchParams.toString());
+      
+      if (selected.length > 0) {
+        params.set(filterName, selected.join(','));
+      } else {
+        params.delete(filterName);
+      }
+      
+      router.replace(`${pathname}?${params.toString()}`);
     };
-  };
+  }, [pathname, router, searchParams]);
 
   return (
     <div className={cn(
@@ -82,8 +40,6 @@ export default function Sidebar() {
         )}
       >
         <div className="overflow-y-auto pt-4 pl-4 pr-4 space-y-4 h-full">
-          {/* Timeline component */}
-          
           {/* Log Levels */}
           <GenericCounter 
             columnName="level"

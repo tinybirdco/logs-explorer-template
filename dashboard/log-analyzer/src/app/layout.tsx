@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { LogProvider } from '@/contexts/LogContext';
 
 export const metadata: Metadata = {
   title: "Log Analyzer",
@@ -15,9 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <LogProvider>
-          {children}
-        </LogProvider>
+        {children}
       </body>
     </html>
   );
