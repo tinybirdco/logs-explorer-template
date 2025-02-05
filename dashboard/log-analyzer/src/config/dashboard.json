@@ -1,0 +1,193 @@
+{
+  "filters": [
+    {
+      "columnName": "event_level",
+      "title": "Log Levels",
+      "type": "multiselect",
+      "order": 1
+    },
+    {
+      "columnName": "event_environment",
+      "title": "Environments",
+      "type": "multiselect",
+      "order": 2
+    },
+    {
+      "columnName": "event_proxy_host",
+      "title": "Hosts",
+      "type": "multiselect",
+      "order": 3
+    },
+    {
+      "columnName": "event_proxy_method",
+      "title": "HTTP Methods",
+      "type": "multiselect",
+      "order": 4
+    },
+    {
+      "columnName": "event_statusCode",
+      "title": "Status Codes",
+      "type": "multiselect",
+      "order": 5
+    },
+    {
+      "columnName": "event_source",
+      "title": "Sources",
+      "type": "multiselect",
+      "order": 6
+    },
+    {
+      "columnName": "event_projectName",
+      "title": "Projects",
+      "type": "multiselect",
+      "order": 7
+    },
+    {
+      "columnName": "event_message",
+      "title": "by message",
+      "type": "search",
+      "order": 8
+    }
+  ],
+  "table": {
+    "columns": [
+      {
+        "key": "event_requestId",
+        "title": "ID",
+        "width": "w-32",
+        "type": "text",
+        "truncate": true
+      },
+      {
+        "key": "event_time",
+        "title": "Time",
+        "width": "w-32",
+        "type": "datetime"
+      },
+      {
+        "key": "event_level",
+        "title": "Level",
+        "width": "w-16",
+        "type": "badge",
+        "badgeConfig": {
+          "colorMap": {
+            "ERROR": "bg-red-100 text-red-700",
+            "WARN": "bg-yellow-100 text-yellow-700"
+          },
+          "defaultColor": "bg-green-100 text-green-700"
+        }
+      },
+      {
+        "key": "event_projectName",
+        "title": "Project",
+        "width": "w-24",
+        "type": "text"
+      },
+      {
+        "key": "event_proxy_method",
+        "title": "Method",
+        "width": "w-16",
+        "type": "text"
+      },
+      {
+        "key": "event_proxy_host",
+        "title": "Host",
+        "width": "w-64",
+        "type": "text"
+      },
+      {
+        "key": "event_environment",
+        "title": "Environment",
+        "width": "w-64",
+        "type": "text"
+      },
+      {
+        "key": "event_source",
+        "title": "Source",
+        "width": "w-64",
+        "type": "text"
+      },
+      {
+        "key": "event_statusCode",
+        "title": "Status",
+        "width": "w-16",
+        "type": "badge",
+        "badgeConfig": {
+          "colorMap": {
+            "500": "bg-red-100 text-red-700",
+            "400": "bg-yellow-100 text-yellow-700"
+          },
+          "defaultColor": "bg-green-100 text-green-700"
+        }
+      },
+      {
+        "key": "event_message",
+        "title": "Message",
+        "width": "flex-1",
+        "type": "text",
+        "truncate": true
+      }
+    ]
+  },
+  "timeseries": {
+    "endpoint": "/v0/pipes/log_timeseries.json",
+    "index": "date",
+    "categories": ["total_requests", "error_count"],
+    "height": "140px",
+    "colorPalette": ["#000000", "#ff0000"],
+    "params": [
+      {
+        "name": "event_projectName",
+        "type": "string[]"
+      },
+      {
+        "name": "event_level",
+        "type": "string[]"
+      },
+      {
+        "name": "event_environment",
+        "type": "string[]"
+      },
+      {
+        "name": "event_proxy_method",
+        "type": "string[]"
+      },
+      {
+        "name": "event_statusCode",
+        "type": "string[]"
+      },
+      {
+        "name": "event_proxy_path",
+        "type": "string[]"
+      },
+      {
+        "name": "event_userAgent",
+        "type": "string[]"
+      },
+      {
+        "name": "event_proxy_host",
+        "type": "string[]"
+      },
+      {
+        "name": "event_source",
+        "type": "string[]"
+      },
+      {
+        "name": "event_message",
+        "type": "string"
+      },
+      {
+        "name": "start_date",
+        "type": "string"
+      },
+      {
+        "name": "end_date",
+        "type": "string"
+      }
+    ]
+  },
+  "endpoints": {
+    "counter": "generic_counter",
+    "logs": "log_analysis"
+  }
+} 
