@@ -68,7 +68,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-80 flex-none overflow-y-auto border-r p-4 space-y-4">
+    <div className="w-80 flex-none overflow-y-auto border-r p-4 space-y-4 h-[calc(100vh-64px)]">
       {/* Timeline component */}
       
       {/* Log Levels */}
