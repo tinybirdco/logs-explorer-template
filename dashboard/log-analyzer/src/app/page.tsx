@@ -10,20 +10,18 @@ export default async function Page() {
   };
 
   return (
-    <main className="flex h-screen bg-background">
-      <div className="w-80 border-r border-border">
-        <Suspense fallback={
-          <div className="p-4 space-y-4">
-            <div className="animate-pulse bg-gray-200 h-8 w-full rounded" />
-            <div className="animate-pulse bg-gray-200 h-32 w-full rounded" />
-            <div className="animate-pulse bg-gray-200 h-32 w-full rounded" />
-          </div>
-        }>
-          <Sidebar />
-        </Suspense>
-      </div>
+    <main className="flex h-screen bg-background overflow-hidden">
+      <Suspense fallback={
+        <div className="w-80 border-r border-border p-4 space-y-4">
+          <div className="animate-pulse bg-gray-200 h-8 w-full rounded" />
+          <div className="animate-pulse bg-gray-200 h-32 w-full rounded" />
+          <div className="animate-pulse bg-gray-200 h-32 w-full rounded" />
+        </div>
+      }>
+        <Sidebar />
+      </Suspense>
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         <Suspense fallback={
           <div className="border-b border-border p-4">
             <div className="animate-pulse bg-gray-200 h-10 w-full rounded" />
