@@ -6,6 +6,7 @@ export function TimeSeriesChart(params: {
   token?: string
   start_date?: string
   end_date?: string
+  message?: string
   request_path?: string[]
   user_agent?: string[]
   status_code?: string[]
@@ -29,6 +30,7 @@ export function TimeSeriesChart(params: {
       level: params.level?.join(',') ?? '',
       environment: params.environment?.join(',') ?? '',
       request_method: params.request_method?.join(',') ?? '',
+      message: params.message ?? '',
     }}
     stacked={true}
     colorPalette={['#000000', '#ff0000']}

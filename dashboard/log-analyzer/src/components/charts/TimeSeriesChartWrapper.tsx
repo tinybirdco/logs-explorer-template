@@ -27,6 +27,7 @@ export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
     status_code: searchParams.get('status_code')?.split(',').filter(Boolean),
     request_path: searchParams.get('request_path')?.split(',').filter(Boolean),
     user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean),
+    message: searchParams.get('message') ?? '',
   };
 
   return <TimeSeriesChart {...params} />;

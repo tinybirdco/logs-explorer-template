@@ -33,6 +33,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
       status_code: searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined,
       request_path: searchParams.get('request_path')?.split(',').filter(Boolean) || undefined,
       user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined,
+      message: searchParams.get('message') || undefined,
       sort_by: currentSortColumn || undefined,
       order: currentSortOrder || undefined,
     };

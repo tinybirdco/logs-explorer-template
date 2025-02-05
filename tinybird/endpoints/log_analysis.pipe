@@ -44,6 +44,9 @@ SQL >
     {% if defined(user_agent) and user_agent != [''] %}
         AND user_agent in {{Array(user_agent)}}
     {% end %}
+    {% if defined(message) and message != '' %}
+        AND message like concat('%', {{String(message)}}, '%')
+    {% end %}
     ORDER BY 
     {% if defined(sort_by) and sort_by != '' %}
         {{column(sort_by)}}
