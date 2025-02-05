@@ -5,8 +5,10 @@ import { useEffect, useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown } from "lucide-react"; // Make sure lucide-react is installed
+import { ChevronDown, Search, X } from "lucide-react";
 import { useSearchParams } from 'next/navigation';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface GenericCounterProps {
   columnName: string;
@@ -19,6 +21,8 @@ interface CountData {
   count: number;
 }
 
+const VISIBLE_ITEMS = 5;
+
 export function GenericCounter({ 
   columnName, 
   title,
@@ -26,6 +30,8 @@ export function GenericCounter({
 }: GenericCounterProps) {
   const searchParams = useSearchParams();
   const [data, setData] = useState<CountData[]>([]);
+  const [filteredData, setFilteredData] = useState<CountData[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [selected, setSelected] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -44,6 +50,7 @@ export function GenericCounter({
     }
   }, [currentParams]);
 
+  // Fetch data effect
   useEffect(() => {
     async function fetchData() {
       try {
@@ -54,6 +61,7 @@ export function GenericCounter({
           end_date: endDate || undefined,
         });
         setData(response.data);
+        setFilteredData(response.data);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch data');
       } finally {
@@ -66,6 +74,14 @@ export function GenericCounter({
     }
   }, [columnName, startDate, endDate]);
 
+  // Filter data effect
+  useEffect(() => {
+    const filtered = data.filter(item => 
+      item.category.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredData(filtered);
+  }, [searchTerm, data]);
+
   const handleCheckboxChange = (category: string) => {
     const newSelected = selected.includes(category)
       ? selected.filter(item => item !== category)
@@ -73,6 +89,19 @@ export function GenericCounter({
     
     setSelected(newSelected);
     onSelectionChange?.(newSelected);
+  };
+
+  // Get visible items - all if searching, or first VISIBLE_ITEMS if not
+  const visibleItems = searchTerm ? filteredData : filteredData.slice(0, VISIBLE_ITEMS);
+  const showSearch = data.length > VISIBLE_ITEMS;
+
+  const handleClearSearch = () => {
+    setSearchTerm('');
+  };
+
+  const handleClearSelections = () => {
+    setSelected([]);
+    onSelectionChange?.([]);
   };
 
   if (isLoading) {
@@ -109,19 +138,58 @@ export function GenericCounter({
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <Card>
         <CardHeader className="p-4">
-          <CollapsibleTrigger className="flex w-full items-center justify-between">
-            <CardTitle className="text-lg">{title}</CardTitle>
-            <ChevronDown
-              className={`h-4 w-4 transition-transform duration-200 ${
-                isOpen ? 'transform rotate-180' : ''
-              }`}
-            />
-          </CollapsibleTrigger>
+          <div className="flex w-full items-center justify-between">
+            <CollapsibleTrigger className="flex items-center space-x-2">
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  isOpen ? 'transform rotate-180' : ''
+                }`}
+              />
+              <CardTitle className="text-lg">{title}</CardTitle>
+            </CollapsibleTrigger>
+            {selected.length > 0 && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-7 w-7 rounded-full hover:bg-muted relative"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent collapsible from toggling
+                  handleClearSelections();
+                }}
+              >
+                <X className="h-4 w-4" />
+                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                  {selected.length}
+                </span>
+              </Button>
+            )}
+          </div>
         </CardHeader>
         <CollapsibleContent>
           <CardContent className="p-4 pt-0">
+            {showSearch && (
+              <div className="relative mb-4">
+                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder={`Search ${title.toLowerCase()}...`}
+                  className="pl-8 pr-8"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                {searchTerm && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-1 top-1 h-7 w-7 rounded-full hover:bg-muted"
+                    onClick={handleClearSearch}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
+            )}
             <div className="space-y-2">
-              {data.map((item) => (
+              {visibleItems.map((item) => (
                 <div key={item.category} className="flex items-center space-x-2">
                   <Checkbox
                     id={`${columnName}-${item.category}`}

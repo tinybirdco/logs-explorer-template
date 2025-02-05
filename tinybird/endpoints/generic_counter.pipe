@@ -20,6 +20,5 @@ SQL >
     {% end %}
     GROUP BY {{column(column_name, 'level')}}
     ORDER BY count DESC
-    LIMIT 5
 
 TYPE endpoint
