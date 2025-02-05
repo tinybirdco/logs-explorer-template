@@ -89,7 +89,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   );
 
   return (
-    <div className="h-[calc(100vh-200px)] overflow-auto">
+    <div className="h-[calc(100vh-64px)] overflow-auto">
       <LogTable logs={logs} />
       <div 
         ref={observerRef} 
