@@ -9,13 +9,8 @@ function formatDate(date: Date) {
 }
 
 export default async function Page() {
-  const now = new Date();
-  const hourAgo = new Date(now.getTime() - 24 * 30 * 60 * 60 * 1000);
-
   const params = {
     token: process.env.NEXT_PUBLIC_TINYBIRD_API_KEY,
-    start_date: formatDate(hourAgo),
-    end_date: formatDate(now)
   };
 
   return (
@@ -29,7 +24,7 @@ export default async function Page() {
       <div className="flex-1 flex flex-col">
         <TopBar />
         <div className="flex-1 p-6 overflow-hidden flex flex-col gap-4">
-          <div className="h-48 border rounded-md bg-white">
+          <div className="border rounded-md bg-white pb-4">
             <Suspense fallback={<div>Loading chart...</div>}>
               <TimeSeriesChartWrapper {...params} />
             </Suspense>

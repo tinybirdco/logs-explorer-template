@@ -24,6 +24,8 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
 
   const getFilters = useCallback(() => {
     const filters = {
+      start_date: searchParams.get('start_date') || undefined,
+      end_date: searchParams.get('end_date') || undefined,
       service: searchParams.get('service')?.split(',').filter(Boolean) || undefined,
       level: searchParams.get('level')?.split(',').filter(Boolean) || undefined,
       environment: searchParams.get('environment')?.split(',').filter(Boolean) || undefined,

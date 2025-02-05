@@ -19,7 +19,7 @@ export function TimeSeriesChart(params: {
     token={params.token ?? ''}
     index="date"
     categories={['total_requests', 'error_count']}
-    height="200px"
+    height="140px"
     params={{
       ...params,
       request_path: params.request_path?.join(',') ?? '',

@@ -1,8 +1,8 @@
 'use client';
 
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { DateRangeSelector } from "@/components/filters/DateRangeSelector";
 
 export default function TopBar() {
   return (
@@ -15,17 +15,7 @@ export default function TopBar() {
             className="pl-8"
           />
         </div>
-        <Select defaultValue="30m">
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Time Range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="30m">Last 30 minutes</SelectItem>
-            <SelectItem value="1h">Last 1 hour</SelectItem>
-            <SelectItem value="24h">Last 24 hours</SelectItem>
-            <SelectItem value="7d">Last 7 days</SelectItem>
-          </SelectContent>
-        </Select>
+        <DateRangeSelector />
       </div>
     </div>
   );

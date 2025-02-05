@@ -5,15 +5,21 @@ import { TimeSeriesChart } from "@/components/charts/TimeSeriesChart";
 
 interface TimeSeriesChartWrapperProps {
   token: string | undefined;
-  start_date: string;
-  end_date: string;
 }
 
 export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
   const searchParams = useSearchParams();
+  const start_date = searchParams.get('start_date');
+  const end_date = searchParams.get('end_date');
   
+  if (!start_date || !end_date) {
+    return <div className="flex items-center justify-center h-full">Select a time range</div>;
+  }
+
   const params = {
     ...props,
+    start_date,
+    end_date,
     service: searchParams.get('service')?.split(',').filter(Boolean),
     level: searchParams.get('level')?.split(',').filter(Boolean),
     environment: searchParams.get('environment')?.split(',').filter(Boolean),
