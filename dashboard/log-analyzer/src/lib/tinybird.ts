@@ -18,6 +18,8 @@ export const logAnalysisApi = tb.buildPipe({
     status_code: z.array(z.number()).optional(),
     request_path: z.array(z.string()).optional(),
     user_agent: z.array(z.string()).optional(),
+    sort_by: z.string().optional(),
+    order: z.string().optional(),
   }),
   data: LogAnalysisResponseSchema,
 });

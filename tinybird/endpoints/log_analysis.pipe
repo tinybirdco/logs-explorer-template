@@ -44,7 +44,19 @@ SQL >
     {% if defined(user_agent) and user_agent != '' %}
         AND user_agent in {{Array(user_agent)}}
     {% end %}
-    ORDER BY timestamp DESC
+    ORDER BY 
+    {% if defined(sort_by) and sort_by != '' %}
+        {{column(sort_by)}}
+    {% else %}
+        timestamp
+    {% end %}
+    {% if defined(order) and order != '' %}
+        {% if order == 'asc' %}
+            ASC
+        {% else %}
+            DESC
+        {% end %}
+    {% end %}
     LIMIT {{Int32(page_size, 100)}}
     OFFSET {{Int32(page, 0)}} * {{Int32(page_size, 100)}}
 
