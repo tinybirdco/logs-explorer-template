@@ -4,9 +4,9 @@ This is a template for a log analytics web application. It is built with Next.js
 
 You can use this template to bootstrap logging analytics for any software project. Take it and make it your own!
 
-Get started by forking the repository and then customizing it to your needs.
-
 ## Quick Start
+
+Deploy the Tinybird and Next.js to the cloud to get started quickly.
 
 <p align="left">
   <a href="https://app.tinybird.co?starter_kit=https://github.com/tinybirdco/log-analytics-template/tinybird">
@@ -19,6 +19,8 @@ Get started by forking the repository and then customizing it to your needs.
 Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source.
 
 ## Local Development
+
+Get started by forking the repository and then customizing it to your needs.
 
 Start Tinybird locally:
 
@@ -69,3 +71,12 @@ tb --cloud deploy --auto --wait
 
 Once deployed copy your Tinybird cloud host and `read_pipes` token, [deploy the Next.js application to Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftinybirdco%2Flog-analytics-template&project-name=tinybird-log-analytics-template&repository-name=tinybird-log-analytics-template&demo-description=Custom%20analytics%20for%20your%20application%20logs%20using%20Tinybird&demo-url=http%3A%2F%2Flog-analytics.tinybird.co&demo-image=//github.com/tinybirdco/log-analytics-starter-kit/blob/main/dashboard/public/banner.png?raw=true&root-directory=dashboard&integration-ids=oac_uoH2YyxhaS1H6UYvtuRbRbDY) and configure the environment variables.
 
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## License
+
+MIT License
+
+Copyright (c) 2025 Tinybird.co
