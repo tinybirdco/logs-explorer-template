@@ -93,6 +93,14 @@ await fetch(
 
 Check the [examples](./examples) folder for some examples of how to do this with different languages and `logs` schema.
 
+## Building a log aggregator with Vector
+
+Vector is a log aggregator that is used to collect, process, and store logs built by DataDog.
+
+You can use Vector to collect logs from different sources and send them to a Tinybird Sink.
+
+Check the [examples/vector](./examples/vector) folder for an example of how to do this with Vector.
+
 ## Deployment
 
 Deploy the Tinybird project to the cloud:
