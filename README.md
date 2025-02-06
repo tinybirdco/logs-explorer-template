@@ -1,6 +1,6 @@
 # Log Analytics Template
 
-This is a template for a log analytics web application. It is built with Next.js and Tinybird.
+This is a template for a log analytics web application. It is built with Next.js and [Tinybird](https://tinybird.co).
 
 You can use this template to bootstrap logging analytics for any software project. Fork it and make it your own!
 

@@ -22,7 +22,7 @@ tb --cloud deploy --auto --wait
 
 Adapt the [logs.datasource](./datasources/logs.datasource) and pipes accordingly to match your application's log schema.
 
-Once you've made the changes in Tinybird adapt the `tinybird.ts` library and components accordingly to support the new pipes and parameters.
+Once you've made the changes in Tinybird, instrument your application and adapt the `tinybird.ts` library and components accordingly to support the new pipes and parameters.
 
 ## Mock Data
 
@@ -43,3 +43,34 @@ TB_ENDPOINT=http://localhost mockingbird-cli tinybird \
 You can stream mock data to Tinybird Cloud by using your Workspace host and append token.
 
 Update the [mocks/logs.json](./mocks/logs.json) file to match your application's log schema.
+
+## Instrumenting your application
+
+To instrument your application, just send JSON objects to the Tinybird [Events API](https://www.tinybird.co/docs/get-data-in/ingest-apis/events-api).
+
+```typescript
+const data = {
+    timestamp: new Date().toISOString(),
+    level: 'info',
+    service: 'my-app',
+    message: 'This is a test message',
+    request_id: '1234567890',
+    environment: 'development',
+    status_code: 200,
+    response_time: 100,
+    request_method: 'GET',
+    request_path: '/',
+    host: 'my-app.com',
+    user_agent: req.headers.get('user-agent')
+}
+await fetch(
+    `https://<YOUR_TINYBIRD_HOST>/v0/events?name=logs`,
+    {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { Authorization: `Bearer ${process.env.TINYBIRD_APPEND_TOKEN}` },
+    }
+)
+```
+
+Check the [examples](../examples) folder for some examples of how to do this with different languages and `logs` schema.
