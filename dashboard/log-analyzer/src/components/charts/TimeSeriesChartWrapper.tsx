@@ -1,37 +1,55 @@
 'use client';
 
 import { useSearchParams } from "next/navigation";
-import { TimeSeriesChart } from "@/components/charts/TimeSeriesChart";
+import { TimeSeriesChart, type TimeSeriesChartProps } from "@/components/charts/TimeSeriesChart";
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
+import { type DashboardConfig } from "@/config/types";
+import dashboardConfig from "@/config/dashboard.json";
+
+const config = dashboardConfig as DashboardConfig;
+
+type TimeSeriesParams = {
+  token: string | undefined;
+  start_date: string;
+  end_date: string;
+  endpoint: string;
+  index: string;
+  categories: string[];
+  height: string;
+  colorPalette: string[];
+  [key: string]: string | string[] | undefined;
+};
 
 interface TimeSeriesChartWrapperProps {
   token: string | undefined;
 }
 
-export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
+export function TimeSeriesChartWrapper({ token }: TimeSeriesChartWrapperProps) {
   const searchParams = useSearchParams();
-  const start_date = searchParams.get('start_date');
-  const end_date = searchParams.get('end_date');
-  
   useDefaultDateRange();
 
-  if (!start_date || !end_date) {
-    return <div className="flex items-center justify-center h-full">Select a time range</div>;
+  if (!token) {
+    return <div className="flex items-center justify-center h-full">
+      Missing API token
+    </div>;
   }
 
   const params = {
-    ...props,
-    start_date,
-    end_date,
-    service: searchParams.get('service')?.split(',').filter(Boolean),
-    level: searchParams.get('level')?.split(',').filter(Boolean),
-    environment: searchParams.get('environment')?.split(',').filter(Boolean),
-    request_method: searchParams.get('request_method')?.split(',').filter(Boolean),
-    status_code: searchParams.get('status_code')?.split(',').filter(Boolean),
-    request_path: searchParams.get('request_path')?.split(',').filter(Boolean),
-    user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean),
-    message: searchParams.get('message') ?? '',
-  };
+    token,
+    endpoint: config.timeseries.endpoint,
+    index: config.timeseries.index,
+    categories: config.timeseries.categories,
+    height: config.timeseries.height,
+    colorPalette: config.timeseries.colorPalette,
+  } as TimeSeriesParams;
 
-  return <TimeSeriesChart {...params} />;
+  // Add dynamic params from URL based on config
+  config.timeseries.params.forEach(param => {
+    const value = searchParams.get(param.name);
+    if (value) {
+      params[param.name] = param.type === 'string[]' ? value.split(',').filter(Boolean) : value;
+    }
+  });
+
+  return <TimeSeriesChart {...params as TimeSeriesChartProps} />;
 } 

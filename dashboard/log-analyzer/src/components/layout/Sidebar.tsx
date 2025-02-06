@@ -6,6 +6,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import dashboardConfig from "@/config/dashboard.json";
 
 export default function Sidebar() {
   const router = useRouter();
@@ -28,6 +29,11 @@ export default function Sidebar() {
     };
   }, [pathname, router, searchParams]);
 
+  // Filter out search type filters as they belong in the TopBar
+  const sidebarFilters = dashboardConfig.filters
+    .filter(filter => filter.type === 'multiselect')
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
+
   return (
     <div className={cn(
       "relative transition-all duration-300 ease-in-out",
@@ -40,54 +46,14 @@ export default function Sidebar() {
         )}
       >
         <div className="overflow-y-auto pt-4 pl-4 pr-4 space-y-4 h-full">
-          {/* Log Levels */}
-          <GenericCounter 
-            columnName="level"
-            title="Log Levels"
-            onSelectionChange={createFilterHandler('level')}
-          />
-          
-          {/* Environments */}
-          <GenericCounter 
-            columnName="environment"
-            title="Environments"
-            onSelectionChange={createFilterHandler('environment')}
-          />
-          
-          {/* Services */}
-          <GenericCounter 
-            columnName="service"
-            title="Services"
-            onSelectionChange={createFilterHandler('service')}
-          />
-          
-          {/* HTTP Methods */}
-          <GenericCounter 
-            columnName="request_method"
-            title="HTTP Methods"
-            onSelectionChange={createFilterHandler('request_method')}
-          />
-          
-          {/* Status Codes */}
-          <GenericCounter 
-            columnName="status_code"
-            title="Status Codes"
-            onSelectionChange={createFilterHandler('status_code')}
-          />
-
-          {/* Request Paths */}
-          <GenericCounter 
-            columnName="request_path"
-            title="Request Paths"
-            onSelectionChange={createFilterHandler('request_path')}
-          />
-
-          {/* User Agents */}
-          <GenericCounter 
-            columnName="user_agent"
-            title="User Agents"
-            onSelectionChange={createFilterHandler('user_agent')}
-          />
+          {sidebarFilters.map((filter) => (
+            <GenericCounter
+              key={filter.columnName}
+              columnName={filter.columnName}
+              title={filter.title}
+              onSelectionChange={createFilterHandler(filter.columnName)}
+            />
+          ))}
         </div>
       </div>
       <Button

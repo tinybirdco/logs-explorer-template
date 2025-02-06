@@ -6,20 +6,25 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import type { FilterConfig } from "@/config/types";
 
-export function SearchBar() {
+interface SearchBarProps {
+  filter: FilterConfig;
+}
+
+export function SearchBar({ filter }: SearchBarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get('message') ?? '');
+  const [searchTerm, setSearchTerm] = useState(searchParams.get(filter.columnName) ?? '');
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams.toString());
     
     if (term) {
-      params.set('message', term);
+      params.set(filter.columnName, term);
     } else {
-      params.delete('message');
+      params.delete(filter.columnName);
     }
     
     router.replace(`${pathname}?${params.toString()}`);
@@ -34,7 +39,7 @@ export function SearchBar() {
     <div className="relative flex-1">
       <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
       <Input
-        placeholder="Search logs..."
+        placeholder={`Search ${filter.title.toLowerCase()}...`}
         className="pl-8 pr-8"
         value={searchTerm}
         onChange={(e) => {
