@@ -106,7 +106,11 @@ Once deployed copy your Tinybird cloud host and `read_pipes` token, [deploy the 
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Please open an issue or submit a pull request.
+
+## Support
+
+Contact us at [support@tinybird.co](mailto:support@tinybird.co) to get help with your project.
 
 ## License
 
