@@ -2,7 +2,7 @@
 
 This is a template for a log analytics web application. It is built with Next.js and Tinybird.
 
-You can use this template to bootstrap logging analytics for any software project. Take it and make it your own!
+You can use this template to bootstrap logging analytics for any software project. Fork it and make it your own!
 
 ## Quick Start
 
@@ -16,7 +16,7 @@ Deploy the Tinybird and Next.js to the cloud to get started quickly.
 
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftinybirdco%2Flog-analytics-template&project-name=tinybird-log-analytics-template&repository-name=tinybird-log-analytics-template&demo-description=Custom%20analytics%20for%20your%20application%20logs%20using%20Tinybird&demo-url=http%3A%2F%2Flog-analytics.tinybird.co&demo-image=//github.com/tinybirdco/log-analytics-starter-kit/blob/main/dashboard/public/banner.png?raw=true&root-directory=dashboard&integration-ids=oac_uoH2YyxhaS1H6UYvtuRbRbDY)
 
-Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source.
+Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source or stream some mock data.
 
 ## Local Development
 
@@ -60,21 +60,7 @@ Open the application in your browser:
 http://localhost:3000
 ```
 
-## Mock Data
-
-You can use the [mockingbird-cli](https://github.com/tinybirdco/mockingbird?tab=readme-ov-file#cli) to generate mock data for the application.
-
-```bash
-cd tinybird
-export TB_LOCAL_TOKEN=<YOUR_TINYBIRD_LOCAL_ADMIN_TOKEN>
-TB_ENDPOINT=http://localhost mockingbird-cli tinybird \
---schema "mocks/logs.json" \
---datasource "logs" \
---token $TB_LOCAL_TOKEN \
---endpoint "custom" \
---eps 100 \
---limit 200000000
-```
+Read the [dashboard/log-analyzer/README.md](./dashboard/log-analyzer/README.md) file for more information on how to use the application and [tinybird/README.md](./tinybird/README.md) for more information on how to customize the template.
 
 ## Instrumenting your application
 
@@ -105,7 +91,7 @@ await fetch(
 )
 ```
 
-Check the [examples](./examples) folder for some examples of how to do this with different languages.
+Check the [examples](./examples) folder for some examples of how to do this with different languages and `logs` schema.
 
 ## Deployment
 

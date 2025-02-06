@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -16,21 +14,28 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tinybird Integration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project uses the [Tinybird](https://tinybird.co) API to fetch the data and display it in the dashboard.
 
-## Learn More
+There are three components that use the Tinybird API:
 
-To learn more about Next.js, take a look at the following resources:
+**1. GenericCounter.tsx**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The [generic_counter](../../tinybird/endpoints/generic_counter.pipe) pipe is used to fetch the data for the side bar filters.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**2. LogTableWithPagination.tsx**
 
-## Deploy on Vercel
+The [log_analysis](../../tinybird/endpoints/log_analysis.pipe) pipe is used to fetch the data for the log analysis table.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**3. TimeSeriesChart.tsx**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+It uses the [log_timeseries](../../tinybird/endpoints/log_timeseries.pipe) pipe to fetch the data for the time series chart using [Tinybird charts](https://www.npmjs.com/package/@tinybirdco/charts).
+
+The [./lib/tinybird.ts](./src/lib/tinybird.ts) file contains the Tinybird client and the pipes used to fetch the data for the side bar filters and the log analysis table.
+
+## Customization
+
+See the [tinybird/README.md](../../tinybird/README.md) file for more information on how to customize the template by adapting the `logs` schema and pipes.
+
+Once you've made the changes in Tinybird adapt the `tinybird.ts` library and components accordingly to support the new pipes and parameters.
