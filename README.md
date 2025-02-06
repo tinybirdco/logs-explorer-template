@@ -91,7 +91,9 @@ await fetch(
 )
 ```
 
-Check the [examples](./examples) folder for some examples of how to do this with different languages and `logs` schema.
+The example above uses the [logs](./tinybird/datasources/logs.datasource) Data Source and schema in this template but you can use your own Data Source and schema, append logs and build your own logging analytics application.
+
+Check the [examples](./examples) folder for some examples of how to do this with different languages, services and schemas.
 
 ## Building a log aggregator with Vector
 
