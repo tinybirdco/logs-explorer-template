@@ -10,12 +10,12 @@ export default async function Page() {
   };
 
   return (
-    <main className="flex h-screen bg-background overflow-hidden">
+    <main className="flex h-screen bg-[var(--background)]">
       <Suspense fallback={
-        <div className="w-80 border-r border-border p-4 space-y-4">
-          <div className="animate-pulse bg-gray-200 h-8 w-full rounded" />
-          <div className="animate-pulse bg-gray-200 h-32 w-full rounded" />
-          <div className="animate-pulse bg-gray-200 h-32 w-full rounded" />
+        <div className="w-80 bg-card p-6 space-y-4">
+          <div className="animate-pulse bg-muted h-8 w-full rounded" />
+          <div className="animate-pulse bg-muted h-32 w-full rounded" />
+          <div className="animate-pulse bg-muted h-32 w-full rounded" />
         </div>
       }>
         <Sidebar />
@@ -23,20 +23,22 @@ export default async function Page() {
 
       <div className="flex-1 flex flex-col min-w-0">
         <Suspense fallback={
-          <div className="border-b border-border p-4">
-            <div className="animate-pulse bg-gray-200 h-10 w-full rounded" />
+          <div className=" bg-card p-6">
+            <div className="animate-pulse bg-muted h-10 w-full rounded" />
           </div>
         }>
           <TopBar />
         </Suspense>
-        <div className="flex-1 p-6 overflow-hidden flex flex-col gap-4">
-          <div className="border rounded-md bg-white pb-4">
-            <Suspense fallback={<div>Loading chart...</div>}>
+        <div className="flex-1 pr-6 py-6 space-y-6 overflow-hidden flex flex-col">
+          <Suspense fallback={<div className="animate-pulse bg-muted h-[140px]" />}>
+            <div className="bg-card rounded-2xl">
               <TimeSeriesChartWrapper {...params} />
-            </Suspense>
-          </div>
-          <Suspense fallback={<div>Loading logs...</div>}>
-            <LogTableWithPagination pageSize={20} />
+            </div>
+          </Suspense>
+          <Suspense fallback={<div className="animate-pulse bg-muted flex-1" />}>
+            <div className="bg-card rounded-2xl flex-1 overflow-hidden">
+              <LogTableWithPagination pageSize={20} />
+            </div>
           </Suspense>
         </div>
       </div>
