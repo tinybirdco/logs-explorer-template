@@ -145,7 +145,7 @@ export function GenericCounter({
       className="space-y-4"
     >
       <div className="flex items-center justify-between">
-        <CollapsibleTrigger className="flex items-center justify-between w-full gap-2 group relative">
+        <CollapsibleTrigger className="flex items-center justify-between w-full gap-2 group relative cursor-pointer">
           <div className="absolute -left-3 top-0 bottom-0 w-1 height-24 bg-[#357AF6] opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="flex items-center gap-2">
             <h3 className={cn(
@@ -174,7 +174,7 @@ export function GenericCounter({
             )}
           </div>
           <ChevronDown className={cn(
-            "h-6 w-6 transition-transform duration-200",
+            "h-6 w-6 transition-transform duration-200 cursor-pointer",
             !isOpen && "transform rotate-180"
           )} />
         </CollapsibleTrigger>
@@ -194,25 +194,25 @@ export function GenericCounter({
           </div>
         )}
 
-        <div className="">
+        <div className="space-y-1">
           {visibleItems.map(({ category, count }) => (
             <label
               key={category}
-              className="flex items-center justify-between py-1 hover:bg-gray-50 rounded cursor-pointer"
+              className="flex items-center justify-between py-0 hover:bg-gray-50 rounded cursor-pointer"
             >
               <div className="flex items-end gap-2">
                 <Checkbox
-                  className="border-border-gray"
+                  className="border-border-gray cursor-pointer"
                   checked={selected.includes(category)}
                   onCheckedChange={(checked) => {
                     handleCheckboxChange(category, checked === true);
                   }}
                 />
-                <span className="text-[14px] leading-[17px] font-normal">
+                <span className="text-[14px] leading-[17px] font-normal cursor-pointer">
                   {category}
                 </span>
               </div>
-              <span className="text-[12px] leading-[16px] text-text-primary bg-gray-100 rounded-sm px-1 font-medium">
+              <span className="text-[12px] leading-[16px] text-text-primary bg-gray-100 rounded-sm px-1 font-medium h-6 flex items-center justify-center min-w-[20px]">
                 {count}
               </span>
             </label>
