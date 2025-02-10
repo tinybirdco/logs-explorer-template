@@ -25,11 +25,11 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder }: LogTableP
   };
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-lg">
       <div className="relative h-[calc(100vh-140px)]">
-        <div className="sticky top-0 w-full bg-white z-10">
+        <div className="sticky top-0 w-full z-10">
           <Table className="table-fixed w-full">
-            <TableHeader>
+            <TableHeader className="table-header bg-white">
               <TableRow>
                 <TableHead className="w-32" onClick={() => onSort('request_id')}>
                   ID{renderSortIndicator('request_id')}
@@ -70,9 +70,11 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder }: LogTableP
                   </TableCell>
                   <TableCell className="w-16">
                     <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                      ${log.level === 'ERROR' ? 'bg-red-100 text-red-700' : 
-                        log.level === 'WARN' ? 'bg-yellow-100 text-yellow-700' : 
-                        'bg-green-100 text-green-700'}`
+                      ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
+                        log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
+                        log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
+                        log.level === 'DEBUG' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
+                        'bg-[var(--bg-pill-default)] text-[var(--text-pill-default)]'}`
                     }>
                       {log.level}
                     </span>
@@ -82,9 +84,10 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder }: LogTableP
                   <TableCell className="w-64 font-mono">{log.request_path}</TableCell>
                   <TableCell className="w-16">
                     <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                      ${log.status_code >= 500 ? 'bg-red-100 text-red-700' : 
-                        log.status_code >= 400 ? 'bg-yellow-100 text-yellow-700' : 
-                        'bg-green-100 text-green-700'}`
+                      ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
+                        log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
+                        log.status_code >= 200 ? 'bg-[var(--bg-pill-success)] text-[var(--text-pill-success)]' : 
+                        'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]'}`
                     }>
                       {log.status_code}
                     </span>

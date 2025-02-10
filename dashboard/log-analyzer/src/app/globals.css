@@ -11,6 +11,20 @@
     --background-hover: #E0EFFF;
     --text-primary: 232 18% 19%;  /* #25283D */
     --text-secondary: 0 0% 14%;  /* #232323 */
+    --text-table-header: #718EBF;
+    --table-separator: #E6EFF5;
+    --bg-pill-error: #FDECEC;
+    --bg-pill-warn: #FFFBD6;
+    --bg-pill-info: #E0EFFF;
+    --bg-pill-debug: #E8E9ED;
+    --bg-pill-default: #718EBF;
+    --bg-pill-success: #EBFEF5;
+    --text-pill-error: #D51515;
+    --text-pill-warn: #25283D;
+    --text-pill-info: #25283D;
+    --text-pill-debug: #25283D;
+    --text-pill-default: #718EBF;
+    --text-pill-success: #008060;
     --white: 0 0% 100%;           /* #FFFFFF */
     --gray-50: 210 20% 98%;       /* #F8FAFC */
     --gray-200: 220 13% 91%;      /* #E2E8F0 */
@@ -105,5 +119,18 @@
   
   .btn-icon:active > svg {
     @apply text-white !important;
+  }
+  
+  .table-header th {
+    @apply text-[var(--text-table-header)] !important;
+  }
+
+  .table-fixed th:not(:last-child), .table-fixed td:not(:last-child) {
+    @apply border-b border-[var(--table-separator)] !important;
+  }
+
+  .table-fixed td {
+    @apply text-[var(--text-primary)] !important;
+    @apply text-[14px] !important;
   }
 } 

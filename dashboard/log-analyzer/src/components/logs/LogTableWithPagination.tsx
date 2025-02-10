@@ -120,7 +120,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   useDefaultDateRange();
 
   return (
-    <div className="h-[calc(100vh-64px)] overflow-auto">
+    <div className="h-[calc(100vh-64px)] overflow-auto p-6">
       <LogTable 
         logs={logs} 
         onSort={handleSort}
