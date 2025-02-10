@@ -1,14 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 214 15% 97%;    /* #F5F7FA */
+    --text-primary: 232 18% 19%;  /* #25283D */
+    --text-secondary: 0 0% 14%;  /* #232323 */
+    --white: 0 0% 100%;           /* #FFFFFF */
+    --gray-50: 210 20% 98%;       /* #F8FAFC */
+    --gray-200: 220 13% 91%;      /* #E2E8F0 */
+    --border-gray: 216 12% 84%;       /* #CBCCD1 */
+    --gray-100: #E8E9ED;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -24,7 +29,7 @@ body {
     --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
+    --border: 220 13% 91%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
     --chart-1: 12 76% 61%;
@@ -34,6 +39,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -59,6 +65,12 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 

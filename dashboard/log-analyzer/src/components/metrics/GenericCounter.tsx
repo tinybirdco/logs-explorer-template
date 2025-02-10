@@ -85,10 +85,10 @@ export function GenericCounter({
     setFilteredData(filtered);
   }, [searchTerm, data]);
 
-  const handleCheckboxChange = (category: string) => {
-    const newSelected = selected.includes(category)
-      ? selected.filter(item => item !== category)
-      : [...selected, category];
+  const handleCheckboxChange = (category: string, checked: boolean) => {
+    const newSelected = checked
+      ? [...selected, category]
+      : selected.filter(item => item !== category);
     
     setSelected(newSelected);
     onSelectionChange?.(newSelected);
@@ -138,27 +138,23 @@ export function GenericCounter({
   }
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <Card>
-        <CardHeader className="p-4">
-          <div className="flex w-full items-center justify-between">
-            <CollapsibleTrigger className="flex items-center space-x-2">
-              <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${
-                  isOpen ? 'transform rotate-180' : ''
-                }`}
-              />
-              <CardTitle className="text-lg">{title}</CardTitle>
-            </CollapsibleTrigger>
+    <Collapsible
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      className="space-y-4"
+    >
+      <div className="flex items-center justify-between">
+        <CollapsibleTrigger className="flex items-center justify-between w-full gap-2">
+          <h3 className="text-text-primary text-[14px] leading-[17px] font-semibold">
+            {title}
+          </h3>
+          <div className="flex items-center gap-2">
             {selected.length > 0 && (
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 rounded-full hover:bg-muted relative"
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent collapsible from toggling
-                  handleClearSelections();
-                }}
+                className="h-7 w-7 rounded-full hover:bg-gray-50 relative"
+                onClick={handleClearSelections}
               >
                 <X className="h-4 w-4" />
                 <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-4 w-4 flex items-center justify-center">
@@ -166,52 +162,50 @@ export function GenericCounter({
                 </span>
               </Button>
             )}
+            <ChevronDown className="h-6 w-6" />
           </div>
-        </CardHeader>
-        <CollapsibleContent>
-          <CardContent className="p-4 pt-0">
-            {showSearch && (
-              <div className="relative mb-4">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder={`Search ${title.toLowerCase()}...`}
-                  className="pl-8 pr-8"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+        </CollapsibleTrigger>
+      </div>
+      
+      <CollapsibleContent>
+        {showSearch && (
+          <div className="relative">
+            <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+            <Input
+              type="search"
+              placeholder="Search"
+              className="pl-8"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        )}
+
+        <div className="">
+          {visibleItems.map(({ category, count }) => (
+            <label
+              key={category}
+              className="flex items-center justify-between py-1 hover:bg-gray-50 rounded cursor-pointer"
+            >
+              <div className="flex items-end gap-2">
+                <Checkbox
+                  className="border-border-gray"
+                  checked={selected.includes(category)}
+                  onCheckedChange={(checked) => {
+                    handleCheckboxChange(category, checked === true);
+                  }}
                 />
-                {searchTerm && (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-1 top-1 h-7 w-7 rounded-full hover:bg-muted"
-                    onClick={handleClearSearch}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                )}
+                <span className="text-[14px] leading-[17px] font-normal">
+                  {category}
+                </span>
               </div>
-            )}
-            <div className="space-y-2">
-              {visibleItems.map((item) => (
-                <div key={item.category} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`${columnName}-${item.category}`}
-                    checked={selected.includes(item.category)}
-                    onCheckedChange={() => handleCheckboxChange(item.category)}
-                  />
-                  <label
-                    htmlFor={`${columnName}-${item.category}`}
-                    className="flex flex-1 justify-between text-sm items-center cursor-pointer"
-                  >
-                    <span className="font-medium">{item.category}</span>
-                    <span className="text-gray-500">{item.count.toLocaleString()}</span>
-                  </label>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </CollapsibleContent>
-      </Card>
+              <span className="text-[12px] leading-[16px] text-text-primary bg-gray-100 rounded-sm px-1 font-medium">
+                {count}
+              </span>
+            </label>
+          ))}
+        </div>
+      </CollapsibleContent>
     </Collapsible>
   );
 } 
