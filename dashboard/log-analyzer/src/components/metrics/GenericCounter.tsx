@@ -156,13 +156,13 @@ export function GenericCounter({
                   <span className="text-[12px] leading-[16px]">{selected.length}</span>
                 </div>
                 <div 
-                  className="bg-[#EEF4FF] text-text-primary px-2 py-0.5 rounded-r border-l border-white cursor-pointer h-6 flex items-center justify-center"
+                  className="bg-[#EEF4FF] text-text-primary px-1.5 py-0.5 rounded-r border-l border-white h-6 flex items-center justify-center"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleClearSelections();
                   }}
                 >
-                  <X size={12} />
+                  <X size={16} />
                 </div>
               </div>
             )}
