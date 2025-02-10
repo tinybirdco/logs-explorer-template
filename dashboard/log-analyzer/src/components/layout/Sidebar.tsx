@@ -34,7 +34,7 @@ export default function Sidebar() {
       isCollapsed ? "w-12" : "w-[317px]"
     )}>
       {isCollapsed ? (
-        <div className="h-[calc(100vh-48px)] bg-white rounded-2xl shadow-sm">
+        <div className="h-[calc(100vh-48px)] bg-white rounded-2xl">
           <Button
             variant="ghost"
             size="icon"
@@ -46,7 +46,7 @@ export default function Sidebar() {
           </Button>
         </div>
       ) : (
-        <div className="h-[calc(100vh-48px)] bg-white rounded-2xl shadow-sm">
+        <div className="h-[calc(100vh-48px)] bg-white rounded-2xl">
           <div className="overflow-y-auto p-6 space-y-4 h-full">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-[15px] leading-6 font-semibold text-text-primary">

@@ -151,16 +151,17 @@ export function GenericCounter({
               {title}
             </h3>
             {selected.length > 0 && (
-              <div className="flex items-center">
+              <div className="flex items-center cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleClearSelections();
+                }}
+              >
                 <div className="bg-[#EEF4FF] text-text-primary px-2 py-0.5 rounded-l font-medium h-6 w-7 flex items-center justify-center">
                   <span className="text-[12px] leading-[16px]">{selected.length}</span>
                 </div>
                 <div 
                   className="bg-[#EEF4FF] text-text-primary px-1.5 py-0.5 rounded-r border-l border-white h-6 flex items-center justify-center"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleClearSelections();
-                  }}
                 >
                   <X size={16} />
                 </div>
@@ -176,12 +177,12 @@ export function GenericCounter({
       
       <CollapsibleContent>
         {showSearch && (
-          <div className="relative">
-            <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+          <div className="relative my-4">
+            <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-text-secondary" />
             <Input
               type="search"
               placeholder="Search"
-              className="pl-8"
+              className="pl-8 border-border-gray border rounded-lg focus-visible:border-1"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
