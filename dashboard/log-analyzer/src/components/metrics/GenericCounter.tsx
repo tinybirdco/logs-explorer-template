@@ -10,6 +10,7 @@ import { useSearchParams } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
+import { cn } from "@/lib/utils";
 
 interface GenericCounterProps {
   columnName: string;
@@ -145,25 +146,31 @@ export function GenericCounter({
     >
       <div className="flex items-center justify-between">
         <CollapsibleTrigger className="flex items-center justify-between w-full gap-2">
-          <h3 className="text-text-primary text-[14px] leading-[17px] font-semibold">
-            {title}
-          </h3>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <h3 className="text-text-primary text-[14px] leading-[17px] font-semibold">
+              {title}
+            </h3>
             {selected.length > 0 && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-7 w-7 rounded-full hover:bg-gray-50 relative"
-                onClick={handleClearSelections}
-              >
-                <X className="h-4 w-4" />
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                  {selected.length}
-                </span>
-              </Button>
+              <div className="flex items-center">
+                <div className="bg-[#EEF4FF] text-text-primary px-2 py-0.5 rounded-l font-medium h-6 w-7 flex items-center justify-center">
+                  <span className="text-[12px] leading-[16px]">{selected.length}</span>
+                </div>
+                <div 
+                  className="bg-[#EEF4FF] text-text-primary px-2 py-0.5 rounded-r border-l border-white cursor-pointer h-6 flex items-center justify-center"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClearSelections();
+                  }}
+                >
+                  <X size={12} />
+                </div>
+              </div>
             )}
-            <ChevronDown className="h-6 w-6" />
           </div>
+          <ChevronDown className={cn(
+            "h-6 w-6 transition-transform duration-200",
+            !isOpen && "transform rotate-180"
+          )} />
         </CollapsibleTrigger>
       </div>
       
