@@ -4,7 +4,7 @@ import { GenericCounter } from "@/components/metrics/GenericCounter";
 import { useCallback, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Sidebar() {
@@ -43,21 +43,25 @@ export default function Sidebar() {
     <aside 
       className={cn(
         "relative transition-all duration-300 ease-in-out p-6",
-        isCollapsed ? "w-12" : "w-[317px]"
+        isCollapsed ? "w-42" : "w-[317px]"
       )}
       onTransitionEnd={() => setIsTransitioning(false)}
     >
       {isCollapsed ? (
-        <div className="h-[calc(100vh-48px)] bg-white rounded-2xl">
-          <Button
+        <div className="w-[88px] h-[88px] bg-white rounded-2xl flex items-center justify-center">
+        <Button
             variant="ghost"
             size="icon"
-            className="m-6 h-10 w-10 rounded-lg bg-white hover:bg-gray-50 border border-gray-200"
+            className="btn-icon"
             onClick={handleExpand}
-            title="Expand Filters"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
+        >
+            <ArrowRight className="h-4 w-4" />
+        </Button>
+        <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 invisible group-hover:visible">
+            <div className="bg-[#18191B] text-white text-sm px-4 py-2.5 rounded-lg whitespace-nowrap">
+            Expand Filter Panel
+            </div>
+        </div>
         </div>
       ) : (
         <div className="h-[calc(100vh-48px)] bg-white rounded-2xl">
@@ -74,11 +78,11 @@ export default function Sidebar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-10 w-10 rounded-lg bg-white hover:bg-gray-50 border border-gray-200"
+                className="btn-icon"
                 onClick={handleCollapse}
                 title="Collapse Filters"
               >
-                <X className="h-4 w-4" />
+                <ArrowLeft className="h-4 w-4" />
               </Button>
             </div>
 

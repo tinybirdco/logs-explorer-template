@@ -21,10 +21,10 @@ export function RefreshButton() {
 
   return (
     <Button 
-      variant="outline" 
+      variant="ghost" 
       size="icon"
       onClick={handleRefresh}
-      title="Refresh"
+      className="btn-icon"
     >
       <RotateCw className="h-4 w-4" />
     </Button>

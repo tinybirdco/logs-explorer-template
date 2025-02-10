@@ -34,5 +34,14 @@ export function TimeSeriesChart(params: {
     }}
     stacked={true}
     colorPalette={['#000000', '#ff0000']}
+    options={{
+      grid: {
+        left: 0,
+        right: 0,
+        top: 8,
+        bottom: 0,
+        containLabel: true,
+      },
+    }}
   />
 }

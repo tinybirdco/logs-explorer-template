@@ -33,5 +33,9 @@ export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
     message: searchParams.get('message') ?? '',
   };
 
-  return <TimeSeriesChart {...params} />;
+  return (
+    <div className="bg-white rounded-2xl p-6">
+      <TimeSeriesChart {...params} />
+    </div>
+  );
 } 

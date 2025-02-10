@@ -21,7 +21,7 @@ export default async function Page() {
         <Sidebar />
       </Suspense>
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 pl-6">
         <Suspense fallback={
           <div className="border-b border-border bg-card p-6">
             <div className="animate-pulse bg-muted h-10 w-full rounded" />
@@ -29,13 +29,13 @@ export default async function Page() {
         }>
           <TopBar />
         </Suspense>
-        <div className="flex-1 p-6 space-y-2 overflow-hidden">
-          <div className="bg-card border border-border rounded-lg shadow-sm">
+        <div className="flex-1 py-6 pr-6 space-y-6 overflow-hidden">
+          <div className="bg-card rounded-lg">
             <Suspense fallback={<div className="p-6">Loading chart...</div>}>
               <TimeSeriesChartWrapper {...params} />
             </Suspense>
           </div>
-          <div className="bg-card border border-border rounded-lg shadow-sm flex-1">
+          <div className="bg-card rounded-lg flex-1">
             <Suspense fallback={<div className="p-6">Loading logs...</div>}>
               <LogTableWithPagination pageSize={20} />
             </Suspense>

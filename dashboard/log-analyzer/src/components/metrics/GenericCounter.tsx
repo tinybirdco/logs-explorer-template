@@ -162,11 +162,11 @@ export function GenericCounter({
                   handleClearSelections();
                 }}
               >
-                <div className="bg-[#EEF4FF] text-text-primary px-2 py-0.5 rounded-l font-medium h-6 w-7 flex items-center justify-center">
+                <div className="bg-[var(--background-hover)] text-text-primary px-2 py-0.5 rounded-l font-medium h-6 w-7 flex items-center justify-center">
                   <span className="text-[12px] leading-[16px]">{selected.length}</span>
                 </div>
                 <div 
-                  className="bg-[#EEF4FF] text-text-primary px-1.5 py-0.5 rounded-r border-l border-white h-6 flex items-center justify-center"
+                  className="bg-[var(--background-hover)] text-text-primary px-1.5 py-0.5 rounded-r border-l border-white h-6 flex items-center justify-center"
                 >
                   <X size={16} />
                 </div>
@@ -198,7 +198,7 @@ export function GenericCounter({
           {visibleItems.map(({ category, count }) => (
             <label
               key={category}
-              className="flex items-center justify-between py-0 hover:bg-gray-50 rounded cursor-pointer"
+              className="flex items-center justify-between py-0 hover:bg-[--background-hover] rounded cursor-pointer"
             >
               <div className="flex items-end gap-2">
                 <Checkbox
