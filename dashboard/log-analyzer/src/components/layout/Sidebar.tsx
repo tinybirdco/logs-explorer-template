@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -28,18 +29,31 @@ export default function Sidebar() {
     };
   }, [pathname, router, searchParams]);
 
+  const handleExpand = () => {
+    setIsTransitioning(true);
+    setIsCollapsed(false);
+  };
+
+  const handleCollapse = () => {
+    setIsTransitioning(true);
+    setIsCollapsed(true);
+  };
+
   return (
-    <aside className={cn(
-      "relative transition-all duration-300 ease-in-out p-6",
-      isCollapsed ? "w-12" : "w-[317px]"
-    )}>
+    <aside 
+      className={cn(
+        "relative transition-all duration-300 ease-in-out p-6",
+        isCollapsed ? "w-12" : "w-[317px]"
+      )}
+      onTransitionEnd={() => setIsTransitioning(false)}
+    >
       {isCollapsed ? (
         <div className="h-[calc(100vh-48px)] bg-white rounded-2xl">
           <Button
             variant="ghost"
             size="icon"
             className="m-6 h-10 w-10 rounded-lg bg-white hover:bg-gray-50 border border-gray-200"
-            onClick={() => setIsCollapsed(false)}
+            onClick={handleExpand}
             title="Expand Filters"
           >
             <ChevronRight className="h-4 w-4" />
@@ -47,7 +61,12 @@ export default function Sidebar() {
         </div>
       ) : (
         <div className="h-[calc(100vh-48px)] bg-white rounded-2xl">
-          <div className="overflow-y-auto p-6 space-y-4 h-full">
+          <div className={cn(
+            "overflow-y-auto p-6 space-y-4 h-full",
+            isTransitioning && "opacity-0",
+            "transition-opacity duration-150",
+            !isTransitioning && "opacity-100"
+          )}>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-[15px] leading-6 font-semibold text-text-primary">
                 Filter by:
@@ -56,7 +75,7 @@ export default function Sidebar() {
                 variant="ghost"
                 size="icon"
                 className="h-10 w-10 rounded-lg bg-white hover:bg-gray-50 border border-gray-200"
-                onClick={() => setIsCollapsed(true)}
+                onClick={handleCollapse}
                 title="Collapse Filters"
               >
                 <X className="h-4 w-4" />

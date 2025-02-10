@@ -145,13 +145,18 @@ export function GenericCounter({
       className="space-y-4"
     >
       <div className="flex items-center justify-between">
-        <CollapsibleTrigger className="flex items-center justify-between w-full gap-2">
-          <div className="flex items-center gap-3">
-            <h3 className="text-text-primary text-[14px] leading-[17px] font-semibold">
+        <CollapsibleTrigger className="flex items-center justify-between w-full gap-2 group relative">
+          <div className="absolute -left-3 top-0 bottom-0 w-1 height-24 bg-[#357AF6] opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="flex items-center gap-2">
+            <h3 className={cn(
+              "text-text-primary text-[14px] leading-[17px] transition-all",
+              isOpen ? "font-semibold" : "font-normal group-hover:font-semibold"
+            )}>
               {title}
             </h3>
             {selected.length > 0 && (
-              <div className="flex items-center cursor-pointer"
+              <div 
+                className="flex items-center cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleClearSelections();
