@@ -33,7 +33,7 @@ export function TimeSeriesChart(params: {
       message: params.message ?? '',
     }}
     stacked={true}
-    colorPalette={['#000000', '#ff0000']}
+    colorPalette={['#357AF6', '#fe5b73']}
     options={{
       grid: {
         left: 0,

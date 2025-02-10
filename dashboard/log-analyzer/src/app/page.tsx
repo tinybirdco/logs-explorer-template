@@ -21,7 +21,7 @@ export default async function Page() {
         <Sidebar />
       </Suspense>
 
-      <div className="flex-1 flex flex-col min-w-0 pl-6">
+      <div className="flex-1 flex flex-col min-w-0">
         <Suspense fallback={
           <div className="border-b border-border bg-card p-6">
             <div className="animate-pulse bg-muted h-10 w-full rounded" />
