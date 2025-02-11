@@ -17,9 +17,10 @@ interface LogTableProps {
   onSort: (column: string) => void;
   sortColumn?: string;
   sortOrder?: 'asc' | 'desc';
+  className?: string;
 }
 
-export function LogTable({ logs = [], onSort, sortColumn, sortOrder }: LogTableProps) {
+export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }: LogTableProps) {
   const [hoveredColumn, setHoveredColumn] = useState<string | null>(null);
 
   const renderSortIndicator = (column: string) => {
@@ -30,7 +31,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder }: LogTableP
   };
 
   return (
-    <div className="rounded-lg">
+    <div className={`rounded-lg ${className}`}>
       <div className="relative h-[calc(100vh-140px)]">
         <div className="sticky top-0 w-full z-10">
           <Table className="w-full table-fixed">

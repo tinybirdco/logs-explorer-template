@@ -29,16 +29,12 @@ export default async function Page() {
         }>
           <TopBar />
         </Suspense>
-        <div className="flex-1 py-6 pr-6 space-y-6 overflow-hidden">
+        <div className="flex-1 pr-6 py-6 space-y-6 overflow-hidden flex flex-col">
           <div className="bg-card rounded-lg">
-            <Suspense fallback={<div className="p-6">Loading chart...</div>}>
-              <TimeSeriesChartWrapper {...params} />
-            </Suspense>
+            <TimeSeriesChartWrapper {...params} />
           </div>
-          <div className="bg-card rounded-lg flex-1">
-            <Suspense fallback={<div className="p-6">Loading logs...</div>}>
-              <LogTableWithPagination pageSize={20} />
-            </Suspense>
+          <div className="bg-card rounded-lg flex-1 overflow-hidden">
+            <LogTableWithPagination pageSize={20} />
           </div>
         </div>
       </div>
