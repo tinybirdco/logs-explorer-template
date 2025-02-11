@@ -161,13 +161,24 @@ export function TimeSeriesChart(params: {
             lineHeight: 16,
         },
       },
-      axisLabel: {
-        color: '#9D9EA1',
-        fontSize: 12,
-        fontWeight: 'semibold',
-        fontFamily: 'Inter',
-        lineHeight: 16,
+      xAxis: {
+        axisLabel: {
+            color: '#9D9EA1',
+            fontSize: 12,
+            fontWeight: 500,
+            fontFamily: 'Inter',
+            lineHeight: 16,
+        }
       },
+      yAxis: {
+        axisLabel: {
+            color: '#9D9EA1',
+            fontSize: 12,
+            fontWeight: 500,
+            fontFamily: 'Inter',
+            lineHeight: 16,
+        }
+      }
     }}
   />
 }
