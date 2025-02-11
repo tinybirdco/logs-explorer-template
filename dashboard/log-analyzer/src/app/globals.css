@@ -113,11 +113,12 @@
     @apply bg-[var(--background-secondary)] border-[var(--background-secondary)] !important;
   }
   
-  .btn-icon > svg {
+  .btn-icon svg {
     @apply text-gray-500 !important;
   }
   
-  .btn-icon:active > svg {
+  .btn-icon:active svg,
+  .btn-icon:active svg path {
     @apply text-white !important;
   }
   
@@ -127,6 +128,10 @@
 
   .table-row td {
     @apply px-6 !important;
+  }
+
+  .table-row:hover td {
+    background-color: rgba(224, 239, 255, 0.4) !important;
   }
 
   .table-fixed th:not(:last-child), .table-fixed td:not(:last-child) {
