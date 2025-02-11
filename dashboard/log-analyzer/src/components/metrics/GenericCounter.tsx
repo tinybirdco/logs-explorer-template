@@ -185,20 +185,30 @@ export function GenericCounter({
           <div className="relative my-4">
             <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-text-secondary" />
             <Input
-              type="search"
               placeholder="Search"
               className="pl-8 border-border-gray border rounded-lg focus-visible:border-1"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {searchTerm && (
+                <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-1.5 top-1.5 h-7 w-7 rounded-full hover:bg-muted"
+                onClick={handleClearSearch}
+                >
+                <X className="h-4 w-4" />
+                </Button>
+            )}
           </div>
+          
         )}
 
         <div className="space-y-1">
           {visibleItems.map(({ category, count }) => (
             <label
               key={category}
-              className="flex items-center justify-between py-0 hover:bg-[--background-hover] rounded cursor-pointer"
+              className="flex items-center justify-between py-0 hover:bg-transparent rounded cursor-pointer"
             >
               <div className="flex items-end gap-2">
                 <Checkbox

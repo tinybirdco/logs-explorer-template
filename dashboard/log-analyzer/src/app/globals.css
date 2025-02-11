@@ -122,7 +122,11 @@
   }
   
   .table-header th {
-    @apply text-[var(--text-table-header)] !important;
+    @apply text-[var(--text-table-header)] px-6 cursor-pointer !important;
+  }
+
+  .table-row td {
+    @apply px-6 !important;
   }
 
   .table-fixed th:not(:last-child), .table-fixed td:not(:last-child) {
