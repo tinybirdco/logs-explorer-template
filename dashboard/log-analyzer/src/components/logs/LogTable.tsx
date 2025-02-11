@@ -113,7 +113,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   <TableCell className="w-[10%] truncate">{log.request_id}</TableCell>
                   <TableCell className="w-[10%] truncate">{formatDistanceToNow(new Date(log.timestamp), { addSuffix: true })}</TableCell>
                   <TableCell className="w-[8%] truncate">
-                    <span className={`inline-flex items-center rounded-lg px-2 py-1 text-xs font-medium
+                    <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
                       ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
                         log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
                         log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
@@ -127,7 +127,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   <TableCell className="w-[10%] truncate">{log.request_method}</TableCell>
                   <TableCell className="w-[14%] truncate">{log.request_path}</TableCell>
                   <TableCell className="w-[8%] truncate">
-                    <span className={`inline-flex items-center rounded-lg px-2 py-1 text-xs font-medium
+                    <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
                       ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
                         log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
                         log.status_code >= 200 ? 'bg-[var(--bg-pill-success)] text-[var(--text-pill-success)]' : 
