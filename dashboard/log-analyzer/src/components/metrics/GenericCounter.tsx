@@ -26,7 +26,7 @@ interface CountData {
 
 const VISIBLE_ITEMS = 5;
 
-const dataCache: Record<string, any> = {};
+const dataCache: Record<string, CountData[]> = {};
 
 export function GenericCounter({ 
   columnName, 
@@ -47,7 +47,6 @@ export function GenericCounter({
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
   const hasInitializedRef = useRef(false);
-  const prevShouldRefreshRef = useRef(shouldRefresh);
 
   useDefaultDateRange();
 

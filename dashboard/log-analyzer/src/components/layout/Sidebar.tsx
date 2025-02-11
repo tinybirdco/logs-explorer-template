@@ -4,12 +4,11 @@ import { GenericCounter } from "@/components/metrics/GenericCounter";
 import { useCallback, useState, useEffect } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { PanelLeftOpen, PanelLeftClose, ChevronRight, X } from "lucide-react";
+import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -41,12 +40,10 @@ export default function Sidebar() {
   }, [pathname, router, searchParams]);
 
   const handleExpand = () => {
-    setIsTransitioning(true);
     setIsCollapsed(false);
   };
 
   const handleCollapse = () => {
-    setIsTransitioning(true);
     setIsCollapsed(true);
   };
 
@@ -56,7 +53,6 @@ export default function Sidebar() {
         "relative transition-all duration-300 ease-in-out p-6",
         isCollapsed ? "w-42" : "w-[317px]"
       )}
-      onTransitionEnd={() => setIsTransitioning(false)}
     >
       {isCollapsed ? (
         <div className="w-[88px] h-[88px] bg-white rounded-2xl flex items-center justify-center">
