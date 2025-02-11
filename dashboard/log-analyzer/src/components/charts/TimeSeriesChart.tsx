@@ -152,6 +152,7 @@ export function TimeSeriesChart(params: {
         trigger: 'axis',
         backgroundColor: '#25283D',
         borderWidth: 0,
+        padding: 12,
         textStyle: {
             color: '#FFFFFF',
             fontSize: 12,
