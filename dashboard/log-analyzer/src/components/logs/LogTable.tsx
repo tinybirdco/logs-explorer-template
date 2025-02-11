@@ -80,7 +80,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
             <TableBody>
               {logs?.map((log, index) => (
                 <TableRow key={index} className="table-row">
-                  <TableCell className="w-[10%] truncate font-mono">{log.request_id}</TableCell>
+                  <TableCell className="w-[10%] truncate">{log.request_id}</TableCell>
                   <TableCell className="w-[10%]">{formatDistanceToNow(new Date(log.timestamp), { addSuffix: true })}</TableCell>
                   <TableCell className="w-[8%]">
                     <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
@@ -95,7 +95,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   </TableCell>
                   <TableCell className="w-[10%]">{log.service}</TableCell>
                   <TableCell className="w-[10%]">{log.request_method}</TableCell>
-                  <TableCell className="w-[14%] font-mono truncate">{log.request_path}</TableCell>
+                  <TableCell className="w-[14%] truncate">{log.request_path}</TableCell>
                   <TableCell className="w-[8%]">
                     <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
                       ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
