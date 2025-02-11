@@ -126,11 +126,11 @@
   }
   
   .table-header th {
-    @apply text-[var(--text-table-header)] px-6 cursor-pointer !important;
+    @apply text-[var(--text-table-header)] px-0 pt-0 cursor-pointer align-top pb-4 h-6 !important;
   }
 
   .table-row td {
-    @apply px-6 !important;
+    @apply px-0 !important;
   }
 
   .table-row:hover td {
