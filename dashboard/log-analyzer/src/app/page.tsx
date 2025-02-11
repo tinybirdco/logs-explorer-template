@@ -10,7 +10,7 @@ export default async function Page() {
   };
 
   return (
-    <main className="flex h-screen bg-background">
+    <main className="flex h-screen bg-[var(--background)]">
       <Suspense fallback={
         <div className="w-80 bg-card p-6 space-y-4">
           <div className="animate-pulse bg-muted h-8 w-full rounded" />
