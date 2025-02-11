@@ -28,7 +28,7 @@
     --white: 0 0% 100%;           /* #FFFFFF */
     --gray-50: 210 20% 98%;       /* #F8FAFC */
     --gray-200: 220 13% 91%;      /* #E2E8F0 */
-    --border-gray: 216 12% 84%;       /* #CBCCD1 */
+    --border-gray: #CBCCD1;
     --gray-100: #E8E9ED;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -85,6 +85,9 @@
 
   body {
     font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -101,7 +104,7 @@
 
 @layer components {
   .btn-icon {
-    @apply h-10 w-10 rounded-lg bg-white border border-gray-200 !important;
+    @apply h-10 w-10 rounded-lg bg-white border border-[var(--border-gray)] !important;
     @apply transition-colors !important;
   }
   

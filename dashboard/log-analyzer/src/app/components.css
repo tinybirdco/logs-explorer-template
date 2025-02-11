@@ -1,6 +1,0 @@
-.btn-icon {
-  @apply h-10 w-10 rounded-lg bg-white border border-gray-200 transition-colors;
-  @apply hover:bg-[#EEF4FF];
-  @apply active:bg-[#357AF6] active:border-[#357AF6];
-  @apply [&>svg]:text-gray-500 [&>svg]:active:text-white;
-} 

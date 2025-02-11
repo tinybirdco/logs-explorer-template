@@ -35,7 +35,7 @@ export function SearchBar() {
       <Search className="absolute left-3 top-3 h-4 w-4 text-text-secondary" />
       <Input
         placeholder="Search logs..."
-        className="h-10 pl-9 pr-9"
+        className="h-10 pl-9 pr-9 border-[var(--border-gray)]"
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);

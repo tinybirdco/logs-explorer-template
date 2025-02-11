@@ -57,7 +57,7 @@ export function DateRangeSelector() {
 
   return (
     <Select defaultValue="7d" onValueChange={handleTimeRangeChange}>
-      <SelectTrigger className="w-[180px] h-10 bg-white border-gray-200">
+      <SelectTrigger className="w-[180px] h-10 bg-white border-[var(--border-gray)]">
         <SelectValue placeholder="Time Range" />
       </SelectTrigger>
       <SelectContent>

@@ -12,7 +12,7 @@ export default async function Page() {
   return (
     <main className="flex h-screen bg-background">
       <Suspense fallback={
-        <div className="w-80 border-r border-border bg-card p-6 space-y-4">
+        <div className="w-80 bg-card p-6 space-y-4">
           <div className="animate-pulse bg-muted h-8 w-full rounded" />
           <div className="animate-pulse bg-muted h-32 w-full rounded" />
           <div className="animate-pulse bg-muted h-32 w-full rounded" />
@@ -23,7 +23,7 @@ export default async function Page() {
 
       <div className="flex-1 flex flex-col min-w-0">
         <Suspense fallback={
-          <div className="border-b border-border bg-card p-6">
+          <div className=" bg-card p-6">
             <div className="animate-pulse bg-muted h-10 w-full rounded" />
           </div>
         }>
