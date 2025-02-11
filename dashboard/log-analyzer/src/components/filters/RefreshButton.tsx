@@ -10,12 +10,13 @@ export function RefreshButton() {
   const searchParams = useSearchParams();
 
   const handleRefresh = () => {
+    // Dispatch custom event for refresh
+    window.dispatchEvent(new Event('refresh-filters'));
+    
+    // Update URL params as before
     const params = new URLSearchParams(searchParams.toString());
     const now = new Date();
-    
-    // Update end_date to now
-    params.set('end_date', now.toISOString().split('.')[0].replace('T', ' ').replace('Z', ''));
-    
+    params.set('end_date', now.toISOString().split('.')[0].replace('T', ' '));
     router.replace(`${pathname}?${params.toString()}`);
   };
 

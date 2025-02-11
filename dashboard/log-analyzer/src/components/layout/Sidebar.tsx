@@ -1,7 +1,7 @@
 'use client';
 
 import { GenericCounter } from "@/components/metrics/GenericCounter";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { PanelLeftOpen, PanelLeftClose, ChevronRight, X } from "lucide-react";
@@ -10,10 +10,21 @@ import { cn } from "@/lib/utils";
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   
+  // Add this effect to listen to refresh events
+  useEffect(() => {
+    const handleRefresh = () => {
+      setRefreshTrigger(prev => !prev);
+    };
+    
+    window.addEventListener('refresh-filters', handleRefresh);
+    return () => window.removeEventListener('refresh-filters', handleRefresh);
+  }, []);
+
   // Update URL with new filters
   const createFilterHandler = useCallback((filterName: string) => {
     return (selected: string[]) => {
@@ -89,6 +100,7 @@ export default function Sidebar() {
                 columnName="level"
                 title="Log Levels"
                 onSelectionChange={createFilterHandler('level')}
+                shouldRefresh={refreshTrigger}
               />
               
               {/* Environments */}
@@ -96,6 +108,7 @@ export default function Sidebar() {
                 columnName="environment"
                 title="Environments"
                 onSelectionChange={createFilterHandler('environment')}
+                shouldRefresh={refreshTrigger}
               />
               
               {/* Services */}
@@ -103,6 +116,7 @@ export default function Sidebar() {
                 columnName="service"
                 title="Services"
                 onSelectionChange={createFilterHandler('service')}
+                shouldRefresh={refreshTrigger}
               />
               
               {/* HTTP Methods */}
@@ -110,6 +124,7 @@ export default function Sidebar() {
                 columnName="request_method"
                 title="HTTP Methods"
                 onSelectionChange={createFilterHandler('request_method')}
+                shouldRefresh={refreshTrigger}
               />
               
               {/* Status Codes */}
@@ -117,6 +132,7 @@ export default function Sidebar() {
                 columnName="status_code"
                 title="Status Codes"
                 onSelectionChange={createFilterHandler('status_code')}
+                shouldRefresh={refreshTrigger}
               />
 
               {/* Request Paths */}
@@ -124,6 +140,7 @@ export default function Sidebar() {
                 columnName="request_path"
                 title="Request Paths"
                 onSelectionChange={createFilterHandler('request_path')}
+                shouldRefresh={refreshTrigger}
               />
 
               {/* User Agents */}
@@ -131,6 +148,7 @@ export default function Sidebar() {
                 columnName="user_agent"
                 title="User Agents"
                 onSelectionChange={createFilterHandler('user_agent')}
+                shouldRefresh={refreshTrigger}
               />
             </div>
           </div>

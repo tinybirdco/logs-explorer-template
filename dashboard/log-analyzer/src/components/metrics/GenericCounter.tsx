@@ -16,6 +16,7 @@ interface GenericCounterProps {
   columnName: string;
   title: string;
   onSelectionChange?: (selected: string[]) => void;
+  shouldRefresh: boolean;
 }
 
 interface CountData {
@@ -25,23 +26,28 @@ interface CountData {
 
 const VISIBLE_ITEMS = 5;
 
+const dataCache: Record<string, any> = {};
+
 export function GenericCounter({ 
   columnName, 
   title,
-  onSelectionChange 
+  onSelectionChange,
+  shouldRefresh
 }: GenericCounterProps) {
   const searchParams = useSearchParams();
-  const [data, setData] = useState<CountData[]>([]);
+  const [data, setData] = useState<CountData[]>(dataCache[columnName] || []);
   const [filteredData, setFilteredData] = useState<CountData[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selected, setSelected] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!dataCache[columnName]);
   const [error, setError] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(true);
   const initializedRef = useRef(false);
   const currentParams = searchParams.get(columnName);
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
+  const hasInitializedRef = useRef(false);
+  const prevShouldRefreshRef = useRef(shouldRefresh);
 
   useDefaultDateRange();
 
@@ -54,29 +60,40 @@ export function GenericCounter({
     }
   }, [currentParams]);
 
-  // Fetch data effect
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        const response = await genericCounterApi({ 
-          column_name: columnName,
-          start_date: startDate || undefined,
-          end_date: endDate || undefined,
-        });
-        setData(response.data);
-        setFilteredData(response.data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch data');
-      } finally {
-        setIsLoading(false);
-      }
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await genericCounterApi({ 
+        column_name: columnName,
+        start_date: startDate || undefined,
+        end_date: endDate || undefined,
+      });
+      dataCache[columnName] = response.data || [];
+      setData(dataCache[columnName]);
+      setFilteredData(dataCache[columnName]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch data');
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    if (startDate && endDate) {
+  // Only fetch on first mount
+  useEffect(() => {
+    if (!hasInitializedRef.current && !dataCache[columnName]) {
+      hasInitializedRef.current = true;
+      fetchData();
+    } else {
+      setIsLoading(false); // Ensure loading is false if using cached data
+    }
+  }, []);
+
+  // Handle refresh
+  useEffect(() => {
+    if (shouldRefresh) {
       fetchData();
     }
-  }, [columnName, startDate, endDate]);
+  }, [shouldRefresh]);
 
   // Filter data effect
   useEffect(() => {
