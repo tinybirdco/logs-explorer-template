@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, Search, X } from "lucide-react";
+import { ChevronUp, Search, X } from "lucide-react";
 import { useSearchParams } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -197,7 +197,7 @@ export function GenericCounter({
               </div>
             )}
           </div>
-          <ChevronDown className={cn(
+          <ChevronUp className={cn(
             "h-6 w-6 transition-transform duration-200 cursor-pointer",
             !isOpen && "transform rotate-180"
           )} />
@@ -242,7 +242,7 @@ export function GenericCounter({
                     handleCheckboxChange(category, checked === true);
                   }}
                 />
-                <span className="cursor-pointer">
+                <span className="cursor-pointer max-w-[150px] truncate">
                   {capitalizeFirstLetter(category)}
                 </span>
               </div>
