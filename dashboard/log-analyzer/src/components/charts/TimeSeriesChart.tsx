@@ -1,9 +1,6 @@
 'use client'
 
 import { BarChart } from '@tinybirdco/charts'
-import { useQuery } from '@tinybirdco/charts'
-import ReactECharts from 'echarts-for-react'
-import * as echarts from 'echarts'
 
 export function TimeSeriesChart(params: {
   token?: string
