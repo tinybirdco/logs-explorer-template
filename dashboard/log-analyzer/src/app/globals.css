@@ -137,4 +137,8 @@
     @apply text-[var(--text-primary)] !important;
     @apply text-[14px] !important;
   }
+
+  aside h3 {
+    @apply cursor-pointer !important;
+  }
 } 

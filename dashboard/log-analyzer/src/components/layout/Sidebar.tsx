@@ -4,7 +4,7 @@ import { GenericCounter } from "@/components/metrics/GenericCounter";
 import { useCallback, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, ChevronRight, X } from "lucide-react";
+import { PanelLeftOpen, PanelLeftClose, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Sidebar() {
@@ -55,7 +55,7 @@ export default function Sidebar() {
             className="btn-icon"
             onClick={handleExpand}
         >
-            <ArrowRight className="h-4 w-4" />
+            <PanelLeftOpen className="h-4 w-4" />
         </Button>
         <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 invisible group-hover:visible">
             <div className="bg-[#18191B] text-white text-sm px-4 py-2.5 rounded-lg whitespace-nowrap">
@@ -66,10 +66,7 @@ export default function Sidebar() {
       ) : (
         <div className="h-[calc(100vh-48px)] bg-white rounded-2xl">
           <div className={cn(
-            "overflow-y-auto p-6 space-y-4 h-full",
-            isTransitioning && "opacity-0",
-            "transition-opacity duration-150",
-            !isTransitioning && "opacity-100"
+            "overflow-y-auto p-6 space-y-4 h-full"
           )}>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-[15px] leading-6 font-semibold text-text-primary">
@@ -82,7 +79,7 @@ export default function Sidebar() {
                 onClick={handleCollapse}
                 title="Collapse Filters"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <PanelLeftClose className="h-4 w-4" />
               </Button>
             </div>
 

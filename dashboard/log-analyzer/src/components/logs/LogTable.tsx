@@ -62,13 +62,13 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                 <TableHead className="w-[10%]" onClick={() => onSort('request_method')} onMouseEnter={() => setHoveredColumn('request_method')} onMouseLeave={() => setHoveredColumn(null)}>
                   Method{renderSortIndicator('request_method')}
                 </TableHead>
-                <TableHead className="w-[22%]" onClick={() => onSort('request_path')} onMouseEnter={() => setHoveredColumn('request_path')} onMouseLeave={() => setHoveredColumn(null)}>
+                <TableHead className="w-[14%]" onClick={() => onSort('request_path')} onMouseEnter={() => setHoveredColumn('request_path')} onMouseLeave={() => setHoveredColumn(null)}>
                   Path{renderSortIndicator('request_path')}
                 </TableHead>
                 <TableHead className="w-[8%]" onClick={() => onSort('status_code')} onMouseEnter={() => setHoveredColumn('status_code')} onMouseLeave={() => setHoveredColumn(null)}>
                   Status{renderSortIndicator('status_code')}
                 </TableHead>
-                <TableHead className="w-[22%]" onClick={() => onSort('message')} onMouseEnter={() => setHoveredColumn('message')} onMouseLeave={() => setHoveredColumn(null)}>
+                <TableHead className="w-[30%]" onClick={() => onSort('message')} onMouseEnter={() => setHoveredColumn('message')} onMouseLeave={() => setHoveredColumn(null)}>
                   Message{renderSortIndicator('message')}
                 </TableHead>
               </TableRow>
@@ -95,7 +95,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   </TableCell>
                   <TableCell className="w-[10%]">{log.service}</TableCell>
                   <TableCell className="w-[10%]">{log.request_method}</TableCell>
-                  <TableCell className="w-[22%] font-mono">{log.request_path}</TableCell>
+                  <TableCell className="w-[14%] font-mono truncate">{log.request_path}</TableCell>
                   <TableCell className="w-[8%]">
                     <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
                       ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
@@ -106,7 +106,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                       {log.status_code}
                     </span>
                   </TableCell>
-                  <TableCell className="w-[22%] truncate">{log.message}</TableCell>
+                  <TableCell className="w-[30%] truncate">{log.message}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
