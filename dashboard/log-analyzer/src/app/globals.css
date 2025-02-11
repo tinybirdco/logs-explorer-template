@@ -129,10 +129,6 @@
     @apply text-[var(--text-table-header)] px-0 pt-0 cursor-pointer align-top pb-4 h-6 !important;
   }
 
-  .table-header:hover {
-    @apply bg-transparent !important;
-  }
-
   .table-row td {
     @apply px-0 !important;
   }
