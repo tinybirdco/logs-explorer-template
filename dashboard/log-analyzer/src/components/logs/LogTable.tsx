@@ -46,7 +46,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   ID{renderSortIndicator('request_id')}
                 </TableHead>
                 <TableHead 
-                  className="w-[10%] truncate" 
+                  className="w-[120px] max-w-[120px] truncate"
                   onClick={() => onSort('timestamp')}
                   onMouseEnter={() => setHoveredColumn('timestamp')}
                   onMouseLeave={() => setHoveredColumn(null)}
@@ -54,7 +54,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   Time{renderSortIndicator('timestamp')}
                 </TableHead>
                 <TableHead 
-                  className="w-[8%] truncate" 
+                  className="w-[80px] max-w-[80px] truncate"
                   onClick={() => onSort('level')} 
                   onMouseEnter={() => setHoveredColumn('level')} 
                   onMouseLeave={() => setHoveredColumn(null)}
@@ -62,7 +62,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   Level{renderSortIndicator('level')}
                 </TableHead>
                 <TableHead 
-                  className="w-[10%] truncate" 
+                  className="w-[120px] max-w-[120px] truncate" 
                   onClick={() => onSort('service')} 
                   onMouseEnter={() => setHoveredColumn('service')} 
                   onMouseLeave={() => setHoveredColumn(null)}
@@ -70,7 +70,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   Service{renderSortIndicator('service')}
                 </TableHead>
                 <TableHead 
-                  className="w-[10%] truncate" 
+                  className="w-[80px] max-w-[80px] truncate"
                   onClick={() => onSort('request_method')} 
                   onMouseEnter={() => setHoveredColumn('request_method')} 
                   onMouseLeave={() => setHoveredColumn(null)}
@@ -86,7 +86,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                   Path{renderSortIndicator('request_path')}
                 </TableHead>
                 <TableHead 
-                  className="w-[8%] truncate" 
+                  className="w-[80px] max-w-[80px] truncate"
                   onClick={() => onSort('status_code')} 
                   onMouseEnter={() => setHoveredColumn('status_code')} 
                   onMouseLeave={() => setHoveredColumn(null)}
@@ -111,8 +111,8 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
               {logs?.map((log, index) => (
                 <TableRow key={index} className="table-row">
                   <TableCell className="w-[10%] truncate">{log.request_id}</TableCell>
-                  <TableCell className="w-[10%] truncate">{formatDistanceToNow(new Date(log.timestamp), { addSuffix: true })}</TableCell>
-                  <TableCell className="w-[8%] truncate">
+                  <TableCell className="w-[120px] max-w-[120px] truncate">{formatDistanceToNow(new Date(log.timestamp), { addSuffix: true })}</TableCell>
+                  <TableCell className="w-[80px] max-w-[80px] truncate">
                     <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
                       ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
                         log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
@@ -123,10 +123,10 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, className }
                       {log.level}
                     </span>
                   </TableCell>
-                  <TableCell className="w-[10%] truncate">{log.service}</TableCell>
-                  <TableCell className="w-[10%] truncate">{log.request_method}</TableCell>
+                  <TableCell className="w-[120px] max-w-[120px] truncate">{log.service}</TableCell>
+                  <TableCell className="w-[80px] max-w-[80px] truncate">{log.request_method}</TableCell>
                   <TableCell className="w-[14%] truncate">{log.request_path}</TableCell>
-                  <TableCell className="w-[8%] truncate">
+                  <TableCell className="w-[80px] max-w-[80px] truncate">
                     <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
                       ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
                         log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 

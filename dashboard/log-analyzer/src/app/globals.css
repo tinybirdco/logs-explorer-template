@@ -11,7 +11,7 @@
     --background-hover: #E0EFFF;
     --text-primary: 232 18% 19%;  /* #25283D */
     --text-secondary: 0 0% 14%;  /* #232323 */
-    --search-icon: #333B69;
+    --button-text: #333B69;
     --text-table-header: #718EBF;
     --table-separator: #E6EFF5;
     --bg-pill-error: #FDECEC;
@@ -110,28 +110,33 @@
   }
   
   .btn-icon:hover {
-    @apply bg-[var(--background-hover)] !important;
+    @apply bg-[var(--background-secondary)] !important;
   }
   
   .btn-icon:active {
-    @apply bg-[var(--background-secondary)] border-[var(--background-secondary)] !important;
+    @apply bg-[var(--background-hover)] !important;
   }
   
   .btn-icon svg {
     @apply text-gray-500 !important;
   }
   
-  .btn-icon:active svg,
-  .btn-icon:active svg path {
+  .btn-icon:hover svg,
+  .btn-icon:hover svg path {
     @apply text-white !important;
   }
   
+  .btn-icon:active svg,
+  .btn-icon:active svg path {
+    @apply text-[var(--text-primary)] !important;
+  }
+  
   .table-header th {
-    @apply text-[var(--text-table-header)] px-0 pt-0 cursor-pointer align-top pb-4 h-6 !important;
+    @apply text-[var(--text-table-header)] px-0 pt-0 pr-6 cursor-pointer align-top pb-4 h-6 !important;
   }
 
   .table-row td {
-    @apply px-0 !important;
+    @apply px-0 pr-6;
   }
 
   .table-row:hover td {

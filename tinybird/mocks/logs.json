@@ -26,9 +26,9 @@
     ]
   },
   "message": {
-    "type": "lorem.word",
+    "type": "lorem.words",
     "params": [
-      10
+      { "min": 8, "max": 20 }
     ]
   },
   "service": {
