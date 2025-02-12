@@ -6,6 +6,12 @@ DESCRIPTION >
 NODE count_attributes
 SQL >
 %
+    {% if not defined(column_name) %}
+        {{ error('column_name (String) query param is required') }}
+    {% end %}
+    {% if defined(column_name) and column_name not in ['level', 'status_code', 'service', 'environment', 'request_method', 'request_path', 'host', 'user_agent'] %}
+        {{ error('column_name (String) query param must be one of the following: level, status_code, service, environment, request_method, request_path, host, user_agent') }}
+    {% end %}
     SELECT
         toString({{column(column_name, 'level')}}) as category,
         COUNT() as count
