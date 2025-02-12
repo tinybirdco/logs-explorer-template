@@ -29,8 +29,12 @@ const VISIBLE_ITEMS = 5;
 const dataCache: Record<string, CountData[]> = {};
 
 const formatNumber = (num: number) => {
-  return new Intl.NumberFormat('de-DE').format(num);
-};
+  const formatter = Intl.NumberFormat('en', { 
+    notation: 'compact',
+    maximumFractionDigits: 2
+  });
+  return formatter.format(num);
+}; 
 
 const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
