@@ -21,7 +21,7 @@ jobs:
       tinybird:
         image: tinybirdco/tinybird-local:beta
         ports:
-          - 80:80
+          - 7181:80
     steps:
       - uses: actions/checkout@v3
       - name: Install Tinybird CLI
