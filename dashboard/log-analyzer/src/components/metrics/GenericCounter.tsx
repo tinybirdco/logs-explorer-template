@@ -66,7 +66,6 @@ export function GenericCounter({
   const statusCode = searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined;
   const requestPath = searchParams.get('request_path')?.split(',').filter(Boolean) || undefined;
   const userAgent = searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined;
-  const hasInitializedRef = useRef(false);
 
   useDefaultDateRange();
 
