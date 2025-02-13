@@ -25,6 +25,6 @@ SQL >
         AND date <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
     {% end %}
     GROUP BY {{column(column_name, 'level')}}
-    ORDER BY count DESC
+    ORDER BY count DESC, {{column(column_name, 'level')}}
 
 TYPE endpoint

@@ -1,4 +1,3 @@
-
 name: Tinybird - CI Workflow
 
 on:
@@ -16,12 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: '.'
+        working-directory: './tinybird'
     services:
       tinybird:
         image: tinybirdco/tinybird-local:beta
         ports:
-          - 80:80
+          - 7181:7181
     steps:
       - uses: actions/checkout@v3
       - name: Install Tinybird CLI
