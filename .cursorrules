@@ -47,9 +47,6 @@ Follow these instructions when creating or updating .datasource files:
     - Use always json paths to define the schema. Example: `user_id` String `json:$.user_id`,
 </datasource_file_instructions>
 
-</datasource_file_instructions>
-
-<pipe_file_instructions>
 Follow these instructions when creating or updating .pipe files:
 
 <pipe_file_instructions>
@@ -181,18 +178,43 @@ COPY_SCHEDULE 0 * * * *
 - TYPE MATERIALIZED is the type of the pipe and it is mandatory for materialized pipes.
 - The content of the .pipe file must follow this format:
 DESCRIPTION Materialized Pipe to aggregate sales per hour in the sales_by_hour Data Source
+- Use State modifier for the aggregated columns in the pipe.
+- Keep the SQL query simple and avoid using complex queries with joins, subqueries, etc.
+</materialized_pipe_instructions>
+
+<materialized_pipe_content>
 
 NODE daily_sales
 SQL >
-    SELECT toStartOfDay(starting_date) day, country, sum(sales) as total_sales
+    SELECT toStartOfDay(starting_date) day, country, sumState(sales) as total_sales
     FROM teams
     GROUP BY day, country
 
 TYPE MATERIALIZED
 DATASOURCE sales_by_hour
-</materialized_pipe_instructions>
+</materialized_pipe_content>
 
-</pipe_file_instructions>
+<target_datasource_instructions>
+- The target datasource of a materialized pipe must have an AggregatingMergeTree engine.
+- Use AggregateFunction for the aggregated columns in the pipe.
+- Pipes using a materialized data source must use the Merge modifier in the SQL query for the aggregated columns. Example: sumMerge(total_sales)
+- Put all dimensions in the ENGINE_SORTING_KEY, sort first by the lowest granularity and then by the highest.
+- If the ENGINE_SORTING_KEY has more than 4 columns, add an ENGINE_PRIMARY_KEY with the first 3 columns of the ENGINE_SORTING_KEY.
+</target_datasource_instructions>
+<target_datasource_content>
+SCHEMA >
+    `total_sales` AggregateFunction(sum, Float64),
+    `column_name_2` AggregateFunction(avg, Float64),
+    `dimension_1` String,
+    `dimension_2` String,
+    ...
+    `date` DateTime
+
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(date)"
+ENGINE_SORTING_KEY "date, dimension_1, dimension_2, ..."
+</target_datasource_content>
+
 <test_file_instructions>
 Follow these instructions when creating or updating .yaml files for tests:
 
