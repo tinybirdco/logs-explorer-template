@@ -1,4 +1,3 @@
-
 name: Tinybird - CI Workflow
 
 on:
@@ -16,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: '.'
+        working-directory: './tinybird'
     services:
       tinybird:
         image: tinybirdco/tinybird-local:beta
