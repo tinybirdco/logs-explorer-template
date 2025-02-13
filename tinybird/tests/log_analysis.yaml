@@ -1,163 +1,207 @@
 
 - name: basic_log_query
   description: Basic log query with default parameters
-  parameters: page=0&page_size=100
+  parameters: ''
   expected_result: |
-    {"timestamp":"2025-02-03 20:03:14.000","request_method":"POST","status_code":373,"service":"database","request_path":"\/orders\/373","level":"ERROR","message":"Log message 373"}
-    {"timestamp":"2025-02-03 19:34:02.000","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
-    {"timestamp":"2025-02-03 19:23:42.000","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/945","level":"ERROR","message":"Log message 945"}
-    {"timestamp":"2025-02-03 19:13:22.000","request_method":"POST","status_code":565,"service":"api","request_path":"\/orders\/365","level":"ERROR","message":"Log message 365"}
-    {"timestamp":"2025-02-03 19:01:34.000","request_method":"POST","status_code":473,"service":"database","request_path":"\/orders\/873","level":"ERROR","message":"Log message 873"}
-    {"timestamp":"2025-02-03 18:46:58.000","request_method":"POST","status_code":549,"service":"cache","request_path":"\/orders\/549","level":"ERROR","message":"Log message 549"}
-    {"timestamp":"2025-02-03 18:29:58.000","request_method":"POST","status_code":369,"service":"cache","request_path":"\/orders\/369","level":"ERROR","message":"Log message 369"}
-    {"timestamp":"2025-02-03 18:25:59.000","request_method":"GET","status_code":208,"service":"database","request_path":"\/users\/608","level":"INFO","message":"Log message 608"}
-    {"timestamp":"2025-02-03 18:25:33.000","request_method":"PUT","status_code":234,"service":"cache","request_path":"\/products\/834","level":"WARN","message":"Log message 834"}
-    {"timestamp":"2025-02-03 18:24:58.000","request_method":"POST","status_code":269,"service":"cache","request_path":"\/orders\/869","level":"ERROR","message":"Log message 869"}
-    {"timestamp":"2025-02-03 18:14:20.000","request_method":"DELETE","status_code":507,"service":"auth","request_path":"\/auth\/507","level":"DEBUG","message":"Log message 507"}
-    {"timestamp":"2025-02-03 17:05:51.000","request_method":"GET","status_code":216,"service":"web","request_path":"\/users\/416","level":"INFO","message":"Log message 416"}
-    {"timestamp":"2025-02-03 16:47:25.000","request_method":"PUT","status_code":522,"service":"auth","request_path":"\/products\/722","level":"WARN","message":"Log message 722"}
-    {"timestamp":"2025-02-03 16:43:43.000","request_method":"GET","status_code":344,"service":"cache","request_path":"\/users\/344","level":"INFO","message":"Log message 344"}
-    {"timestamp":"2025-02-03 16:40:48.000","request_method":"DELETE","status_code":519,"service":"cache","request_path":"\/auth\/519","level":"DEBUG","message":"Log message 519"}
-    {"timestamp":"2025-02-03 16:00:56.000","request_method":"DELETE","status_code":511,"service":"web","request_path":"\/auth\/711","level":"DEBUG","message":"Log message 711"}
-    {"timestamp":"2025-02-03 15:39:12.000","request_method":"DELETE","status_code":215,"service":"api","request_path":"\/auth\/15","level":"DEBUG","message":"Log message 15"}
-    {"timestamp":"2025-02-03 15:07:37.000","request_method":"PUT","status_code":510,"service":"api","request_path":"\/products\/710","level":"WARN","message":"Log message 710"}
-    {"timestamp":"2025-02-03 15:02:38.000","request_method":"POST","status_code":409,"service":"cache","request_path":"\/orders\/609","level":"ERROR","message":"Log message 609"}
-    {"timestamp":"2025-02-03 14:40:43.000","request_method":"GET","status_code":524,"service":"cache","request_path":"\/users\/924","level":"INFO","message":"Log message 924"}
-    {"timestamp":"2025-02-03 14:38:55.000","request_method":"GET","status_code":232,"service":"auth","request_path":"\/users\/232","level":"INFO","message":"Log message 232"}
-    {"timestamp":"2025-02-03 14:16:46.000","request_method":"POST","status_code":361,"service":"web","request_path":"\/orders\/761","level":"ERROR","message":"Log message 761"}
-    {"timestamp":"2025-02-03 14:04:19.000","request_method":"GET","status_code":308,"service":"database","request_path":"\/users\/908","level":"INFO","message":"Log message 908"}
-    {"timestamp":"2025-02-03 13:59:26.000","request_method":"POST","status_code":201,"service":"web","request_path":"\/orders\/1","level":"ERROR","message":"Log message 1"}
-    {"timestamp":"2025-02-03 13:45:29.000","request_method":"PUT","status_code":238,"service":"database","request_path":"\/products\/638","level":"WARN","message":"Log message 638"}
-    {"timestamp":"2025-02-03 13:28:06.000","request_method":"POST","status_code":481,"service":"web","request_path":"\/orders\/681","level":"ERROR","message":"Log message 681"}
-    {"timestamp":"2025-02-03 13:22:51.000","request_method":"GET","status_code":396,"service":"web","request_path":"\/users\/796","level":"INFO","message":"Log message 796"}
-    {"timestamp":"2025-02-03 13:04:58.000","request_method":"POST","status_code":269,"service":"cache","request_path":"\/orders\/869","level":"ERROR","message":"Log message 869"}
-    {"timestamp":"2025-02-03 12:40:27.000","request_method":"GET","status_code":540,"service":"api","request_path":"\/users\/340","level":"INFO","message":"Log message 340"}
-    {"timestamp":"2025-02-03 12:30:20.000","request_method":"DELETE","status_code":347,"service":"auth","request_path":"\/auth\/347","level":"DEBUG","message":"Log message 347"}
-    {"timestamp":"2025-02-03 12:13:33.000","request_method":"PUT","status_code":554,"service":"cache","request_path":"\/products\/754","level":"WARN","message":"Log message 754"}
-    {"timestamp":"2025-02-03 11:51:49.000","request_method":"PUT","status_code":258,"service":"database","request_path":"\/products\/858","level":"WARN","message":"Log message 858"}
-    {"timestamp":"2025-02-03 11:20:03.000","request_method":"GET","status_code":564,"service":"cache","request_path":"\/users\/564","level":"INFO","message":"Log message 564"}
-    {"timestamp":"2025-02-03 11:17:58.000","request_method":"POST","status_code":289,"service":"cache","request_path":"\/orders\/489","level":"ERROR","message":"Log message 489"}
-    {"timestamp":"2025-02-03 11:04:22.000","request_method":"POST","status_code":305,"service":"api","request_path":"\/orders\/105","level":"ERROR","message":"Log message 105"}
-    {"timestamp":"2025-02-03 11:01:55.000","request_method":"GET","status_code":452,"service":"auth","request_path":"\/users\/252","level":"INFO","message":"Log message 252"}
-    {"timestamp":"2025-02-03 10:55:52.000","request_method":"DELETE","status_code":415,"service":"api","request_path":"\/auth\/15","level":"DEBUG","message":"Log message 15"}
-    {"timestamp":"2025-02-03 10:28:25.000","request_method":"PUT","status_code":462,"service":"auth","request_path":"\/products\/62","level":"WARN","message":"Log message 62"}
-    {"timestamp":"2025-02-03 10:25:00.000","request_method":"DELETE","status_code":267,"service":"auth","request_path":"\/auth\/67","level":"DEBUG","message":"Log message 67"}
-    {"timestamp":"2025-02-03 09:44:30.000","request_method":"POST","status_code":297,"service":"auth","request_path":"\/orders\/897","level":"ERROR","message":"Log message 897"}
-    {"timestamp":"2025-02-03 09:36:50.000","request_method":"POST","status_code":357,"service":"auth","request_path":"\/orders\/757","level":"ERROR","message":"Log message 757"}
-    {"timestamp":"2025-02-03 09:21:29.000","request_method":"PUT","status_code":478,"service":"database","request_path":"\/products\/678","level":"WARN","message":"Log message 678"}
-    {"timestamp":"2025-02-03 09:19:00.000","request_method":"DELETE","status_code":227,"service":"auth","request_path":"\/auth\/27","level":"DEBUG","message":"Log message 27"}
-    {"timestamp":"2025-02-03 08:32:49.000","request_method":"PUT","status_code":598,"service":"database","request_path":"\/products\/198","level":"WARN","message":"Log message 198"}
-    {"timestamp":"2025-02-03 08:22:55.000","request_method":"GET","status_code":392,"service":"auth","request_path":"\/users\/592","level":"INFO","message":"Log message 592"}
-    {"timestamp":"2025-02-03 08:06:58.000","request_method":"POST","status_code":549,"service":"cache","request_path":"\/orders\/349","level":"ERROR","message":"Log message 349"}
-    {"timestamp":"2025-02-03 08:02:42.000","request_method":"POST","status_code":405,"service":"api","request_path":"\/orders\/205","level":"ERROR","message":"Log message 205"}
-    {"timestamp":"2025-02-03 07:58:44.000","request_method":"DELETE","status_code":243,"service":"database","request_path":"\/auth\/843","level":"DEBUG","message":"Log message 843"}
-    {"timestamp":"2025-02-03 07:44:53.000","request_method":"PUT","status_code":274,"service":"cache","request_path":"\/products\/874","level":"WARN","message":"Log message 874"}
-    {"timestamp":"2025-02-03 07:27:08.000","request_method":"DELETE","status_code":539,"service":"cache","request_path":"\/auth\/139","level":"DEBUG","message":"Log message 139"}
-    {"timestamp":"2025-02-03 07:18:05.000","request_method":"PUT","status_code":282,"service":"auth","request_path":"\/products\/282","level":"WARN","message":"Log message 282"}
-    {"timestamp":"2025-02-03 07:12:36.000","request_method":"DELETE","status_code":211,"service":"web","request_path":"\/auth\/11","level":"DEBUG","message":"Log message 11"}
-    {"timestamp":"2025-02-03 06:52:58.000","request_method":"POST","status_code":589,"service":"cache","request_path":"\/orders\/789","level":"ERROR","message":"Log message 789"}
-    {"timestamp":"2025-02-03 06:38:26.000","request_method":"POST","status_code":261,"service":"web","request_path":"\/orders\/261","level":"ERROR","message":"Log message 261"}
-    {"timestamp":"2025-02-03 06:37:45.000","request_method":"PUT","status_code":302,"service":"auth","request_path":"\/products\/102","level":"WARN","message":"Log message 102"}
-    {"timestamp":"2025-02-03 06:26:20.000","request_method":"DELETE","status_code":587,"service":"auth","request_path":"\/auth\/587","level":"DEBUG","message":"Log message 587"}
-    {"timestamp":"2025-02-03 06:14:02.000","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
-    {"timestamp":"2025-02-03 06:08:10.000","request_method":"POST","status_code":477,"service":"auth","request_path":"\/orders\/277","level":"ERROR","message":"Log message 277"}
-    {"timestamp":"2025-02-03 06:02:52.000","request_method":"DELETE","status_code":395,"service":"api","request_path":"\/auth\/395","level":"DEBUG","message":"Log message 395"}
-    {"timestamp":"2025-02-03 05:06:19.000","request_method":"GET","status_code":588,"service":"database","request_path":"\/users\/788","level":"INFO","message":"Log message 788"}
-    {"timestamp":"2025-02-03 04:58:03.000","request_method":"GET","status_code":284,"service":"cache","request_path":"\/users\/484","level":"INFO","message":"Log message 484"}
-    {"timestamp":"2025-02-03 04:35:35.000","request_method":"GET","status_code":432,"service":"auth","request_path":"\/users\/632","level":"INFO","message":"Log message 632"}
-    {"timestamp":"2025-02-03 04:16:55.000","request_method":"GET","status_code":352,"service":"auth","request_path":"\/users\/352","level":"INFO","message":"Log message 352"}
-    {"timestamp":"2025-02-03 04:10:01.000","request_method":"PUT","status_code":366,"service":"web","request_path":"\/products\/366","level":"WARN","message":"Log message 366"}
-    {"timestamp":"2025-02-03 03:49:27.000","request_method":"GET","status_code":400,"service":"api","request_path":"\/users\/800","level":"INFO","message":"Log message 800"}
-    {"timestamp":"2025-02-03 03:39:53.000","request_method":"PUT","status_code":574,"service":"cache","request_path":"\/products\/774","level":"WARN","message":"Log message 774"}
-    {"timestamp":"2025-02-03 03:38:37.000","request_method":"PUT","status_code":250,"service":"api","request_path":"\/products\/50","level":"WARN","message":"Log message 50"}
-    {"timestamp":"2025-02-03 03:27:12.000","request_method":"DELETE","status_code":535,"service":"api","request_path":"\/auth\/135","level":"DEBUG","message":"Log message 135"}
-    {"timestamp":"2025-02-03 03:03:03.000","request_method":"GET","status_code":384,"service":"cache","request_path":"\/users\/584","level":"INFO","message":"Log message 584"}
-    {"timestamp":"2025-02-03 02:52:08.000","request_method":"DELETE","status_code":239,"service":"cache","request_path":"\/auth\/239","level":"DEBUG","message":"Log message 239"}
-    {"timestamp":"2025-02-03 02:51:00.000","request_method":"DELETE","status_code":307,"service":"auth","request_path":"\/auth\/307","level":"DEBUG","message":"Log message 307"}
-    {"timestamp":"2025-02-03 02:47:45.000","request_method":"PUT","status_code":502,"service":"auth","request_path":"\/products\/302","level":"WARN","message":"Log message 302"}
-    {"timestamp":"2025-02-03 02:24:49.000","request_method":"PUT","status_code":278,"service":"database","request_path":"\/products\/878","level":"WARN","message":"Log message 878"}
-    {"timestamp":"2025-02-03 01:55:11.000","request_method":"GET","status_code":456,"service":"web","request_path":"\/users\/656","level":"INFO","message":"Log message 656"}
-    {"timestamp":"2025-02-03 01:36:26.000","request_method":"POST","status_code":381,"service":"web","request_path":"\/orders\/181","level":"ERROR","message":"Log message 181"}
-    {"timestamp":"2025-02-03 01:31:11.000","request_method":"GET","status_code":296,"service":"web","request_path":"\/users\/296","level":"INFO","message":"Log message 296"}
-    {"timestamp":"2025-02-03 01:15:38.000","request_method":"POST","status_code":429,"service":"cache","request_path":"\/orders\/829","level":"ERROR","message":"Log message 829"}
-    {"timestamp":"2025-02-03 01:11:04.000","request_method":"DELETE","status_code":303,"service":"database","request_path":"\/auth\/103","level":"DEBUG","message":"Log message 103"}
-    {"timestamp":"2025-02-03 01:06:44.000","request_method":"DELETE","status_code":563,"service":"database","request_path":"\/auth\/763","level":"DEBUG","message":"Log message 763"}
-    {"timestamp":"2025-02-03 01:02:53.000","request_method":"PUT","status_code":394,"service":"cache","request_path":"\/products\/194","level":"WARN","message":"Log message 194"}
-    {"timestamp":"2025-02-03 00:43:53.000","request_method":"PUT","status_code":334,"service":"cache","request_path":"\/products\/734","level":"WARN","message":"Log message 734"}
-    {"timestamp":"2025-02-03 00:33:47.000","request_method":"GET","status_code":540,"service":"api","request_path":"\/users\/140","level":"INFO","message":"Log message 140"}
-    {"timestamp":"2025-02-03 00:10:38.000","request_method":"POST","status_code":329,"service":"cache","request_path":"\/orders\/729","level":"ERROR","message":"Log message 729"}
-    {"timestamp":"2025-02-03 00:04:05.000","request_method":"PUT","status_code":322,"service":"auth","request_path":"\/products\/122","level":"WARN","message":"Log message 122"}
-    {"timestamp":"2025-02-02 23:35:49.000","request_method":"PUT","status_code":418,"service":"database","request_path":"\/products\/818","level":"WARN","message":"Log message 818"}
-    {"timestamp":"2025-02-02 23:28:07.000","request_method":"GET","status_code":480,"service":"api","request_path":"\/users\/80","level":"INFO","message":"Log message 80"}
-    {"timestamp":"2025-02-02 23:25:25.000","request_method":"PUT","status_code":242,"service":"auth","request_path":"\/products\/842","level":"WARN","message":"Log message 842"}
-    {"timestamp":"2025-02-02 22:47:43.000","request_method":"GET","status_code":504,"service":"cache","request_path":"\/users\/904","level":"INFO","message":"Log message 904"}
-    {"timestamp":"2025-02-02 22:47:27.000","request_method":"GET","status_code":520,"service":"api","request_path":"\/users\/320","level":"INFO","message":"Log message 320"}
-    {"timestamp":"2025-02-02 22:21:32.000","request_method":"DELETE","status_code":475,"service":"api","request_path":"\/auth\/275","level":"DEBUG","message":"Log message 275"}
-    {"timestamp":"2025-02-02 22:21:06.000","request_method":"POST","status_code":501,"service":"web","request_path":"\/orders\/901","level":"ERROR","message":"Log message 901"}
-    {"timestamp":"2025-02-02 22:20:17.000","request_method":"PUT","status_code":550,"service":"api","request_path":"\/products\/350","level":"WARN","message":"Log message 350"}
-    {"timestamp":"2025-02-02 22:19:39.000","request_method":"GET","status_code":588,"service":"database","request_path":"\/users\/388","level":"INFO","message":"Log message 388"}
-    {"timestamp":"2025-02-02 21:56:42.000","request_method":"POST","status_code":365,"service":"api","request_path":"\/orders\/165","level":"ERROR","message":"Log message 165"}
-    {"timestamp":"2025-02-02 21:23:42.000","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/745","level":"ERROR","message":"Log message 745"}
-    {"timestamp":"2025-02-02 21:17:29.000","request_method":"PUT","status_code":318,"service":"database","request_path":"\/products\/318","level":"WARN","message":"Log message 318"}
-    {"timestamp":"2025-02-02 21:12:48.000","request_method":"DELETE","status_code":599,"service":"cache","request_path":"\/auth\/799","level":"DEBUG","message":"Log message 799"}
-    {"timestamp":"2025-02-02 20:59:19.000","request_method":"GET","status_code":208,"service":"database","request_path":"\/users\/408","level":"INFO","message":"Log message 408"}
-    {"timestamp":"2025-02-02 20:47:02.000","request_method":"POST","status_code":545,"service":"api","request_path":"\/orders\/345","level":"ERROR","message":"Log message 345"}
-    {"timestamp":"2025-02-02 20:36:21.000","request_method":"PUT","status_code":386,"service":"web","request_path":"\/products\/586","level":"WARN","message":"Log message 586"}
+    {"timestamp":"2025-02-02 20:36:21.000","request_id":"req-3dbdad6adce206bf","request_method":"PUT","status_code":386,"service":"web","request_path":"\/products\/586","level":"WARN","message":"Log message 586"}
+    {"timestamp":"2025-02-02 20:47:02.000","request_id":"req-781644190c5ab313","request_method":"POST","status_code":545,"service":"api","request_path":"\/orders\/345","level":"ERROR","message":"Log message 345"}
+    {"timestamp":"2025-02-02 20:59:19.000","request_id":"req-8f03293fa457463f","request_method":"GET","status_code":208,"service":"database","request_path":"\/users\/408","level":"INFO","message":"Log message 408"}
+    {"timestamp":"2025-02-02 21:12:48.000","request_id":"req-3b61992a411c79a2","request_method":"DELETE","status_code":599,"service":"cache","request_path":"\/auth\/799","level":"DEBUG","message":"Log message 799"}
+    {"timestamp":"2025-02-02 21:17:29.000","request_id":"req-d32589fb749768e8","request_method":"PUT","status_code":318,"service":"database","request_path":"\/products\/318","level":"WARN","message":"Log message 318"}
+    {"timestamp":"2025-02-02 21:23:42.000","request_id":"req-77b0b28d7e89da92","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/745","level":"ERROR","message":"Log message 745"}
+    {"timestamp":"2025-02-02 21:56:42.000","request_id":"req-d4e7ca4fe100c522","request_method":"POST","status_code":365,"service":"api","request_path":"\/orders\/165","level":"ERROR","message":"Log message 165"}
+    {"timestamp":"2025-02-02 22:19:39.000","request_id":"req-c278ae231b86db77","request_method":"GET","status_code":588,"service":"database","request_path":"\/users\/388","level":"INFO","message":"Log message 388"}
+    {"timestamp":"2025-02-02 22:20:17.000","request_id":"req-be5e6d4ddd5fde1b","request_method":"PUT","status_code":550,"service":"api","request_path":"\/products\/350","level":"WARN","message":"Log message 350"}
+    {"timestamp":"2025-02-02 22:21:06.000","request_id":"req-d76379e176654acd","request_method":"POST","status_code":501,"service":"web","request_path":"\/orders\/901","level":"ERROR","message":"Log message 901"}
+    {"timestamp":"2025-02-02 22:21:32.000","request_id":"req-2654afb07fe28408","request_method":"DELETE","status_code":475,"service":"api","request_path":"\/auth\/275","level":"DEBUG","message":"Log message 275"}
+    {"timestamp":"2025-02-02 22:47:27.000","request_id":"req-c4ef116fe65fd9fa","request_method":"GET","status_code":520,"service":"api","request_path":"\/users\/320","level":"INFO","message":"Log message 320"}
+    {"timestamp":"2025-02-02 22:47:43.000","request_id":"req-d621ff5549ad1276","request_method":"GET","status_code":504,"service":"cache","request_path":"\/users\/904","level":"INFO","message":"Log message 904"}
+    {"timestamp":"2025-02-02 23:25:25.000","request_id":"req-629e353c4b6358fb","request_method":"PUT","status_code":242,"service":"auth","request_path":"\/products\/842","level":"WARN","message":"Log message 842"}
+    {"timestamp":"2025-02-02 23:28:07.000","request_id":"req-b44069a35ccbf58d","request_method":"GET","status_code":480,"service":"api","request_path":"\/users\/80","level":"INFO","message":"Log message 80"}
+    {"timestamp":"2025-02-02 23:35:49.000","request_id":"req-ca7bf556325ef147","request_method":"PUT","status_code":418,"service":"database","request_path":"\/products\/818","level":"WARN","message":"Log message 818"}
+    {"timestamp":"2025-02-03 00:04:05.000","request_id":"req-4860bb49e129c265","request_method":"PUT","status_code":322,"service":"auth","request_path":"\/products\/122","level":"WARN","message":"Log message 122"}
+    {"timestamp":"2025-02-03 00:10:38.000","request_id":"req-1af70463d1e63266","request_method":"POST","status_code":329,"service":"cache","request_path":"\/orders\/729","level":"ERROR","message":"Log message 729"}
+    {"timestamp":"2025-02-03 00:33:47.000","request_id":"req-67983c8adffea7e0","request_method":"GET","status_code":540,"service":"api","request_path":"\/users\/140","level":"INFO","message":"Log message 140"}
+    {"timestamp":"2025-02-03 00:43:53.000","request_id":"req-400ae5fc3d2a5ed6","request_method":"PUT","status_code":334,"service":"cache","request_path":"\/products\/734","level":"WARN","message":"Log message 734"}
+    {"timestamp":"2025-02-03 01:02:53.000","request_id":"req-b75d2c18ebf0eeff","request_method":"PUT","status_code":394,"service":"cache","request_path":"\/products\/194","level":"WARN","message":"Log message 194"}
+    {"timestamp":"2025-02-03 01:06:44.000","request_id":"req-2d8edca4d33f7d8e","request_method":"DELETE","status_code":563,"service":"database","request_path":"\/auth\/763","level":"DEBUG","message":"Log message 763"}
+    {"timestamp":"2025-02-03 01:11:04.000","request_id":"req-690d6a131fa219de","request_method":"DELETE","status_code":303,"service":"database","request_path":"\/auth\/103","level":"DEBUG","message":"Log message 103"}
+    {"timestamp":"2025-02-03 01:15:38.000","request_id":"req-14aa05993b4eb909","request_method":"POST","status_code":429,"service":"cache","request_path":"\/orders\/829","level":"ERROR","message":"Log message 829"}
+    {"timestamp":"2025-02-03 01:31:11.000","request_id":"req-d89c766fc4718b6e","request_method":"GET","status_code":296,"service":"web","request_path":"\/users\/296","level":"INFO","message":"Log message 296"}
+    {"timestamp":"2025-02-03 01:36:26.000","request_id":"req-6a15a97bb5959cb3","request_method":"POST","status_code":381,"service":"web","request_path":"\/orders\/181","level":"ERROR","message":"Log message 181"}
+    {"timestamp":"2025-02-03 01:55:11.000","request_id":"req-8a4d610413693029","request_method":"GET","status_code":456,"service":"web","request_path":"\/users\/656","level":"INFO","message":"Log message 656"}
+    {"timestamp":"2025-02-03 02:24:49.000","request_id":"req-bef7639f901fab6a","request_method":"PUT","status_code":278,"service":"database","request_path":"\/products\/878","level":"WARN","message":"Log message 878"}
+    {"timestamp":"2025-02-03 02:47:45.000","request_id":"req-ca83d36e8900caba","request_method":"PUT","status_code":502,"service":"auth","request_path":"\/products\/302","level":"WARN","message":"Log message 302"}
+    {"timestamp":"2025-02-03 02:51:00.000","request_id":"req-26630e76547eabe0","request_method":"DELETE","status_code":307,"service":"auth","request_path":"\/auth\/307","level":"DEBUG","message":"Log message 307"}
+    {"timestamp":"2025-02-03 02:52:08.000","request_id":"req-6e6029862364b135","request_method":"DELETE","status_code":239,"service":"cache","request_path":"\/auth\/239","level":"DEBUG","message":"Log message 239"}
+    {"timestamp":"2025-02-03 03:03:03.000","request_id":"req-46ba8ab9af8ed171","request_method":"GET","status_code":384,"service":"cache","request_path":"\/users\/584","level":"INFO","message":"Log message 584"}
+    {"timestamp":"2025-02-03 03:27:12.000","request_id":"req-c08e5f49948d2f66","request_method":"DELETE","status_code":535,"service":"api","request_path":"\/auth\/135","level":"DEBUG","message":"Log message 135"}
+    {"timestamp":"2025-02-03 03:38:37.000","request_id":"req-4a92f1a03e7a61b9","request_method":"PUT","status_code":250,"service":"api","request_path":"\/products\/50","level":"WARN","message":"Log message 50"}
+    {"timestamp":"2025-02-03 03:39:53.000","request_id":"req-4f592642589f1d63","request_method":"PUT","status_code":574,"service":"cache","request_path":"\/products\/774","level":"WARN","message":"Log message 774"}
+    {"timestamp":"2025-02-03 03:49:27.000","request_id":"req-125a85b740a5bd23","request_method":"GET","status_code":400,"service":"api","request_path":"\/users\/800","level":"INFO","message":"Log message 800"}
+    {"timestamp":"2025-02-03 04:10:01.000","request_id":"req-e9e2a8b4d1488ecc","request_method":"PUT","status_code":366,"service":"web","request_path":"\/products\/366","level":"WARN","message":"Log message 366"}
+    {"timestamp":"2025-02-03 04:16:55.000","request_id":"req-2dba5c336d18558b","request_method":"GET","status_code":352,"service":"auth","request_path":"\/users\/352","level":"INFO","message":"Log message 352"}
+    {"timestamp":"2025-02-03 04:35:35.000","request_id":"req-b2c44fe14446906d","request_method":"GET","status_code":432,"service":"auth","request_path":"\/users\/632","level":"INFO","message":"Log message 632"}
+    {"timestamp":"2025-02-03 04:58:03.000","request_id":"req-04ed4fac25e74bf0","request_method":"GET","status_code":284,"service":"cache","request_path":"\/users\/484","level":"INFO","message":"Log message 484"}
+    {"timestamp":"2025-02-03 05:06:19.000","request_id":"req-987dca20cfd54fba","request_method":"GET","status_code":588,"service":"database","request_path":"\/users\/788","level":"INFO","message":"Log message 788"}
+    {"timestamp":"2025-02-03 06:02:52.000","request_id":"req-2e8c3ff4d5acedda","request_method":"DELETE","status_code":395,"service":"api","request_path":"\/auth\/395","level":"DEBUG","message":"Log message 395"}
+    {"timestamp":"2025-02-03 06:08:10.000","request_id":"req-63b0251a0ac64495","request_method":"POST","status_code":477,"service":"auth","request_path":"\/orders\/277","level":"ERROR","message":"Log message 277"}
+    {"timestamp":"2025-02-03 06:14:02.000","request_id":"req-5fcaa73d1df686e6","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
+    {"timestamp":"2025-02-03 06:26:20.000","request_id":"req-f34b535b55e40fab","request_method":"DELETE","status_code":587,"service":"auth","request_path":"\/auth\/587","level":"DEBUG","message":"Log message 587"}
+    {"timestamp":"2025-02-03 06:37:45.000","request_id":"req-7f524c14163e8e1a","request_method":"PUT","status_code":302,"service":"auth","request_path":"\/products\/102","level":"WARN","message":"Log message 102"}
+    {"timestamp":"2025-02-03 06:38:26.000","request_id":"req-e8d8bfd9b0694789","request_method":"POST","status_code":261,"service":"web","request_path":"\/orders\/261","level":"ERROR","message":"Log message 261"}
+    {"timestamp":"2025-02-03 06:52:58.000","request_id":"req-d7c2fc623c431896","request_method":"POST","status_code":589,"service":"cache","request_path":"\/orders\/789","level":"ERROR","message":"Log message 789"}
+    {"timestamp":"2025-02-03 07:12:36.000","request_id":"req-f3c59763e11b3e21","request_method":"DELETE","status_code":211,"service":"web","request_path":"\/auth\/11","level":"DEBUG","message":"Log message 11"}
+    {"timestamp":"2025-02-03 07:18:05.000","request_id":"req-72fdb02a73cca037","request_method":"PUT","status_code":282,"service":"auth","request_path":"\/products\/282","level":"WARN","message":"Log message 282"}
+    {"timestamp":"2025-02-03 07:27:08.000","request_id":"req-1382cdbb36e667c2","request_method":"DELETE","status_code":539,"service":"cache","request_path":"\/auth\/139","level":"DEBUG","message":"Log message 139"}
+    {"timestamp":"2025-02-03 07:44:53.000","request_id":"req-3b47d989ab75d2b8","request_method":"PUT","status_code":274,"service":"cache","request_path":"\/products\/874","level":"WARN","message":"Log message 874"}
+    {"timestamp":"2025-02-03 07:58:44.000","request_id":"req-7a4222c8e83f4a44","request_method":"DELETE","status_code":243,"service":"database","request_path":"\/auth\/843","level":"DEBUG","message":"Log message 843"}
+    {"timestamp":"2025-02-03 08:02:42.000","request_id":"req-e80695b4b6b1f89f","request_method":"POST","status_code":405,"service":"api","request_path":"\/orders\/205","level":"ERROR","message":"Log message 205"}
+    {"timestamp":"2025-02-03 08:06:58.000","request_id":"req-f4b92f77e1fffe65","request_method":"POST","status_code":549,"service":"cache","request_path":"\/orders\/349","level":"ERROR","message":"Log message 349"}
+    {"timestamp":"2025-02-03 08:22:55.000","request_id":"req-959e7ef6d19eeba6","request_method":"GET","status_code":392,"service":"auth","request_path":"\/users\/592","level":"INFO","message":"Log message 592"}
+    {"timestamp":"2025-02-03 08:32:49.000","request_id":"req-6b44d7980567a8b2","request_method":"PUT","status_code":598,"service":"database","request_path":"\/products\/198","level":"WARN","message":"Log message 198"}
+    {"timestamp":"2025-02-03 09:19:00.000","request_id":"req-0c86ea3fe3c57eaa","request_method":"DELETE","status_code":227,"service":"auth","request_path":"\/auth\/27","level":"DEBUG","message":"Log message 27"}
+    {"timestamp":"2025-02-03 09:21:29.000","request_id":"req-569b06568133b957","request_method":"PUT","status_code":478,"service":"database","request_path":"\/products\/678","level":"WARN","message":"Log message 678"}
+    {"timestamp":"2025-02-03 09:36:50.000","request_id":"req-4ab0201945f323b8","request_method":"POST","status_code":357,"service":"auth","request_path":"\/orders\/757","level":"ERROR","message":"Log message 757"}
+    {"timestamp":"2025-02-03 09:44:30.000","request_id":"req-07043e4e4cc26a91","request_method":"POST","status_code":297,"service":"auth","request_path":"\/orders\/897","level":"ERROR","message":"Log message 897"}
+    {"timestamp":"2025-02-03 10:25:00.000","request_id":"req-279ecde007e7ea29","request_method":"DELETE","status_code":267,"service":"auth","request_path":"\/auth\/67","level":"DEBUG","message":"Log message 67"}
+    {"timestamp":"2025-02-03 10:28:25.000","request_id":"req-3e5f45f86bdd6a34","request_method":"PUT","status_code":462,"service":"auth","request_path":"\/products\/62","level":"WARN","message":"Log message 62"}
+    {"timestamp":"2025-02-03 10:55:52.000","request_id":"req-2b233a30f1802ec4","request_method":"DELETE","status_code":415,"service":"api","request_path":"\/auth\/15","level":"DEBUG","message":"Log message 15"}
+    {"timestamp":"2025-02-03 11:01:55.000","request_id":"req-c539742735effa57","request_method":"GET","status_code":452,"service":"auth","request_path":"\/users\/252","level":"INFO","message":"Log message 252"}
+    {"timestamp":"2025-02-03 11:04:22.000","request_id":"req-1be7850effe31e0a","request_method":"POST","status_code":305,"service":"api","request_path":"\/orders\/105","level":"ERROR","message":"Log message 105"}
+    {"timestamp":"2025-02-03 11:17:58.000","request_id":"req-94520d263ae20783","request_method":"POST","status_code":289,"service":"cache","request_path":"\/orders\/489","level":"ERROR","message":"Log message 489"}
+    {"timestamp":"2025-02-03 11:20:03.000","request_id":"req-3fe37e2471e8aab1","request_method":"GET","status_code":564,"service":"cache","request_path":"\/users\/564","level":"INFO","message":"Log message 564"}
+    {"timestamp":"2025-02-03 11:51:49.000","request_id":"req-695dab6dfcd8ae7c","request_method":"PUT","status_code":258,"service":"database","request_path":"\/products\/858","level":"WARN","message":"Log message 858"}
+    {"timestamp":"2025-02-03 12:13:33.000","request_id":"req-7dff8ff23fe195d3","request_method":"PUT","status_code":554,"service":"cache","request_path":"\/products\/754","level":"WARN","message":"Log message 754"}
+    {"timestamp":"2025-02-03 12:30:20.000","request_id":"req-9d521e40c4e789b8","request_method":"DELETE","status_code":347,"service":"auth","request_path":"\/auth\/347","level":"DEBUG","message":"Log message 347"}
+    {"timestamp":"2025-02-03 12:40:27.000","request_id":"req-daeabc1a2a4ffca4","request_method":"GET","status_code":540,"service":"api","request_path":"\/users\/340","level":"INFO","message":"Log message 340"}
+    {"timestamp":"2025-02-03 13:04:58.000","request_id":"req-1e41c0555a16b61a","request_method":"POST","status_code":269,"service":"cache","request_path":"\/orders\/869","level":"ERROR","message":"Log message 869"}
+    {"timestamp":"2025-02-03 13:22:51.000","request_id":"req-80e19410452fa81f","request_method":"GET","status_code":396,"service":"web","request_path":"\/users\/796","level":"INFO","message":"Log message 796"}
+    {"timestamp":"2025-02-03 13:28:06.000","request_id":"req-2491d31de31ce656","request_method":"POST","status_code":481,"service":"web","request_path":"\/orders\/681","level":"ERROR","message":"Log message 681"}
+    {"timestamp":"2025-02-03 13:45:29.000","request_id":"req-40951836761bc7df","request_method":"PUT","status_code":238,"service":"database","request_path":"\/products\/638","level":"WARN","message":"Log message 638"}
+    {"timestamp":"2025-02-03 13:59:26.000","request_id":"req-2fb704ff9d1ccc5c","request_method":"POST","status_code":201,"service":"web","request_path":"\/orders\/1","level":"ERROR","message":"Log message 1"}
+    {"timestamp":"2025-02-03 14:04:19.000","request_id":"req-07c0f541ca0d4b51","request_method":"GET","status_code":308,"service":"database","request_path":"\/users\/908","level":"INFO","message":"Log message 908"}
+    {"timestamp":"2025-02-03 14:16:46.000","request_id":"req-5dd9b7492803bf6e","request_method":"POST","status_code":361,"service":"web","request_path":"\/orders\/761","level":"ERROR","message":"Log message 761"}
+    {"timestamp":"2025-02-03 14:38:55.000","request_id":"req-8cd7fb233ce8356b","request_method":"GET","status_code":232,"service":"auth","request_path":"\/users\/232","level":"INFO","message":"Log message 232"}
+    {"timestamp":"2025-02-03 14:40:43.000","request_id":"req-c8d4444ad61a899a","request_method":"GET","status_code":524,"service":"cache","request_path":"\/users\/924","level":"INFO","message":"Log message 924"}
+    {"timestamp":"2025-02-03 15:02:38.000","request_id":"req-9c7e035547a525e7","request_method":"POST","status_code":409,"service":"cache","request_path":"\/orders\/609","level":"ERROR","message":"Log message 609"}
+    {"timestamp":"2025-02-03 15:07:37.000","request_id":"req-d0ed62ae727e8292","request_method":"PUT","status_code":510,"service":"api","request_path":"\/products\/710","level":"WARN","message":"Log message 710"}
+    {"timestamp":"2025-02-03 15:39:12.000","request_id":"req-a048144522cf953a","request_method":"DELETE","status_code":215,"service":"api","request_path":"\/auth\/15","level":"DEBUG","message":"Log message 15"}
+    {"timestamp":"2025-02-03 16:00:56.000","request_id":"req-df15b611ff28c72b","request_method":"DELETE","status_code":511,"service":"web","request_path":"\/auth\/711","level":"DEBUG","message":"Log message 711"}
+    {"timestamp":"2025-02-03 16:40:48.000","request_id":"req-9e20f1d0247ea9bb","request_method":"DELETE","status_code":519,"service":"cache","request_path":"\/auth\/519","level":"DEBUG","message":"Log message 519"}
+    {"timestamp":"2025-02-03 16:43:43.000","request_id":"req-9f455da534639c12","request_method":"GET","status_code":344,"service":"cache","request_path":"\/users\/344","level":"INFO","message":"Log message 344"}
+    {"timestamp":"2025-02-03 16:47:25.000","request_id":"req-7f84afbcbdec6464","request_method":"PUT","status_code":522,"service":"auth","request_path":"\/products\/722","level":"WARN","message":"Log message 722"}
+    {"timestamp":"2025-02-03 17:05:51.000","request_id":"req-44a543f4ca01e89a","request_method":"GET","status_code":216,"service":"web","request_path":"\/users\/416","level":"INFO","message":"Log message 416"}
+    {"timestamp":"2025-02-03 18:14:20.000","request_id":"req-fd55e35cebb17698","request_method":"DELETE","status_code":507,"service":"auth","request_path":"\/auth\/507","level":"DEBUG","message":"Log message 507"}
+    {"timestamp":"2025-02-03 18:24:58.000","request_id":"req-70e2c77bd891b4b2","request_method":"POST","status_code":269,"service":"cache","request_path":"\/orders\/869","level":"ERROR","message":"Log message 869"}
+    {"timestamp":"2025-02-03 18:25:33.000","request_id":"req-62f42132995ab3f9","request_method":"PUT","status_code":234,"service":"cache","request_path":"\/products\/834","level":"WARN","message":"Log message 834"}
+    {"timestamp":"2025-02-03 18:25:59.000","request_id":"req-3eaa2ad145aece6f","request_method":"GET","status_code":208,"service":"database","request_path":"\/users\/608","level":"INFO","message":"Log message 608"}
+    {"timestamp":"2025-02-03 18:29:58.000","request_id":"req-d24e8aeaebd4b69b","request_method":"POST","status_code":369,"service":"cache","request_path":"\/orders\/369","level":"ERROR","message":"Log message 369"}
+    {"timestamp":"2025-02-03 18:46:58.000","request_id":"req-589d07b0b9af886c","request_method":"POST","status_code":549,"service":"cache","request_path":"\/orders\/549","level":"ERROR","message":"Log message 549"}
+    {"timestamp":"2025-02-03 19:01:34.000","request_id":"req-d1157b50a186f360","request_method":"POST","status_code":473,"service":"database","request_path":"\/orders\/873","level":"ERROR","message":"Log message 873"}
+    {"timestamp":"2025-02-03 19:13:22.000","request_id":"req-41cfd4707d5d9189","request_method":"POST","status_code":565,"service":"api","request_path":"\/orders\/365","level":"ERROR","message":"Log message 365"}
+    {"timestamp":"2025-02-03 19:23:42.000","request_id":"req-ab50f632c7544b42","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/945","level":"ERROR","message":"Log message 945"}
+    {"timestamp":"2025-02-03 19:34:02.000","request_id":"req-6f65658010123820","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
+    {"timestamp":"2025-02-03 20:03:14.000","request_id":"req-6296819fe0433ec7","request_method":"POST","status_code":373,"service":"database","request_path":"\/orders\/373","level":"ERROR","message":"Log message 373"}
 
 - name: filtered_by_date
   description: Query logs within a specific date range
-  parameters: start_date=2024-01-15%2000%3A00%3A00&end_date=2024-01-16%2023%3A59%3A59&page_size=50
-  expected_result: ''
+  parameters: start_date=2025-02-03%2000%3A00%3A00&end_date=2025-02-03%2023%3A59%3A59&page_size=2
+  expected_result: |
+    {"timestamp":"2025-02-03 00:04:05.000","request_id":"req-4860bb49e129c265","request_method":"PUT","status_code":322,"service":"auth","request_path":"\/products\/122","level":"WARN","message":"Log message 122"}
+    {"timestamp":"2025-02-03 00:10:38.000","request_id":"req-1af70463d1e63266","request_method":"POST","status_code":329,"service":"cache","request_path":"\/orders\/729","level":"ERROR","message":"Log message 729"}
 
 - name: error_logs
   description: Filter logs by error level
-  parameters: level=ERROR&page_size=50
+  parameters: level=ERROR&page_size=10
   expected_result: |
-    {"timestamp":"2025-02-03 20:03:14.000","request_method":"POST","status_code":373,"service":"database","request_path":"\/orders\/373","level":"ERROR","message":"Log message 373"}
-    {"timestamp":"2025-02-03 19:34:02.000","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
-    {"timestamp":"2025-02-03 19:23:42.000","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/945","level":"ERROR","message":"Log message 945"}
-    {"timestamp":"2025-02-03 19:13:22.000","request_method":"POST","status_code":565,"service":"api","request_path":"\/orders\/365","level":"ERROR","message":"Log message 365"}
-    {"timestamp":"2025-02-03 19:01:34.000","request_method":"POST","status_code":473,"service":"database","request_path":"\/orders\/873","level":"ERROR","message":"Log message 873"}
-    {"timestamp":"2025-02-03 18:46:58.000","request_method":"POST","status_code":549,"service":"cache","request_path":"\/orders\/549","level":"ERROR","message":"Log message 549"}
-    {"timestamp":"2025-02-03 18:29:58.000","request_method":"POST","status_code":369,"service":"cache","request_path":"\/orders\/369","level":"ERROR","message":"Log message 369"}
-    {"timestamp":"2025-02-03 18:24:58.000","request_method":"POST","status_code":269,"service":"cache","request_path":"\/orders\/869","level":"ERROR","message":"Log message 869"}
-    {"timestamp":"2025-02-03 15:02:38.000","request_method":"POST","status_code":409,"service":"cache","request_path":"\/orders\/609","level":"ERROR","message":"Log message 609"}
-    {"timestamp":"2025-02-03 14:16:46.000","request_method":"POST","status_code":361,"service":"web","request_path":"\/orders\/761","level":"ERROR","message":"Log message 761"}
-    {"timestamp":"2025-02-03 13:59:26.000","request_method":"POST","status_code":201,"service":"web","request_path":"\/orders\/1","level":"ERROR","message":"Log message 1"}
-    {"timestamp":"2025-02-03 13:28:06.000","request_method":"POST","status_code":481,"service":"web","request_path":"\/orders\/681","level":"ERROR","message":"Log message 681"}
-    {"timestamp":"2025-02-03 13:04:58.000","request_method":"POST","status_code":269,"service":"cache","request_path":"\/orders\/869","level":"ERROR","message":"Log message 869"}
-    {"timestamp":"2025-02-03 11:17:58.000","request_method":"POST","status_code":289,"service":"cache","request_path":"\/orders\/489","level":"ERROR","message":"Log message 489"}
-    {"timestamp":"2025-02-03 11:04:22.000","request_method":"POST","status_code":305,"service":"api","request_path":"\/orders\/105","level":"ERROR","message":"Log message 105"}
-    {"timestamp":"2025-02-03 09:44:30.000","request_method":"POST","status_code":297,"service":"auth","request_path":"\/orders\/897","level":"ERROR","message":"Log message 897"}
-    {"timestamp":"2025-02-03 09:36:50.000","request_method":"POST","status_code":357,"service":"auth","request_path":"\/orders\/757","level":"ERROR","message":"Log message 757"}
-    {"timestamp":"2025-02-03 08:06:58.000","request_method":"POST","status_code":549,"service":"cache","request_path":"\/orders\/349","level":"ERROR","message":"Log message 349"}
-    {"timestamp":"2025-02-03 08:02:42.000","request_method":"POST","status_code":405,"service":"api","request_path":"\/orders\/205","level":"ERROR","message":"Log message 205"}
-    {"timestamp":"2025-02-03 06:52:58.000","request_method":"POST","status_code":589,"service":"cache","request_path":"\/orders\/789","level":"ERROR","message":"Log message 789"}
-    {"timestamp":"2025-02-03 06:38:26.000","request_method":"POST","status_code":261,"service":"web","request_path":"\/orders\/261","level":"ERROR","message":"Log message 261"}
-    {"timestamp":"2025-02-03 06:14:02.000","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
-    {"timestamp":"2025-02-03 06:08:10.000","request_method":"POST","status_code":477,"service":"auth","request_path":"\/orders\/277","level":"ERROR","message":"Log message 277"}
-    {"timestamp":"2025-02-03 01:36:26.000","request_method":"POST","status_code":381,"service":"web","request_path":"\/orders\/181","level":"ERROR","message":"Log message 181"}
-    {"timestamp":"2025-02-03 01:15:38.000","request_method":"POST","status_code":429,"service":"cache","request_path":"\/orders\/829","level":"ERROR","message":"Log message 829"}
-    {"timestamp":"2025-02-03 00:10:38.000","request_method":"POST","status_code":329,"service":"cache","request_path":"\/orders\/729","level":"ERROR","message":"Log message 729"}
-    {"timestamp":"2025-02-02 22:21:06.000","request_method":"POST","status_code":501,"service":"web","request_path":"\/orders\/901","level":"ERROR","message":"Log message 901"}
-    {"timestamp":"2025-02-02 21:56:42.000","request_method":"POST","status_code":365,"service":"api","request_path":"\/orders\/165","level":"ERROR","message":"Log message 165"}
-    {"timestamp":"2025-02-02 21:23:42.000","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/745","level":"ERROR","message":"Log message 745"}
-    {"timestamp":"2025-02-02 20:47:02.000","request_method":"POST","status_code":545,"service":"api","request_path":"\/orders\/345","level":"ERROR","message":"Log message 345"}
+    {"timestamp":"2025-02-02 20:47:02.000","request_id":"req-781644190c5ab313","request_method":"POST","status_code":545,"service":"api","request_path":"\/orders\/345","level":"ERROR","message":"Log message 345"}
+    {"timestamp":"2025-02-02 21:23:42.000","request_id":"req-77b0b28d7e89da92","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/745","level":"ERROR","message":"Log message 745"}
+    {"timestamp":"2025-02-02 21:56:42.000","request_id":"req-d4e7ca4fe100c522","request_method":"POST","status_code":365,"service":"api","request_path":"\/orders\/165","level":"ERROR","message":"Log message 165"}
+    {"timestamp":"2025-02-02 22:21:06.000","request_id":"req-d76379e176654acd","request_method":"POST","status_code":501,"service":"web","request_path":"\/orders\/901","level":"ERROR","message":"Log message 901"}
+    {"timestamp":"2025-02-03 00:10:38.000","request_id":"req-1af70463d1e63266","request_method":"POST","status_code":329,"service":"cache","request_path":"\/orders\/729","level":"ERROR","message":"Log message 729"}
+    {"timestamp":"2025-02-03 01:15:38.000","request_id":"req-14aa05993b4eb909","request_method":"POST","status_code":429,"service":"cache","request_path":"\/orders\/829","level":"ERROR","message":"Log message 829"}
+    {"timestamp":"2025-02-03 01:36:26.000","request_id":"req-6a15a97bb5959cb3","request_method":"POST","status_code":381,"service":"web","request_path":"\/orders\/181","level":"ERROR","message":"Log message 181"}
+    {"timestamp":"2025-02-03 06:08:10.000","request_id":"req-63b0251a0ac64495","request_method":"POST","status_code":477,"service":"auth","request_path":"\/orders\/277","level":"ERROR","message":"Log message 277"}
+    {"timestamp":"2025-02-03 06:14:02.000","request_id":"req-5fcaa73d1df686e6","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
+    {"timestamp":"2025-02-03 06:38:26.000","request_id":"req-e8d8bfd9b0694789","request_method":"POST","status_code":261,"service":"web","request_path":"\/orders\/261","level":"ERROR","message":"Log message 261"}
+
+- name: error_and_info_logs
+  description: Filter logs by error and info levels
+  parameters: level=ERROR,INFO&page_size=10
+  expected_result: |
+    {"timestamp":"2025-02-02 20:47:02.000","request_id":"req-781644190c5ab313","request_method":"POST","status_code":545,"service":"api","request_path":"\/orders\/345","level":"ERROR","message":"Log message 345"}
+    {"timestamp":"2025-02-02 20:59:19.000","request_id":"req-8f03293fa457463f","request_method":"GET","status_code":208,"service":"database","request_path":"\/users\/408","level":"INFO","message":"Log message 408"}
+    {"timestamp":"2025-02-02 21:23:42.000","request_id":"req-77b0b28d7e89da92","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/745","level":"ERROR","message":"Log message 745"}
+    {"timestamp":"2025-02-02 21:56:42.000","request_id":"req-d4e7ca4fe100c522","request_method":"POST","status_code":365,"service":"api","request_path":"\/orders\/165","level":"ERROR","message":"Log message 165"}
+    {"timestamp":"2025-02-02 22:19:39.000","request_id":"req-c278ae231b86db77","request_method":"GET","status_code":588,"service":"database","request_path":"\/users\/388","level":"INFO","message":"Log message 388"}
+    {"timestamp":"2025-02-02 22:21:06.000","request_id":"req-d76379e176654acd","request_method":"POST","status_code":501,"service":"web","request_path":"\/orders\/901","level":"ERROR","message":"Log message 901"}
+    {"timestamp":"2025-02-02 22:47:27.000","request_id":"req-c4ef116fe65fd9fa","request_method":"GET","status_code":520,"service":"api","request_path":"\/users\/320","level":"INFO","message":"Log message 320"}
+    {"timestamp":"2025-02-02 22:47:43.000","request_id":"req-d621ff5549ad1276","request_method":"GET","status_code":504,"service":"cache","request_path":"\/users\/904","level":"INFO","message":"Log message 904"}
+    {"timestamp":"2025-02-02 23:28:07.000","request_id":"req-b44069a35ccbf58d","request_method":"GET","status_code":480,"service":"api","request_path":"\/users\/80","level":"INFO","message":"Log message 80"}
+    {"timestamp":"2025-02-03 00:10:38.000","request_id":"req-1af70463d1e63266","request_method":"POST","status_code":329,"service":"cache","request_path":"\/orders\/729","level":"ERROR","message":"Log message 729"}
 
 - name: service_specific
   description: Filter logs for a specific service with HTTP method
   parameters: service=api&request_method=POST&page_size=5
   expected_result: |
-    {"timestamp":"2025-02-03 19:34:02.000","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
-    {"timestamp":"2025-02-03 19:23:42.000","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/945","level":"ERROR","message":"Log message 945"}
-    {"timestamp":"2025-02-03 19:13:22.000","request_method":"POST","status_code":565,"service":"api","request_path":"\/orders\/365","level":"ERROR","message":"Log message 365"}
-    {"timestamp":"2025-02-03 11:04:22.000","request_method":"POST","status_code":305,"service":"api","request_path":"\/orders\/105","level":"ERROR","message":"Log message 105"}
-    {"timestamp":"2025-02-03 08:02:42.000","request_method":"POST","status_code":405,"service":"api","request_path":"\/orders\/205","level":"ERROR","message":"Log message 205"}
+    {"timestamp":"2025-02-02 20:47:02.000","request_id":"req-781644190c5ab313","request_method":"POST","status_code":545,"service":"api","request_path":"\/orders\/345","level":"ERROR","message":"Log message 345"}
+    {"timestamp":"2025-02-02 21:23:42.000","request_id":"req-77b0b28d7e89da92","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/745","level":"ERROR","message":"Log message 745"}
+    {"timestamp":"2025-02-02 21:56:42.000","request_id":"req-d4e7ca4fe100c522","request_method":"POST","status_code":365,"service":"api","request_path":"\/orders\/165","level":"ERROR","message":"Log message 165"}
+    {"timestamp":"2025-02-03 06:14:02.000","request_id":"req-5fcaa73d1df686e6","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
+    {"timestamp":"2025-02-03 08:02:42.000","request_id":"req-e80695b4b6b1f89f","request_method":"POST","status_code":405,"service":"api","request_path":"\/orders\/205","level":"ERROR","message":"Log message 205"}
 
 - name: error_status_codes
   description: Filter logs by error status codes
-  parameters: status_code=418,525&page_size=50
+  parameters: status_code=418,525&page_size=10
   expected_result: |
-    {"timestamp":"2025-02-03 19:34:02.000","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
-    {"timestamp":"2025-02-03 06:14:02.000","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
-    {"timestamp":"2025-02-02 23:35:49.000","request_method":"PUT","status_code":418,"service":"database","request_path":"\/products\/818","level":"WARN","message":"Log message 818"}
+    {"timestamp":"2025-02-02 23:35:49.000","request_id":"req-ca7bf556325ef147","request_method":"PUT","status_code":418,"service":"database","request_path":"\/products\/818","level":"WARN","message":"Log message 818"}
+    {"timestamp":"2025-02-03 06:14:02.000","request_id":"req-5fcaa73d1df686e6","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
+    {"timestamp":"2025-02-03 19:34:02.000","request_id":"req-6f65658010123820","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
+
+- name: environment_filter
+  description: Filter logs by environment
+  parameters: environment=production&page_size=1
+  expected_result: |
+    {"timestamp":"2025-02-02 20:36:21.000","request_id":"req-3dbdad6adce206bf","request_method":"PUT","status_code":386,"service":"web","request_path":"\/products\/586","level":"WARN","message":"Log message 586"}
+
+- name: request_path_filter
+  description: Filter logs by request path
+  parameters: request_path=/auth/347&page_size=1
+  expected_result: |
+    {"timestamp":"2025-02-03 12:30:20.000","request_id":"req-9d521e40c4e789b8","request_method":"DELETE","status_code":347,"service":"auth","request_path":"\/auth\/347","level":"DEBUG","message":"Log message 347"}
+
+- name: user_agent_filter
+  description: Filter logs by user agent
+  parameters: user_agent=curl/7.64.1&page_size=1
+  expected_result: |
+    {"timestamp":"2025-02-02 20:59:19.000","request_id":"req-8f03293fa457463f","request_method":"GET","status_code":208,"service":"database","request_path":"\/users\/408","level":"INFO","message":"Log message 408"}
+
+- name: pagination_query
+  description: Basic log query with pagination parameters
+  parameters: page=0&page_size=1
+  expected_result: |
+    {"timestamp":"2025-02-02 20:36:21.000","request_id":"req-3dbdad6adce206bf","request_method":"PUT","status_code":386,"service":"web","request_path":"\/products\/586","level":"WARN","message":"Log message 586"}
+
+- name: sort_by_timestamp_desc
+  description: Sort logs by timestamp in descending order
+  parameters: sort_by=timestamp&order=desc&page_size=1
+  expected_result: |
+    {"timestamp":"2025-02-03 20:03:14.000","request_id":"req-6296819fe0433ec7","request_method":"POST","status_code":373,"service":"database","request_path":"\/orders\/373","level":"ERROR","message":"Log message 373"}
+
+- name: sort_by_timestamp_asc
+  description: Sort logs by timestamp in ascending order
+  parameters: sort_by=timestamp&order=asc&page_size=1
+  expected_result: |
+    {"timestamp":"2025-02-02 20:36:21.000","request_id":"req-3dbdad6adce206bf","request_method":"PUT","status_code":386,"service":"web","request_path":"\/products\/586","level":"WARN","message":"Log message 586"}
+
+- name: empty_page_size
+  description: Empty page size
+  parameters: page_size=0
+  expected_result: ''
+
+- name: filter_by_message
+  description: Filter logs by message
+  parameters: message=345&page_size=1
+  expected_result: |
+    {"timestamp":"2025-02-02 20:47:02.000","request_id":"req-781644190c5ab313","request_method":"POST","status_code":545,"service":"api","request_path":"\/orders\/345","level":"ERROR","message":"Log message 345"}
