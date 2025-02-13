@@ -59,6 +59,13 @@ export function GenericCounter({
   const currentParams = searchParams.get(columnName);
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
+  const service = searchParams.get('service')?.split(',').filter(Boolean) || undefined;
+  const level = searchParams.get('level')?.split(',').filter(Boolean) || undefined;
+  const environment = searchParams.get('environment')?.split(',').filter(Boolean) || undefined;
+  const requestMethod = searchParams.get('request_method')?.split(',').filter(Boolean) || undefined;
+  const statusCode = searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined;
+  const requestPath = searchParams.get('request_path')?.split(',').filter(Boolean) || undefined;
+  const userAgent = searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined;
   const hasInitializedRef = useRef(false);
 
   useDefaultDateRange();
@@ -79,10 +86,17 @@ export function GenericCounter({
         column_name: columnName,
         start_date: startDate || undefined,
         end_date: endDate || undefined,
+        service: columnName !== 'service' ? service : undefined,
+        level: columnName !== 'level' ? level : undefined,
+        environment: columnName !== 'environment' ? environment : undefined,
+        request_method: columnName !== 'request_method' ? requestMethod : undefined,
+        status_code: columnName !== 'status_code' ? statusCode : undefined,
+        request_path: columnName !== 'request_path' ? requestPath : undefined,
+        user_agent: columnName !== 'user_agent' ? userAgent : undefined,
+        __tb__deployment: process.env.NEXT_PUBLIC_TINYBIRD_DEPLOYMENT_ID || undefined,
       });
-      dataCache[columnName] = response.data || [];
-      setData(dataCache[columnName]);
-      setFilteredData(dataCache[columnName]);
+      setData(response.data || []);
+      setFilteredData(response.data || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch data');
     } finally {
@@ -90,22 +104,10 @@ export function GenericCounter({
     }
   };
 
-  // Only fetch on first mount
+  // Add searchParams to dependency array of useEffect
   useEffect(() => {
-    if (!hasInitializedRef.current && !dataCache[columnName]) {
-      hasInitializedRef.current = true;
-      fetchData();
-    } else {
-      setIsLoading(false); // Ensure loading is false if using cached data
-    }
-  }, []);
-
-  // Handle refresh
-  useEffect(() => {
-    if (shouldRefresh) {
-      fetchData();
-    }
-  }, [shouldRefresh]);
+    fetchData();
+  }, [searchParams, shouldRefresh]); // Add searchParams as dependency
 
   // Filter data effect
   useEffect(() => {
