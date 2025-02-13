@@ -50,7 +50,7 @@
     {"date":"2025-02-03 09:00:00.000","error_count":2,"total_requests":2,"error_rate":50,"avg_response_time":589.75,"max_response_time":897}
     {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":3,"error_rate":0,"avg_response_time":48,"max_response_time":67}
     {"date":"2025-02-03 11:00:00.000","error_count":2,"total_requests":3,"error_rate":40,"avg_response_time":453.6,"max_response_time":858}
-    {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":2,"error_rate":0,"avg_response_time":547,"max_response_time":754}
+    {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":3,"error_rate":0,"avg_response_time":480.33,"max_response_time":754}
     {"date":"2025-02-03 13:00:00.000","error_count":3,"total_requests":2,"error_rate":60,"avg_response_time":597,"max_response_time":869}
     {"date":"2025-02-03 14:00:00.000","error_count":1,"total_requests":3,"error_rate":25,"avg_response_time":706.25,"max_response_time":924}
     {"date":"2025-02-03 15:00:00.000","error_count":1,"total_requests":2,"error_rate":33.33,"avg_response_time":444.67,"max_response_time":710}
