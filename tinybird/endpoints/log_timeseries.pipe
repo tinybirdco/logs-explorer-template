@@ -56,21 +56,39 @@ SQL >
     %
     SELECT
         {% if date_diff_in_hours(start_date, end_date) > 24 * 7 %}
-            toStartOfDay(timestamp) as date,
+            date,
         {% elif date_diff_in_hours(start_date, end_date) > 1 %}
             toStartOfHour(timestamp) as date,
         {% else %}
             toStartOfMinute(timestamp) as date,
         {% end %}
-        countIf(level = 'ERROR') as error_count,
-        countIf(level != 'ERROR') as total_requests,
-        round(countIf(level = 'ERROR') * 100.0 / count(), 2) as error_rate,
-        round(avg(response_time), 2) as avg_response_time,
-        round(max(response_time), 2) as max_response_time
-    FROM logs
+        {% if date_diff_in_hours(start_date, end_date) > 24 * 7 %}
+            countMerge(error_count) as error_count,
+            countMerge(total_requests) as total_requests,
+            round(error_count * 100.0 / total_requests, 2) as error_rate,
+            round(avgMerge(response_time_avg), 2) as avg_response_time,
+            round(maxMerge(response_time_max), 2) as max_response_time
+        {% else %}
+            countIf(level = 'ERROR') as error_count,
+            countIf(level != 'ERROR') as total_requests,
+            round(countIf(level = 'ERROR') * 100.0 / count(), 2) as error_rate,
+            round(avg(response_time), 2) as avg_response_time,
+            round(max(response_time), 2) as max_response_time
+        {% end %}
+    FROM
+    {% if date_diff_in_hours(start_date, end_date) > 24 * 7 %}
+        logs_daily_timeseries
+    {% else %}
+        logs
+    {% end %}
     WHERE 1=1
+    {% if date_diff_in_hours(start_date, end_date) > 24 * 7 %}
+        AND date >= {{DateTime(start_date)}}
+        AND date <= {{DateTime(end_date)}}
+    {% else %}
         AND timestamp >= {{DateTime(start_date)}}
         AND timestamp <= {{DateTime(end_date)}}
+    {% end %}
     {% if defined(service) and service != [''] %}
         AND service in {{Array(service)}}
     {% end %}

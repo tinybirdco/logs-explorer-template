@@ -1,0 +1,31 @@
+DESCRIPTION >
+    Materializes daily metrics for time series analysis
+
+NODE daily_metrics
+SQL >
+    SELECT
+        toStartOfDay(timestamp) as date,
+        service,
+        level,
+        environment,
+        request_method,
+        status_code,
+        request_path,
+        user_agent,
+        countStateIf(level = 'ERROR') as error_count,
+        countState() as total_requests,
+        maxState(toFloat64(response_time)) as response_time_max,
+        avgState(toFloat64(response_time)) as response_time_avg
+    FROM logs
+    GROUP BY
+        date,
+        service,
+        level,
+        environment,
+        request_method,
+        status_code,
+        request_path,
+        user_agent
+
+TYPE materialized
+DATASOURCE logs_daily_timeseries
