@@ -4,8 +4,8 @@
   parameters: column_name=level
   expected_result: |
     {"category":"ERROR","count":30}
-    {"category":"WARN","count":25}
     {"category":"INFO","count":25}
+    {"category":"WARN","count":25}
     {"category":"DEBUG","count":20}
 
 - name: count_level_date_range
@@ -13,23 +13,29 @@
   parameters: column_name=level&start_date=2025-02-02%2000%3A00%3A00&end_date=2025-02-03%2023%3A59%3A59
   expected_result: |
     {"category":"ERROR","count":30}
-    {"category":"WARN","count":25}
     {"category":"INFO","count":25}
+    {"category":"WARN","count":25}
     {"category":"DEBUG","count":20}
 
 - name: count_status_basic
   description: Test basic counter with status column for full year
   parameters: column_name=status_code
   expected_result: |
-    {"category":"269","count":2}
     {"category":"208","count":2}
-    {"category":"588","count":2}
-    {"category":"549","count":2}
-    {"category":"540","count":2}
-    {"category":"525","count":2}
+    {"category":"269","count":2}
     {"category":"345","count":2}
+    {"category":"525","count":2}
+    {"category":"540","count":2}
+    {"category":"549","count":2}
+    {"category":"588","count":2}
     {"category":"201","count":1}
-    {"category":"519","count":1}
+    {"category":"211","count":1}
+    {"category":"215","count":1}
+    {"category":"216","count":1}
+    {"category":"227","count":1}
+    {"category":"232","count":1}
+    {"category":"234","count":1}
+    {"category":"238","count":1}
     {"category":"239","count":1}
     {"category":"242","count":1}
     {"category":"243","count":1}
@@ -37,7 +43,6 @@
     {"category":"258","count":1}
     {"category":"261","count":1}
     {"category":"267","count":1}
-    {"category":"234","count":1}
     {"category":"274","count":1}
     {"category":"278","count":1}
     {"category":"282","count":1}
@@ -50,12 +55,11 @@
     {"category":"305","count":1}
     {"category":"307","count":1}
     {"category":"308","count":1}
-    {"category":"238","count":1}
+    {"category":"318","count":1}
     {"category":"322","count":1}
     {"category":"329","count":1}
     {"category":"334","count":1}
     {"category":"344","count":1}
-    {"category":"232","count":1}
     {"category":"347","count":1}
     {"category":"352","count":1}
     {"category":"357","count":1}
@@ -93,16 +97,13 @@
     {"category":"507","count":1}
     {"category":"510","count":1}
     {"category":"511","count":1}
-    {"category":"599","count":1}
+    {"category":"519","count":1}
     {"category":"520","count":1}
     {"category":"522","count":1}
     {"category":"524","count":1}
-    {"category":"227","count":1}
     {"category":"535","count":1}
     {"category":"539","count":1}
-    {"category":"216","count":1}
     {"category":"545","count":1}
-    {"category":"215","count":1}
     {"category":"550","count":1}
     {"category":"554","count":1}
     {"category":"563","count":1}
@@ -110,10 +111,9 @@
     {"category":"565","count":1}
     {"category":"574","count":1}
     {"category":"587","count":1}
-    {"category":"211","count":1}
     {"category":"589","count":1}
     {"category":"598","count":1}
-    {"category":"318","count":1}
+    {"category":"599","count":1}
 
 - name: count_service_basic
   description: Test basic counter with service column for full year
@@ -147,110 +147,112 @@
   parameters: column_name=request_path
   expected_result: |
     {"category":"\/auth\/15","count":2}
-    {"category":"\/orders\/925","count":2}
     {"category":"\/orders\/869","count":2}
-    {"category":"\/auth\/67","count":1}
-    {"category":"\/orders\/165","count":1}
-    {"category":"\/users\/584","count":1}
-    {"category":"\/orders\/345","count":1}
-    {"category":"\/users\/320","count":1}
-    {"category":"\/users\/408","count":1}
-    {"category":"\/products\/858","count":1}
-    {"category":"\/auth\/239","count":1}
-    {"category":"\/users\/416","count":1}
-    {"category":"\/products\/282","count":1}
-    {"category":"\/auth\/843","count":1}
-    {"category":"\/products\/194","count":1}
-    {"category":"\/products\/50","count":1}
-    {"category":"\/users\/656","count":1}
-    {"category":"\/users\/340","count":1}
-    {"category":"\/orders\/897","count":1}
-    {"category":"\/products\/198","count":1}
-    {"category":"\/products\/122","count":1}
-    {"category":"\/users\/924","count":1}
-    {"category":"\/products\/350","count":1}
-    {"category":"\/orders\/901","count":1}
+    {"category":"\/orders\/925","count":2}
+    {"category":"\/auth\/103","count":1}
     {"category":"\/auth\/11","count":1}
-    {"category":"\/orders\/549","count":1}
-    {"category":"\/users\/484","count":1}
+    {"category":"\/auth\/135","count":1}
     {"category":"\/auth\/139","count":1}
-    {"category":"\/orders\/729","count":1}
-    {"category":"\/users\/140","count":1}
-    {"category":"\/orders\/1","count":1}
-    {"category":"\/orders\/873","count":1}
-    {"category":"\/auth\/507","count":1}
-    {"category":"\/products\/638","count":1}
-    {"category":"\/products\/874","count":1}
-    {"category":"\/auth\/347","count":1}
-    {"category":"\/products\/734","count":1}
-    {"category":"\/products\/318","count":1}
-    {"category":"\/users\/592","count":1}
-    {"category":"\/orders\/349","count":1}
-    {"category":"\/orders\/745","count":1}
-    {"category":"\/products\/102","count":1}
+    {"category":"\/auth\/239","count":1}
+    {"category":"\/auth\/27","count":1}
+    {"category":"\/auth\/275","count":1}
     {"category":"\/auth\/307","count":1}
-    {"category":"\/orders\/757","count":1}
-    {"category":"\/users\/608","count":1}
-    {"category":"\/users\/904","count":1}
-    {"category":"\/products\/586","count":1}
-    {"category":"\/orders\/761","count":1}
-    {"category":"\/products\/722","count":1}
+    {"category":"\/auth\/347","count":1}
+    {"category":"\/auth\/395","count":1}
+    {"category":"\/auth\/507","count":1}
+    {"category":"\/auth\/519","count":1}
+    {"category":"\/auth\/587","count":1}
+    {"category":"\/auth\/67","count":1}
     {"category":"\/auth\/711","count":1}
-    {"category":"\/users\/352","count":1}
+    {"category":"\/auth\/763","count":1}
+    {"category":"\/auth\/799","count":1}
+    {"category":"\/auth\/843","count":1}
+    {"category":"\/orders\/1","count":1}
+    {"category":"\/orders\/105","count":1}
+    {"category":"\/orders\/165","count":1}
+    {"category":"\/orders\/181","count":1}
+    {"category":"\/orders\/205","count":1}
+    {"category":"\/orders\/261","count":1}
+    {"category":"\/orders\/277","count":1}
+    {"category":"\/orders\/345","count":1}
+    {"category":"\/orders\/349","count":1}
+    {"category":"\/orders\/365","count":1}
+    {"category":"\/orders\/369","count":1}
+    {"category":"\/orders\/373","count":1}
+    {"category":"\/orders\/489","count":1}
+    {"category":"\/orders\/549","count":1}
+    {"category":"\/orders\/609","count":1}
+    {"category":"\/orders\/681","count":1}
+    {"category":"\/orders\/729","count":1}
+    {"category":"\/orders\/745","count":1}
+    {"category":"\/orders\/757","count":1}
+    {"category":"\/orders\/761","count":1}
     {"category":"\/orders\/789","count":1}
     {"category":"\/orders\/829","count":1}
-    {"category":"\/orders\/105","count":1}
-    {"category":"\/orders\/365","count":1}
-    {"category":"\/auth\/275","count":1}
+    {"category":"\/orders\/873","count":1}
+    {"category":"\/orders\/897","count":1}
+    {"category":"\/orders\/901","count":1}
     {"category":"\/orders\/945","count":1}
-    {"category":"\/products\/818","count":1}
-    {"category":"\/users\/296","count":1}
-    {"category":"\/products\/62","count":1}
+    {"category":"\/products\/102","count":1}
+    {"category":"\/products\/122","count":1}
+    {"category":"\/products\/194","count":1}
+    {"category":"\/products\/198","count":1}
+    {"category":"\/products\/282","count":1}
     {"category":"\/products\/302","count":1}
+    {"category":"\/products\/318","count":1}
+    {"category":"\/products\/350","count":1}
     {"category":"\/products\/366","count":1}
-    {"category":"\/orders\/181","count":1}
-    {"category":"\/products\/754","count":1}
-    {"category":"\/orders\/681","count":1}
-    {"category":"\/orders\/277","count":1}
-    {"category":"\/auth\/135","count":1}
-    {"category":"\/auth\/103","count":1}
-    {"category":"\/auth\/587","count":1}
-    {"category":"\/orders\/261","count":1}
-    {"category":"\/auth\/799","count":1}
-    {"category":"\/users\/252","count":1}
-    {"category":"\/users\/796","count":1}
-    {"category":"\/auth\/763","count":1}
-    {"category":"\/users\/564","count":1}
-    {"category":"\/users\/388","count":1}
-    {"category":"\/products\/842","count":1}
-    {"category":"\/auth\/27","count":1}
-    {"category":"\/users\/632","count":1}
-    {"category":"\/users\/344","count":1}
-    {"category":"\/users\/800","count":1}
-    {"category":"\/orders\/489","count":1}
-    {"category":"\/orders\/373","count":1}
-    {"category":"\/users\/788","count":1}
-    {"category":"\/auth\/519","count":1}
-    {"category":"\/products\/834","count":1}
-    {"category":"\/products\/774","count":1}
+    {"category":"\/products\/50","count":1}
+    {"category":"\/products\/586","count":1}
+    {"category":"\/products\/62","count":1}
+    {"category":"\/products\/638","count":1}
     {"category":"\/products\/678","count":1}
-    {"category":"\/users\/232","count":1}
     {"category":"\/products\/710","count":1}
-    {"category":"\/orders\/369","count":1}
-    {"category":"\/users\/80","count":1}
-    {"category":"\/users\/908","count":1}
-    {"category":"\/orders\/609","count":1}
-    {"category":"\/auth\/395","count":1}
-    {"category":"\/orders\/205","count":1}
+    {"category":"\/products\/722","count":1}
+    {"category":"\/products\/734","count":1}
+    {"category":"\/products\/754","count":1}
+    {"category":"\/products\/774","count":1}
+    {"category":"\/products\/818","count":1}
+    {"category":"\/products\/834","count":1}
+    {"category":"\/products\/842","count":1}
+    {"category":"\/products\/858","count":1}
+    {"category":"\/products\/874","count":1}
     {"category":"\/products\/878","count":1}
+    {"category":"\/users\/140","count":1}
+    {"category":"\/users\/232","count":1}
+    {"category":"\/users\/252","count":1}
+    {"category":"\/users\/296","count":1}
+    {"category":"\/users\/320","count":1}
+    {"category":"\/users\/340","count":1}
+    {"category":"\/users\/344","count":1}
+    {"category":"\/users\/352","count":1}
+    {"category":"\/users\/388","count":1}
+    {"category":"\/users\/408","count":1}
+    {"category":"\/users\/416","count":1}
+    {"category":"\/users\/484","count":1}
+    {"category":"\/users\/564","count":1}
+    {"category":"\/users\/584","count":1}
+    {"category":"\/users\/592","count":1}
+    {"category":"\/users\/608","count":1}
+    {"category":"\/users\/632","count":1}
+    {"category":"\/users\/656","count":1}
+    {"category":"\/users\/788","count":1}
+    {"category":"\/users\/796","count":1}
+    {"category":"\/users\/80","count":1}
+    {"category":"\/users\/800","count":1}
+    {"category":"\/users\/904","count":1}
+    {"category":"\/users\/908","count":1}
+    {"category":"\/users\/924","count":1}
 
 - name: count_host_basic
   description: Test basic counter with host column for full year
   parameters: column_name=host
-  expected_result: '[Error] Unknown expression or function identifier ''host'' in
-    scope SELECT toString(host) AS category, countMerge(count) AS count FROM Tinybird_Local_Build_6900e350b1284d8a28c22c54400e4519f754a229022bca3d46f781bb91d7fc55.logs_daily_dimensions
-    AS logs_daily_dimensions WHERE 1 = 1 GROUP BY host ORDER BY count DESC. (UNKNOWN_IDENTIFIER)'
-  expected_http_status: 400
+  expected_result: |
+    {"category":"server-4","count":26}
+    {"category":"server-0","count":22}
+    {"category":"server-2","count":21}
+    {"category":"server-3","count":17}
+    {"category":"server-1","count":14}
 
 - name: count_user_agent_basic
   description: Test basic counter with user_agent column for full year
