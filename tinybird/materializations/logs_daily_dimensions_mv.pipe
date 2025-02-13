@@ -1,0 +1,35 @@
+DESCRIPTION >
+    Materializes daily counts for each combination of dimensions from logs
+
+NODE aggregate_dimensions
+SQL >
+    SELECT
+        toStartOfDay(timestamp) as date,
+        service,
+        level,
+        environment,
+        request_method,
+        status_code,
+        request_path,
+        user_agent,
+        countState() as count,
+        avgState(response_time) as avg_response_time,
+        sumState(response_time) as sum_response_time,
+        minState(response_time) as min_response_time,
+        maxState(response_time) as max_response_time,
+        quantileState(0.5)(response_time) as median_response_time,
+        quantileState(0.9)(response_time) as p90_response_time,
+        quantileState(0.99)(response_time) as p99_response_time
+    FROM logs
+    GROUP BY
+        date,
+        service,
+        level,
+        environment,
+        request_method,
+        status_code,
+        request_path,
+        user_agent
+
+TYPE materialized
+DATASOURCE logs_daily_dimensions 

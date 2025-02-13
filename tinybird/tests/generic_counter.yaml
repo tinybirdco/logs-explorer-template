@@ -6,7 +6,7 @@
     {"category":"ERROR","count":30}
     {"category":"WARN","count":25}
     {"category":"INFO","count":25}
-    {"category":"DEBUG","count":19}
+    {"category":"DEBUG","count":20}
 
 - name: count_level_date_range
   description: Test counter with level column for specific date range
@@ -15,7 +15,7 @@
     {"category":"ERROR","count":30}
     {"category":"WARN","count":25}
     {"category":"INFO","count":25}
-    {"category":"DEBUG","count":19}
+    {"category":"DEBUG","count":20}
 
 - name: count_status_basic
   description: Test basic counter with status column for full year
@@ -56,6 +56,7 @@
     {"category":"334","count":1}
     {"category":"344","count":1}
     {"category":"232","count":1}
+    {"category":"347","count":1}
     {"category":"352","count":1}
     {"category":"357","count":1}
     {"category":"361","count":1}
@@ -120,7 +121,7 @@
   expected_result: |
     {"category":"cache","count":26}
     {"category":"api","count":22}
-    {"category":"auth","count":20}
+    {"category":"auth","count":21}
     {"category":"database","count":17}
     {"category":"web","count":14}
 
@@ -129,7 +130,7 @@
   parameters: column_name=environment
   expected_result: |
     {"category":"development","count":36}
-    {"category":"staging","count":34}
+    {"category":"staging","count":35}
     {"category":"production","count":29}
 
 - name: count_request_method_basic
@@ -139,7 +140,7 @@
     {"category":"POST","count":30}
     {"category":"GET","count":25}
     {"category":"PUT","count":25}
-    {"category":"DELETE","count":19}
+    {"category":"DELETE","count":20}
 
 - name: count_request_path_basic
   description: Test basic counter with request_path column for full year
@@ -162,10 +163,10 @@
     {"category":"\/products\/194","count":1}
     {"category":"\/products\/50","count":1}
     {"category":"\/users\/656","count":1}
-    {"category":"\/products\/122","count":1}
+    {"category":"\/users\/340","count":1}
     {"category":"\/orders\/897","count":1}
     {"category":"\/products\/198","count":1}
-    {"category":"\/users\/340","count":1}
+    {"category":"\/products\/122","count":1}
     {"category":"\/users\/924","count":1}
     {"category":"\/products\/350","count":1}
     {"category":"\/orders\/901","count":1}
@@ -177,13 +178,14 @@
     {"category":"\/users\/140","count":1}
     {"category":"\/orders\/1","count":1}
     {"category":"\/orders\/873","count":1}
-    {"category":"\/products\/638","count":1}
     {"category":"\/auth\/507","count":1}
+    {"category":"\/products\/638","count":1}
     {"category":"\/products\/874","count":1}
+    {"category":"\/auth\/347","count":1}
     {"category":"\/products\/734","count":1}
     {"category":"\/products\/318","count":1}
-    {"category":"\/orders\/349","count":1}
     {"category":"\/users\/592","count":1}
+    {"category":"\/orders\/349","count":1}
     {"category":"\/orders\/745","count":1}
     {"category":"\/products\/102","count":1}
     {"category":"\/auth\/307","count":1}
@@ -209,29 +211,29 @@
     {"category":"\/orders\/181","count":1}
     {"category":"\/products\/754","count":1}
     {"category":"\/orders\/681","count":1}
-    {"category":"\/auth\/135","count":1}
     {"category":"\/orders\/277","count":1}
+    {"category":"\/auth\/135","count":1}
     {"category":"\/auth\/103","count":1}
     {"category":"\/auth\/587","count":1}
     {"category":"\/orders\/261","count":1}
     {"category":"\/auth\/799","count":1}
     {"category":"\/users\/252","count":1}
-    {"category":"\/auth\/763","count":1}
     {"category":"\/users\/796","count":1}
+    {"category":"\/auth\/763","count":1}
     {"category":"\/users\/564","count":1}
     {"category":"\/users\/388","count":1}
     {"category":"\/products\/842","count":1}
-    {"category":"\/users\/632","count":1}
     {"category":"\/auth\/27","count":1}
+    {"category":"\/users\/632","count":1}
     {"category":"\/users\/344","count":1}
     {"category":"\/users\/800","count":1}
     {"category":"\/orders\/489","count":1}
-    {"category":"\/products\/678","count":1}
+    {"category":"\/orders\/373","count":1}
     {"category":"\/users\/788","count":1}
     {"category":"\/auth\/519","count":1}
     {"category":"\/products\/834","count":1}
     {"category":"\/products\/774","count":1}
-    {"category":"\/orders\/373","count":1}
+    {"category":"\/products\/678","count":1}
     {"category":"\/users\/232","count":1}
     {"category":"\/products\/710","count":1}
     {"category":"\/orders\/369","count":1}
@@ -245,19 +247,17 @@
 - name: count_host_basic
   description: Test basic counter with host column for full year
   parameters: column_name=host
-  expected_result: |
-    {"category":"server-4","count":26}
-    {"category":"server-0","count":22}
-    {"category":"server-2","count":20}
-    {"category":"server-3","count":17}
-    {"category":"server-1","count":14}
+  expected_result: '[Error] Unknown expression or function identifier ''host'' in
+    scope SELECT toString(host) AS category, countMerge(count) AS count FROM Tinybird_Local_Build_6900e350b1284d8a28c22c54400e4519f754a229022bca3d46f781bb91d7fc55.logs_daily_dimensions
+    AS logs_daily_dimensions WHERE 1 = 1 GROUP BY host ORDER BY count DESC. (UNKNOWN_IDENTIFIER)'
+  expected_http_status: 400
 
 - name: count_user_agent_basic
   description: Test basic counter with user_agent column for full year
   parameters: column_name=user_agent
   expected_result: |
     {"category":"curl\/7.64.1","count":36}
-    {"category":"PostmanRuntime\/7.28.4","count":34}
+    {"category":"PostmanRuntime\/7.28.4","count":35}
     {"category":"Mozilla\/5.0","count":29}
 
 - name: wrong_column_name

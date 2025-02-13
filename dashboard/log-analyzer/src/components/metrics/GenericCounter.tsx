@@ -29,12 +29,13 @@ const VISIBLE_ITEMS = 5;
 const dataCache: Record<string, CountData[]> = {};
 
 const formatNumber = (num: number) => {
-  const formatter = Intl.NumberFormat('en', { 
-    notation: 'compact',
-    maximumFractionDigits: 2
-  });
-  return formatter.format(num);
-}; 
+  if (num >= 1_000_000) {
+    return `${(num / 1_000_000).toFixed(1)}M`;
+  } else if (num >= 1_000) {
+    return `${(num / 1_000).toFixed(1)}K`;
+  }
+  return num.toString();
+};
 
 const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
