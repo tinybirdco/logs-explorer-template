@@ -12,6 +12,7 @@ SQL >
         status_code,
         request_path,
         user_agent,
+        host,
         countState() as count,
         avgState(response_time) as avg_response_time,
         sumState(response_time) as sum_response_time,
@@ -29,7 +30,8 @@ SQL >
         request_method,
         status_code,
         request_path,
-        user_agent
+        user_agent,
+        host
 
 TYPE materialized
 DATASOURCE logs_daily_dimensions 
