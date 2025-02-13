@@ -32,10 +32,10 @@ export function SearchBar() {
 
   return (
     <div className="relative flex-1">
-      <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+      <Search className="absolute left-3 top-3 h-4 w-4 text-[var(--button-text)]" />
       <Input
         placeholder="Search logs..."
-        className="pl-8 pr-8"
+        className="h-10 pl-9 pr-9 border-[var(--border-gray)]"
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
@@ -46,7 +46,7 @@ export function SearchBar() {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-1 top-1 h-7 w-7 rounded-full hover:bg-muted"
+          className="absolute right-1.5 top-1.5 h-7 w-7 rounded-full hover:bg-muted"
           onClick={handleClear}
         >
           <X className="h-4 w-4" />

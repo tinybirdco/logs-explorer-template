@@ -33,6 +33,18 @@ export function DateRangeSelector() {
       case '7d':
         startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
         break;
+      case '30d':
+        startDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        break;
+      case '3m':
+        startDate = new Date(now.getTime() - 3 * 30 * 24 * 60 * 60 * 1000);
+        break;
+      case '6m':
+        startDate = new Date(now.getTime() - 6 * 30 * 24 * 60 * 60 * 1000);
+        break;
+      case '1y':
+        startDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+        break;
       default:
         startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
     }
@@ -45,14 +57,18 @@ export function DateRangeSelector() {
 
   return (
     <Select defaultValue="7d" onValueChange={handleTimeRangeChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[180px] h-10 bg-white border-[var(--border-gray)]">
         <SelectValue placeholder="Time Range" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="30m">Last 30 minutes</SelectItem>
-        <SelectItem value="1h">Last 1 hour</SelectItem>
-        <SelectItem value="24h">Last 24 hours</SelectItem>
-        <SelectItem value="7d">Last 7 days</SelectItem>
+        <SelectItem value="30m" className="hover:bg-[var(--background-hover)]">Last 30 minutes</SelectItem>
+        <SelectItem value="1h" className="hover:bg-[var(--background-hover)]">Last 1 hour</SelectItem>
+        <SelectItem value="24h" className="hover:bg-[var(--background-hover)]">Last 24 hours</SelectItem>
+        <SelectItem value="7d" className="hover:bg-[var(--background-hover)]">Last 7 days</SelectItem>
+        <SelectItem value="30d" className="hover:bg-[var(--background-hover)]">Last 30 days</SelectItem>
+        <SelectItem value="3m" className="hover:bg-[var(--background-hover)]">Last 3 months</SelectItem>
+        <SelectItem value="6m" className="hover:bg-[var(--background-hover)]">Last 6 months</SelectItem>
+        <SelectItem value="1y" className="hover:bg-[var(--background-hover)]">Last 1 year</SelectItem>
       </SelectContent>
     </Select>
   );

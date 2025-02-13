@@ -10,21 +10,22 @@ export function RefreshButton() {
   const searchParams = useSearchParams();
 
   const handleRefresh = () => {
+    // Dispatch custom event for refresh
+    window.dispatchEvent(new Event('refresh-filters'));
+    
+    // Update URL params as before
     const params = new URLSearchParams(searchParams.toString());
     const now = new Date();
-    
-    // Update end_date to now
-    params.set('end_date', now.toISOString().split('.')[0].replace('T', ' ').replace('Z', ''));
-    
+    params.set('end_date', now.toISOString().split('.')[0].replace('T', ' '));
     router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (
     <Button 
-      variant="outline" 
+      variant="ghost" 
       size="icon"
       onClick={handleRefresh}
-      title="Refresh"
+      className="btn-icon"
     >
       <RotateCw className="h-4 w-4" />
     </Button>
