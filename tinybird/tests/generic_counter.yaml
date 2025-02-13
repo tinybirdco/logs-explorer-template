@@ -275,3 +275,50 @@
   parameters: ''
   expected_result: column_name (String) query param is required
   expected_http_status: 400
+
+- name: filter_by_service
+  description: Test counter with filter by service
+  parameters: column_name=service&service=api,auth
+  expected_result: |
+    {"category":"api","count":22}
+    {"category":"auth","count":21}
+
+- name: filter_by_level
+  description: Test counter with filter by level
+  parameters: column_name=level&level=ERROR,INFO
+  expected_result: |
+    {"category":"ERROR","count":30}
+    {"category":"INFO","count":25}
+
+- name: filter_by_environment
+  description: Test counter with filter by environment
+  parameters: column_name=environment&environment=development,staging
+  expected_result: |
+    {"category":"development","count":36}
+    {"category":"staging","count":35}
+
+- name: filter_by_request_method
+  description: Test counter with filter by request_method
+  parameters: column_name=request_method&request_method=POST,GET
+  expected_result: |
+    {"category":"POST","count":30}
+    {"category":"GET","count":25}
+
+- name: filter_by_request_path
+  description: Test counter with filter by request_path
+  parameters: column_name=request_path&request_path=/orders/925,/orders/869
+  expected_result: |
+    {"category":"\/orders\/869","count":2}
+    {"category":"\/orders\/925","count":2}
+
+- name: filter_by_status_code
+  description: Test counter with filter by status_code
+  parameters: column_name=status_code&status_code=200,201
+  expected_result: |
+    {"category":"201","count":1}
+
+- name: filter_by_environment_and_level
+  description: Test counter with filter by environment and level
+  parameters: column_name=environment&environment=development&level=ERROR
+  expected_result: |
+    {"category":"development","count":12}
