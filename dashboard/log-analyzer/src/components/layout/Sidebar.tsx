@@ -80,15 +80,6 @@ export default function Sidebar() {
                 <CollapseIcon />
               </Button>
             </div>
-
-            <div className="space-y-4">
-              {/* Log Levels */}
-              <GenericCounter 
-                columnName="level"
-                title="Log Levels"
-                onSelectionChange={createFilterHandler('level')}
-                shouldRefresh={refreshTrigger}
-              />
               
               {/* Environments */}
               <GenericCounter 
@@ -96,6 +87,7 @@ export default function Sidebar() {
                 title="Environments"
                 onSelectionChange={createFilterHandler('environment')}
                 shouldRefresh={refreshTrigger}
+                startOpen={true}
               />
               
               {/* Services */}
@@ -103,6 +95,15 @@ export default function Sidebar() {
                 columnName="service"
                 title="Services"
                 onSelectionChange={createFilterHandler('service')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              <div className="space-y-4">
+              {/* Log Levels */}
+              <GenericCounter 
+                columnName="level"
+                title="Log Levels"
+                onSelectionChange={createFilterHandler('level')}
                 shouldRefresh={refreshTrigger}
               />
               
