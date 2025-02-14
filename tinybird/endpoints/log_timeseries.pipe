@@ -103,7 +103,7 @@ SQL >
     {% if defined(request_method) and request_method != '' %}
         AND request_method in {{Array(request_method)}}
     {% end %}
-    {% if defined(status_code) and status_code != '' %}
+    {% if defined(status_code) %}
         AND status_code in {{Array(status_code)}}
     {% end %}
     {% if defined(request_path) and request_path != '' %}
