@@ -62,11 +62,7 @@ SQL >
         {% end %}
         {% if date_diff_in_hours(start_date, end_date) > 24 * 7 %}
             countMerge(error_count) as error_count,
-            {% if defined(level) and level != 'ERROR' %}
-                countMerge(total_requests) as total_requests,
-            {% else %}
-                0 as total_requests,
-            {% end %}
+            countMerge(total_requests) as total_requests,
             round(error_count * 100.0 / if(total_requests == 0, 1, total_requests), 2) as error_rate,
             round(avgMerge(response_time_avg), 2) as avg_response_time,
             round(maxMerge(response_time_max), 2) as max_response_time
