@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 interface UseInfiniteScrollReturn {
   observerRef: (node: Element | null) => void;
@@ -9,32 +9,29 @@ interface UseInfiniteScrollReturn {
 
 export function useInfiniteScroll(callback: () => Promise<void>): UseInfiniteScrollReturn {
   const [isLoading, setIsLoading] = useState(false);
-  const [target, setTarget] = useState<Element | null>(null);
+  const observer = useCallback(
+    (node: Element | null) => {
+      if (node) {
+        const intersectionObserver = new IntersectionObserver(
+          async (entries) => {
+            const [entry] = entries;
+            if (entry.isIntersecting && !isLoading) {
+              setIsLoading(true);
+              await callback();
+              setIsLoading(false);
+            }
+          },
+          {
+            rootMargin: '100px',
+          }
+        );
 
-  const observerRef = useCallback((node: Element | null) => {
-    setTarget(node);
-  }, []);
-
-  useEffect(() => {
-    if (!target) return;
-
-    const observer = new IntersectionObserver(
-      async (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting && !isLoading) {
-          setIsLoading(true);
-          await callback();
-          setIsLoading(false);
-        }
-      },
-      {
-        rootMargin: '100px',
+        intersectionObserver.observe(node);
+        return () => intersectionObserver.disconnect();
       }
-    );
+    },
+    [callback, isLoading]
+  );
 
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, [callback, isLoading, target]);
-
-  return { observerRef, isLoading };
+  return { observerRef: observer, isLoading };
 } 

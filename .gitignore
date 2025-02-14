@@ -1,4 +1,5 @@
 logs1M*
+logs-*.ndjson
 
 # dependencies
 /node_modules
