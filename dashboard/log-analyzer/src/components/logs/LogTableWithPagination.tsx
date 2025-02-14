@@ -3,7 +3,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { LogTable } from "./LogTable";
 import type { LogEntry } from "@/lib/types";
-import { Loader2 } from 'lucide-react';
 import { logAnalysisApi } from '@/lib/tinybird';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
@@ -17,6 +16,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -82,8 +82,8 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     loadInitialData();
   }, [searchParams, pageSize, getFilters, currentSortColumn, currentSortOrder]);
 
-  const loadMore = useCallback(async (setIsLoading: (loading: boolean) => void) => {
-    if (!hasMore) return;
+  const loadMore = useCallback(async () => {
+    if (!hasMore || isLoading) return;
 
     setIsLoading(true);
     try {
@@ -111,30 +111,23 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     } finally {
       setIsLoading(false);
     }
-  }, [page, hasMore, pageSize, getFilters, currentSortColumn, currentSortOrder]);
+  }, [page, hasMore, isLoading, pageSize, getFilters, currentSortColumn, currentSortOrder]);
 
-  const { observerRef, isLoading } = useInfiniteScroll(
-    () => loadMore(setIsLoading => setIsLoading)
-  );
+  const { observerRef } = useInfiniteScroll(loadMore);
 
   useDefaultDateRange();
 
   return (
-    <div className="h-[calc(100vh-64px)] overflow-auto p-6">
+    <div className="h-[calc(100vh-64px)] p-6">
       <LogTable 
         logs={logs} 
         onSort={handleSort}
         sortColumn={currentSortColumn || undefined}
         sortOrder={currentSortOrder || undefined}
+        observerRef={observerRef}
+        isLoading={isLoading}
+        hasMore={hasMore}
       />
-      <div 
-        ref={observerRef} 
-        className="h-20 w-full flex items-center justify-center"
-      >
-        {isLoading && (
-          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-        )}
-      </div>
     </div>
   );
 } 
