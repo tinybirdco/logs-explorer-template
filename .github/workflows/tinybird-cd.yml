@@ -18,4 +18,4 @@ jobs:
       - name: Install Tinybird CLI
         run: curl -LsSf https://api.tinybird.co/static/install.sh | sh
       - name: Deploy project
-        run: tb --cloud deploy
+        run: tb --cloud deploy --no-wait
