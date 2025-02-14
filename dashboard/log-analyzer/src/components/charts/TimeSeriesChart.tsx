@@ -128,7 +128,8 @@ export function TimeSeriesChart(params: {
     categories={['total_requests', 'error_count']}
     height="140px"
     params={{
-      ...params,
+      start_date: params.start_date ?? '',
+      end_date: params.end_date ?? '',
       request_path: params.request_path?.join(',') ?? '',
       user_agent: params.user_agent?.join(',') ?? '',
       status_code: params.status_code?.join(',') ?? '',
