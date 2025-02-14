@@ -17,6 +17,7 @@ interface GenericCounterProps {
   title: string;
   onSelectionChange?: (selected: string[]) => void;
   shouldRefresh: boolean;
+  startOpen?: boolean;
 }
 
 interface CountData {
@@ -45,16 +46,16 @@ export function GenericCounter({
   columnName, 
   title,
   onSelectionChange,
-  shouldRefresh
+  shouldRefresh,
+  startOpen = false
 }: GenericCounterProps) {
   const searchParams = useSearchParams();
   const [data, setData] = useState<CountData[]>(dataCache[columnName] || []);
   const [filteredData, setFilteredData] = useState<CountData[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selected, setSelected] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(!dataCache[columnName]);
   const [error, setError] = useState<string | null>(null);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(startOpen);
   const initializedRef = useRef(false);
   const currentParams = searchParams.get(columnName);
   const startDate = searchParams.get('start_date');
@@ -80,7 +81,6 @@ export function GenericCounter({
 
   const fetchData = async () => {
     try {
-      setIsLoading(true);
       const response = await genericCounterApi({ 
         column_name: columnName,
         start_date: startDate || undefined,
@@ -98,15 +98,14 @@ export function GenericCounter({
       setFilteredData(response.data || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch data');
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  // Add searchParams to dependency array of useEffect
   useEffect(() => {
-    fetchData();
-  }, [searchParams, shouldRefresh]); // Add searchParams as dependency
+    if (isOpen && (!data.length || shouldRefresh)) {
+      fetchData();
+    }
+  }, [isOpen, shouldRefresh, searchParams]);
 
   // Filter data effect
   useEffect(() => {
@@ -138,23 +137,6 @@ export function GenericCounter({
     onSelectionChange?.([]);
   };
 
-  if (isLoading) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            <div className="animate-pulse bg-gray-200 h-4 w-full rounded" />
-            <div className="animate-pulse bg-gray-200 h-4 w-3/4 rounded" />
-            <div className="animate-pulse bg-gray-200 h-4 w-1/2 rounded" />
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
   if (error) {
     return (
       <Card>
@@ -171,7 +153,9 @@ export function GenericCounter({
   return (
     <Collapsible
       open={isOpen}
-      onOpenChange={setIsOpen}
+      onOpenChange={(open) => {
+        setIsOpen(open);
+      }}
       className="space-y-4"
     >
       <div className="flex items-center justify-between">
