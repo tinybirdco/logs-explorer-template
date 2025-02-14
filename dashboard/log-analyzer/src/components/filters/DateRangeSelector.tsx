@@ -53,6 +53,7 @@ export function DateRangeSelector() {
     params.set('end_date', formatDate(now));
     
     router.replace(`${pathname}?${params.toString()}`);
+    window.dispatchEvent(new Event('refresh-filters'));
   }, [pathname, router, searchParams]);
 
   return (
