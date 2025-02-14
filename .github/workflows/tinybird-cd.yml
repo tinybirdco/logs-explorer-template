@@ -20,4 +20,4 @@ jobs:
       - name: Authenticate
         run: tb auth --host https://api.europe-west2.gcp.tinybird.co --token ${{ secrets.TB_ADMIN_TOKEN }}
       - name: Deploy project
-        run: tb --cloud deploy --no-wait
+        run: tb --cloud deploy
