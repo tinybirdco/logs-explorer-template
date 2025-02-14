@@ -6,7 +6,7 @@ on:
     branches:
       - main
       - master
-    types: [opened, reopened, labeled, unlabeled, synchronize, closed]
+    types: [opened, reopened, labeled, unlabeled, synchronize]
 
 concurrency: ${{ github.workflow }}-${{ github.event.pull_request.number }}
 
