@@ -1,0 +1,21 @@
+name: Tinybird - CD Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './tinybird'
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Tinybird CLI
+        run: curl -LsSf https://api.tinybird.co/static/install.sh | sh
+      - name: Deploy project
+        run: tb --cloud deploy
