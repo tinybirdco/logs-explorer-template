@@ -116,7 +116,7 @@ SQL >
         AND message like concat('%', {{String(message)}}, '%')
     {% end %}
     GROUP BY date
-    ORDER BY date ASC
+    ORDER BY date
 
 
 NODE endpoint
