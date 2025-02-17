@@ -1,0 +1,20 @@
+NODE mv
+SQL >
+
+    SELECT
+        toStartOfFifteenMinutes(timestamp) AS start_ts,
+        start_ts + toIntervalMinute(15) AS end_ts,
+        environment,
+        service,
+        level,
+        countState() AS n_rows
+    FROM logs
+    GROUP BY
+        start_ts,
+        end_ts,
+        environment,
+        service,
+        level
+
+TYPE materialized
+DATASOURCE logs_range_15m

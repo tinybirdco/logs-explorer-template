@@ -1,0 +1,12 @@
+SCHEMA >
+    `start_ts` DateTime64(3) `json:$.start_ts`,
+    `end_ts` DateTime64(3) `json:$.end_ts`,
+    `environment` LowCardinality(String) `json:$.environment`,
+    `service` LowCardinality(String) `json:$.service`,
+    `level` LowCardinality(String) `json:$.level`,
+    `n_rows` AggregateFunction(count, UInt64) `json:$.n_rows`
+
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(start_ts)"
+ENGINE_SORTING_KEY "start_ts, end_ts, environment, service, level"
+ENGINE_PRIMARY_KEY "start_ts, end_ts, environment"
