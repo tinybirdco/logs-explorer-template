@@ -114,7 +114,7 @@ SQL >
     {% end %}
     {% if date_diff_in_hours(start_date, end_date) <= 24 * 7 %}
         {% if defined(message) and message != '' %}
-            AND message like concat('%', {{String(message)}}, '%')
+            AND message ilike concat('%', {{String(message)}}, '%')
         {% end %}
     {% end %}
     GROUP BY date
