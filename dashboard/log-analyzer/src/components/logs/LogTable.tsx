@@ -108,7 +108,17 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
                   )}
                   <TableRow className="table-row">
                     <TableCell className="w-[10%] truncate">{log.request_id}</TableCell>
-                    <TableCell className="w-[120px] max-w-[120px] truncate">{new Date(log.timestamp).toLocaleString()}</TableCell>
+                    <TableCell className="w-[120px] max-w-[120px] truncate">
+                      {new Date(log.timestamp).toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false
+                      }).replace(',', '')}
+                    </TableCell>
                     <TableCell className="w-[80px] max-w-[80px] truncate">
                       <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
                         ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 

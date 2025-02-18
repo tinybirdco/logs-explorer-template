@@ -99,10 +99,10 @@ export function TimeSeriesChart(params: {
               hideOverlap: true,
               formatter: (value: string) => {
                 const date = new Date(value);
-                const isLessThanDay = params.start_date && params.end_date && 
-                  (new Date(params.end_date).getTime() - new Date(params.start_date).getTime() <= 86400000);
+                const isLessThan3Day = params.start_date && params.end_date && 
+                  (new Date(params.end_date).getTime() - new Date(params.start_date).getTime() <= 86400000 * 3);
 
-                return isLessThanDay 
+                return isLessThan3Day 
                   ? format(date, 'HH:mm')
                   : format(date, 'dd MMM')
               }
@@ -130,11 +130,9 @@ export function TimeSeriesChart(params: {
             name: 'Total Requests',
             type: 'bar',
             stack: 'Total',
-            smooth: true,
-            barWidth: 9,
-            barMinWidth: 9,
-            barMaxWidth: 9,
-            barGap: 1,
+            barWidth: 8,
+            barGap: '20%',
+            large: true,
             itemStyle: {
               color: '#357AF6'
             },
@@ -186,8 +184,8 @@ export function TimeSeriesChart(params: {
           style={{ height: '140px' }} 
           onEvents={{
             datazoom: (zoomParams: any) => {
-              const start = zoomParams.start / 100; // Convert percentage to decimal
-              const end = zoomParams.end / 100; // Convert percentage to decimal
+              const start = zoomParams.start / 100;
+              const end = zoomParams.end / 100;
               const dates = data?.map(item => item.date) ?? [];
               if (dates.length > 0) {
                 const startIndex = Math.floor(dates.length * start);
