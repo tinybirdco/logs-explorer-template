@@ -59,14 +59,14 @@ SQL >
         {% end %}
     {% end %}
     SELECT
-        {% if date_diff_in_hours(start_date, end_date) > 24 * 30 %}
+        {% if date_diff_in_hours(start_date, end_date) >= 24 * 30 %}
             date,
-        {% elif date_diff_in_hours(start_date, end_date) > 24 * 7 %}
+        {% elif date_diff_in_hours(start_date, end_date) >= 24 * 7 %}
             toStartOfHour(timestamp) as date,
         {% else %}
             toStartOfMinute(timestamp) as date,
         {% end %}
-        {% if date_diff_in_hours(start_date, end_date) > 24 * 30 %}
+        {% if date_diff_in_hours(start_date, end_date) >= 24 * 30 %}
             countMerge(error_count) as error_count,
             {% if defined(level) and level != 'ERROR' %}
                 countMerge(total_requests) as total_requests,
@@ -84,13 +84,13 @@ SQL >
             round(max(response_time), 2) as max_response_time
         {% end %}
     FROM
-    {% if date_diff_in_hours(start_date, end_date) > 24 * 30 %}
+    {% if date_diff_in_hours(start_date, end_date) >= 24 * 30 %}
         logs_daily_timeseries
     {% else %}
         logs
     {% end %}
     WHERE 1=1
-    {% if date_diff_in_hours(start_date, end_date) > 24 * 30 %}
+    {% if date_diff_in_hours(start_date, end_date) >= 24 * 30 %}
         AND date >= {{DateTime(start_date)}}
         AND date <= {{DateTime(end_date)}}
     {% else %}
@@ -144,9 +144,9 @@ SQL >
         avg_response_time,
         max_response_time
     FROM
-    {% if date_diff_in_hours(start_date, end_date) > 24 * 30 %}
+    {% if date_diff_in_hours(start_date, end_date) >= 24 * 30 %}
         day_intervals
-    {% elif date_diff_in_hours(start_date, end_date) > 24 * 7 %}
+    {% elif date_diff_in_hours(start_date, end_date) >= 24 * 7 %}
         hour_intervals
     {% else %}
         minute_intervals

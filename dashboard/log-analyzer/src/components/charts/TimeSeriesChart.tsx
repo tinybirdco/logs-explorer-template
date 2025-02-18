@@ -130,7 +130,7 @@ export function TimeSeriesChart(params: {
             name: 'Total Requests',
             type: 'bar',
             stack: 'Total',
-            barWidth: 8,
+            maxBarWidth: 8,
             barGap: '20%',
             large: true,
             itemStyle: {
