@@ -44,7 +44,13 @@ export function TimeSeriesChart(params: {
         }
       })
     
-      if (loading) return <div>Loading...</div>
+      if (loading) {
+        return (
+          <div className="">
+            <div className="h-[140px] bg-[#D9D9D9] rounded-[4px] animation-pulse" />
+          </div>
+        );
+      }
       if (error) return <div>Error: {error}</div>
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
