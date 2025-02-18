@@ -1,6 +1,5 @@
 'use client'
 
-import { BarChart } from '@tinybirdco/charts'
 import { useQuery } from '@tinybirdco/charts'
 import ReactECharts from 'echarts-for-react';
 import { format } from 'date-fns';
@@ -28,7 +27,7 @@ export function TimeSeriesChart(params: {
   request_method?: string[]
   onDateRangeSelect?: (start: string, end: string) => void
 }) {
-    const { data, meta, error, loading } = useQuery({
+    const { data, error, loading } = useQuery({
         endpoint: `${process.env.NEXT_PUBLIC_TINYBIRD_API_URL}/v0/pipes/log_timeseries.json`,
         token: params.token ?? '',
         params: {
@@ -48,6 +47,7 @@ export function TimeSeriesChart(params: {
       if (loading) return <div>Loading...</div>
       if (error) return <div>Error: {error}</div>
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const dates = data?.map((item: any) => item.date) ?? [];
       const option = {
         grid: {
@@ -149,6 +149,7 @@ export function TimeSeriesChart(params: {
                 opacity: 1
              }
             },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             data: data?.map((item: any) => item.total_requests) ?? []
           },
           {
@@ -173,6 +174,7 @@ export function TimeSeriesChart(params: {
                   opacity: 1
                }
               },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             data: data?.map((item: any) => item.error_count) ?? []
           }
         ]
@@ -183,6 +185,7 @@ export function TimeSeriesChart(params: {
           option={option} 
           style={{ height: '140px' }} 
           onEvents={{
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             datazoom: (zoomParams: any) => {
               const start = zoomParams.start / 100;
               const end = zoomParams.end / 100;
