@@ -59,9 +59,6 @@ export function TimeSeriesChart(params: {
         },
         dataZoom: [
           {
-            type: 'inside'
-          },
-          {
             type: 'slider',
             handleSize: 0,
             backgroundCOlor: 'rgba(0,0,0,0)',
@@ -134,15 +131,18 @@ export function TimeSeriesChart(params: {
             type: 'bar',
             stack: 'Total',
             smooth: true,
+            barWidth: 9,
+            barMinWidth: 9,
+            barMaxWidth: 9,
+            barGap: 1,
             itemStyle: {
-              width: 2,
               color: '#357AF6'
             },
             emphasis: {
               focus: 'self',
               blurScope: "coordinateSystem",
               itemStyle: {
-                color: '#357AF6'
+                color: '#357AF6',
               }
             },
             blur: {
