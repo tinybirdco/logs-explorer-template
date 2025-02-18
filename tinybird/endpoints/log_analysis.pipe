@@ -4,6 +4,10 @@ DESCRIPTION >
 NODE log_analysis_node
 SQL >
     %
+    {% if defined(message) and message != '' %}
+        with {{split_to_array(String(message, ''), separator='|')}} as message_patterns,
+        multiMatchAllIndices(message, arrayMap(x -> concat('(?i)', x), message_patterns)) as indices
+    {% end %}
     SELECT
         timestamp,
         request_id,
@@ -43,7 +47,7 @@ SQL >
         AND user_agent in {{Array(user_agent)}}
     {% end %}
     {% if defined(message) and message != '' %}
-        AND message ilike concat('%', {{String(message)}}, '%')
+        AND length(indices) > 0
     {% end %}
     ORDER BY 
     {% if defined(sort_by) and sort_by != '' %}
