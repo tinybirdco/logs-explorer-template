@@ -107,7 +107,10 @@ SQL >
         service,
         request_path,
         level,
-        message
+        message,
+        user_agent,
+        response_time,
+        environment
     FROM logs
     WHERE 1=1
         {% if defined(service) and service != [''] %}
