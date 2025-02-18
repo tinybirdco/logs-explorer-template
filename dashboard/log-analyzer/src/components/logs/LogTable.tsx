@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { Loader2 } from "lucide-react";
 import { FileIcon } from "@/components/icons";
 import React from 'react';
+import { LogDetailPanel } from "./LogDetailPanel";
 
 interface LogTableProps {
   logs: LogEntry[];
@@ -27,6 +28,13 @@ interface LogTableProps {
 
 export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef, isLoading, hasMore, isLoadingMore }: LogTableProps) {
   const [hoveredColumn, setHoveredColumn] = useState<string | null>(null);
+  const [selectedLog, setSelectedLog] = useState<LogEntry | null>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+  const handleRowClick = (log: LogEntry) => {
+    setSelectedLog(log);
+    setIsDetailOpen(true);
+  };
 
   const renderSortIndicator = (column: string) => {
     if (sortColumn === column) {
@@ -99,7 +107,10 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
                             </td>
                           </tr>
                         )}
-                        <TableRow className="table-row">
+                        <TableRow 
+                          className="table-row cursor-pointer hover:bg-muted/50" 
+                          onClick={() => handleRowClick(log)}
+                        >
                           <TableCell className="w-[10%] truncate">{log.request_id}</TableCell>
                           <TableCell className="w-[120px] max-w-[120px] truncate">
                             {new Date(log.timestamp).toLocaleDateString('en-GB', {
@@ -147,6 +158,14 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
           )}
         </>
       )}
+      <LogDetailPanel 
+        log={selectedLog}
+        isOpen={isDetailOpen}
+        onClose={() => {
+          setIsDetailOpen(false);
+          setSelectedLog(null);
+        }}
+      />
     </div>
   );
 } 
