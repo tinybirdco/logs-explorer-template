@@ -44,7 +44,13 @@ export function TimeSeriesChart(params: {
         }
       })
     
-      if (loading) return <div>Loading...</div>
+      if (loading) {
+        return (
+          <div className="">
+            <div className="h-[140px] bg-[#D9D9D9] rounded-[4px] animation-pulse" />
+          </div>
+        );
+      }
       if (error) return <div>Error: {error}</div>
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -130,7 +136,8 @@ export function TimeSeriesChart(params: {
             name: 'Total Requests',
             type: 'bar',
             stack: 'Total',
-            maxBarWidth: 8,
+            barMinWidth: 1,
+            barMaxWidth: 8,
             barGap: '20%',
             large: true,
             itemStyle: {

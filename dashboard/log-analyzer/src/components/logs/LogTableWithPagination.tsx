@@ -17,6 +17,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -69,6 +70,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   useEffect(() => {
     const loadInitialData = async () => {
       try {
+        setIsLoading(true);
         const filters = getFilters();
         const api = shouldUseExplorerApi(filters) ? logExplorerApi : logAnalysisApi;
         
@@ -83,6 +85,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         setLogs(response.data || []);
         setPage(0);
         setHasMore(true);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error loading logs:', error);
         setHasMore(false);
@@ -93,10 +96,10 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   }, [searchParams, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi]);
 
   const loadMore = useCallback(async () => {
-    if (!hasMore || isLoading) return;
+    if (!hasMore || isLoading || isLoadingMore) return;
 
-    setIsLoading(true);
     try {
+      setIsLoadingMore(true);
       const nextPage = page + 1;
       console.log('Loading page:', nextPage);
       
@@ -122,7 +125,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
       console.error('Error loading more logs:', error);
       setHasMore(false);
     } finally {
-      setIsLoading(false);
+      setIsLoadingMore(false);
     }
   }, [page, hasMore, isLoading, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi]);
 
@@ -131,7 +134,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   useDefaultDateRange();
 
   return (
-    <div className="h-[calc(100vh-64px)] p-6">
+    <div className="h-full p-6">
       <LogTable 
         logs={logs} 
         onSort={handleSort}
@@ -139,6 +142,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         sortOrder={currentSortOrder || undefined}
         observerRef={observerRef}
         isLoading={isLoading}
+        isLoadingMore={isLoadingMore}
         hasMore={hasMore}
       />
     </div>

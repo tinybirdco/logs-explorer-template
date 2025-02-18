@@ -21,6 +21,9 @@ export function DateRangeSelector() {
     let startDate: Date;
 
     switch (value) {
+      case '5m':
+        startDate = new Date(now.getTime() - 30 * 60 * 1000);
+        break;
       case '30m':
         startDate = new Date(now.getTime() - 30 * 60 * 1000);
         break;
@@ -42,9 +45,6 @@ export function DateRangeSelector() {
       case '6m':
         startDate = new Date(now.getTime() - 6 * 30 * 24 * 60 * 60 * 1000);
         break;
-      case '1y':
-        startDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
-        break;
       default:
         startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
     }
@@ -62,6 +62,7 @@ export function DateRangeSelector() {
         <SelectValue placeholder="Time Range" />
       </SelectTrigger>
       <SelectContent>
+        <SelectItem value="5m" className="hover:bg-[var(--background-hover)]">Last 5 minutes</SelectItem>
         <SelectItem value="30m" className="hover:bg-[var(--background-hover)]">Last 30 minutes</SelectItem>
         <SelectItem value="1h" className="hover:bg-[var(--background-hover)]">Last 1 hour</SelectItem>
         <SelectItem value="24h" className="hover:bg-[var(--background-hover)]">Last 24 hours</SelectItem>
@@ -69,7 +70,6 @@ export function DateRangeSelector() {
         <SelectItem value="30d" className="hover:bg-[var(--background-hover)]">Last 30 days</SelectItem>
         <SelectItem value="3m" className="hover:bg-[var(--background-hover)]">Last 3 months</SelectItem>
         <SelectItem value="6m" className="hover:bg-[var(--background-hover)]">Last 6 months</SelectItem>
-        <SelectItem value="1y" className="hover:bg-[var(--background-hover)]">Last 1 year</SelectItem>
       </SelectContent>
     </Select>
   );
