@@ -40,7 +40,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
       {isLoading ? (
         <div className="h-full">
           <div className="space-y-[29px]">
-            {[...Array(8)].map((_, index) => (
+          {[...Array(Math.ceil((window.innerHeight - 48) / 67))].map((_, index) => (
               <div 
                 key={index}
                 className="h-[24px] bg-[#D9D9D9] rounded-[4px] animate-pulse" 
