@@ -11,6 +11,7 @@ import {
 import { type LogEntry } from "@/lib/types";
 import { useState } from 'react';
 import { Loader2 } from "lucide-react";
+import { FileIcon } from "@/components/icons";
 import React from 'react';
 
 interface LogTableProps {
@@ -88,69 +89,78 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
         </Table>
       </div>
 
-      {/* Scrollable body */}
+      
+      {logs.length === 0 ? (
+        <div className="h-[calc(100%-24px)] flex flex-col items-center justify-center bg-[--background] rounded-lg mt-6">
+          <div className="mb-[18px]">
+            <FileIcon />
+          </div>
+          <span className="text-[#000000]">No data for the selected filter</span>
+        </div>
+      ) : (
       <div className="flex-1 overflow-auto min-h-0">
         <div className="h-full">
-          <Table className="border-collapse w-full table-fixed">
-            <TableBody>
-              {logs?.map((log, index) => (
-                <React.Fragment key={log.request_id || index}>
-                  {hasMore && index === logs.length - 6 && (
-                    <tr ref={observerRef}>
-                      <td colSpan={8} className="p-0">
-                        {isLoading && (
-                          <div className="w-full flex items-center justify-center py-4">
-                            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-                          </div>
-                        )}
-                      </td>
-                    </tr>
-                  )}
-                  <TableRow className="table-row">
-                    <TableCell className="w-[10%] truncate">{log.request_id}</TableCell>
-                    <TableCell className="w-[120px] max-w-[120px] truncate">
-                      {new Date(log.timestamp).toLocaleDateString('en-GB', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                        hour12: false
-                      }).replace(',', '')}
-                    </TableCell>
-                    <TableCell className="w-[80px] max-w-[80px] truncate">
-                      <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-                        ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                          log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                          log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
-                          log.level === 'DEBUG' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
-                          'bg-[var(--bg-pill-default)] text-[var(--text-pill-default)]'}`
-                      }>
-                        {log.level}
-                      </span>
-                    </TableCell>
-                    <TableCell className="w-[120px] max-w-[120px] truncate">{log.service}</TableCell>
-                    <TableCell className="w-[80px] max-w-[80px] truncate">{log.request_method}</TableCell>
-                    <TableCell className="w-[14%] truncate">{log.request_path}</TableCell>
-                    <TableCell className="w-[80px] max-w-[80px] truncate">
-                      <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-                        ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                          log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                          log.status_code >= 200 ? 'bg-[var(--bg-pill-success)] text-[var(--text-pill-success)]' : 
-                          'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]'}`
-                      }>
-                        {log.status_code}
-                      </span>
-                    </TableCell>
-                    <TableCell className="w-[30%] truncate">{log.message}</TableCell>
-                  </TableRow>
-                </React.Fragment>
-              ))}
-            </TableBody>
-          </Table>
+            <Table className="border-collapse w-full table-fixed">
+              <TableBody>
+                {logs?.map((log, index) => (
+                  <React.Fragment key={log.request_id || index}>
+                    {hasMore && index === logs.length - 6 && (
+                      <tr ref={observerRef}>
+                        <td colSpan={8} className="p-0">
+                          {isLoading && (
+                            <div className="w-full flex items-center justify-center py-4">
+                              <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                    <TableRow className="table-row">
+                      <TableCell className="w-[10%] truncate">{log.request_id}</TableCell>
+                      <TableCell className="w-[120px] max-w-[120px] truncate">
+                        {new Date(log.timestamp).toLocaleDateString('en-GB', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: '2-digit',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          hour12: false
+                        }).replace(',', '')}
+                      </TableCell>
+                      <TableCell className="w-[80px] max-w-[80px] truncate">
+                        <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
+                          ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
+                            log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
+                            log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
+                            log.level === 'DEBUG' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
+                            'bg-[var(--bg-pill-default)] text-[var(--text-pill-default)]'}`
+                        }>
+                          {log.level}
+                        </span>
+                      </TableCell>
+                      <TableCell className="w-[120px] max-w-[120px] truncate">{log.service}</TableCell>
+                      <TableCell className="w-[80px] max-w-[80px] truncate">{log.request_method}</TableCell>
+                      <TableCell className="w-[14%] truncate">{log.request_path}</TableCell>
+                      <TableCell className="w-[80px] max-w-[80px] truncate">
+                        <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
+                          ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
+                            log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
+                            log.status_code >= 200 ? 'bg-[var(--bg-pill-success)] text-[var(--text-pill-success)]' : 
+                            'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]'}`
+                        }>
+                          {log.status_code}
+                        </span>
+                      </TableCell>
+                      <TableCell className="w-[30%] truncate">{log.message}</TableCell>
+                    </TableRow>
+                  </React.Fragment>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 } 
