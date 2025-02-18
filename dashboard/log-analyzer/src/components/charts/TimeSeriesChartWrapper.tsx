@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { TimeSeriesChart } from "@/components/charts/TimeSeriesChart";
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
+import { useRouter } from "next/navigation";
 
 interface TimeSeriesChartWrapperProps {
   token: string | undefined;
@@ -12,7 +13,7 @@ export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
   const searchParams = useSearchParams();
   const start_date = searchParams.get('start_date');
   const end_date = searchParams.get('end_date');
-  
+  const router = useRouter();
   useDefaultDateRange();
 
   if (!start_date || !end_date) {
@@ -35,7 +36,13 @@ export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
 
   return (
     <div className="bg-white rounded-2xl p-6">
-      <TimeSeriesChart {...params} />
+      <TimeSeriesChart {...params}
+      onDateRangeSelect={(start, end) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('start_date', start);
+        params.set('end_date', end);
+        router.push(`?${params.toString()}`);
+      }} />
     </div>
   );
 } 

@@ -26,6 +26,7 @@ export function TimeSeriesChart(params: {
   level?: string[]
   environment?: string[]
   request_method?: string[]
+  onDateRangeSelect?: (start: string, end: string) => void
 }) {
     const { data, meta, error, loading } = useQuery({
         endpoint: `${process.env.NEXT_PUBLIC_TINYBIRD_API_URL}/v0/pipes/log_timeseries.json`,
@@ -47,18 +48,41 @@ export function TimeSeriesChart(params: {
       if (loading) return <div>Loading...</div>
       if (error) return <div>Error: {error}</div>
 
+      const dates = data?.map((item: any) => item.date) ?? [];
       const option = {
         grid: {
           left: '0',
           right: '0',
-          bottom: '0',
+          bottom: '15%',
           top: '8',
           containLabel: true,
         },
+        dataZoom: [
+          {
+            type: 'inside'
+          },
+          {
+            type: 'slider',
+            handleSize: 0,
+            backgroundCOlor: 'rgba(0,0,0,0)',
+            fillerColor: 'rgba(0,0,0,0)',
+            borderRadius: 0,
+            borderColor: 'rgba(0,0,0,0)',
+            brushSelect: true,
+            bottom: 0,
+            handleStyle: {
+              color: 'rgba(0,0,0,0)',
+              opacity: 0
+            },
+            moveHandleSize: 0,
+            showDetail: false,
+          }
+        ],
         tooltip: {
             trigger: 'axis',
             backgroundColor: '#25283D',
             borderWidth: 0,
+            padding: 12,
             textStyle: {
                 color: '#FFFFFF',
                 fontSize: 12,
@@ -66,6 +90,7 @@ export function TimeSeriesChart(params: {
                 fontFamily: 'Inter',
                 lineHeight: 16,
             },
+            confine: true,
           },
         xAxis: [
           {
@@ -84,7 +109,7 @@ export function TimeSeriesChart(params: {
                   : format(date, 'dd MMM')
               }
             },
-            data: data?.map((item: any) => item.date) ?? []
+            data: dates
           }
         ],
         yAxis: [
@@ -154,7 +179,27 @@ export function TimeSeriesChart(params: {
         ]
       };
     
-      return <ReactECharts option={option} style={{ height: '140px' }} />
+      return (
+        <ReactECharts 
+          option={option} 
+          style={{ height: '140px' }} 
+          onEvents={{
+            datazoom: (zoomParams: any) => {
+              const start = zoomParams.start / 100; // Convert percentage to decimal
+              const end = zoomParams.end / 100; // Convert percentage to decimal
+              const dates = data?.map(item => item.date) ?? [];
+              if (dates.length > 0) {
+                const startIndex = Math.floor(dates.length * start);
+                const endIndex = Math.floor(dates.length * end);
+                params.onDateRangeSelect?.(
+                  String(dates[startIndex]).split('.')[0],
+                  String(dates[Math.min(endIndex, dates.length - 1)]).split('.')[0]
+                );
+              }
+            }
+          }}
+        />
+      );
 
   // return <BarChart 
   //   endpoint={`${process.env.NEXT_PUBLIC_TINYBIRD_API_URL}/v0/pipes/log_timeseries.json`}
