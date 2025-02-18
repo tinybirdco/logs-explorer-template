@@ -12,13 +12,13 @@ SQL >
     {% end %}
     SELECT
         toString({{column(column_name, 'level')}}) as category,
-        {% if date_diff_in_hours(start_date, end_date) >= 24 %}
+        {% if defined(start_date) and defined(end_date) and date_diff_in_hours(start_date, end_date) >= 24 %}
             countMerge(count) as count
         {% else %}
             count() as count
         {% end %}
     FROM
-        {% if date_diff_in_hours(start_date, end_date) >= 24 %}
+        {% if defined(start_date) and defined(end_date) and date_diff_in_hours(start_date, end_date) >= 24 %}
             logs_daily_dimensions
         {% else %}
             logs
