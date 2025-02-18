@@ -38,10 +38,14 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
   return (
     <div className="flex flex-col h-full">
       {isLoading ? (
-        <div className="h-full flex flex-col items-center justify-center bg-[--background]">
-          <div className="flex flex-col items-center gap-[18px]">
-            <div className="w-6 h-6 rounded-sm bg-muted animate-pulse" />
-            <div className="w-40 h-5 rounded-sm bg-muted animate-pulse" />
+        <div className="h-full">
+          <div className="space-y-[29px]">
+            {[...Array(8)].map((_, index) => (
+              <div 
+                key={index}
+                className="h-[24px] bg-[#D9D9D9] rounded-[4px] animate-pulse" 
+              />
+            ))}
           </div>
         </div>
       ) : (
