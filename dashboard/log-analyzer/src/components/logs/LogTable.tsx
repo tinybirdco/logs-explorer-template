@@ -8,7 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatDistanceToNow } from 'date-fns';
 import { type LogEntry } from "@/lib/types";
 import { useState } from 'react';
 import { Loader2 } from "lucide-react";
