@@ -19,6 +19,6 @@ SCHEMA >
 
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
-ENGINE_SORTING_KEY "timestamp, service, level"
+ENGINE_SORTING_KEY "timestamp, environment, service, level"
 ENGINE_TTL "toDateTime(timestamp) + INTERVAL 180 DAY"
         

@@ -3,17 +3,20 @@
 import { Input } from "@/components/ui/input";
 import { Search, X } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function SearchBar() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get('message') ?? '');
+  const [inputValue, setInputValue] = useState('');
 
-  const handleSearch = useDebouncedCallback((term: string) => {
+  useEffect(() => {
+    setInputValue(searchParams.get('message') ?? '');
+  }, [searchParams]);
+
+  const handleSearch = (term: string) => {
     const params = new URLSearchParams(searchParams.toString());
     
     if (term) {
@@ -23,11 +26,17 @@ export function SearchBar() {
     }
     
     router.replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  };
 
   const handleClear = () => {
-    setSearchTerm('');
+    setInputValue('');
     handleSearch('');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch(inputValue);
+    }
   };
 
   return (
@@ -36,13 +45,11 @@ export function SearchBar() {
       <Input
         placeholder="Search logs..."
         className="h-10 pl-9 pr-9 border-[var(--border-gray)]"
-        value={searchTerm}
-        onChange={(e) => {
-          setSearchTerm(e.target.value);
-          handleSearch(e.target.value);
-        }}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
-      {searchTerm && (
+      {inputValue && (
         <Button
           variant="ghost"
           size="icon"
