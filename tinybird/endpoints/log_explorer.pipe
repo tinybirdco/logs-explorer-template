@@ -94,8 +94,8 @@ SQL >
                 (SELECT ifNull(previous_cum_sum, 0) FROM min_ts_range) AS previous
             {% end %}
         {% else %}
-            (SELECT start_ts FROM min_ts_range) AS start_range,
-            (SELECT end_ts FROM max_ts_range) AS end_range,
+            (SELECT start_ts FROM max_ts_range) AS start_range,
+            (SELECT end_ts FROM min_ts_range) AS end_range,
             (SELECT ifNull(previous_cum_sum, 0) FROM min_ts_range) AS previous
         {% end %}
 
