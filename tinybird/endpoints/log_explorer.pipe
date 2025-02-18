@@ -3,9 +3,15 @@ DESCRIPTION >
     Filter data and calculate the running sum of rows in the result set to determine the time range.
 
 SQL >
-
-    %
-    SELECT end_ts, start_ts, countMerge(n_rows) OVER (ORDER BY start_ts DESC) AS n_rows
+%
+    SELECT 
+        start_ts,
+        end_ts,
+        sum(n_rows) as rows,
+        sum(n_rows) OVER (ORDER BY start_ts asc) as _n_rows,
+        _n_rows - rows as previous_cum_sum
+    from (
+    SELECT start_ts, end_ts, countMerge(n_rows) AS n_rows
     FROM logs_range_15m
     WHERE 1=1
         {% if defined(environment) and environment != [''] %}
@@ -17,25 +23,37 @@ SQL >
         {% if defined(level) and level != [''] %}
             AND level in {{ Array(level) }}
         {% end %}
-        AND start_ts >= {{ DateTime(start, '2024-03-08 00:00:00') }} - INTERVAL {{ UInt8(days_param, 30) }} DAY
-        AND end_ts <= {{ DateTime(start, '2024-03-08 00:00:00') }}
-    ORDER BY end_ts DESC
+        AND start_ts >= {{ DateTime(start_date, '2025-02-02 00:00:00') }}
+        AND end_ts <= {{ DateTime(end_date, '2025-02-04 00:00:00') }}
+        group by start_ts, end_ts
+    )
+    group by start_ts, end_ts, n_rows
+    ORDER BY end_ts asc
 
 
 
-NODE ts_range
-DESCRIPTION >
-    What is the time period, starting at X, and up to Y, that I need to query in order to get Z amount of rows that I need.
-
+NODE min_ts_range
 SQL >
-
-    %
-    SELECT max(end_ts) AS max_end_ts, min(start_ts) AS min_start_ts
+%
+with {{ Int32(page, 0)* Int32(page_size, 10) }} as page_start
+SELECT *
     FROM cummulative_rows
-    WHERE
-        n_rows > {{ Int32(page, 0) * Int32(page_size, 100) }}
-        AND n_rows <= {{ (Int32(page, 0) + 1) * Int32(page_size, 100) }}
+    WHERE _n_rows >= page_start
+    order by _n_rows asc
+    limit 1
 
+NODE max_ts_range
+SQL >
+%
+with {{ (Int32(page, 0) + 1) * Int32(page_size, 10) }} as page_end
+    SELECT *
+    FROM cummulative_rows
+    WHERE _n_rows >= page_end
+    order by _n_rows asc
+    limit 1
+
+
+    
 
 
 NODE logs_result
@@ -45,10 +63,11 @@ DESCRIPTION >
 
 SQL >
 
-    %
+%
     WITH
-        (SELECT min_start_ts FROM ts_range) AS start_range,
-        (SELECT max_end_ts FROM ts_range) AS end_range
+        (SELECT start_ts FROM min_ts_range) AS start_range,
+        (SELECT end_ts FROM max_ts_range) AS end_range,
+        (SELECT ifNull(previous_cum_sum, 0) FROM min_ts_range) AS previous
 
     SELECT 
         timestamp,
@@ -87,6 +106,8 @@ SQL >
         {% end %}
         AND timestamp >= start_range
         AND timestamp <= end_range
-    ORDER BY timestamp DESC
+    ORDER BY timestamp ASC
+    --LIMIT {{Int32(page_size, 10)}}
+    --OFFSET {{Int32(page, 0)}} * {{Int32(page_size, 10)}} - assumeNotNull(previous)
 
 TYPE endpoint

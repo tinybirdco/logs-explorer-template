@@ -3,7 +3,7 @@
 import { useCallback, useState, useEffect } from 'react';
 import { LogTable } from "./LogTable";
 import type { LogEntry } from "@/lib/types";
-import { logAnalysisApi } from '@/lib/tinybird';
+import { logAnalysisApi, logExplorerApi } from '@/lib/tinybird';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
@@ -59,11 +59,20 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     router.push(`?${params.toString()}`);
   }, [searchParams, currentSortColumn, currentSortOrder, router]);
 
+  const shouldUseExplorerApi = useCallback((filters: Record<string, any>) => {
+    const allowedFilters = ['start_date', 'end_date', 'environment', 'service', 'level'];
+    const activeFilters = Object.keys(filters);
+    return activeFilters.every(filter => allowedFilters.includes(filter));
+  }, []);
+
   useEffect(() => {
     const loadInitialData = async () => {
       try {
-        const response = await logAnalysisApi({ 
-          ...getFilters(),
+        const filters = getFilters();
+        const api = shouldUseExplorerApi(filters) ? logExplorerApi : logAnalysisApi;
+        
+        const response = await api({ 
+          ...filters,
           page: 0,
           page_size: pageSize,
           sort_by: currentSortColumn || undefined,
@@ -72,7 +81,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         
         setLogs(response.data || []);
         setPage(0);
-        setHasMore(response.data?.length === pageSize);
+        setHasMore(true);
       } catch (error) {
         console.error('Error loading logs:', error);
         setHasMore(false);
@@ -80,7 +89,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     };
 
     loadInitialData();
-  }, [searchParams, pageSize, getFilters, currentSortColumn, currentSortOrder]);
+  }, [searchParams, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi]);
 
   const loadMore = useCallback(async () => {
     if (!hasMore || isLoading) return;
@@ -90,8 +99,11 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
       const nextPage = page + 1;
       console.log('Loading page:', nextPage);
       
-      const response = await logAnalysisApi({ 
-        ...getFilters(),
+      const filters = getFilters();
+      const api = shouldUseExplorerApi(filters) ? logExplorerApi : logAnalysisApi;
+
+      const response = await api({ 
+        ...filters,
         page: nextPage,
         page_size: pageSize,
         sort_by: currentSortColumn || undefined,
@@ -103,7 +115,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
       } else {
         setLogs(prev => [...prev, ...response.data]);
         setPage(nextPage);
-        setHasMore(response.data.length === pageSize);
+        setHasMore(true);
       }
     } catch (error) {
       console.error('Error loading more logs:', error);
@@ -111,7 +123,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     } finally {
       setIsLoading(false);
     }
-  }, [page, hasMore, isLoading, pageSize, getFilters, currentSortColumn, currentSortOrder]);
+  }, [page, hasMore, isLoading, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi]);
 
   const { observerRef } = useInfiniteScroll(loadMore);
 
