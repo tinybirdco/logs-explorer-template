@@ -9,6 +9,9 @@ export const LogEntrySchema = z.object({
   request_path: z.string(),
   level: z.string(),
   message: z.string(),
+  user_agent: z.string(),
+  response_time: z.number(),
+  environment: z.string(),
 });
 
 export type LogEntry = z.infer<typeof LogEntrySchema>;

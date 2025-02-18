@@ -26,14 +26,18 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
     });
   };
 
+  const formatTime = (ms: number) => {
+    return `${ms}ms`;
+  };
+
   return (
     <div className={cn(
       "fixed top-0 right-0 h-screen w-[600px] bg-[--background-secondary] transform transition-transform duration-300 ease-in-out z-50",
       isOpen ? "translate-x-0" : "translate-x-full"
     )}>
-      <div className="pr-8 pt-[30px] h-full flex flex-col">
+      <div className="pt-[30px] h-full flex flex-col">
         {/* Header */}
-        <div className="flex justify-end mb-6">
+        <div className="pr-8 flex justify-end mb-6">
           <Button
             variant="ghost"
             size="icon"
@@ -59,61 +63,72 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
             </span>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span>Request started</span>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-white"></div>
+              <span>Request started</span>
+            </div>
             <span>{formatDate(log.timestamp)}</span>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="bg-white rounded-2xl p-6 flex-1 overflow-auto mx-6">
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Request ID</h3>
-              <p className="text-sm">{log.request_id}</p>
+        {/* Request Details Card */}
+        <div className="mx-4 bg-white rounded-lg p-2">
+          <div className="px-4 py-[16px] space-y-[24px]">
+            {/* Request ID */}
+            <div className="flex justify-between items-center border-b border-[--table-separator] pb-[16px]">
+              <span className="text-sm text-[--text-secondary]">Request ID</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.request_id}</span>
             </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Timestamp</h3>
-              <p className="text-sm">{new Date(log.timestamp).toLocaleString()}</p>
+            {/* Path */}
+            <div className="flex justify-between items-center border-b border-[--table-separator] pb-[16px]">
+              <span className="text-sm text-[--text-secondary]">Path</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.request_path}</span>
             </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Level</h3>
-              <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-                ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                  log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                  log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
-                  log.level === 'DEBUG' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
-                  'bg-[var(--bg-pill-default)] text-[var(--text-pill-default)]'}`
-              }>
-                {log.level}
-              </span>
+            {/* Host */}
+            <div className="flex justify-between items-center border-b border-[--table-separator] pb-[16px]">
+              <span className="text-sm text-[--text-secondary]">Host</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">app.tinybird.co</span>
             </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Service</h3>
-              <p className="text-sm">{log.service}</p>
+            {/* User Agent */}
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-[--text-secondary]">User Agent</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.user_agent}</span>
             </div>
+          </div>
+        </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Request Method</h3>
-              <p className="text-sm">{log.request_method}</p>
+        {/* Log Message Card */}
+        <div className="mx-4 mt-6 bg-white rounded-lg">
+          <div className="px-4 py-[16px]">
+            <div className="text-sm text-[--text-secondary] whitespace-pre-wrap break-words">
+              {log.message}
             </div>
+          </div>
+        </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Request Path</h3>
-              <p className="text-sm break-all">{log.request_path}</p>
+        <div className="mx-4 mt-6 bg-white rounded-lg p-2">
+          <div className="px-4 py-[16px] space-y-[24px]">
+            <div className="flex justify-between items-center border-b border-[--table-separator] pb-[16px]">
+              <span className="text-sm text-[--text-secondary]">Environment</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.environment}</span>
             </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-[--text-secondary]">Service</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.service}</span>
+            </div>
+          </div>
+        </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">User Agent</h3>
-              <p className="text-sm break-all">{log.user_agent}</p>
+        <div className="px-8 mt-6 text-white">
+          <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-[#27F795] border-2 border-white"></div>
+              <span>Request finished</span>
             </div>
-
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Message</h3>
-              <p className="text-sm break-all whitespace-pre-wrap">{log.message}</p>
-            </div>
+            <span>{formatTime(log.response_time)}</span>
           </div>
         </div>
       </div>
