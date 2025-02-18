@@ -76,6 +76,7 @@ export function TimeSeriesChart(params: {
             },
             moveHandleSize: 0,
             showDetail: false,
+            height: 20,
           }
         ],
         tooltip: {
