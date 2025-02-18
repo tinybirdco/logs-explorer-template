@@ -1,36 +1,38 @@
 
-# - name: default_log_explorer
-#   description: Test with default parameters for last 1 day
-#   parameters: start_date=2025-02-03%2000:00:00&end_date=2025-02-04%2000:00:00&page=0&page_size=3&order=asc
-#   expected_result: |
-#     {"timestamp":"2025-02-03 00:04:05.000","request_id":"req-4860bb49e129c265","request_method":"PUT","status_code":322,"service":"auth","request_path":"\/products\/122","level":"WARN","message":"Log message 122"}
-#     {"timestamp":"2025-02-03 00:10:38.000","request_id":"req-1af70463d1e63266","request_method":"POST","status_code":329,"service":"cache","request_path":"\/orders\/729","level":"ERROR","message":"Log message 729"}
-#     {"timestamp":"2025-02-03 00:33:47.000","request_id":"req-67983c8adffea7e0","request_method":"GET","status_code":540,"service":"api","request_path":"\/users\/140","level":"INFO","message":"Log message 140"}
+- name: default_log_explorer
+  description: Test with default parameters for last 1 day
+  parameters: start_date=2025-02-03%2000:00:00&end_date=2025-02-04%2000:00:00&page=0&page_size=3&order=asc
+  expected_result: |
+    {"timestamp":"2025-02-03 00:04:05.000","request_id":"req-4860bb49e129c265","request_method":"PUT","status_code":322,"service":"auth","request_path":"\/products\/122","level":"WARN","message":"Log message 122"}
+    {"timestamp":"2025-02-03 00:10:38.000","request_id":"req-1af70463d1e63266","request_method":"POST","status_code":329,"service":"cache","request_path":"\/orders\/729","level":"ERROR","message":"Log message 729"}
+    {"timestamp":"2025-02-03 00:33:47.000","request_id":"req-67983c8adffea7e0","request_method":"GET","status_code":540,"service":"api","request_path":"\/users\/140","level":"INFO","message":"Log message 140"}
 
-# - name: default_log_explorer_page_2
-#   description: Test with default parameters for last 1 day
-#   parameters: start_date=2025-02-02%2000:00:00&end_date=2025-02-03%2000:00:00&page=1&page_size=3
-#   expected_result: |
-#     {"timestamp":"2025-02-02 21:12:48.000","request_id":"req-3b61992a411c79a2","request_method":"DELETE","status_code":599,"service":"cache","request_path":"\/auth\/799","level":"DEBUG","message":"Log message 799"}
-#     {"timestamp":"2025-02-02 21:17:29.000","request_id":"req-d32589fb749768e8","request_method":"PUT","status_code":318,"service":"database","request_path":"\/products\/318","level":"WARN","message":"Log message 318"}
-#     {"timestamp":"2025-02-02 21:23:42.000","request_id":"req-77b0b28d7e89da92","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/745","level":"ERROR","message":"Log message 745"}
+- name: default_log_explorer_page_2
+  description: Test with default parameters for last 1 day
+  parameters: start_date=2025-02-02%2000:00:00&end_date=2025-02-03%2000:00:00&page=1&page_size=3&order=asc
+  expected_result: |
+    {"timestamp":"2025-02-02 21:12:48.000","request_id":"req-3b61992a411c79a2","request_method":"DELETE","status_code":599,"service":"cache","request_path":"\/auth\/799","level":"DEBUG","message":"Log message 799"}
+    {"timestamp":"2025-02-02 21:17:29.000","request_id":"req-d32589fb749768e8","request_method":"PUT","status_code":318,"service":"database","request_path":"\/products\/318","level":"WARN","message":"Log message 318"}
+    {"timestamp":"2025-02-02 21:23:42.000","request_id":"req-77b0b28d7e89da92","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/745","level":"ERROR","message":"Log message 745"}
 
-# - name: filtered_by_service_and_level
-#   description: Test filtered by specific service and error level
-#   parameters: start_date=2025-02-03%2000:00:00&end_date=2025-02-04%2000:00:00&service=api&level=ERROR&page=0&page_size=5
-#   expected_result: |
-#     {"timestamp":"2025-02-03 06:14:02.000","request_id":"req-5fcaa73d1df686e6","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
-#     {"timestamp":"2025-02-03 08:02:42.000","request_id":"req-e80695b4b6b1f89f","request_method":"POST","status_code":405,"service":"api","request_path":"\/orders\/205","level":"ERROR","message":"Log message 205"}
-#     {"timestamp":"2025-02-03 11:04:22.000","request_id":"req-1be7850effe31e0a","request_method":"POST","status_code":305,"service":"api","request_path":"\/orders\/105","level":"ERROR","message":"Log message 105"}
-#     {"timestamp":"2025-02-03 19:13:22.000","request_id":"req-41cfd4707d5d9189","request_method":"POST","status_code":565,"service":"api","request_path":"\/orders\/365","level":"ERROR","message":"Log message 365"}
-#     {"timestamp":"2025-02-03 19:23:42.000","request_id":"req-ab50f632c7544b42","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/945","level":"ERROR","message":"Log message 945"}
+- name: filtered_by_service_and_level
+  description: Test filtered by specific service and error level
+  parameters: start_date=2025-02-03%2000:00:00&end_date=2025-02-04%2000:00:00&service=api&level=ERROR&page=0&page_size=5&order=asc
+  expected_result: |
+    {"timestamp":"2025-02-03 06:14:02.000","request_id":"req-5fcaa73d1df686e6","request_method":"POST","status_code":525,"service":"api","request_path":"\/orders\/925","level":"ERROR","message":"Log message 925"}
+    {"timestamp":"2025-02-03 08:02:42.000","request_id":"req-e80695b4b6b1f89f","request_method":"POST","status_code":405,"service":"api","request_path":"\/orders\/205","level":"ERROR","message":"Log message 205"}
+    {"timestamp":"2025-02-03 11:04:22.000","request_id":"req-1be7850effe31e0a","request_method":"POST","status_code":305,"service":"api","request_path":"\/orders\/105","level":"ERROR","message":"Log message 105"}
+    {"timestamp":"2025-02-03 19:13:22.000","request_id":"req-41cfd4707d5d9189","request_method":"POST","status_code":565,"service":"api","request_path":"\/orders\/365","level":"ERROR","message":"Log message 365"}
+    {"timestamp":"2025-02-03 19:23:42.000","request_id":"req-ab50f632c7544b42","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/945","level":"ERROR","message":"Log message 945"}
 
-# - name: search_by_message
-#   description: Test searching for specific message content
-#   parameters: start_date=2025-02-03%2000:00:00&end_date=2025-02-04%2000:00:00&message=945&page=0&page_size=3
-#   expected_result: ''
+- name: search_by_message
+  description: Test searching for specific message content
+  parameters: start_date=2025-02-03%2000:00:00&end_date=2025-02-04%2000:00:00&message=945&page=0&page_size=3
+  expected_result: |
+    {"timestamp":"2025-02-03 19:23:42.000","request_id":"req-ab50f632c7544b42","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/945","level":"ERROR","message":"Log message 945"}
 
-# - name: filtered_by_request_method
-#   description: Test filtered by HTTP method and status code
-#   parameters: start_date=2025-02-03%2000:00:00&end_date=2025-02-04%2000:00:00&request_method=POST&status_code=345&page=0&page_size=25
-#   expected_result: ''
+- name: filtered_by_request_method
+  description: Test filtered by HTTP method and status code
+  parameters: start_date=2025-02-03%2000:00:00&end_date=2025-02-04%2000:00:00&request_method=POST&status_code=345&page=0&page_size=25
+  expected_result: |
+    {"timestamp":"2025-02-03 19:23:42.000","request_id":"req-ab50f632c7544b42","request_method":"POST","status_code":345,"service":"api","request_path":"\/orders\/945","level":"ERROR","message":"Log message 945"}
