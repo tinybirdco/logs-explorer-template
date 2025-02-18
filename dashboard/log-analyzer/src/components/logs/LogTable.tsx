@@ -43,11 +43,8 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
             <TableRow>
               <TableHead 
                 className="w-[10%] truncate" 
-                onClick={() => onSort('request_id')}
-                onMouseEnter={() => setHoveredColumn('request_id')}
-                onMouseLeave={() => setHoveredColumn(null)}
               >
-                ID{renderSortIndicator('request_id')}
+                ID
               </TableHead>
               <TableHead 
                 className="w-[120px] max-w-[120px] truncate"
@@ -59,51 +56,33 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
               </TableHead>
               <TableHead 
                 className="w-[80px] max-w-[80px] truncate"
-                onClick={() => onSort('level')} 
-                onMouseEnter={() => setHoveredColumn('level')} 
-                onMouseLeave={() => setHoveredColumn(null)}
               >
-                Level{renderSortIndicator('level')}
+                Level
               </TableHead>
               <TableHead 
                 className="w-[120px] max-w-[120px] truncate" 
-                onClick={() => onSort('service')} 
-                onMouseEnter={() => setHoveredColumn('service')} 
-                onMouseLeave={() => setHoveredColumn(null)}
               >
-                Service{renderSortIndicator('service')}
+                Service
               </TableHead>
               <TableHead 
                 className="w-[80px] max-w-[80px] truncate"
-                onClick={() => onSort('request_method')} 
-                onMouseEnter={() => setHoveredColumn('request_method')} 
-                onMouseLeave={() => setHoveredColumn(null)}
               >
-                Method{renderSortIndicator('request_method')}
+                Method
               </TableHead>
               <TableHead 
                 className="w-[14%] truncate" 
-                onClick={() => onSort('request_path')} 
-                onMouseEnter={() => setHoveredColumn('request_path')} 
-                onMouseLeave={() => setHoveredColumn(null)}
               >
-                Path{renderSortIndicator('request_path')}
+                Path
               </TableHead>
               <TableHead 
                 className="w-[80px] max-w-[80px] truncate"
-                onClick={() => onSort('status_code')} 
-                onMouseEnter={() => setHoveredColumn('status_code')} 
-                onMouseLeave={() => setHoveredColumn(null)}
               >
-                Status{renderSortIndicator('status_code')}
+                Status
               </TableHead>
               <TableHead 
                 className="w-[30%] truncate" 
-                onClick={() => onSort('message')} 
-                onMouseEnter={() => setHoveredColumn('message')} 
-                onMouseLeave={() => setHoveredColumn(null)}
               >
-                Message{renderSortIndicator('message')}
+                Message
               </TableHead>
             </TableRow>
           </TableHeader>

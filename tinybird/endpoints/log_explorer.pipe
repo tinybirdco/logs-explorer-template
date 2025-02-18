@@ -8,7 +8,16 @@ SQL >
         start_ts,
         end_ts,
         sum(n_rows) as rows,
-        sum(n_rows) OVER (ORDER BY start_ts asc) as _n_rows,
+        sum(n_rows) OVER (ORDER BY start_ts 
+        {% if defined(order) and order != '' %}
+            {% if order == 'asc' %}
+                ASC
+            {% else %}
+                DESC
+            {% end %}
+        {% else %}
+            DESC
+        {% end %}) as _n_rows,
         _n_rows - rows as previous_cum_sum
     from (
     SELECT start_ts, end_ts, countMerge(n_rows) AS n_rows
@@ -28,7 +37,16 @@ SQL >
         group by start_ts, end_ts
     )
     group by start_ts, end_ts, n_rows
-    ORDER BY end_ts asc
+    ORDER BY end_ts 
+    {% if defined(order) and order != '' %}
+        {% if order == 'asc' %}
+            ASC
+        {% else %}
+            DESC
+        {% end %}
+    {% else %}
+        DESC
+    {% end %}
 
 
 
@@ -65,9 +83,21 @@ SQL >
 
 %
     WITH
-        (SELECT start_ts FROM min_ts_range) AS start_range,
-        (SELECT end_ts FROM max_ts_range) AS end_range,
-        (SELECT ifNull(previous_cum_sum, 0) FROM min_ts_range) AS previous
+        {% if defined(order) and order != '' %}
+            {% if order == 'asc' %}
+                (SELECT start_ts FROM min_ts_range) AS start_range,
+                (SELECT end_ts FROM max_ts_range) AS end_range,
+                (SELECT ifNull(previous_cum_sum, 0) FROM min_ts_range) AS previous
+            {% else %}
+                (SELECT start_ts FROM max_ts_range) AS start_range,
+                (SELECT end_ts FROM min_ts_range) AS end_range,
+                (SELECT ifNull(previous_cum_sum, 0) FROM min_ts_range) AS previous
+            {% end %}
+        {% else %}
+            (SELECT start_ts FROM min_ts_range) AS start_range,
+            (SELECT end_ts FROM max_ts_range) AS end_range,
+            (SELECT ifNull(previous_cum_sum, 0) FROM min_ts_range) AS previous
+        {% end %}
 
     SELECT 
         timestamp,
@@ -106,7 +136,16 @@ SQL >
         {% end %}
         AND timestamp >= start_range
         AND timestamp <= end_range
-    ORDER BY timestamp ASC
+    ORDER BY timestamp 
+    {% if defined(order) and order != '' %}
+        {% if order == 'asc' %}
+            ASC
+        {% else %}
+            DESC
+        {% end %}
+    {% else %}
+        DESC
+    {% end %}
     LIMIT {{Int32(page_size, 10)}}
     OFFSET {{Int32(page, 0)}} * {{Int32(page_size, 10)}} - assumeNotNull(previous)
 
