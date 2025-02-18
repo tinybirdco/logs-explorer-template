@@ -119,21 +119,6 @@ SQL >
         {% if defined(environment) and environment != [''] %}
             AND environment in {{Array(environment)}}
         {% end %}
-        {% if defined(request_method) and request_method != [''] %}
-            AND request_method in {{Array(request_method)}}
-        {% end %}
-        {% if defined(status_code) and status_code != [''] %}
-            AND status_code in {{Array(status_code)}}
-        {% end %}
-        {% if defined(request_path) and request_path != [''] %}
-            AND request_path in {{Array(request_path)}}
-        {% end %}
-        {% if defined(user_agent) and user_agent != [''] %}
-            AND user_agent in {{Array(user_agent)}}
-        {% end %}
-        {% if defined(message) and message != '' %}
-            AND message ilike concat('%', {{String(message)}}, '%')
-        {% end %}
         AND timestamp >= start_range
         AND timestamp <= end_range
     ORDER BY timestamp 
