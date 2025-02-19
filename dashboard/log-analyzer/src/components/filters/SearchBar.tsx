@@ -100,7 +100,7 @@ export function SearchBar() {
             <p>Filter by Environment and Service and one day of data.
             </p>
           ) : (
-            <p>Use text or regular expressions: Internal.*Memory|Internal.*Timeout</p>
+            <p>Search the Message column: Memory|Timeout</p>
           )}
         </TooltipContent>
       </TooltipRoot>

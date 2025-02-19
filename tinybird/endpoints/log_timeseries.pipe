@@ -52,7 +52,7 @@ SQL >
 NODE error_monitoring_node
 SQL >
     %
-    {% if date_diff_in_hours(start_date, end_date) <= 24 * 1 %}
+    {% if date_diff_in_hours(start_date, end_date) <= 24 * 7 %}
         {% if defined(message) and message != '' %}
             with {{split_to_array(String(message, ''), separator='|')}} as message_patterns
         {% end %}
@@ -113,7 +113,7 @@ SQL >
     {% if defined(user_agent) and user_agent != [''] %}
         AND user_agent in {{Array(user_agent)}}
     {% end %}
-    {% if date_diff_in_hours(start_date, end_date) <= 24 * 1 %}
+    {% if date_diff_in_hours(start_date, end_date) <= 24 * 7 %}
         {% if defined(message) and message != '' %}
             AND multiSearchAnyCaseInsensitive(message, message_patterns)
         {% end %}
