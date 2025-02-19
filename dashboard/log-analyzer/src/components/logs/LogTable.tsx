@@ -87,7 +87,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
               <div className="mb-[18px]">
                 <FileIcon />
               </div>
-              <span className="text-[#000000]">No data for the selected filter</span>
+              <span className="text-[#000000] text-[16px]">No data for the selected filter</span>
             </div>
           ) : (
             <div className="flex-1 overflow-auto min-h-0">

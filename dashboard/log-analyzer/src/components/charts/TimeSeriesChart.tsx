@@ -3,6 +3,7 @@
 import { useQuery } from '@tinybirdco/charts'
 import ReactECharts from 'echarts-for-react';
 import { format } from 'date-fns';
+import { Loader2 } from "lucide-react";
 
 const formatNumber = (num: number) => {
   if (num >= 1_000_000) {
@@ -46,8 +47,9 @@ export function TimeSeriesChart(params: {
     
       if (loading) {
         return (
-          <div className="">
-            <div className="h-[140px] bg-[#D9D9D9] rounded-[4px] animate-pulse" />
+          <div className="h-[160px] flex items-center justify-center gap-2 bg-[#D9D9D9] rounded-[4px] animate-pulse">
+            <Loader2 className="h-5 w-5 animate-spin" />
+            <span className="text-sm text-[#25283D]">Loading data...</span>
           </div>
         );
       }
@@ -200,7 +202,7 @@ export function TimeSeriesChart(params: {
       return (
         <ReactECharts 
           option={option} 
-          style={{ height: '140px' }} 
+          style={{ height: '160px' }} 
           onEvents={{
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             datazoom: (zoomParams: any) => {

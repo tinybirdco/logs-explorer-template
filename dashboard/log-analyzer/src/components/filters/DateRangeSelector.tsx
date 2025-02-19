@@ -20,6 +20,10 @@ export function DateRangeSelector() {
     const now = new Date();
     let startDate: Date;
 
+    if (value !== 'custom') {
+      params.delete('custom_range');
+    }
+
     switch (value) {
       case '1h':
         startDate = new Date(now.getTime() - 60 * 60 * 1000);
@@ -51,7 +55,10 @@ export function DateRangeSelector() {
   }, [pathname, router, searchParams]);
 
   return (
-    <Select defaultValue="3d" onValueChange={handleTimeRangeChange}>
+    <Select 
+      value={searchParams.get('custom_range') || "3d"} 
+      onValueChange={handleTimeRangeChange}
+    >
       <SelectTrigger className="w-[180px] h-10 bg-white border-[var(--border-gray)]">
         <SelectValue placeholder="Time Range" />
       </SelectTrigger>
@@ -62,6 +69,7 @@ export function DateRangeSelector() {
         <SelectItem value="7d" className="hover:bg-[var(--background-hover)]">Last 7 days</SelectItem>
         <SelectItem value="30d" className="hover:bg-[var(--background-hover)]">Last 30 days</SelectItem>
         <SelectItem value="6m" className="hover:bg-[var(--background-hover)]">Last 6 months</SelectItem>
+        <SelectItem value="custom" className="hover:bg-[var(--background-hover)]">Custom Range</SelectItem>
       </SelectContent>
     </Select>
   );
