@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 import { cn } from "@/lib/utils";
+import { subDays, format } from "date-fns";
 
 interface GenericCounterProps {
   columnName: string;
@@ -79,29 +80,39 @@ export function GenericCounter({
     }
   }, [currentParams]);
 
-  const fetchData = async () => {
-    try {
-      const response = await genericCounterApi({ 
-        column_name: columnName,
-        start_date: startDate || undefined,
-        end_date: endDate || undefined,
-        service: columnName !== 'service' ? service : undefined,
-        level: columnName !== 'level' ? level : undefined,
-        environment: columnName !== 'environment' ? environment : undefined,
-        request_method: columnName !== 'request_method' ? requestMethod : undefined,
-        status_code: columnName !== 'status_code' ? statusCode : undefined,
-        request_path: columnName !== 'request_path' ? requestPath : undefined,
-        user_agent: columnName !== 'user_agent' ? userAgent : undefined,
-        __tb__deployment: process.env.NEXT_PUBLIC_TINYBIRD_DEPLOYMENT_ID || undefined,
-      });
-      setData(response.data || []);
-      setFilteredData(response.data || []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch data');
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const start_date = searchParams.get('start_date');
+        const end_date = searchParams.get('end_date');
+        
+        // Default to last 3 days if no dates present
+        const defaultEndDate = new Date();
+        const defaultStartDate = subDays(defaultEndDate, 3);
+        
+        const params = {
+          column_name: columnName,
+          start_date: start_date || format(defaultStartDate, 'yyyy-MM-dd'),
+          end_date: end_date || format(defaultEndDate, 'yyyy-MM-dd'),
+          service: columnName !== 'service' ? service : undefined,
+          level: columnName !== 'level' ? level : undefined,
+          environment: columnName !== 'environment' ? environment : undefined,
+          request_method: columnName !== 'request_method' ? requestMethod : undefined,
+          status_code: columnName !== 'status_code' ? statusCode : undefined,
+          request_path: columnName !== 'request_path' ? requestPath : undefined,
+          user_agent: columnName !== 'user_agent' ? userAgent : undefined,
+        };
+
+        const response = await genericCounterApi(params);
+        setData(response.data || []);
+        setFilteredData(response.data || []);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError(error instanceof Error ? error.message : 'Failed to fetch data');
+        setData([]);
+      }
+    };
+
     if (isOpen && (!data.length || shouldRefresh)) {
       fetchData();
     }

@@ -21,6 +21,9 @@ export function DateRangeSelector() {
     let startDate: Date;
 
     switch (value) {
+      case '5m':
+        startDate = new Date(now.getTime() - 5 * 60 * 1000);
+        break;
       case '30m':
         startDate = new Date(now.getTime() - 30 * 60 * 1000);
         break;
