@@ -56,16 +56,11 @@ export function TimeSeriesChart(params: {
       if (error) {
         return (
           <div className="h-full p-6">
-        <div className="h-full flex flex-col items-center justify-center gap-4 bg-white rounded-[4px]">
-          <Info className="h-10 w-10 text-[var(--error)]" />
-          <span className="text-[var(--error)] text-base font-semibold">{error}</span>
-        </div>
-      </div>
-          // <div className="h-[160px] flex items-center justify-center gap-2 bg-white rounded-[4px]">
-          //   <div className="flex items-center gap-2">
-          //     <span className="text-[var(--error)] font-semibold">{error}</span>
-          //   </div>
-          // </div>
+            <div className="h-full flex flex-col items-center justify-center gap-4 bg-white rounded-[4px]">
+              <Info className="h-10 w-10 text-[var(--error)]" />
+              <span className="text-[var(--error)] text-base font-semibold">{error}</span>
+            </div>
+          </div>
         );
       }
 
@@ -75,7 +70,7 @@ export function TimeSeriesChart(params: {
         grid: {
           left: '0',
           right: '0',
-          bottom: '15%',
+          bottom: 48,
           top: '8',
           containLabel: true,
         },
@@ -95,7 +90,7 @@ export function TimeSeriesChart(params: {
             },
             moveHandleSize: 0,
             showDetail: false,
-            height: 20,
+            height: 40,
             selectedDataBackground: {
               areaStyle: {
                 color: '#E0EFFF',
