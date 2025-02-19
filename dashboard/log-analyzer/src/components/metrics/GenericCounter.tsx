@@ -111,7 +111,7 @@ export function GenericCounter({
       }
     };
 
-    if (isOpen && (!data.length || shouldRefresh)) {
+    if (isOpen || shouldRefresh) {
       fetchData();
     }
   }, [isOpen, shouldRefresh, searchParams]);

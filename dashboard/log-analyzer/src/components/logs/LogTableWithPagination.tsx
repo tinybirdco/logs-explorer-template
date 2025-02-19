@@ -7,6 +7,7 @@ import { logAnalysisApi, logExplorerApi } from '@/lib/tinybird';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
+import { getTotalRowCount } from "@/lib/utils";
 
 interface LogTableWithPaginationProps {
   pageSize: number;
@@ -61,10 +62,17 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   }, [searchParams, currentSortColumn, currentSortOrder, router]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const shouldUseExplorerApi = useCallback((filters: Record<string, any>) => {
+  const shouldUseExplorerApi = useCallback(async (filters: Record<string, any>) => {
+    // First check if only allowed filters are being used
     const allowedFilters = ['start_date', 'end_date', 'environment', 'service', 'level', 'order', 'sort_by'];
     const activeFilters = Object.keys(filters);
-    return activeFilters.every(filter => allowedFilters.includes(filter));
+    const onlyAllowedFilters = activeFilters.every(filter => allowedFilters.includes(filter));
+    
+    if (!onlyAllowedFilters) return false;
+    
+    // Then check row count
+    const totalCount = await getTotalRowCount(filters);
+    return totalCount >= 10_000_000;
   }, []);
 
   useEffect(() => {
@@ -72,7 +80,8 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
       try {
         setIsLoading(true);
         const filters = getFilters();
-        const api = shouldUseExplorerApi(filters) ? logExplorerApi : logAnalysisApi;
+        const useExplorer = await shouldUseExplorerApi(filters);
+        const api = useExplorer ? logExplorerApi : logAnalysisApi;
         
         const response = await api({ 
           ...filters,
@@ -104,7 +113,8 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
       console.log('Loading page:', nextPage);
       
       const filters = getFilters();
-      const api = shouldUseExplorerApi(filters) ? logExplorerApi : logAnalysisApi;
+      const useExplorer = await shouldUseExplorerApi(filters);
+      const api = useExplorer ? logExplorerApi : logAnalysisApi;
 
       const response = await api({ 
         ...filters,
