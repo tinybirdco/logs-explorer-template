@@ -5,8 +5,7 @@ NODE log_analysis_node
 SQL >
     %
     {% if defined(message) and message != '' %}
-        with {{split_to_array(String(message, ''), separator='|')}} as message_patterns,
-        multiMatchAllIndices(message, arrayMap(x -> concat('(?i)', x), message_patterns)) as indices
+        with {{split_to_array(String(message, ''), separator='|')}} as message_patterns
     {% end %}
     SELECT
         timestamp,
@@ -50,7 +49,7 @@ SQL >
         AND user_agent in {{Array(user_agent)}}
     {% end %}
     {% if defined(message) and message != '' %}
-        AND length(indices) > 0
+        AND multiSearchAnyCaseInsensitive(message, message_patterns)
     {% end %}
     ORDER BY 
     {% if defined(sort_by) and sort_by != '' %}

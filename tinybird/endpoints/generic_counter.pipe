@@ -54,6 +54,11 @@ SQL >
     {% if defined(user_agent) and user_agent != [''] %}
         AND user_agent in {{Array(user_agent)}}
     {% end %}
+    {% if defined(start_date) and defined(end_date) and date_diff_in_hours(start_date, end_date) < 10 %}
+        {% if defined(message) and message != '' %}
+            AND multiSearchAnyCaseInsensitive(message, {{split_to_array(String(message, ''), separator='|')}})
+        {% end %}
+    {% end %}
     GROUP BY {{column(column_name, 'level')}}
     ORDER BY count DESC, {{column(column_name, 'level')}}
 
