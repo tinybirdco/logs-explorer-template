@@ -47,7 +47,7 @@ export function TimeSeriesChart(params: {
       if (loading) {
         return (
           <div className="">
-            <div className="h-[140px] bg-[#D9D9D9] rounded-[4px] animation-pulse" />
+            <div className="h-[140px] bg-[#D9D9D9] rounded-[4px] animate-pulse" />
           </div>
         );
       }

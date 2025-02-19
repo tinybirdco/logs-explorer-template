@@ -29,7 +29,13 @@ export function SearchBar() {
       };
 
       const totalCount = await getTotalRowCount(params);
-      setIsDisabled(totalCount >= 50_000_000);
+      const newIsDisabled = totalCount >= 50_000_000;
+      setIsDisabled(newIsDisabled);
+      
+      if (newIsDisabled) {
+        setInputValue('');
+        handleSearch('');
+      }
     };
 
     checkRowCount();
