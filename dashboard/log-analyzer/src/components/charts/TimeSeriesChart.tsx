@@ -80,7 +80,17 @@ export function TimeSeriesChart(params: {
             moveHandleSize: 0,
             showDetail: false,
             height: 20,
-          }
+            selectedDataBackground: {
+              areaStyle: {
+                color: '#E0EFFF',
+                opacity: 1
+              },
+              lineStyle: {
+                opacity: 1,
+                color: '#357AF6',
+              }
+            }
+          },
         ],
         tooltip: {
             trigger: 'axis',
