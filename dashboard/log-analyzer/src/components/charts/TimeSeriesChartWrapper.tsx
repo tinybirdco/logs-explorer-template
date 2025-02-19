@@ -41,6 +41,7 @@ export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
         const params = new URLSearchParams(searchParams.toString());
         params.set('start_date', start);
         params.set('end_date', end);
+        params.set('custom_range', 'custom');
         router.push(`?${params.toString()}`);
       }} />
     </div>

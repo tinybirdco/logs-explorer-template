@@ -2,16 +2,16 @@
 
 import { genericCounterApi } from "@/lib/tinybird";
 import { useEffect, useState, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronUp, Search, X } from "lucide-react";
+import { ChevronUp, Search, X, Info } from "lucide-react";
 import { useSearchParams } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 import { cn } from "@/lib/utils";
 import { subDays, format } from "date-fns";
+import { TooltipContent, TooltipProvider, TooltipRoot, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface GenericCounterProps {
   columnName: string;
@@ -148,14 +148,25 @@ export function GenericCounter({
 
   if (error) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-red-500">Error: {error}</div>
-        </CardContent>
-      </Card>
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center gap-2 group relative cursor-pointer w-full">
+          <div className="absolute -left-3 top-0 bottom-0 w-1 height-24 bg-[var(--error)] opacity-0 group-hover:opacity-100 transition-opacity" />
+          <h3 className="text-[var(--error)] font-semibold">
+            {title}
+          </h3>
+          <div className="flex-1" />
+          <TooltipProvider delayDuration={0}>
+            <TooltipRoot>
+              <TooltipTrigger asChild>
+                <Info className="h-6 w-6 text-[var(--error)]" />
+              </TooltipTrigger>
+              <TooltipContent side="right" className="mt-2 ml-2 bg-[var(--error)] text-white">
+                <p>{error}</p>
+              </TooltipContent>
+            </TooltipRoot>
+          </TooltipProvider>
+        </div>
+      </div>
     );
   }
 

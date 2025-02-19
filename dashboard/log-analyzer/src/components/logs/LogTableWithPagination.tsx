@@ -8,6 +8,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 import { getTotalRowCount } from "@/lib/utils";
+import { Info } from "lucide-react";
 
 interface LogTableWithPaginationProps {
   pageSize: number;
@@ -19,6 +20,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -79,6 +81,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     const loadInitialData = async () => {
       try {
         setIsLoading(true);
+        setError(null);
         const filters = getFilters();
         const useExplorer = await shouldUseExplorerApi(filters);
         const api = useExplorer ? logExplorerApi : logAnalysisApi;
@@ -94,10 +97,11 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         setLogs(response.data || []);
         setPage(0);
         setHasMore(true);
-        setIsLoading(false);
       } catch (error) {
-        console.error('Error loading logs:', error);
+        setError(error instanceof Error ? error.message : 'An error occurred while loading logs');
         setHasMore(false);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -110,7 +114,6 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     try {
       setIsLoadingMore(true);
       const nextPage = page + 1;
-      console.log('Loading page:', nextPage);
       
       const filters = getFilters();
       const useExplorer = await shouldUseExplorerApi(filters);
@@ -132,7 +135,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         setHasMore(true);
       }
     } catch (error) {
-      console.error('Error loading more logs:', error);
+      setError(error instanceof Error ? error.message : 'An error occurred while loading more logs');
       setHasMore(false);
     } finally {
       setIsLoadingMore(false);
@@ -142,6 +145,17 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   const { observerRef } = useInfiniteScroll(loadMore);
 
   useDefaultDateRange();
+
+  if (error) {
+    return (
+      <div className="h-full p-6">
+        <div className="h-full flex flex-col items-center justify-center gap-4 bg-white rounded-[4px]">
+          <Info className="h-10 w-10 text-[var(--error)]" />
+          <span className="text-[var(--error)] text-base font-semibold">{error}</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-full p-6">

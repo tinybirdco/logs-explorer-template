@@ -3,7 +3,8 @@
 import { useQuery } from '@tinybirdco/charts'
 import ReactECharts from 'echarts-for-react';
 import { format } from 'date-fns';
-
+import { LoaderIcon } from '../icons';
+import { Info } from "lucide-react";
 const formatNumber = (num: number) => {
   if (num >= 1_000_000) {
     return `${(num / 1_000_000).toFixed(1)}M`;
@@ -46,12 +47,22 @@ export function TimeSeriesChart(params: {
     
       if (loading) {
         return (
-          <div className="">
-            <div className="h-[140px] bg-[#D9D9D9] rounded-[4px] animate-pulse" />
+          <div className="h-[160px] flex items-center justify-center gap-2 bg-[#D9D9D9] rounded-[4px] animate-pulse">
+              <LoaderIcon />
+            <span className="text-sm text-[#25283D]">Loading data...</span>
           </div>
         );
       }
-      if (error) return <div>Error: {error}</div>
+      if (error) {
+        return (
+          <div className="h-full p-6">
+            <div className="h-full flex flex-col items-center justify-center gap-4 bg-white rounded-[4px]">
+              <Info className="h-10 w-10 text-[var(--error)]" />
+              <span className="text-[var(--error)] text-base font-semibold">{error}</span>
+            </div>
+          </div>
+        );
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const dates = data?.map((item: any) => item.date) ?? [];
@@ -59,7 +70,7 @@ export function TimeSeriesChart(params: {
         grid: {
           left: '0',
           right: '0',
-          bottom: '15%',
+          bottom: 48,
           top: '8',
           containLabel: true,
         },
@@ -79,7 +90,7 @@ export function TimeSeriesChart(params: {
             },
             moveHandleSize: 0,
             showDetail: false,
-            height: 20,
+            height: 40,
             selectedDataBackground: {
               areaStyle: {
                 color: '#E0EFFF',
@@ -200,7 +211,7 @@ export function TimeSeriesChart(params: {
       return (
         <ReactECharts 
           option={option} 
-          style={{ height: '140px' }} 
+          style={{ height: '160px' }} 
           onEvents={{
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             datazoom: (zoomParams: any) => {

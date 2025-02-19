@@ -11,6 +11,7 @@
     --background-hover: #E0EFFF;
     --text-primary: 232 18% 19%;  /* #25283D */
     --text-secondary: 0 0% 14%;  /* #232323 */
+    --error: #DE1616;
     --button-text: #333B69;
     --text-table-header: #718EBF;
     --table-separator: #E6EFF5;
@@ -160,7 +161,6 @@
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: normal !important;
-    color: var(--text-primary) !important;
   } 
   
 }

@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { getTotalRowCount } from "@/lib/utils";
 import { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+
 export function SearchBar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -76,7 +78,10 @@ export function SearchBar() {
             <Search className="absolute left-3 top-3 h-4 w-4 text-[var(--button-text)]" />
             <Input
               placeholder={isDisabled ? "Narrow the filters to enable search" : "Search... "}
-              className="h-10 pl-9 pr-9 border-[var(--border-gray)] font-semibold"
+              className={cn(
+                "h-10 pl-9 pr-9 border-[var(--border-gray)] font-semibold disabled:opacity-100",
+                isDisabled && "placeholder:italic placeholder:text-[#8A8A8A]"
+              )}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
