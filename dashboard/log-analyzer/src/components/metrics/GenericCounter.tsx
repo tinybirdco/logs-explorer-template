@@ -59,8 +59,6 @@ export function GenericCounter({
   const [isOpen, setIsOpen] = useState(startOpen);
   const initializedRef = useRef(false);
   const currentParams = searchParams.get(columnName);
-  const startDate = searchParams.get('start_date');
-  const endDate = searchParams.get('end_date');
   const service = searchParams.get('service')?.split(',').filter(Boolean) || undefined;
   const level = searchParams.get('level')?.split(',').filter(Boolean) || undefined;
   const environment = searchParams.get('environment')?.split(',').filter(Boolean) || undefined;
