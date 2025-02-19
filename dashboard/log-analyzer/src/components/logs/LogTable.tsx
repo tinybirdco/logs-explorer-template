@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { type LogEntry } from "@/lib/types";
 import { useState } from 'react';
-import { Loader2 } from "lucide-react";
+import { LoaderIcon } from "@/components/icons";
 import { FileIcon } from "@/components/icons";
 import React from 'react';
 import { LogDetailPanel } from "./LogDetailPanel";
@@ -44,7 +44,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full relative">
       {isLoading ? (
         <div className="h-full">
           <div className="space-y-[29px]">
@@ -97,15 +97,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
                     {logs?.map((log, index) => (
                       <React.Fragment key={log.request_id || index}>
                         {hasMore && index === logs.length - 6 && (
-                          <tr ref={observerRef}>
-                            <td colSpan={8} className="p-0">
-                              {isLoadingMore && (
-                                <div className="w-full flex items-center justify-center py-4">
-                                  <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-                                </div>
-                              )}
-                            </td>
-                          </tr>
+                          <tr ref={observerRef} />
                         )}
                         <TableRow 
                           className="table-row cursor-pointer hover:bg-muted/50" 
@@ -166,6 +158,14 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
           setSelectedLog(null);
         }}
       />
+      {isLoadingMore && (
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 bg-[#357AF6] rounded-xl p-4">
+          <div className="flex items-center gap-2">
+            <LoaderIcon color="#FFFFFF" />
+            <span className="text-sm text-white">Loading more...</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 } 

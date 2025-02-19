@@ -22,12 +22,17 @@ export const FileIcon = () => (
     </svg>
 );
 
-export const LoaderIcon = () => (
-    <svg className="animate-spin" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  className?: string;
+  color?: string
+}
+
+export const LoaderIcon = ({ className = '', color = '#232323', ...props }: IconProps) => (
+    <svg className={`animate-spin ${className}`} width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g clipPath="url(#paint0_angular_3097_434_clip_path)" data-figma-skip-parse="true">
         <g transform="matrix(0 0.0106667 -0.0106667 0 10.9999 10.9568)">
           <foreignObject x="-1150" y="-1150" width="2300" height="2300">
-            <div style={{background: "conic-gradient(from 90deg,rgba(35, 35, 35, 0) 0deg,rgba(35, 35, 35, 0) 91.875deg,rgba(35, 35, 35, 1) 360deg)", height: "100%", width: "100%", opacity: 1}} />
+            <div style={{background: `conic-gradient(from 90deg,${color}00 0deg,${color}00 91.875deg,${color} 360deg)`, height: "100%", width: "100%", opacity: 1}} />
           </foreignObject>
         </g>
       </g>
