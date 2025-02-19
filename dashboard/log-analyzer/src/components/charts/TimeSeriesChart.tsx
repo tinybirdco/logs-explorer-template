@@ -4,7 +4,7 @@ import { useQuery } from '@tinybirdco/charts'
 import ReactECharts from 'echarts-for-react';
 import { format } from 'date-fns';
 import { LoaderIcon } from '../icons';
-
+import { Info } from "lucide-react";
 const formatNumber = (num: number) => {
   if (num >= 1_000_000) {
     return `${(num / 1_000_000).toFixed(1)}M`;
@@ -53,7 +53,21 @@ export function TimeSeriesChart(params: {
           </div>
         );
       }
-      if (error) return <div>Error: {error}</div>
+      if (error) {
+        return (
+          <div className="h-full p-6">
+        <div className="h-full flex flex-col items-center justify-center gap-4 bg-white rounded-[4px]">
+          <Info className="h-10 w-10 text-[var(--error)]" />
+          <span className="text-[var(--error)] text-base font-semibold">{error}</span>
+        </div>
+      </div>
+          // <div className="h-[160px] flex items-center justify-center gap-2 bg-white rounded-[4px]">
+          //   <div className="flex items-center gap-2">
+          //     <span className="text-[var(--error)] font-semibold">{error}</span>
+          //   </div>
+          // </div>
+        );
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const dates = data?.map((item: any) => item.date) ?? [];
