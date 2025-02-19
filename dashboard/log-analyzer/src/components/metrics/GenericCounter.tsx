@@ -90,8 +90,8 @@ export function GenericCounter({
         
         const params = {
           column_name: columnName,
-          start_date: start_date || format(defaultStartDate, 'yyyy-MM-dd'),
-          end_date: end_date || format(defaultEndDate, 'yyyy-MM-dd'),
+          start_date: start_date || format(defaultStartDate, 'yyyy-MM-dd HH:mm:ss'),
+          end_date: end_date || format(defaultEndDate, 'yyyy-MM-dd HH:mm:ss'),
           service: columnName !== 'service' ? service : undefined,
           level: columnName !== 'level' ? level : undefined,
           environment: columnName !== 'environment' ? environment : undefined,
