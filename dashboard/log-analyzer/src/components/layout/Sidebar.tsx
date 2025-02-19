@@ -6,7 +6,6 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CollapseIcon, ExpandIcon } from "@/components/icons";
-import { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
