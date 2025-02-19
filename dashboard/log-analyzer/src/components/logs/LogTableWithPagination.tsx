@@ -61,6 +61,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     router.push(`?${params.toString()}`);
   }, [searchParams, currentSortColumn, currentSortOrder, router]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const shouldUseExplorerApi = useCallback(async (filters: Record<string, any>) => {
     // First check if only allowed filters are being used
     const allowedFilters = ['start_date', 'end_date', 'environment', 'service', 'level', 'order', 'sort_by'];
