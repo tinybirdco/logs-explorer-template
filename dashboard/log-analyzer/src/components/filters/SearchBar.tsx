@@ -105,7 +105,15 @@ export function SearchBar() {
             <p>Filter by Environment and Service and one day of data.
             </p>
           ) : (
-            <p>Search the Message column: Memory|Timeout</p>
+            <p>Type to search in the Message column:
+              <br />
+              Example: <span className="font-semibold">memory limit</span>
+              <br />
+              <br />
+              Search for multiple terms using <code className="font-semibold">|</code> (pipe).
+              <br />
+              Example: <span className="font-semibold">memory|timeout</span>
+              </p>
           )}
         </TooltipContent>
       </TooltipRoot>
