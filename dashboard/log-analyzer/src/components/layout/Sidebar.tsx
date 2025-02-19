@@ -53,14 +53,14 @@ export default function Sidebar() {
     )}>
       {isCollapsed ? (
         <div className="w-[88px] h-[88px] bg-white rounded-2xl flex items-center justify-center">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="btn-icon"
-            onClick={handleExpand}
-          >
-            <ExpandIcon />
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="btn-icon"
+              onClick={handleExpand}
+            >
+              <ExpandIcon />
+            </Button>
         </div>
       ) : (
         <div className="h-[calc(100vh-48px)] bg-white rounded-2xl">
@@ -96,6 +96,7 @@ export default function Sidebar() {
                 title="Services"
                 onSelectionChange={createFilterHandler('service')}
                 shouldRefresh={refreshTrigger}
+                startOpen={true}
               />
 
               <div className="space-y-4">
@@ -105,6 +106,7 @@ export default function Sidebar() {
                 title="Log Levels"
                 onSelectionChange={createFilterHandler('level')}
                 shouldRefresh={refreshTrigger}
+                startOpen={true}
               />
               
               {/* HTTP Methods */}
@@ -131,13 +133,6 @@ export default function Sidebar() {
                 shouldRefresh={refreshTrigger}
               />
 
-              {/* User Agents */}
-              <GenericCounter 
-                columnName="user_agent"
-                title="User Agents"
-                onSelectionChange={createFilterHandler('user_agent')}
-                shouldRefresh={refreshTrigger}
-              />
             </div>
           </div>
         </div>

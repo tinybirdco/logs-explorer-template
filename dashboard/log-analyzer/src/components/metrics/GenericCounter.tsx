@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 import { cn } from "@/lib/utils";
+import { subDays, format } from "date-fns";
 
 interface GenericCounterProps {
   columnName: string;
@@ -58,8 +59,6 @@ export function GenericCounter({
   const [isOpen, setIsOpen] = useState(startOpen);
   const initializedRef = useRef(false);
   const currentParams = searchParams.get(columnName);
-  const startDate = searchParams.get('start_date');
-  const endDate = searchParams.get('end_date');
   const service = searchParams.get('service')?.split(',').filter(Boolean) || undefined;
   const level = searchParams.get('level')?.split(',').filter(Boolean) || undefined;
   const environment = searchParams.get('environment')?.split(',').filter(Boolean) || undefined;
@@ -79,29 +78,39 @@ export function GenericCounter({
     }
   }, [currentParams]);
 
-  const fetchData = async () => {
-    try {
-      const response = await genericCounterApi({ 
-        column_name: columnName,
-        start_date: startDate || undefined,
-        end_date: endDate || undefined,
-        service: columnName !== 'service' ? service : undefined,
-        level: columnName !== 'level' ? level : undefined,
-        environment: columnName !== 'environment' ? environment : undefined,
-        request_method: columnName !== 'request_method' ? requestMethod : undefined,
-        status_code: columnName !== 'status_code' ? statusCode : undefined,
-        request_path: columnName !== 'request_path' ? requestPath : undefined,
-        user_agent: columnName !== 'user_agent' ? userAgent : undefined,
-        __tb__deployment: process.env.NEXT_PUBLIC_TINYBIRD_DEPLOYMENT_ID || undefined,
-      });
-      setData(response.data || []);
-      setFilteredData(response.data || []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch data');
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const start_date = searchParams.get('start_date');
+        const end_date = searchParams.get('end_date');
+        
+        // Default to last 3 days if no dates present
+        const defaultEndDate = new Date();
+        const defaultStartDate = subDays(defaultEndDate, 3);
+        
+        const params = {
+          column_name: columnName,
+          start_date: start_date || format(defaultStartDate, 'yyyy-MM-dd'),
+          end_date: end_date || format(defaultEndDate, 'yyyy-MM-dd'),
+          service: columnName !== 'service' ? service : undefined,
+          level: columnName !== 'level' ? level : undefined,
+          environment: columnName !== 'environment' ? environment : undefined,
+          request_method: columnName !== 'request_method' ? requestMethod : undefined,
+          status_code: columnName !== 'status_code' ? statusCode : undefined,
+          request_path: columnName !== 'request_path' ? requestPath : undefined,
+          user_agent: columnName !== 'user_agent' ? userAgent : undefined,
+        };
+
+        const response = await genericCounterApi(params);
+        setData(response.data || []);
+        setFilteredData(response.data || []);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError(error instanceof Error ? error.message : 'Failed to fetch data');
+        setData([]);
+      }
+    };
+
     if (isOpen && (!data.length || shouldRefresh)) {
       fetchData();
     }
@@ -200,7 +209,7 @@ export function GenericCounter({
             <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--button-text)]" />
             <Input
               placeholder="Search"
-              className="pl-8 border-[var(--border-gray)] border rounded-lg focus-visible:border-1"
+              className="pl-8 border-[var(--border-gray)] border rounded-lg focus-visible:border-1 font-semibold"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

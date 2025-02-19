@@ -6,7 +6,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { getTotalRowCount } from "@/lib/utils";
-
+import { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 export function SearchBar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -63,27 +63,41 @@ export function SearchBar() {
   };
 
   return (
-    <div className="relative flex-1">
-      <Search className="absolute left-3 top-3 h-4 w-4 text-[var(--button-text)]" />
-      <Input
-        placeholder={isDisabled ? "Narrow the filter to enable search" : "Search... (e.g. Internal.*Memory|Internal.*Timeout)"}
-        className="h-10 pl-9 pr-9 border-[var(--border-gray)]"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKeyDown}
-        disabled={isDisabled}
-      />
-      {inputValue && (
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute right-1.5 top-1.5 h-7 w-7 rounded-full hover:bg-muted"
-          onClick={handleClear}
-          disabled={isDisabled}
-        >
-          <X className="h-4 w-4" />
-        </Button>
-      )}
-    </div>
+    <TooltipProvider delayDuration={0}>
+      <TooltipRoot>
+        <TooltipTrigger asChild>
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-3 h-4 w-4 text-[var(--button-text)]" />
+            <Input
+              placeholder={isDisabled ? "Narrow the filters to enable search" : "Search... "}
+              className="h-10 pl-9 pr-9 border-[var(--border-gray)] font-semibold"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              disabled={isDisabled}
+            />
+            {inputValue && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-1.5 top-1.5 h-7 w-7 rounded-full hover:bg-muted"
+                onClick={handleClear}
+                disabled={isDisabled}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
+        </TooltipTrigger>
+        <TooltipContent side="bottom" align="start" className="mt-2"> 
+          {isDisabled ? (
+            <p>Filter by Environment and Service and one day of data.
+            </p>
+          ) : (
+            <p>Use text or regular expressions: Internal.*Memory|Internal.*Timeout</p>
+          )}
+        </TooltipContent>
+      </TooltipRoot>
+    </TooltipProvider>
   );
 } 
