@@ -2,7 +2,6 @@
 
 import { genericCounterApi } from "@/lib/tinybird";
 import { useEffect, useState, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronUp, Search, X, Info } from "lucide-react";
