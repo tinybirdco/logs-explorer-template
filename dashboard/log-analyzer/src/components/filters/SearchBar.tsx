@@ -29,7 +29,7 @@ export function SearchBar() {
       };
 
       const totalCount = await getTotalRowCount(params);
-      const newIsDisabled = totalCount >= 50_000_000;
+      const newIsDisabled = totalCount >= 100_000_000;
       setIsDisabled(newIsDisabled);
       
       if (newIsDisabled) {
