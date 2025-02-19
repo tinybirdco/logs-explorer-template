@@ -6,7 +6,6 @@ import type { LogEntry } from "@/lib/types";
 import { logAnalysisApi, logExplorerApi } from '@/lib/tinybird';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
-import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 import { getTotalRowCount } from "@/lib/utils";
 import { Info } from "lucide-react";
 
@@ -143,8 +142,6 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   }, [page, hasMore, isLoading, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi]);
 
   const { observerRef } = useInfiniteScroll(loadMore);
-
-  useDefaultDateRange();
 
   if (error) {
     return (

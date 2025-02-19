@@ -2,7 +2,6 @@
 
 import { useSearchParams } from "next/navigation";
 import { TimeSeriesChart } from "@/components/charts/TimeSeriesChart";
-import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 import { useRouter } from "next/navigation";
 
 interface TimeSeriesChartWrapperProps {
@@ -14,10 +13,9 @@ export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
   const start_date = searchParams.get('start_date');
   const end_date = searchParams.get('end_date');
   const router = useRouter();
-  useDefaultDateRange();
 
   if (!start_date || !end_date) {
-    return <div className="flex items-center justify-center h-full">Select a time range</div>;
+    return null;
   }
 
   const params = {

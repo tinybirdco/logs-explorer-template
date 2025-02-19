@@ -160,7 +160,7 @@ export function GenericCounter({
               <TooltipTrigger asChild>
                 <Info className="h-6 w-6 text-[var(--error)]" />
               </TooltipTrigger>
-              <TooltipContent side="right" className="mt-2 ml-2 bg-[var(--error)] text-white">
+              <TooltipContent side="right" className="ml-2 bg-[var(--error)] text-white">
                 <p>{error}</p>
               </TooltipContent>
             </TooltipRoot>
