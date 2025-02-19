@@ -61,9 +61,9 @@ SQL >
     SELECT
         {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
             date,
-        {% elif date_diff_in_hours(start_date, end_date) < 24 * 10 and date_diff_in_hours(start_date, end_date) >= 24 * 3 %}
+        {% elif date_diff_in_hours(start_date, end_date) < 24 * 10 and date_diff_in_hours(start_date, end_date) >= 24 * 1 %}
             toStartOfInterval(timestamp, INTERVAL 2 hour) as date,
-        {% elif date_diff_in_hours(start_date, end_date) < 24 * 3 and date_diff_in_hours(start_date, end_date) > 24 * 1 %}
+        {% elif date_diff_in_hours(start_date, end_date) < 24 * 1 and date_diff_in_hours(start_date, end_date) > 3 %}
             toStartOfHour(timestamp) as date,
         {% else %}
             toStartOfMinute(timestamp) as date,
@@ -139,7 +139,7 @@ SQL >
     FROM
     {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
         day_intervals
-    {% elif date_diff_in_hours(start_date, end_date) >= 24 * 3 %}
+    {% elif date_diff_in_hours(start_date, end_date) > 3 %}
         hour_intervals
     {% else %}
         minute_intervals

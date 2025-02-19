@@ -200,7 +200,7 @@ export function GenericCounter({
             <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--button-text)]" />
             <Input
               placeholder="Search"
-              className="pl-8 border-[var(--border-gray)] border rounded-lg focus-visible:border-1"
+              className="pl-8 border-[var(--border-gray)] border rounded-lg focus-visible:border-1 font-semibold"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

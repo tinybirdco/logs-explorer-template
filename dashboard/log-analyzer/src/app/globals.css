@@ -159,7 +159,7 @@
   ::placeholder {
     font-family: inherit !important;
     font-size: inherit !important;
-    font-weight: inherit !important;
+    font-weight: normal !important;
     color: var(--text-primary) !important;
   } 
   
