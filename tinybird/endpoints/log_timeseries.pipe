@@ -61,32 +61,32 @@ SQL >
     SELECT
         {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
             date,
-        {% elif date_diff_in_hours(start_date, end_date) >= 24 * 3 %}
+        {% elif date_diff_in_hours(start_date, end_date) < 24 * 10 and date_diff_in_hours(start_date, end_date) >= 24 * 3 %}
             toStartOfInterval(timestamp, INTERVAL 6 hour) as date,
-        {% elif date_diff_in_hours(start_date, end_date) >= 24 * 1 %}
+        {% elif date_diff_in_hours(start_date, end_date) < 24 * 3 and date_diff_in_hours(start_date, end_date) >= 24 * 1 %}
             toStartOfHour(timestamp) as date,
         {% else %}
             toStartOfMinute(timestamp) as date,
         {% end %}
-        {% if date_diff_in_hours(start_date, end_date) >= 24 * 3 %}
+        {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
             countMerge(error_count) as error_count,
             {% if defined(level) and level != 'ERROR' %}
-                countMerge(total_requests) as total_requests,
+                countMerge(total_requests) as total_requests
             {% else %}
-                0 as total_requests,
+                0 as total_requests
             {% end %}
         {% else %}
             countIf(level = 'ERROR') as error_count,
             countIf(level != 'ERROR') as total_requests
         {% end %}
     FROM
-    {% if date_diff_in_hours(start_date, end_date) >= 24 * 3 %}
+    {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
         logs_daily_timeseries
     {% else %}
         logs
     {% end %}
     WHERE 1=1
-    {% if date_diff_in_hours(start_date, end_date) >= 24 * 3 %}
+    {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
         AND date >= {{DateTime(start_date)}}
         AND date <= {{DateTime(end_date)}}
     {% else %}
