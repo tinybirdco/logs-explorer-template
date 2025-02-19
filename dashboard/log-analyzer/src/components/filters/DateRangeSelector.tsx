@@ -9,6 +9,15 @@ function formatDate(date: Date) {
   return date.toISOString().split('.')[0].replace('T', ' ').replace('Z', '');
 }
 
+const timeRangeLabels: Record<string, string> = {
+  '1h': 'Last 1 hour',
+  '24h': 'Last 24 hours',
+  '3d': 'Last 3 days',
+  '7d': 'Last 7 days',
+  '30d': 'Last 30 days',
+  '6m': 'Last 6 months',
+};
+
 export function DateRangeSelector() {
   const router = useRouter();
   const pathname = usePathname();
@@ -19,10 +28,6 @@ export function DateRangeSelector() {
     const params = new URLSearchParams(searchParams.toString());
     const now = new Date();
     let startDate: Date;
-
-    if (value !== 'custom') {
-      params.delete('custom_range');
-    }
 
     switch (value) {
       case '1h':
@@ -49,18 +54,26 @@ export function DateRangeSelector() {
 
     params.set('start_date', formatDate(startDate));
     params.set('end_date', formatDate(now));
+    params.set('time_range', value);
+    params.delete('custom_range');
     
     router.replace(`${pathname}?${params.toString()}`);
     window.dispatchEvent(new Event('refresh-filters'));
   }, [pathname, router, searchParams]);
 
+  const isCustomRange = searchParams.get('custom_range') === 'custom';
+  const timeRange = searchParams.get('time_range') || "3d";
+  const defaultValue = isCustomRange ? 'custom' : timeRange;
+
   return (
     <Select 
-      value={searchParams.get('custom_range') || "3d"} 
+      value={defaultValue}
       onValueChange={handleTimeRangeChange}
     >
       <SelectTrigger className="w-[180px] h-10 bg-white border-[var(--border-gray)]">
-        <SelectValue placeholder="Time Range" />
+        <SelectValue>
+          {isCustomRange ? "Custom Range" : timeRangeLabels[timeRange]}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="1h" className="hover:bg-[var(--background-hover)]">Last 1 hour</SelectItem>
@@ -69,7 +82,6 @@ export function DateRangeSelector() {
         <SelectItem value="7d" className="hover:bg-[var(--background-hover)]">Last 7 days</SelectItem>
         <SelectItem value="30d" className="hover:bg-[var(--background-hover)]">Last 30 days</SelectItem>
         <SelectItem value="6m" className="hover:bg-[var(--background-hover)]">Last 6 months</SelectItem>
-        <SelectItem value="custom" className="hover:bg-[var(--background-hover)]">Custom Range</SelectItem>
       </SelectContent>
     </Select>
   );
