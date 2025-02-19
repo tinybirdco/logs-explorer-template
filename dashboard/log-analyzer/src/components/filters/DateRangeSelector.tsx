@@ -21,12 +21,6 @@ export function DateRangeSelector() {
     let startDate: Date;
 
     switch (value) {
-      case '5m':
-        startDate = new Date(now.getTime() - 5 * 60 * 1000);
-        break;
-      case '30m':
-        startDate = new Date(now.getTime() - 30 * 60 * 1000);
-        break;
       case '1h':
         startDate = new Date(now.getTime() - 60 * 60 * 1000);
         break;
@@ -62,8 +56,6 @@ export function DateRangeSelector() {
         <SelectValue placeholder="Time Range" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="5m" className="hover:bg-[var(--background-hover)]">Last 5 minutes</SelectItem>
-        <SelectItem value="30m" className="hover:bg-[var(--background-hover)]">Last 30 minutes</SelectItem>
         <SelectItem value="1h" className="hover:bg-[var(--background-hover)]">Last 1 hour</SelectItem>
         <SelectItem value="24h" className="hover:bg-[var(--background-hover)]">Last 24 hours</SelectItem>
         <SelectItem value="3d" className="hover:bg-[var(--background-hover)]">Last 3 days</SelectItem>
