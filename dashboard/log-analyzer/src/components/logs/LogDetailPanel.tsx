@@ -67,13 +67,13 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
         <div className="pr-8 flex justify-end mb-6">
           <Button
             variant="ghost"
-            className="group relative h-10 w-10 flex items-center justify-center hover:w-auto hover:py-3 hover:px-3.5 hover:bg-[#357AF6] hover:rounded-lg rounded-lg bg-white border border-[var(--border-gray)] hover:border-white hover:bg-transparent"
+            className="group relative h-10 w-10 flex items-center justify-center hover:w-auto hover:py-3 hover:px-3.5 hover:bg-white hover:rounded-lg rounded-lg bg-white border border-[var(--border-gray)] hover:border-[var(--border-gray)]"
             onClick={handleClose}
           >
-            <span className="text-sm text-white opacity-0 group-hover:opacity-100 whitespace-nowrap">
+            <span className="text-sm text-[#357AF6] opacity-0 group-hover:opacity-100 whitespace-nowrap mr-6">
               Close
             </span>
-            <X className="h-4 w-4 text-gray-500 group-hover:text-white absolute group-hover:relative" />
+            <X className="h-4 w-4 text-gray-500 group-hover:text-[#357AF6] absolute right-3" />
           </Button>
         </div>
 
