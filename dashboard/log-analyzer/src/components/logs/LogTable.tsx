@@ -59,24 +59,23 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
       ) : (
         <>
           <div className="sticky top-0 z-10 bg-white">
-            <Table className="border-collapse w-full table-fixed">
-              <TableHeader className="table-header">
-                <TableRow>
-                  <TableHead className="w-[10%] truncate">ID</TableHead>
+            <Table className="border-collapse w-full table-fixed p-0">
+              <TableHeader className="table-header p-0 m-0">
+                <TableRow className="p-0 m-0">
                   <TableHead 
-                    className="w-[120px] max-w-[120px] truncate"
+                    className="w-[15%] whitespace-nowrap px-4 py-3 text-left"
                     onClick={() => onSort('timestamp')}
                     onMouseEnter={() => setHoveredColumn('timestamp')}
                     onMouseLeave={() => setHoveredColumn(null)}
                   >
                     Time{renderSortIndicator('timestamp')}
                   </TableHead>
-                  <TableHead className="w-[80px] max-w-[80px] truncate">Level</TableHead>
-                  <TableHead className="w-[120px] max-w-[120px] truncate">Service</TableHead>
-                  <TableHead className="w-[80px] max-w-[80px] truncate">Method</TableHead>
-                  <TableHead className="w-[14%] truncate">Path</TableHead>
-                  <TableHead className="w-[80px] max-w-[80px] truncate">Status</TableHead>
-                  <TableHead className="w-[30%] truncate">Message</TableHead>
+                  <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Level</TableHead>
+                  <TableHead className="w-[12%] whitespace-nowrap px-4 py-3 text-left">Service</TableHead>
+                  <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Method</TableHead>
+                  <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Status</TableHead>
+                  <TableHead className="w-[14%] px-4 py-3 text-left">Path</TableHead>
+                  <TableHead className="w-[35%] px-4 py-3 text-left">Message</TableHead>
                 </TableRow>
               </TableHeader>
             </Table>
@@ -92,57 +91,57 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
           ) : (
             <div className="flex-1 overflow-auto min-h-0">
               <div className="h-full">
-                <Table className="border-collapse w-full table-fixed">
+                <Table className="border-collapse w-full table-fixed p-0">
                   <TableBody>
                     {logs?.map((log, index) => (
-                      <React.Fragment key={log.request_id || index}>
-                        {hasMore && index === logs.length - 6 && (
-                          <tr ref={observerRef} />
-                        )}
-                        <TableRow 
-                          className="table-row cursor-pointer hover:bg-muted/50" 
-                          onClick={() => handleRowClick(log)}
-                        >
-                          <TableCell className="w-[10%] truncate">{log.request_id}</TableCell>
-                          <TableCell className="w-[120px] max-w-[120px] truncate">
-                            {new Date(log.timestamp).toLocaleDateString('en-GB', {
-                              day: '2-digit',
-                              month: '2-digit',
-                              year: '2-digit',
-                              hour: '2-digit',
-                              minute: '2-digit',
-                              second: '2-digit',
-                              hour12: false
-                            }).replace(',', '')}
-                          </TableCell>
-                          <TableCell className="w-[80px] max-w-[80px] truncate">
-                            <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-                              ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                                log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                                log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
-                                log.level === 'DEBUG' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
-                                'bg-[var(--bg-pill-default)] text-[var(--text-pill-default)]'}`
-                            }>
-                              {log.level}
-                            </span>
-                          </TableCell>
-                          <TableCell className="w-[120px] max-w-[120px] truncate">{log.service}</TableCell>
-                          <TableCell className="w-[80px] max-w-[80px] truncate">{log.request_method}</TableCell>
-                          <TableCell className="w-[14%] truncate">{log.request_path}</TableCell>
-                          <TableCell className="w-[80px] max-w-[80px] truncate">
-                            <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-                              ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                                log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                                log.status_code >= 200 ? 'bg-[var(--bg-pill-success)] text-[var(--text-pill-success)]' : 
-                                'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]'}`
-                            }>
-                              {log.status_code}
-                            </span>
-                          </TableCell>
-                          <TableCell className="w-[30%] truncate">{log.message}</TableCell>
-                        </TableRow>
-                      </React.Fragment>
+                      <TableRow 
+                        key={index}
+                        className="table-row cursor-pointer hover:bg-muted/50 p-0 m-0" 
+                        onClick={() => handleRowClick(log)}
+                      >
+                        <TableCell className="w-[15%] whitespace-nowrap px-4 py-3 text-left truncate">
+                          {new Date(log.timestamp).toLocaleDateString('en-GB', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            hour12: false
+                          }).replace(',', '')}
+                        </TableCell>
+                        <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">
+                          <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
+                            ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
+                              log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
+                              log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
+                              log.level === 'DEBUG' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
+                              'bg-[var(--bg-pill-default)] text-[var(--text-pill-default)]'}`
+                          }>
+                            {log.level}
+                          </span>
+                        </TableCell>
+                        <TableCell className="w-[12%] whitespace-nowrap px-4 py-3 text-left">{log.service}</TableCell>
+                        <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">{log.request_method}</TableCell>
+                        <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">
+                          <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
+                            ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
+                              log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
+                              log.status_code >= 200 ? 'bg-[var(--bg-pill-success)] text-[var(--text-pill-success)]' : 
+                              'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]'}`
+                          }>
+                            {log.status_code}
+                          </span>
+                        </TableCell>
+                        <TableCell className="w-[14%] truncate px-4 py-3 text-left">{log.request_path}</TableCell>
+                        <TableCell className="w-[35%] truncate px-4 py-3 text-left">{log.message}</TableCell>
+                      </TableRow>
                     ))}
+                    {hasMore && (
+                      <TableRow ref={observerRef}>
+                        <TableCell colSpan={7} className="p-0 h-4" />
+                      </TableRow>
+                    )}
                   </TableBody>
                 </Table>
               </div>
