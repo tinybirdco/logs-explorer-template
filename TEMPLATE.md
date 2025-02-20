@@ -57,7 +57,7 @@ Open the application in your browser:
 http://localhost:3000
 ```
 
-Read the [dashboard/log-analyzer/README.md](./dashboard/log-analyzer/README.md) file for more information on how to use the application and [tinybird/README.md](./tinybird/README.md) for more information on how to customize the template.
+Read the [dashboard/log-analyzer/README.md](https://github.com/tinybirdco/log-analytics-template/blob/main/dashboard/log-analyzer/README.md) file for more information on how to use the application and [tinybird/README.md](https://github.com/tinybirdco/log-analytics-template/blob/main/tinybird/README.md) for more information on how to customize the template.
 
 ## Instrumenting your application
 
@@ -88,9 +88,9 @@ await fetch(
 )
 ```
 
-The example above uses the [logs](./tinybird/datasources/logs.datasource) Data Source and schema in this template but you can use your own Data Source and schema, append logs and build your own logging analytics application.
+The example above uses the [logs](https://github.com/tinybirdco/log-analytics-template/blob/main/tinybird/datasources/logs.datasource) Data Source and schema in this template but you can use your own Data Source and schema, append logs and build your own logging analytics application.
 
-Check the [examples](./examples) folder for some examples of how to do this with different languages, services and schemas.
+Check the [examples](https://github.com/tinybirdco/log-analytics-template/tree/main/examples) folder for some examples of how to do this with different languages, services and schemas.
 
 ## Building a log aggregator with Vector
 
@@ -98,7 +98,7 @@ Vector is a log aggregator that is used to collect, process, and store logs buil
 
 You can use Vector to collect logs from different sources and send them to a Tinybird Sink.
 
-Check the [examples/vector](./examples/vector) folder for an example of how to do this with Vector.
+Check the [examples/vector](https://github.com/tinybirdco/log-analytics-template/tree/main/examples/vector) folder for an example of how to do this with Vector.
 
 ## Deployment
 
