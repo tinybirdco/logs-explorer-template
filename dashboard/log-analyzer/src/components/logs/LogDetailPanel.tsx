@@ -52,7 +52,7 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
 
         {/* Request Info */}
         <div className="px-8 mb-6 text-white">
-          <div className="flex items-center gap-4 mb-[26px]">
+          <div className="flex items-center gap-2 mb-[26px]">
             <span>{log.request_method}</span>
             <span>{log.request_path}</span>
             <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
