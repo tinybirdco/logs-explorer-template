@@ -4,6 +4,7 @@ import { LogEntry } from "@/lib/types";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 interface LogDetailPanelProps {
   log: LogEntry | null;
@@ -12,6 +13,29 @@ interface LogDetailPanelProps {
 }
 
 export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
+  const [hasShownBefore, setHasShownBefore] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [isAnimatingIn, setIsAnimatingIn] = useState(false);
+
+  useEffect(() => {
+    if (isOpen && !hasShownBefore) {
+      setIsAnimatingIn(true);
+      setHasShownBefore(true);
+      setTimeout(() => {
+        setIsAnimatingIn(false);
+      }, 300);
+    }
+  }, [isOpen, hasShownBefore]);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      setHasShownBefore(false);
+      onClose();
+    }, 300);
+  };
+
   if (!log) return null;
 
   const formatDate = (timestamp: string) => {
@@ -32,8 +56,11 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
 
   return (
     <div className={cn(
-      "fixed top-0 right-0 h-screen w-[600px] bg-[--background-secondary] transform transition-transform duration-300 ease-in-out z-50",
-      isOpen ? "translate-x-0" : "translate-x-full"
+      "fixed top-0 right-0 h-screen w-[600px] bg-[--background-secondary] z-50",
+      isAnimatingIn ? "animate-slide-in-from-right" : "",
+      isClosing ? "animate-slide-out-to-right" : "",
+      !isOpen && !isClosing ? "translate-x-full" : "translate-x-0",
+      "transition-transform duration-300 ease-in-out"
     )}>
       <div className="pt-[30px] h-full flex flex-col">
         {/* Header */}
@@ -41,7 +68,7 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
           <Button
             variant="ghost"
             className="group relative h-10 w-10 flex items-center justify-center hover:w-auto hover:py-3 hover:px-3.5 hover:bg-[#357AF6] hover:rounded-lg rounded-lg bg-white border border-[var(--border-gray)] hover:border-white hover:bg-transparent"
-            onClick={onClose}
+            onClick={handleClose}
           >
             <span className="text-sm text-white opacity-0 group-hover:opacity-100 whitespace-nowrap">
               Close
