@@ -2,7 +2,7 @@
 
 This is a template for a Logs Explorer web application. It is built with Next.js and [Tinybird](https://tinybird.co).
 
-You can use this template to bootstrap a mult-tenant, user-facing logs explorer for any software project. Fork it and make it your own!
+Use this template to bootstrap a multi-tenant, user-facing logs explorer for any software project. Fork it and make it your own!
 
 ## Quick Start
 
@@ -20,11 +20,12 @@ Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source or str
 
 ## Local Development
 
-Get started by forking the repository and then customizing it to your needs.
+Get started by forking the [GitHub repository](https://github.com/tinybirdco/logs-explorer-template) and then customizing it to your needs.
 
 Start Tinybird locally:
 
 ```bash
+curl -LsSf https://tbrd.co/fwd | sh
 cd tinybird
 tb local start
 tb login
