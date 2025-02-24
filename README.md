@@ -18,6 +18,13 @@ Deploy the Tinybird and Next.js to the cloud to get started quickly.
 
 Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source or stream some mock data.
 
+Configure Environment Variables and you are ready to go:
+
+```bash
+NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_ADMIN_TOKEN>
+NEXT_PUBLIC_TINYBIRD_API_URL=<YOUR_TINYBIRD_REGION_HOST>
+```
+
 ## Local Development
 
 Get started by forking the [GitHub repository](https://github.com/tinybirdco/logs-explorer-template) and then customizing it to your needs.

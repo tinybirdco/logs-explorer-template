@@ -15,7 +15,7 @@ Deploy the Tinybird project to the cloud:
 
 ```bash
 cd tinybird
-tb --cloud deploy --auto --wait
+tb --cloud deploy
 ```
 
 ## Customization
