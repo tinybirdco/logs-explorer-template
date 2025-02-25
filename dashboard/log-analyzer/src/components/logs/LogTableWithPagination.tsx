@@ -97,7 +97,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         setPage(0);
         setHasMore(true);
       } catch (error) {
-        setError(error instanceof Error ? error.message : 'An error occurred while loading logs');
+        setError('No logs found');
         setHasMore(false);
       } finally {
         setIsLoading(false);
