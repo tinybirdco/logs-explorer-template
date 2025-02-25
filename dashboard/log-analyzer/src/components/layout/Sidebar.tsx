@@ -26,7 +26,7 @@ export default function Sidebar() {
     return () => window.removeEventListener('refresh-filters', handleRefresh);
   }, []);
 
-  // Add Konami code detection
+  // Keep the Konami code effect
   useEffect(() => {
     const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
     let konamiIndex = 0;
@@ -73,8 +73,15 @@ export default function Sidebar() {
     setIsCollapsed(true);
   };
 
+  const handleSocialClick = (callback: () => void) => {
+    return () => {
+      setShowSplashCursor(true);
+      callback();
+    };
+  };
+
   const handleProductHunt = () => {
-    window.open('https://www.producthunt.com/posts/habitgo', '_blank');
+    window.open('https://www.producthunt.com/posts/log-analyzer?utm_source=badge-featured', '_blank');
   };
 
   const handleGitHub = () => {
@@ -181,7 +188,7 @@ export default function Sidebar() {
               href="https://www.producthunt.com/posts/habitgo?utm_source=badge-featured"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleProductHunt}
+              onClick={handleSocialClick(handleProductHunt)}
               className="block w-full"
             >
               <img 
@@ -195,7 +202,7 @@ export default function Sidebar() {
               href="https://github.com/tinybirdco/logs-explorer-template/fork"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleGitHub}
+              onClick={handleSocialClick(handleGitHub)}
               className="block w-full"
             >
               <img 
@@ -209,7 +216,7 @@ export default function Sidebar() {
               href="https://news.ycombinator.com/item?id=yourpostid"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleShowHN}
+              onClick={handleSocialClick(handleShowHN)}
               className="flex items-center justify-center w-full bg-[#ff6600] text-white py-1 px-2 rounded hover:bg-[#ff8533] transition-colors"
             >
               <span className="text-sm font-medium">Show HN</span>
