@@ -96,7 +96,8 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         setLogs(response.data || []);
         setPage(0);
         setHasMore(true);
-      } catch () {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
         setError('No logs found');
         setHasMore(false);
       } finally {
