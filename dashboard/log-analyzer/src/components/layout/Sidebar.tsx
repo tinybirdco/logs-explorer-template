@@ -12,6 +12,7 @@ export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   const [showSplashCursor, setShowSplashCursor] = useState(false);
+  const [clickedButtons, setClickedButtons] = useState({ github: false, productHunt: false });
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -73,9 +74,21 @@ export default function Sidebar() {
     setIsCollapsed(true);
   };
 
-  const handleSocialClick = (callback: () => void) => {
+  const handleSocialClick = (type: 'github' | 'productHunt', callback: () => void) => {
     return () => {
-      setShowSplashCursor(true);
+      const newClickedButtons = { ...clickedButtons, [type]: true };
+      setClickedButtons(newClickedButtons);
+      
+      // Only show splash if both buttons have been clicked
+      if (newClickedButtons.github && newClickedButtons.productHunt) {
+        setShowSplashCursor(true);
+        setTimeout(() => {
+          setShowSplashCursor(false);
+          // Reset the clicks after animation
+          setClickedButtons({ github: false, productHunt: false });
+        }, 30000);
+      }
+      
       callback();
     };
   };
@@ -188,7 +201,7 @@ export default function Sidebar() {
               href="https://www.producthunt.com/posts/logs-explorer-template-by-tinybird?utm_source=badge-featured"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleSocialClick(handleProductHunt)}
+              onClick={handleSocialClick('productHunt', handleProductHunt)}
               className="block w-full"
             >
               <img 
@@ -202,7 +215,7 @@ export default function Sidebar() {
               href="https://github.com/tinybirdco/logs-explorer-template/fork"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleSocialClick(handleGitHub)}
+              onClick={handleSocialClick('github', handleGitHub)}
               className="block w-full"
             >
               <img 
