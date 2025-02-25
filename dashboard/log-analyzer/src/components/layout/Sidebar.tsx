@@ -212,7 +212,7 @@ export default function Sidebar() {
               />
             </a>
             
-            <a 
+            {/* <a 
               href="https://news.ycombinator.com/item?id=yourpostid"
               target="_blank"
               rel="noopener noreferrer"
@@ -220,7 +220,7 @@ export default function Sidebar() {
               className="flex items-center justify-center w-full bg-[#ff6600] text-white py-1 px-2 rounded hover:bg-[#ff8533] transition-colors"
             >
               <span className="text-sm font-medium">Show HN</span>
-            </a>
+            </a> */}
           </div>
         </div>
       )}
