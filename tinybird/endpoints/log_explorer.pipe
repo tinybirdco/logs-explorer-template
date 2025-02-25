@@ -1,3 +1,5 @@
+TOKEN read_pipes READ
+
 NODE cummulative_rows
 DESCRIPTION >
     Filter data and calculate the running sum of rows in the result set to determine the time range.

@@ -1,3 +1,5 @@
+TOKEN read_pipes READ
+
 DESCRIPTION >
     This pipe is used to have a counter for each category of each dimension
     
