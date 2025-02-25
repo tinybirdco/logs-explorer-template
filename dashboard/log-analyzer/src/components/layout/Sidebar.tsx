@@ -88,9 +88,9 @@ export default function Sidebar() {
     window.open('https://github.com/tinybirdco/logs-explorer-template/fork', '_blank');
   };
 
-  const handleShowHN = () => {
-    window.open('https://news.ycombinator.com/item?id=yourpostid', '_blank');
-  };
+  // const handleShowHN = () => {
+  //   window.open('https://news.ycombinator.com/item?id=yourpostid', '_blank');
+  // };
 
   return (
     <aside className={cn("relative transition-all duration-300 ease-in-out p-6 [&_*]:cursor-pointer",
