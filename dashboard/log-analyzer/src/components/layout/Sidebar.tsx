@@ -81,7 +81,7 @@ export default function Sidebar() {
   };
 
   const handleProductHunt = () => {
-    window.open('https://www.producthunt.com/posts/log-analyzer?utm_source=badge-featured', '_blank');
+    window.open('https://www.producthunt.com/posts/logs-explorer-template-by-tinybird?utm_source=badge-featured', '_blank');
   };
 
   const handleGitHub = () => {
@@ -185,15 +185,15 @@ export default function Sidebar() {
           {/* Updated bottom section */}
           <div className="p-6 border-t border-gray-200 space-y-3">
             <a 
-              href="https://www.producthunt.com/posts/habitgo?utm_source=badge-featured"
+              href="https://www.producthunt.com/posts/logs-explorer-template-by-tinybird?utm_source=badge-featured"
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleSocialClick(handleProductHunt)}
               className="block w-full"
             >
               <img 
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=habitgo&theme=light" 
-                alt="Log Analyzer - Your product description | Product Hunt" 
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=logs-explorer-template-by-tinybird&theme=light" 
+                alt="Logs Explorer Template by Tinybird | Product Hunt" 
                 className="w-full"
               />
             </a>
