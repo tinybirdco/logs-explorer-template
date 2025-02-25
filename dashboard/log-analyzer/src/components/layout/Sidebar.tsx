@@ -199,7 +199,7 @@ export default function Sidebar() {
               className="block w-full"
             >
               <img 
-                src="https://img.shields.io/badge/Fork_on-GitHub-lightgrey?style=for-the-badge&logo=github" 
+                src="https://img.shields.io/github/stars/tinybirdco/logs-explorer-template?style=for-the-badge&logo=github&label=Fork%20on%20GitHub&logoColor=white" 
                 alt="Fork on GitHub"
                 className="w-full"
               />
