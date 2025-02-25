@@ -96,7 +96,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         setLogs(response.data || []);
         setPage(0);
         setHasMore(true);
-      } catch (error) {
+      } catch () {
         setError('No logs found');
         setHasMore(false);
       } finally {
