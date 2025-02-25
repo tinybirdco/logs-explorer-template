@@ -1,3 +1,5 @@
+TOKEN read_pipes READ
+
 DESCRIPTION >
     Analyze logs with filtering capabilities by time range, service, level and environment
 
@@ -49,7 +51,7 @@ SQL >
         AND user_agent in {{Array(user_agent)}}
     {% end %}
     {% if defined(message) and message != '' %}
-        AND multiSearchAnyCaseInsensitive(message, message_patterns)
+        AND multiSearchAnyCaseInsensitive(message, {{split_to_array(String(message, ''), separator='|')}})
     {% end %}
     ORDER BY 
     {% if defined(sort_by) and sort_by != '' %}

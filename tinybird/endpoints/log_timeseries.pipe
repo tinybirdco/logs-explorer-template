@@ -1,3 +1,5 @@
+TOKEN read_pipes READ
+
 NODE day_intervals
 SQL >
 
