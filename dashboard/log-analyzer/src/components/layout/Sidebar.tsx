@@ -74,7 +74,7 @@ export default function Sidebar() {
   };
 
   const handleProductHunt = () => {
-    window.open('https://www.producthunt.com/posts/log-analyzer', '_blank');
+    window.open('https://www.producthunt.com/posts/habitgo', '_blank');
   };
 
   const handleGitHub = () => {
@@ -178,7 +178,7 @@ export default function Sidebar() {
           {/* Updated bottom section */}
           <div className="p-6 border-t border-gray-200 space-y-3">
             <a 
-              href="https://www.producthunt.com/posts/log-analyzer?utm_source=badge-featured"
+              href="https://www.producthunt.com/posts/habitgo?utm_source=badge-featured"
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleProductHunt}
