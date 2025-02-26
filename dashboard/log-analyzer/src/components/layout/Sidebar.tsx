@@ -13,6 +13,7 @@ export default function Sidebar() {
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   const [showSplashCursor, setShowSplashCursor] = useState(false);
   const [clickedButtons, setClickedButtons] = useState({ github: false, productHunt: false });
+  const [cacheBuster, setCacheBuster] = useState(() => Date.now());
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -49,6 +50,11 @@ export default function Sidebar() {
 
     window.addEventListener('keydown', handleKeydown);
     return () => window.removeEventListener('keydown', handleKeydown);
+  }, []);
+
+  // Add this effect to update the cache buster on page refresh
+  useEffect(() => {
+    setCacheBuster(Date.now());
   }, []);
 
   // Update URL with new filters
@@ -205,7 +211,7 @@ export default function Sidebar() {
               className="block w-full"
             >
               <img 
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=logs-explorer-template-by-tinybird&theme=light" 
+                src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=logs-explorer-template-by-tinybird&theme=light&cache=${cacheBuster}`}
                 alt="Logs Explorer Template by Tinybird | Product Hunt" 
                 className="w-full"
               />
@@ -219,7 +225,7 @@ export default function Sidebar() {
               className="block w-full"
             >
               <img 
-                src="https://img.shields.io/github/stars/tinybirdco/logs-explorer-template?style=for-the-badge&logo=github&label=Fork%20on%20GitHub&logoColor=white" 
+                src={`https://img.shields.io/github/stars/tinybirdco/logs-explorer-template?style=for-the-badge&logo=github&label=Fork%20on%20GitHub&logoColor=white&cache=${cacheBuster}`}
                 alt="Fork on GitHub"
                 className="w-full"
               />
