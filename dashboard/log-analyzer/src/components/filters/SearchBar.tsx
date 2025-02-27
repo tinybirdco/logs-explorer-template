@@ -27,7 +27,13 @@ export function SearchBar() {
         request_method: searchParams.get('request_method')?.split(',').filter(Boolean) || undefined,
         status_code: searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined,
         request_path: searchParams.get('request_path')?.split(',').filter(Boolean) || undefined,
-        user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined,
+        host: searchParams.get('host')?.split(',').filter(Boolean) || undefined,
+        path: searchParams.get('path')?.split(',').filter(Boolean) || undefined,
+        resource: searchParams.get('resource')?.split(',').filter(Boolean) || undefined,
+        request_type: searchParams.get('request_type')?.split(',').filter(Boolean) || undefined,
+        vercel_cache: searchParams.get('vercel_cache')?.split(',').filter(Boolean) || undefined,
+        branch: searchParams.get('branch')?.split(',').filter(Boolean) || undefined,
+        deployment_id: searchParams.get('deployment_id')?.split(',').filter(Boolean) || undefined,
       };
 
       const totalCount = await getTotalRowCount(params);

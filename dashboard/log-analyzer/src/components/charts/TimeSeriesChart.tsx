@@ -20,7 +20,13 @@ export function TimeSeriesChart(params: {
   end_date?: string
   message?: string
   request_path?: string[]
-  user_agent?: string[]
+  host?: string[]
+  path?: string[]
+  resource?: string[]
+  request_type?: string[]
+  vercel_cache?: string[]
+  branch?: string[]
+  deployment_id?: string[]
   status_code?: string[]
   service?: string[]
   level?: string[]
@@ -36,7 +42,13 @@ export function TimeSeriesChart(params: {
             end_date: params.end_date ?? '',
             message: params.message ?? '',
             request_path: params.request_path?.join(',') ?? '',
-            user_agent: params.user_agent?.join(',') ?? '',
+            host: params.host?.join(',') ?? '',
+            path: params.path?.join(',') ?? '',
+            resource: params.resource?.join(',') ?? '',
+            request_type: params.request_type?.join(',') ?? '',
+            vercel_cache: params.vercel_cache?.join(',') ?? '',
+            branch: params.branch?.join(',') ?? '',
+            deployment_id: params.deployment_id?.join(',') ?? '',
             status_code: params.status_code?.join(',') ?? '',   
             service: params.service?.join(',') ?? '',
             level: params.level?.join(',') ?? '',

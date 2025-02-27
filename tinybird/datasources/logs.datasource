@@ -3,18 +3,26 @@ DESCRIPTION >
     Raw logs datasource to store application logs
 
 SCHEMA >
-    `timestamp` DateTime64(3) `json:$.timestamp`,
-    `level` LowCardinality(String) `json:$.level`,
-    `service` LowCardinality(String) `json:$.service`,
-    `message` String `json:$.message`,
-    `request_id` String `json:$.request_id`,
-    `environment` LowCardinality(String) `json:$.environment`,
-    `status_code` UInt16 `json:$.status_code`,
-    `response_time` UInt32 `json:$.response_time`,
-    `request_method` LowCardinality(String) `json:$.request_method`,
-    `request_path` String `json:$.request_path`,
-    `host` LowCardinality(String) `json:$.host`,
-    `user_agent` LowCardinality(String) `json:$.user_agent`
+    `timestamp` DateTime64(3) `json:$.timestamp` DEFAULT now(),
+    `proxy_timestamp` DateTime64(3) `json:$.proxy_timestamp` DEFAULT now(),
+    `level` LowCardinality(String) `json:$.level` DEFAULT '',
+    `service` LowCardinality(String) `json:$.projectName` DEFAULT '',
+    `source` LowCardinality(String) `json:$.source` DEFAULT '',
+    `message` String `json:$.message` DEFAULT '',
+    `request_id` String `json:$.requestId` DEFAULT '',
+    `environment` LowCardinality(String) `json:$.environment` DEFAULT '',
+    `status_code` UInt16 `json:$.statusCode` DEFAULT 0,
+    `request_method` LowCardinality(String) `json:$.proxy_method` DEFAULT '',
+    `request_path` String `json:$.proxy_path` DEFAULT '',
+    `path` String `json:$.path` DEFAULT '',
+    `resource` String `json:$.source` DEFAULT '',
+    `request_type` String `json:$.type` DEFAULT '',
+    `host` LowCardinality(String) `json:$.host` DEFAULT '',
+    `proxy` String `json:$.proxy` DEFAULT '{}',
+    `vercel_cache` LowCardinality(String) `json:$.proxy_vercelCache` DEFAULT '',
+    `branch` LowCardinality(String) `json:$.branch` DEFAULT '',
+    `execution_region` LowCardinality(String) `json:$.executionRegion` DEFAULT '',
+    `deployment_id` String `json:$.deploymentId` DEFAULT ''
     
 
 ENGINE "MergeTree"

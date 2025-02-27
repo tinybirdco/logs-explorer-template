@@ -9,8 +9,8 @@ SQL >
     {% if not defined(column_name) %}
         {{ error('column_name (String) query param is required') }}
     {% end %}
-    {% if defined(column_name) and column_name not in ['level', 'status_code', 'service', 'environment', 'request_method', 'request_path', 'host', 'user_agent'] %}
-        {{ error('column_name (String) query param must be one of the following: level, status_code, service, environment, request_method, request_path, host, user_agent') }}
+    {% if defined(column_name) and column_name not in ['level', 'status_code', 'service', 'environment', 'request_method', 'request_path', 'host', 'path', 'resource', 'request_type', 'vercel_cache', 'branch', 'deployment_id'] %}
+        {{ error('column_name (String) query param must be one of the following: level, status_code, service, environment, request_method, request_path, host, path, resource, request_type, vercel_cache, branch, deployment_id') }}
     {% end %}
     SELECT
         toString({{column(column_name, 'level')}}) as category,
@@ -53,8 +53,26 @@ SQL >
     {% if defined(request_path) and request_path != [''] %}
         AND request_path in {{Array(request_path)}}
     {% end %}
-    {% if defined(user_agent) and user_agent != [''] %}
-        AND user_agent in {{Array(user_agent)}}
+    {% if defined(host) and host != [''] %}
+        AND host in {{Array(host)}}
+    {% end %}
+    {% if defined(path) and path != [''] %}
+        AND path in {{Array(path)}}
+    {% end %}
+    {% if defined(resource) and resource != [''] %}
+        AND resource in {{Array(resource)}}
+    {% end %}
+    {% if defined(request_type) and request_type != [''] %}
+        AND request_type in {{Array(request_type)}}
+    {% end %}
+    {% if defined(vercel_cache) and vercel_cache != [''] %}
+        AND vercel_cache in {{Array(vercel_cache)}}
+    {% end %}
+    {% if defined(branch) and branch != [''] %}
+        AND branch in {{Array(branch)}}
+    {% end %}
+    {% if defined(deployment_id) and deployment_id != [''] %}
+        AND deployment_id in {{Array(deployment_id)}}
     {% end %}
     {% if defined(start_date) and defined(end_date) and date_diff_in_hours(start_date, end_date) < 10 %}
         {% if defined(message) and message != '' %}

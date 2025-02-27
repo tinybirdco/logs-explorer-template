@@ -28,7 +28,13 @@ export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
     request_method: searchParams.get('request_method')?.split(',').filter(Boolean),
     status_code: searchParams.get('status_code')?.split(',').filter(Boolean),
     request_path: searchParams.get('request_path')?.split(',').filter(Boolean),
-    user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean),
+    host: searchParams.get('host')?.split(',').filter(Boolean),
+    path: searchParams.get('path')?.split(',').filter(Boolean),
+    resource: searchParams.get('resource')?.split(',').filter(Boolean),
+    request_type: searchParams.get('request_type')?.split(',').filter(Boolean),
+    vercel_cache: searchParams.get('vercel_cache')?.split(',').filter(Boolean),
+    branch: searchParams.get('branch')?.split(',').filter(Boolean),
+    deployment_id: searchParams.get('deployment_id')?.split(',').filter(Boolean),
     message: searchParams.get('message') ?? '',
   };
 

@@ -133,6 +133,62 @@ export default function Sidebar() {
                 shouldRefresh={refreshTrigger}
               />
 
+              {/* Hosts */}
+              <GenericCounter 
+                columnName="host"
+                title="Hosts"
+                onSelectionChange={createFilterHandler('host')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Paths */}
+              <GenericCounter 
+                columnName="path"
+                title="Paths"
+                onSelectionChange={createFilterHandler('path')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Resources */}
+              <GenericCounter 
+                columnName="resource"
+                title="Resources"
+                onSelectionChange={createFilterHandler('resource')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Request Types */}
+              <GenericCounter 
+                columnName="request_type"
+                title="Request Types"
+                onSelectionChange={createFilterHandler('request_type')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Vercel Cache */}
+              <GenericCounter 
+                columnName="vercel_cache"
+                title="Vercel Cache"
+                onSelectionChange={createFilterHandler('vercel_cache')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Branches */}
+              <GenericCounter 
+                columnName="branch"
+                title="Branches"
+                onSelectionChange={createFilterHandler('branch')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Deployment IDs */}
+              <GenericCounter 
+                columnName="deployment_id"
+                title="Deployment IDs"
+                onSelectionChange={createFilterHandler('deployment_id')}
+                shouldRefresh={refreshTrigger}
+              />
+
             </div>
           </div>
         </div>

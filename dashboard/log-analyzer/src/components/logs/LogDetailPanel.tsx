@@ -50,9 +50,9 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
     });
   };
 
-  const formatTime = (ms: number) => {
-    return `${ms}ms`;
-  };
+  // const formatTime = (ms: number) => {
+  //   return `${ms}ms`;
+  // };
 
   return (
     <div className={cn(
@@ -124,7 +124,7 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
             {/* User Agent */}
             <div className="flex justify-between items-center">
               <span className="text-sm text-[--text-secondary]">User Agent</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.user_agent}</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.proxy ? JSON.parse(log.proxy).userAgent : ''}</span>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
         <div className="mx-4 mt-6 bg-white rounded-lg">
           <div className="px-4 py-[16px]">
             <div className="text-sm text-[--text-secondary] whitespace-pre-wrap break-words">
-              {log.message}
+              {log.message ? log.message : log.proxy ? log.proxy : ''}
             </div>
           </div>
         </div>
@@ -152,13 +152,13 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
         </div>
 
         <div className="px-8 mt-6 text-white">
-          <div className="flex items-center justify-between text-sm">
+          {/* <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 rounded-full bg-[#27F795] border-2 border-white"></div>
               <span>Request finished</span>
             </div>
             <span>{formatTime(log.response_time)}</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

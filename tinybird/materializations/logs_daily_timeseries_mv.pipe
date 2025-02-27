@@ -11,11 +11,15 @@ SQL >
         request_method,
         status_code,
         request_path,
-        user_agent,
-        countStateIf(level = 'ERROR') as error_count,
-        countState() as total_requests,
-        maxState(toFloat64(response_time)) as response_time_max,
-        avgState(toFloat64(response_time)) as response_time_avg
+        host,
+        path,
+        resource,
+        request_type,
+        vercel_cache,
+        branch,
+        deployment_id,
+        countStateIf(level = 'error') as error_count,
+        countState() as total_requests
     FROM logs
     GROUP BY
         date,
@@ -25,7 +29,13 @@ SQL >
         request_method,
         status_code,
         request_path,
-        user_agent
+        host,
+        path,
+        resource,
+        request_type,
+        vercel_cache,
+        branch,
+        deployment_id
 
 TYPE materialized
 DATASOURCE logs_daily_timeseries

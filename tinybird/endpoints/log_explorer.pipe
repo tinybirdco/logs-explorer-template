@@ -110,8 +110,15 @@ SQL >
         request_path,
         level,
         message,
-        user_agent,
-        response_time,
+        host,
+        path,
+        resource,
+        request_type,
+        vercel_cache,
+        branch,
+        deployment_id,
+        proxy,
+        execution_region,
         environment
     FROM logs
     WHERE 1=1

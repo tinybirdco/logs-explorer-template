@@ -65,7 +65,13 @@ export function GenericCounter({
   const requestMethod = searchParams.get('request_method')?.split(',').filter(Boolean) || undefined;
   const statusCode = searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined;
   const requestPath = searchParams.get('request_path')?.split(',').filter(Boolean) || undefined;
-  const userAgent = searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined;
+  const host = searchParams.get('host')?.split(',').filter(Boolean) || undefined;
+  const path = searchParams.get('path')?.split(',').filter(Boolean) || undefined;
+  const resource = searchParams.get('resource')?.split(',').filter(Boolean) || undefined;
+  const requestType = searchParams.get('request_type')?.split(',').filter(Boolean) || undefined;
+  const vercelCache = searchParams.get('vercel_cache')?.split(',').filter(Boolean) || undefined;
+  const branch = searchParams.get('branch')?.split(',').filter(Boolean) || undefined;
+  const deploymentId = searchParams.get('deployment_id')?.split(',').filter(Boolean) || undefined;
 
   useDefaultDateRange();
 
@@ -98,7 +104,13 @@ export function GenericCounter({
           request_method: columnName !== 'request_method' ? requestMethod : undefined,
           status_code: columnName !== 'status_code' ? statusCode : undefined,
           request_path: columnName !== 'request_path' ? requestPath : undefined,
-          user_agent: columnName !== 'user_agent' ? userAgent : undefined,
+          host: columnName !== 'host' ? host : undefined,
+          path: columnName !== 'path' ? path : undefined,
+          resource: columnName !== 'resource' ? resource : undefined,
+          request_type: columnName !== 'request_type' ? requestType : undefined,
+          vercel_cache: columnName !== 'vercel_cache' ? vercelCache : undefined,
+          branch: columnName !== 'branch' ? branch : undefined,
+          deployment_id: columnName !== 'deployment_id' ? deploymentId : undefined,
         };
 
         const response = await genericCounterApi(params);

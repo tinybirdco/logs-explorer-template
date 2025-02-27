@@ -15,7 +15,13 @@ export async function getTotalRowCount(params: {
   request_method?: string[];
   status_code?: number[];
   request_path?: string[];
-  user_agent?: string[];
+  host?: string[];
+  path?: string[];
+  resource?: string[];
+  request_type?: string[];
+  vercel_cache?: string[];
+  branch?: string[];
+  deployment_id?: string[];
 }) {
   try {
     const response = await genericCounterApi({
