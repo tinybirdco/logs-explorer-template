@@ -3,22 +3,19 @@ DESCRIPTION >
     Raw logs datasource to store application logs
 
 SCHEMA >
-    `timestamp` DateTime64(3) `json:$.timestamp`,
-    `level` LowCardinality(String) `json:$.level`,
-    `service` LowCardinality(String) `json:$.service`,
-    `message` String `json:$.message`,
-    `request_id` String `json:$.request_id`,
-    `environment` LowCardinality(String) `json:$.environment`,
-    `status_code` UInt16 `json:$.status_code`,
-    `response_time` UInt32 `json:$.response_time`,
-    `request_method` LowCardinality(String) `json:$.request_method`,
-    `request_path` String `json:$.request_path`,
-    `host` LowCardinality(String) `json:$.host`,
-    `user_agent` LowCardinality(String) `json:$.user_agent`
-    
+    `timestamp` DateTime64(3) `json:$.data.date` DEFAULT now(),
+    `log_id` String `json:$.log_id` DEFAULT '',
+    `tenant_name` String `json:$.data.tenant_name` DEFAULT '',
+    `client_name` String `json:$.data.client_name` DEFAULT '',
+    `user_name` String `json:$.data.user_name` DEFAULT '',
+    `user_agent` String `json:$.data.user_agent` DEFAULT '',
+    `hostname` String `json:$.data.hostname` DEFAULT '',
+    `description` String `json:$.data.description` DEFAULT '',
+    `connection` String `json:$.data.connection` DEFAULT '',
+    `strategy` String `json:$.data.strategy` DEFAULT '',
+    `strategy_type` String `json:$.data.strategy_type` DEFAULT '',
+    `data` String `json:$.data` DEFAULT '{}'
 
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
-ENGINE_SORTING_KEY "timestamp, environment, service, level"
-ENGINE_TTL "toDateTime(timestamp) + INTERVAL 180 DAY"
-        
+ENGINE_SORTING_KEY "timestamp, tenant_name"

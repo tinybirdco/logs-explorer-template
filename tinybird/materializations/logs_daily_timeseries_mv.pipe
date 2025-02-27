@@ -5,27 +5,29 @@ NODE daily_metrics
 SQL >
     SELECT
         toStartOfDay(timestamp) as date,
-        service,
-        level,
-        environment,
-        request_method,
-        status_code,
-        request_path,
+        tenant_name,
+        client_name,
+        user_name,
         user_agent,
-        countStateIf(level = 'ERROR') as error_count,
-        countState() as total_requests,
-        maxState(toFloat64(response_time)) as response_time_max,
-        avgState(toFloat64(response_time)) as response_time_avg
+        hostname,
+        description,
+        connection,
+        strategy,
+        strategy_type,
+        countStateIf(description ilike '%ailed%' or description ilike '%error%' or description ilike '%exception%' or description ilike '%fail%' or description ilike '%error%' or description ilike '%exception%' or description ilike '%fail%') as error_count,
+        countState() as total_requests
     FROM logs
     GROUP BY
         date,
-        service,
-        level,
-        environment,
-        request_method,
-        status_code,
-        request_path,
-        user_agent
+        tenant_name,
+        client_name,
+        user_name,
+        user_agent,
+        hostname,
+        description,
+        connection,
+        strategy,
+        strategy_type
 
 TYPE materialized
 DATASOURCE logs_daily_timeseries

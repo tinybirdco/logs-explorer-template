@@ -80,16 +80,8 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
         {/* Request Info */}
         <div className="px-8 mb-6 text-white">
           <div className="flex items-center gap-2 mb-[26px]">
-            <span>{log.request_method}</span>
-            <span>{log.request_path}</span>
-            <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-              ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                log.status_code >= 200 ? 'bg-[var(--bg-pill-success)] text-[var(--text-pill-success)]' : 
-                'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]'}`
-            }>
-              {log.status_code}
-            </span>
+            <span>{log.tenant_name}</span>
+            <span>{log.user_name}</span>
           </div>
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2">
@@ -105,60 +97,60 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
           <div className="px-4 py-[16px] space-y-[24px]">
             {/* Request ID */}
             <div className="flex justify-between items-center border-b border-[--table-separator] pb-[16px]">
-              <span className="text-sm text-[--text-secondary]">Request ID</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.request_id}</span>
+              <span className="text-sm text-[--text-secondary]">Log ID</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.log_id}</span>
             </div>
 
-            {/* Path */}
             <div className="flex justify-between items-center border-b border-[--table-separator] pb-[16px]">
-              <span className="text-sm text-[--text-secondary]">Path</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.request_path}</span>
+              <span className="text-sm text-[--text-secondary]">User Name</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.user_name}</span>
             </div>
-
-            {/* Host */}
             <div className="flex justify-between items-center border-b border-[--table-separator] pb-[16px]">
-              <span className="text-sm text-[--text-secondary]">Host</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">app.tinybird.co</span>
+              <span className="text-sm text-[--text-secondary]">User Agent</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.user_agent}</span>
             </div>
 
             {/* User Agent */}
             <div className="flex justify-between items-center">
-              <span className="text-sm text-[--text-secondary]">User Agent</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.user_agent}</span>
+              <span className="text-sm text-[--text-secondary]">Host</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.hostname}</span>
             </div>
           </div>
         </div>
-
         {/* Log Message Card */}
         <div className="mx-4 mt-6 bg-white rounded-lg">
           <div className="px-4 py-[16px]">
             <div className="text-sm text-[--text-secondary] whitespace-pre-wrap break-words">
-              {log.message}
+              {log.description}
             </div>
           </div>
         </div>
-
+        <div className="mx-4 mt-6 bg-white rounded-lg">
+          <div className="px-4 py-[16px]">
+            <div className="text-sm text-[--text-secondary] whitespace-pre-wrap break-words">
+              {log.data}
+            </div>
+          </div>
+        </div>
         <div className="mx-4 mt-6 bg-white rounded-lg p-2">
           <div className="px-4 py-[16px] space-y-[24px]">
             <div className="flex justify-between items-center border-b border-[--table-separator] pb-[16px]">
-              <span className="text-sm text-[--text-secondary]">Environment</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.environment}</span>
+              <span className="text-sm text-[--text-secondary]">Connection</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.connection}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-[--text-secondary]">Service</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.service}</span>
+              <span className="text-sm text-[--text-secondary]">Strategy</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.strategy}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-[--text-secondary]">Strategy Type</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.strategy_type}</span>
             </div>
           </div>
         </div>
 
         <div className="px-8 mt-6 text-white">
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-[#27F795] border-2 border-white"></div>
-              <span>Request finished</span>
-            </div>
-            <span>{formatTime(log.response_time)}</span>
-          </div>
+
         </div>
       </div>
     </div>

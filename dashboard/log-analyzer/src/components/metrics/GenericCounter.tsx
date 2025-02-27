@@ -59,13 +59,15 @@ export function GenericCounter({
   const [isOpen, setIsOpen] = useState(startOpen);
   const initializedRef = useRef(false);
   const currentParams = searchParams.get(columnName);
-  const service = searchParams.get('service')?.split(',').filter(Boolean) || undefined;
-  const level = searchParams.get('level')?.split(',').filter(Boolean) || undefined;
-  const environment = searchParams.get('environment')?.split(',').filter(Boolean) || undefined;
-  const requestMethod = searchParams.get('request_method')?.split(',').filter(Boolean) || undefined;
-  const statusCode = searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined;
-  const requestPath = searchParams.get('request_path')?.split(',').filter(Boolean) || undefined;
+  const tenantName = searchParams.get('tenant_name')?.split(',').filter(Boolean) || undefined;
+  const clientName = searchParams.get('client_name')?.split(',').filter(Boolean) || undefined;
+  const userName = searchParams.get('user_name')?.split(',').filter(Boolean) || undefined;
   const userAgent = searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined;
+  const hostname = searchParams.get('hostname')?.split(',').filter(Boolean) || undefined;
+  const description = searchParams.get('description')?.split(',').filter(Boolean) || undefined;
+  const connection = searchParams.get('connection')?.split(',').filter(Boolean) || undefined;
+  const strategy = searchParams.get('strategy')?.split(',').filter(Boolean) || undefined;
+  const strategyType = searchParams.get('strategy_type')?.split(',').filter(Boolean) || undefined;
 
   useDefaultDateRange();
 
@@ -92,13 +94,15 @@ export function GenericCounter({
           column_name: columnName,
           start_date: start_date || format(defaultStartDate, 'yyyy-MM-dd HH:mm:ss'),
           end_date: end_date || format(defaultEndDate, 'yyyy-MM-dd HH:mm:ss'),
-          service: columnName !== 'service' ? service : undefined,
-          level: columnName !== 'level' ? level : undefined,
-          environment: columnName !== 'environment' ? environment : undefined,
-          request_method: columnName !== 'request_method' ? requestMethod : undefined,
-          status_code: columnName !== 'status_code' ? statusCode : undefined,
-          request_path: columnName !== 'request_path' ? requestPath : undefined,
+          tenant_name: columnName !== 'tenant_name' ? tenantName : undefined,
+          client_name: columnName !== 'client_name' ? clientName : undefined,
+          user_name: columnName !== 'user_name' ? userName : undefined,
           user_agent: columnName !== 'user_agent' ? userAgent : undefined,
+          hostname: columnName !== 'hostname' ? hostname : undefined,
+          description: columnName !== 'description' ? description : undefined,
+          connection: columnName !== 'connection' ? connection : undefined,
+          strategy: columnName !== 'strategy' ? strategy : undefined,
+          strategy_type: columnName !== 'strategy_type' ? strategyType : undefined,
         };
 
         const response = await genericCounterApi(params);

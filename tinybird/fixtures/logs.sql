@@ -1,0 +1,25 @@
+
+SELECT
+    now() - rand() % 86400 as timestamp,
+    concat('log_', lower(hex(randomString(8)))) as log_id,
+    ['tenant1', 'tenant2', 'tenant3', 'tenant4'][1 + rand() % 4] as tenant_name,
+    ['client_a', 'client_b', 'client_c'][1 + rand() % 3] as client_name,
+    concat('user_', toString(rand() % 1000)) as user_name,
+    ['Mozilla/5.0', 'Chrome/91.0', 'Safari/14.0'][1 + rand() % 3] as user_agent,
+    concat('host-', toString(rand() % 100), '.example.com') as hostname,
+    ['Login successful', 'Password changed', 'Profile updated', 'Session expired'][1 + rand() % 4] as description,
+    ['database', 'api', 'oauth2'][1 + rand() % 3] as connection,
+    ['email', 'sms', 'oauth'][1 + rand() % 3] as strategy,
+    ['authentication', 'authorization', 'verification'][1 + rand() % 3] as strategy_type,
+    cast(concat('{"date":"', toString(now() - rand() % 86400), 
+        '","tenant_name":"', ['tenant1', 'tenant2', 'tenant3', 'tenant4'][1 + rand() % 4],
+        '","client_name":"', ['client_a', 'client_b', 'client_c'][1 + rand() % 3],
+        '","user_name":"user_', toString(rand() % 1000),
+        '","user_agent":"', ['Mozilla/5.0', 'Chrome/91.0', 'Safari/14.0'][1 + rand() % 3],
+        '","hostname":"host-', toString(rand() % 100), '.example.com',
+        '","description":"', ['Login successful', 'Password changed', 'Profile updated', 'Session expired'][1 + rand() % 4],
+        '","connection":"', ['database', 'api', 'oauth2'][1 + rand() % 3],
+        '","strategy":"', ['email', 'sms', 'oauth'][1 + rand() % 3],
+        '","strategy_type":"', ['authentication', 'authorization', 'verification'][1 + rand() % 3],
+        '"}') as JSON) as data
+FROM numbers(10)

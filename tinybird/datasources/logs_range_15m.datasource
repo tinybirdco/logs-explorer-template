@@ -1,12 +1,10 @@
 SCHEMA >
     `start_ts` DateTime64(3),
     `end_ts` DateTime64(3),
-    `environment` LowCardinality(String),
-    `service` LowCardinality(String),
-    `level` LowCardinality(String),
+    `tenant_name` LowCardinality(String),
     `n_rows` AggregateFunction(count, UInt64)
 
 ENGINE "AggregatingMergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(start_ts)"
-ENGINE_SORTING_KEY "start_ts, end_ts, environment, service, level"
-ENGINE_PRIMARY_KEY "start_ts, end_ts, environment"
+ENGINE_SORTING_KEY "start_ts, end_ts, tenant_name"
+ENGINE_PRIMARY_KEY "start_ts, end_ts, tenant_name"

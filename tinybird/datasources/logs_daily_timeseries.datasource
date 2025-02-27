@@ -5,17 +5,17 @@ SCHEMA >
     `date` DateTime,
     `error_count` AggregateFunction(count, UInt64),
     `total_requests` AggregateFunction(count, UInt64),
-    `response_time_avg` AggregateFunction(avg, Float64),
-    `response_time_max` AggregateFunction(max, Float64),
-    `service` LowCardinality(String),
-    `level` LowCardinality(String),
-    `environment` LowCardinality(String),
-    `request_method` LowCardinality(String),
-    `status_code` UInt16,
-    `request_path` String,
-    `user_agent` LowCardinality(String)
+    `tenant_name` String,
+    `client_name` String,
+    `user_name` String,
+    `user_agent` String,
+    `hostname` String,
+    `description` String,
+    `connection` String,
+    `strategy` String,
+    `strategy_type` String
 
 ENGINE "AggregatingMergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(date)"
-ENGINE_SORTING_KEY "date, environment, service, level, request_method, status_code, request_path, user_agent"
-ENGINE_PRIMARY_KEY "date, environment, service, level"
+ENGINE_SORTING_KEY "date, tenant_name, client_name, user_name, user_agent, hostname, description, connection, strategy, strategy_type"
+ENGINE_PRIMARY_KEY "date, tenant_name"

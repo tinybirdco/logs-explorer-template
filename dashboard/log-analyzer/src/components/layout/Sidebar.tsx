@@ -81,55 +81,79 @@ export default function Sidebar() {
               </Button>
             </div>
               
-              {/* Environments */}
+              {/* Tenant Name */}
               <GenericCounter 
-                columnName="environment"
-                title="Environments"
-                onSelectionChange={createFilterHandler('environment')}
+                columnName="tenant_name"
+                title="Tenant Name"
+                onSelectionChange={createFilterHandler('tenant_name')}
                 shouldRefresh={refreshTrigger}
                 startOpen={true}
               />
               
-              {/* Services */}
+              {/* Client Name */}
               <GenericCounter 
-                columnName="service"
-                title="Services"
-                onSelectionChange={createFilterHandler('service')}
+                columnName="client_name"
+                title="Client Name"
+                onSelectionChange={createFilterHandler('client_name')}
                 shouldRefresh={refreshTrigger}
                 startOpen={true}
               />
 
               <div className="space-y-4">
-              {/* Log Levels */}
+              {/* User Name */}
               <GenericCounter 
-                columnName="level"
-                title="Log Levels"
-                onSelectionChange={createFilterHandler('level')}
+                columnName="user_name"
+                title="User Name"
+                onSelectionChange={createFilterHandler('user_name')}
                 shouldRefresh={refreshTrigger}
                 startOpen={true}
               />
               
-              {/* HTTP Methods */}
+              {/* User Agent */}
               <GenericCounter 
-                columnName="request_method"
-                title="HTTP Methods"
-                onSelectionChange={createFilterHandler('request_method')}
+                columnName="user_agent"
+                title="User Agent"
+                onSelectionChange={createFilterHandler('user_agent')}
                 shouldRefresh={refreshTrigger}
               />
               
-              {/* Status Codes */}
+              {/* Hostname */}
               <GenericCounter 
-                columnName="status_code"
-                title="Status Codes"
+                columnName="hostname"
+                title="Hostname"
                 onSelectionChange={createFilterHandler('status_code')}
                 shouldRefresh={refreshTrigger}
               />
 
-              {/* Request Paths */}
+              {/* Description */}
               <GenericCounter 
-                columnName="request_path"
-                title="Request Paths"
-                onSelectionChange={createFilterHandler('request_path')}
+                columnName="description"
+                title="Description"
+                onSelectionChange={createFilterHandler('description')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Connection */}
+              <GenericCounter 
+                columnName="connection"
+                title="Connection"
+                onSelectionChange={createFilterHandler('connection')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Strategy */}
+              <GenericCounter 
+                columnName="strategy"
+                title="Strategy"
+                onSelectionChange={createFilterHandler('strategy')}
+                shouldRefresh={refreshTrigger}
+              />
+
+              {/* Strategy Type */}
+              <GenericCounter 
+                columnName="strategy_type"
+                title="Strategy Type"
+                onSelectionChange={createFilterHandler('strategy_type')}
                 shouldRefresh={refreshTrigger}
               />
 

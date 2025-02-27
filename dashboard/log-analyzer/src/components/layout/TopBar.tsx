@@ -1,6 +1,6 @@
 'use client';
 
-import { SearchBar } from "@/components/filters/SearchBar";
+// import { SearchBar } from "@/components/filters/SearchBar";
 import { DateRangeSelector } from "@/components/filters/DateRangeSelector";
 import { RefreshButton } from "@/components/filters/RefreshButton";
 
@@ -9,7 +9,7 @@ export default function TopBar() {
     <div className="pt-6 pr-6">
       <div className="bg-white rounded-2xl p-6">
         <div className="flex items-center space-x-2">
-          <SearchBar />
+          {/* <SearchBar /> */}
           <DateRangeSelector />
           <RefreshButton />
         </div>

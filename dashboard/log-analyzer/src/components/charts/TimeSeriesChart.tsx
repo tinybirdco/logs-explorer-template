@@ -18,14 +18,15 @@ export function TimeSeriesChart(params: {
   token?: string
   start_date?: string
   end_date?: string
-  message?: string
-  request_path?: string[]
+  description?: string
+  tenant_name?: string[]
+  client_name?: string[]
+  user_name?: string[]
   user_agent?: string[]
-  status_code?: string[]
-  service?: string[]
-  level?: string[]
-  environment?: string[]
-  request_method?: string[]
+  hostname?: string[]
+  connection?: string[]
+  strategy?: string[]
+  strategy_type?: string[]
   onDateRangeSelect?: (start: string, end: string) => void
 }) {
     const { data, error, loading } = useQuery({
@@ -34,14 +35,15 @@ export function TimeSeriesChart(params: {
         params: {
             start_date: params.start_date ?? '',
             end_date: params.end_date ?? '',
-            message: params.message ?? '',
-            request_path: params.request_path?.join(',') ?? '',
+            description: params.description ?? '',
+            tenant_name: params.tenant_name?.join(',') ?? '',
+            client_name: params.client_name?.join(',') ?? '',
+            user_name: params.user_name?.join(',') ?? '',
             user_agent: params.user_agent?.join(',') ?? '',
-            status_code: params.status_code?.join(',') ?? '',   
-            service: params.service?.join(',') ?? '',
-            level: params.level?.join(',') ?? '',
-            environment: params.environment?.join(',') ?? '',
-            request_method: params.request_method?.join(',') ?? '',
+            hostname: params.hostname?.join(',') ?? '',
+            connection: params.connection?.join(',') ?? '',
+            strategy: params.strategy?.join(',') ?? '',
+            strategy_type: params.strategy_type?.join(',') ?? '',
         }
       })
     

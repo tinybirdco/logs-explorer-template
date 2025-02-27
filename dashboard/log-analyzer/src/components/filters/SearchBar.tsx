@@ -21,13 +21,15 @@ export function SearchBar() {
       const params = {
         start_date: searchParams.get('start_date') || undefined,
         end_date: searchParams.get('end_date') || undefined,
-        service: searchParams.get('service')?.split(',').filter(Boolean) || undefined,
-        level: searchParams.get('level')?.split(',').filter(Boolean) || undefined,
-        environment: searchParams.get('environment')?.split(',').filter(Boolean) || undefined,
-        request_method: searchParams.get('request_method')?.split(',').filter(Boolean) || undefined,
-        status_code: searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined,
-        request_path: searchParams.get('request_path')?.split(',').filter(Boolean) || undefined,
+        tenant_name: searchParams.get('tenant_name')?.split(',').filter(Boolean) || undefined,
+        client_name: searchParams.get('client_name')?.split(',').filter(Boolean) || undefined,
+        user_name: searchParams.get('user_name')?.split(',').filter(Boolean) || undefined,
         user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined,
+        hostname: searchParams.get('hostname')?.split(',').filter(Boolean) || undefined,
+        description: searchParams.get('description')?.split(',').filter(Boolean) || undefined,
+        connection: searchParams.get('connection')?.split(',').filter(Boolean) || undefined,
+        strategy: searchParams.get('strategy')?.split(',').filter(Boolean) || undefined,
+        strategy_type: searchParams.get('strategy_type')?.split(',').filter(Boolean) || undefined,
       };
 
       const totalCount = await getTotalRowCount(params);
@@ -50,9 +52,9 @@ export function SearchBar() {
     const params = new URLSearchParams(searchParams.toString());
     
     if (term) {
-      params.set('message', term);
+      params.set('description', term);
     } else {
-      params.delete('message');
+      params.delete('description');
     }
     
     router.replace(`${pathname}?${params.toString()}`);
@@ -102,18 +104,9 @@ export function SearchBar() {
         </TooltipTrigger>
         <TooltipContent side="bottom" align="start" className="mt-2"> 
           {isDisabled ? (
-            <p>Filter by Environment and Service and one day of data.
-            </p>
+            <p>Filter by Tenant Name and Client Name and one day of data.</p>
           ) : (
-            <p>Type to search in the Message column:
-              <br />
-              Example: <span className="font-semibold">memory limit</span>
-              <br />
-              <br />
-              Search for multiple terms using <code className="font-semibold">|</code> (pipe).
-              <br />
-              Example: <span className="font-semibold">memory|timeout</span>
-              </p>
+            <p>Type to search in the Description column</p>
           )}
         </TooltipContent>
       </TooltipRoot>

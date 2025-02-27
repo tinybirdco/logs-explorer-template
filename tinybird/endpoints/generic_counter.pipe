@@ -9,11 +9,11 @@ SQL >
     {% if not defined(column_name) %}
         {{ error('column_name (String) query param is required') }}
     {% end %}
-    {% if defined(column_name) and column_name not in ['level', 'status_code', 'service', 'environment', 'request_method', 'request_path', 'host', 'user_agent'] %}
-        {{ error('column_name (String) query param must be one of the following: level, status_code, service, environment, request_method, request_path, host, user_agent') }}
+    {% if defined(column_name) and column_name not in ['tenant_name', 'client_name', 'user_name', 'user_agent', 'hostname', 'description', 'connection', 'strategy', 'strategy_type'] %}
+        {{ error('column_name (String) query param must be one of the following: tenant_name, client_name, user_name, user_agent, hostname, description, connection, strategy, strategy_type') }}
     {% end %}
     SELECT
-        toString({{column(column_name, 'level')}}) as category,
+        toString({{column(column_name, 'tenant_name')}}) as category,
         {% if defined(start_date) and defined(end_date) and date_diff_in_hours(start_date, end_date) >= 10 %}
             countMerge(count) as count
         {% else %}
@@ -35,33 +35,36 @@ SQL >
             AND timestamp <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
         {% end %}
     {% end %}
-    {% if defined(service) and service != [''] %}
-        AND service in {{Array(service)}}
+    {% if defined(tenant_name) and tenant_name != [''] %}
+        AND tenant_name in {{Array(tenant_name)}}
     {% end %}
-    {% if defined(level) and level != [''] %}
-        AND level in {{Array(level)}}
+    {% if defined(client_name) and client_name != [''] %}
+        AND client_name in {{Array(client_name)}}
     {% end %}
-    {% if defined(environment) and environment != [''] %}
-        AND environment in {{Array(environment)}}
-    {% end %}
-    {% if defined(request_method) and request_method != [''] %}
-        AND request_method in {{Array(request_method)}}
-    {% end %}
-    {% if defined(status_code) and status_code != [''] %}
-        AND status_code in {{Array(status_code)}}
-    {% end %}
-    {% if defined(request_path) and request_path != [''] %}
-        AND request_path in {{Array(request_path)}}
+    {% if defined(user_name) and user_name != [''] %}
+        AND user_name in {{Array(user_name)}}
     {% end %}
     {% if defined(user_agent) and user_agent != [''] %}
         AND user_agent in {{Array(user_agent)}}
     {% end %}
+    {% if defined(hostname) and hostname != [''] %}
+        AND hostname in {{Array(hostname)}}
+    {% end %}
+    {% if defined(description) and description != [''] %}
+        AND description in {{Array(description)}}
+    {% end %}
+    {% if defined(connection) and connection != [''] %}
+        AND connection in {{Array(connection)}}
+    {% end %}
+    {% if defined(strategy) and strategy != [''] %}
+        AND strategy in {{Array(strategy)}}
+    {% end %}
     {% if defined(start_date) and defined(end_date) and date_diff_in_hours(start_date, end_date) < 10 %}
-        {% if defined(message) and message != '' %}
-            AND multiSearchAnyCaseInsensitive(message, {{split_to_array(String(message, ''), separator='|')}})
+        {% if defined(description) and description != '' %}
+            AND multiSearchAnyCaseInsensitive(description, {{split_to_array(String(description, ''), separator='|')}})
         {% end %}
     {% end %}
-    GROUP BY {{column(column_name, 'level')}}
-    ORDER BY count DESC, {{column(column_name, 'level')}}
+    GROUP BY {{column(column_name, 'tenant_name')}}
+    ORDER BY count DESC, {{column(column_name, 'tenant_name')}}
 
 TYPE endpoint

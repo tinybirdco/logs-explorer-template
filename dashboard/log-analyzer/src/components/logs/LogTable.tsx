@@ -70,12 +70,9 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
                   >
                     Time{renderSortIndicator('timestamp')}
                   </TableHead>
-                  <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Level</TableHead>
-                  <TableHead className="w-[12%] whitespace-nowrap px-4 py-3 text-left">Service</TableHead>
-                  <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Method</TableHead>
-                  <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Status</TableHead>
-                  <TableHead className="w-[14%] px-4 py-3 text-left">Path</TableHead>
-                  <TableHead className="w-[35%] px-4 py-3 text-left">Message</TableHead>
+                  <TableHead className="w-[15%] whitespace-nowrap px-4 py-3 text-left">User Name</TableHead>
+                  <TableHead className="w-[15%] px-4 py-3 text-left">Connection</TableHead>
+                  <TableHead className="w-[44%] px-4 py-3 text-left">Description</TableHead>
                 </TableRow>
               </TableHeader>
             </Table>
@@ -110,31 +107,9 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
                             hour12: false
                           }).replace(',', '')}
                         </TableCell>
-                        <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">
-                          <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-                            ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                              log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                              log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
-                              log.level === 'DEBUG' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
-                              'bg-[var(--bg-pill-default)] text-[var(--text-pill-default)]'}`
-                          }>
-                            {log.level}
-                          </span>
-                        </TableCell>
-                        <TableCell className="w-[12%] whitespace-nowrap px-4 py-3 text-left">{log.service}</TableCell>
-                        <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">{log.request_method}</TableCell>
-                        <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">
-                          <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-                            ${log.status_code >= 400 ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                              log.status_code >= 300 ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                              log.status_code >= 200 ? 'bg-[var(--bg-pill-success)] text-[var(--text-pill-success)]' : 
-                              'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]'}`
-                          }>
-                            {log.status_code}
-                          </span>
-                        </TableCell>
-                        <TableCell className="w-[14%] truncate px-4 py-3 text-left">{log.request_path}</TableCell>
-                        <TableCell className="w-[35%] truncate px-4 py-3 text-left">{log.message}</TableCell>
+                        <TableCell className="w-[15%] whitespace-nowrap px-4 py-3 text-left">{log.user_name}</TableCell>
+                        <TableCell className="w-[15%] px-4 py-3 text-left">{log.connection}</TableCell>
+                        <TableCell className="w-[44%] px-4 py-3 text-left">{log.description}</TableCell>
                       </TableRow>
                     ))}
                     {hasMore && (

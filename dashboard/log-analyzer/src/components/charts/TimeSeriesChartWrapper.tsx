@@ -23,13 +23,15 @@ export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
     start_date,
     end_date,
     service: searchParams.get('service')?.split(',').filter(Boolean),
-    level: searchParams.get('level')?.split(',').filter(Boolean),
-    environment: searchParams.get('environment')?.split(',').filter(Boolean),
-    request_method: searchParams.get('request_method')?.split(',').filter(Boolean),
-    status_code: searchParams.get('status_code')?.split(',').filter(Boolean),
-    request_path: searchParams.get('request_path')?.split(',').filter(Boolean),
+    tenant_name: searchParams.get('tenant_name')?.split(',').filter(Boolean),
+    client_name: searchParams.get('client_name')?.split(',').filter(Boolean),
+    user_name: searchParams.get('user_name')?.split(',').filter(Boolean),
     user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean),
-    message: searchParams.get('message') ?? '',
+    hostname: searchParams.get('hostname')?.split(',').filter(Boolean),
+    description: searchParams.get('description') ?? '',
+    connection: searchParams.get('connection')?.split(',').filter(Boolean),
+    strategy: searchParams.get('strategy')?.split(',').filter(Boolean),
+    strategy_type: searchParams.get('strategy_type')?.split(',').filter(Boolean),
   };
 
   return (

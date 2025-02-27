@@ -2,272 +2,81 @@
 - name: count_level_basic
   description: Test basic counter with level column for full year
   parameters: column_name=level
-  expected_result: |
-    {"category":"ERROR","count":30}
-    {"category":"INFO","count":25}
-    {"category":"WARN","count":25}
-    {"category":"DEBUG","count":20}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: count_level_date_range
   description: Test counter with level column for specific date range
   parameters: column_name=level&start_date=2025-02-02%2000%3A00%3A00&end_date=2025-02-03%2023%3A59%3A59
-  expected_result: |
-    {"category":"ERROR","count":30}
-    {"category":"INFO","count":25}
-    {"category":"WARN","count":25}
-    {"category":"DEBUG","count":20}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: count_status_basic
   description: Test basic counter with status column for full year
   parameters: column_name=status_code
-  expected_result: |
-    {"category":"208","count":2}
-    {"category":"269","count":2}
-    {"category":"345","count":2}
-    {"category":"525","count":2}
-    {"category":"540","count":2}
-    {"category":"549","count":2}
-    {"category":"588","count":2}
-    {"category":"201","count":1}
-    {"category":"211","count":1}
-    {"category":"215","count":1}
-    {"category":"216","count":1}
-    {"category":"227","count":1}
-    {"category":"232","count":1}
-    {"category":"234","count":1}
-    {"category":"238","count":1}
-    {"category":"239","count":1}
-    {"category":"242","count":1}
-    {"category":"243","count":1}
-    {"category":"250","count":1}
-    {"category":"258","count":1}
-    {"category":"261","count":1}
-    {"category":"267","count":1}
-    {"category":"274","count":1}
-    {"category":"278","count":1}
-    {"category":"282","count":1}
-    {"category":"284","count":1}
-    {"category":"289","count":1}
-    {"category":"296","count":1}
-    {"category":"297","count":1}
-    {"category":"302","count":1}
-    {"category":"303","count":1}
-    {"category":"305","count":1}
-    {"category":"307","count":1}
-    {"category":"308","count":1}
-    {"category":"318","count":1}
-    {"category":"322","count":1}
-    {"category":"329","count":1}
-    {"category":"334","count":1}
-    {"category":"344","count":1}
-    {"category":"347","count":1}
-    {"category":"352","count":1}
-    {"category":"357","count":1}
-    {"category":"361","count":1}
-    {"category":"365","count":1}
-    {"category":"366","count":1}
-    {"category":"369","count":1}
-    {"category":"373","count":1}
-    {"category":"381","count":1}
-    {"category":"384","count":1}
-    {"category":"386","count":1}
-    {"category":"392","count":1}
-    {"category":"394","count":1}
-    {"category":"395","count":1}
-    {"category":"396","count":1}
-    {"category":"400","count":1}
-    {"category":"405","count":1}
-    {"category":"409","count":1}
-    {"category":"415","count":1}
-    {"category":"418","count":1}
-    {"category":"429","count":1}
-    {"category":"432","count":1}
-    {"category":"452","count":1}
-    {"category":"456","count":1}
-    {"category":"462","count":1}
-    {"category":"473","count":1}
-    {"category":"475","count":1}
-    {"category":"477","count":1}
-    {"category":"478","count":1}
-    {"category":"480","count":1}
-    {"category":"481","count":1}
-    {"category":"501","count":1}
-    {"category":"502","count":1}
-    {"category":"504","count":1}
-    {"category":"507","count":1}
-    {"category":"510","count":1}
-    {"category":"511","count":1}
-    {"category":"519","count":1}
-    {"category":"520","count":1}
-    {"category":"522","count":1}
-    {"category":"524","count":1}
-    {"category":"535","count":1}
-    {"category":"539","count":1}
-    {"category":"545","count":1}
-    {"category":"550","count":1}
-    {"category":"554","count":1}
-    {"category":"563","count":1}
-    {"category":"564","count":1}
-    {"category":"565","count":1}
-    {"category":"574","count":1}
-    {"category":"587","count":1}
-    {"category":"589","count":1}
-    {"category":"598","count":1}
-    {"category":"599","count":1}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: count_service_basic
   description: Test basic counter with service column for full year
   parameters: column_name=service
-  expected_result: |
-    {"category":"cache","count":26}
-    {"category":"api","count":22}
-    {"category":"auth","count":21}
-    {"category":"database","count":17}
-    {"category":"web","count":14}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: count_environment_basic
   description: Test basic counter with environment column for full year
   parameters: column_name=environment
-  expected_result: |
-    {"category":"development","count":36}
-    {"category":"staging","count":35}
-    {"category":"production","count":29}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: count_request_method_basic
   description: Test basic counter with request_method column for full year
   parameters: column_name=request_method
-  expected_result: |
-    {"category":"POST","count":30}
-    {"category":"GET","count":25}
-    {"category":"PUT","count":25}
-    {"category":"DELETE","count":20}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: count_request_path_basic
   description: Test basic counter with request_path column for full year
   parameters: column_name=request_path
-  expected_result: |
-    {"category":"\/auth\/15","count":2}
-    {"category":"\/orders\/869","count":2}
-    {"category":"\/orders\/925","count":2}
-    {"category":"\/auth\/103","count":1}
-    {"category":"\/auth\/11","count":1}
-    {"category":"\/auth\/135","count":1}
-    {"category":"\/auth\/139","count":1}
-    {"category":"\/auth\/239","count":1}
-    {"category":"\/auth\/27","count":1}
-    {"category":"\/auth\/275","count":1}
-    {"category":"\/auth\/307","count":1}
-    {"category":"\/auth\/347","count":1}
-    {"category":"\/auth\/395","count":1}
-    {"category":"\/auth\/507","count":1}
-    {"category":"\/auth\/519","count":1}
-    {"category":"\/auth\/587","count":1}
-    {"category":"\/auth\/67","count":1}
-    {"category":"\/auth\/711","count":1}
-    {"category":"\/auth\/763","count":1}
-    {"category":"\/auth\/799","count":1}
-    {"category":"\/auth\/843","count":1}
-    {"category":"\/orders\/1","count":1}
-    {"category":"\/orders\/105","count":1}
-    {"category":"\/orders\/165","count":1}
-    {"category":"\/orders\/181","count":1}
-    {"category":"\/orders\/205","count":1}
-    {"category":"\/orders\/261","count":1}
-    {"category":"\/orders\/277","count":1}
-    {"category":"\/orders\/345","count":1}
-    {"category":"\/orders\/349","count":1}
-    {"category":"\/orders\/365","count":1}
-    {"category":"\/orders\/369","count":1}
-    {"category":"\/orders\/373","count":1}
-    {"category":"\/orders\/489","count":1}
-    {"category":"\/orders\/549","count":1}
-    {"category":"\/orders\/609","count":1}
-    {"category":"\/orders\/681","count":1}
-    {"category":"\/orders\/729","count":1}
-    {"category":"\/orders\/745","count":1}
-    {"category":"\/orders\/757","count":1}
-    {"category":"\/orders\/761","count":1}
-    {"category":"\/orders\/789","count":1}
-    {"category":"\/orders\/829","count":1}
-    {"category":"\/orders\/873","count":1}
-    {"category":"\/orders\/897","count":1}
-    {"category":"\/orders\/901","count":1}
-    {"category":"\/orders\/945","count":1}
-    {"category":"\/products\/102","count":1}
-    {"category":"\/products\/122","count":1}
-    {"category":"\/products\/194","count":1}
-    {"category":"\/products\/198","count":1}
-    {"category":"\/products\/282","count":1}
-    {"category":"\/products\/302","count":1}
-    {"category":"\/products\/318","count":1}
-    {"category":"\/products\/350","count":1}
-    {"category":"\/products\/366","count":1}
-    {"category":"\/products\/50","count":1}
-    {"category":"\/products\/586","count":1}
-    {"category":"\/products\/62","count":1}
-    {"category":"\/products\/638","count":1}
-    {"category":"\/products\/678","count":1}
-    {"category":"\/products\/710","count":1}
-    {"category":"\/products\/722","count":1}
-    {"category":"\/products\/734","count":1}
-    {"category":"\/products\/754","count":1}
-    {"category":"\/products\/774","count":1}
-    {"category":"\/products\/818","count":1}
-    {"category":"\/products\/834","count":1}
-    {"category":"\/products\/842","count":1}
-    {"category":"\/products\/858","count":1}
-    {"category":"\/products\/874","count":1}
-    {"category":"\/products\/878","count":1}
-    {"category":"\/users\/140","count":1}
-    {"category":"\/users\/232","count":1}
-    {"category":"\/users\/252","count":1}
-    {"category":"\/users\/296","count":1}
-    {"category":"\/users\/320","count":1}
-    {"category":"\/users\/340","count":1}
-    {"category":"\/users\/344","count":1}
-    {"category":"\/users\/352","count":1}
-    {"category":"\/users\/388","count":1}
-    {"category":"\/users\/408","count":1}
-    {"category":"\/users\/416","count":1}
-    {"category":"\/users\/484","count":1}
-    {"category":"\/users\/564","count":1}
-    {"category":"\/users\/584","count":1}
-    {"category":"\/users\/592","count":1}
-    {"category":"\/users\/608","count":1}
-    {"category":"\/users\/632","count":1}
-    {"category":"\/users\/656","count":1}
-    {"category":"\/users\/788","count":1}
-    {"category":"\/users\/796","count":1}
-    {"category":"\/users\/80","count":1}
-    {"category":"\/users\/800","count":1}
-    {"category":"\/users\/904","count":1}
-    {"category":"\/users\/908","count":1}
-    {"category":"\/users\/924","count":1}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: count_host_basic
   description: Test basic counter with host column for full year
   parameters: column_name=host
-  expected_result: |
-    {"category":"server-4","count":26}
-    {"category":"server-0","count":22}
-    {"category":"server-2","count":21}
-    {"category":"server-3","count":17}
-    {"category":"server-1","count":14}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: count_user_agent_basic
   description: Test basic counter with user_agent column for full year
   parameters: column_name=user_agent
   expected_result: |
-    {"category":"curl\/7.64.1","count":36}
-    {"category":"PostmanRuntime\/7.28.4","count":35}
-    {"category":"Mozilla\/5.0","count":29}
+    {"category":"Mozilla\/5.0","count":4}
+    {"category":"Safari\/14.0","count":4}
+    {"category":"Chrome\/91.0","count":2}
 
 - name: wrong_column_name
   description: Test counter with wrong column name
   parameters: column_name=wrong_column_name
   expected_result: 'column_name (String) query param must be one of the following:
-    level, status_code, service, environment, request_method, request_path, host,
-    user_agent'
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
   expected_http_status: 400
 
 - name: no_column_name
@@ -279,46 +88,55 @@
 - name: filter_by_service
   description: Test counter with filter by service
   parameters: column_name=service&service=api,auth
-  expected_result: |
-    {"category":"api","count":22}
-    {"category":"auth","count":21}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: filter_by_level
   description: Test counter with filter by level
   parameters: column_name=level&level=ERROR,INFO
-  expected_result: |
-    {"category":"ERROR","count":30}
-    {"category":"INFO","count":25}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: filter_by_environment
   description: Test counter with filter by environment
   parameters: column_name=environment&environment=development,staging
-  expected_result: |
-    {"category":"development","count":36}
-    {"category":"staging","count":35}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: filter_by_request_method
   description: Test counter with filter by request_method
   parameters: column_name=request_method&request_method=POST,GET
-  expected_result: |
-    {"category":"POST","count":30}
-    {"category":"GET","count":25}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: filter_by_request_path
   description: Test counter with filter by request_path
   parameters: column_name=request_path&request_path=/orders/925,/orders/869
-  expected_result: |
-    {"category":"\/orders\/869","count":2}
-    {"category":"\/orders\/925","count":2}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: filter_by_status_code
   description: Test counter with filter by status_code
   parameters: column_name=status_code&status_code=200,201
-  expected_result: |
-    {"category":"201","count":1}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400
 
 - name: filter_by_environment_and_level
   description: Test counter with filter by environment and level
   parameters: column_name=environment&environment=development&level=ERROR
-  expected_result: |
-    {"category":"development","count":12}
+  expected_result: 'column_name (String) query param must be one of the following:
+    tenant_name, client_name, user_name, user_agent, hostname, description, connection,
+    strategy, strategy_type'
+  expected_http_status: 400

@@ -1,17 +1,18 @@
 import { z } from 'zod';
 
 export const LogEntrySchema = z.object({
-  request_id: z.string(),
+  log_id: z.string(),
   timestamp: z.string(),
-  request_method: z.string(),
-  status_code: z.number(),
-  service: z.string(),
-  request_path: z.string(),
-  level: z.string(),
-  message: z.string(),
+  tenant_name: z.string(),
+  client_name: z.string(),
+  user_name: z.string(),
   user_agent: z.string(),
-  response_time: z.number(),
-  environment: z.string(),
+  hostname: z.string(),
+  description: z.string(),
+  connection: z.string(),
+  strategy: z.string(),
+  strategy_type: z.string(),
+  data: z.string(),
 });
 
 export type LogEntry = z.infer<typeof LogEntrySchema>;

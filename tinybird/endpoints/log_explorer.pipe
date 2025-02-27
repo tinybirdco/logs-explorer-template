@@ -25,14 +25,8 @@ SQL >
     SELECT start_ts, end_ts, countMerge(n_rows) AS n_rows
     FROM logs_range_15m
     WHERE 1=1
-        {% if defined(environment) and environment != [''] %}
-            AND environment in {{ Array(environment) }}
-        {% end %}
-        {% if defined(service) and service != [''] %}
-            AND service in {{ Array(service) }}
-        {% end %}
-        {% if defined(level) and level != [''] %}
-            AND level in {{ Array(level) }}
+        {% if defined(tenant_name) and tenant_name != [''] %}
+            AND tenant_name in {{ Array(tenant_name) }}
         {% end %}
         AND start_ts >= {{ DateTime(start_date, '2025-02-02 00:00:00') }}
         AND end_ts <= {{ DateTime(end_date, '2025-02-04 00:00:00') }}
@@ -103,26 +97,45 @@ SQL >
 
     SELECT 
         timestamp,
-        request_id,
-        request_method,
-        status_code,
-        service,
-        request_path,
-        level,
-        message,
+        log_id,
+        tenant_name,
+        client_name,
+        user_name,
         user_agent,
-        response_time,
-        environment
+        hostname,
+        description,
+        connection,
+        strategy,
+        strategy_type,
+        data
     FROM logs
     WHERE 1=1
-        {% if defined(service) and service != [''] %}
-            AND service in {{Array(service)}}
+        {% if defined(tenant_name) and tenant_name != [''] %}
+            AND tenant_name in {{Array(tenant_name)}}
         {% end %}
-        {% if defined(level) and level != [''] %}
-            AND level in {{Array(level)}}
+        {% if defined(client_name) and client_name != [''] %}
+            AND client_name in {{Array(client_name)}}
         {% end %}
-        {% if defined(environment) and environment != [''] %}
-            AND environment in {{Array(environment)}}
+        {% if defined(user_name) and user_name != [''] %}
+            AND user_name in {{Array(user_name)}}
+        {% end %}
+        {% if defined(user_agent) and user_agent != [''] %}
+            AND user_agent in {{Array(user_agent)}}
+        {% end %}
+        {% if defined(hostname) and hostname != [''] %}
+            AND hostname in {{Array(hostname)}}
+        {% end %}
+        {% if defined(description) and description != [''] %}
+            AND description in {{Array(description)}}
+        {% end %}
+        {% if defined(connection) and connection != [''] %}
+            AND connection in {{Array(connection)}}
+        {% end %}   
+        {% if defined(strategy) and strategy != [''] %}
+            AND strategy in {{Array(strategy)}}
+        {% end %}
+        {% if defined(strategy_type) and strategy_type != [''] %}
+            AND strategy_type in {{Array(strategy_type)}}
         {% end %}
         AND timestamp >= start_range
         AND timestamp <= end_range

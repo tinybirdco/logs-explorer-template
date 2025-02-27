@@ -6,21 +6,22 @@ DESCRIPTION >
 NODE log_analysis_node
 SQL >
     %
-    {% if defined(message) and message != '' %}
-        with {{split_to_array(String(message, ''), separator='|')}} as message_patterns
+    {% if defined(description) and description != '' %}
+        with {{split_to_array(String(description, ''), separator='|')}} as description_patterns
     {% end %}
     SELECT
         timestamp,
-        request_id,
-        request_method,
-        status_code,
-        service,
-        request_path,
-        level,
-        message,
+        log_id,
+        tenant_name,
+        client_name,
+        user_name,
         user_agent,
-        response_time,
-        environment
+        hostname,
+        description,
+        connection,
+        strategy,
+        strategy_type,
+        data
     FROM logs
     WHERE 1=1
     {% if defined(start_date) and start_date != '' %}
@@ -29,29 +30,29 @@ SQL >
     {% if defined(end_date) and end_date != '' %}
         AND timestamp <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
     {% end %}
-    {% if defined(service) and service != [''] %}
-        AND service in {{Array(service)}}
+    {% if defined(tenant_name) and tenant_name != [''] %}
+        AND tenant_name in {{Array(tenant_name)}}
     {% end %}
-    {% if defined(level) and level != [''] %}
-        AND level in {{Array(level)}}
+    {% if defined(client_name) and client_name != [''] %}
+        AND client_name in {{Array(client_name)}}
     {% end %}
-    {% if defined(environment) and environment != [''] %}
-        AND environment in {{Array(environment)}}
-    {% end %}
-    {% if defined(request_method) and request_method != [''] %}
-        AND request_method in {{Array(request_method)}}
-    {% end %}
-    {% if defined(status_code) and status_code != [''] %}
-        AND status_code in {{Array(status_code)}}
-    {% end %}
-    {% if defined(request_path) and request_path != [''] %}
-        AND request_path in {{Array(request_path)}}
+    {% if defined(user_name) and user_name != [''] %}
+        AND user_name in {{Array(user_name)}}
     {% end %}
     {% if defined(user_agent) and user_agent != [''] %}
         AND user_agent in {{Array(user_agent)}}
     {% end %}
-    {% if defined(message) and message != '' %}
-        AND multiSearchAnyCaseInsensitive(message, {{split_to_array(String(message, ''), separator='|')}})
+    {% if defined(strategy) and strategy != [''] %}
+        AND strategy in {{Array(strategy)}}
+    {% end %}
+    {% if defined(description) and description != [''] %}
+        AND description in {{Array(description)}}
+    {% end %}
+    {% if defined(connection) and connection != [''] %}
+        AND connection in {{Array(connection)}}
+    {% end %}
+    {% if defined(description) and description != '' %}
+        AND multiSearchAnyCaseInsensitive(description, {{split_to_array(String(description, ''), separator='|')}})
     {% end %}
     ORDER BY 
     {% if defined(sort_by) and sort_by != '' %}

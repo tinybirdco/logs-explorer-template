@@ -55,8 +55,8 @@ NODE error_monitoring_node
 SQL >
     %
     {% if date_diff_in_hours(start_date, end_date) <= 24 * 7 %}
-        {% if defined(message) and message != '' %}
-            with {{split_to_array(String(message, ''), separator='|')}} as message_patterns
+        {% if defined(description) and description != '' %}
+            with {{split_to_array(String(description, ''), separator='|')}} as description_patterns
         {% end %}
     {% end %}
     SELECT
@@ -71,14 +71,14 @@ SQL >
         {% end %}
         {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
             countMerge(error_count) as error_count,
-            {% if defined(level) and level != 'ERROR' %}
+            {% if defined(description) and description != '' %}
                 countMerge(total_requests) as total_requests
             {% else %}
                 0 as total_requests
             {% end %}
         {% else %}
-            countIf(level = 'ERROR') as error_count,
-            countIf(level != 'ERROR') as total_requests
+            countIf(description ilike '%ailed%' or description ilike '%error%' or description ilike '%exception%' or description ilike '%fail%' or description ilike '%error%' or description ilike '%exception%' or description ilike '%fail%') as error_count,
+            count() as total_requests
         {% end %}
     FROM
     {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
@@ -94,30 +94,36 @@ SQL >
         AND timestamp >= {{DateTime(start_date)}}
         AND timestamp <= {{DateTime(end_date)}}
     {% end %}
-    {% if defined(service) and service != [''] %}
-        AND service in {{Array(service)}}
+    {% if defined(tenant_name) and tenant_name != [''] %}
+        AND tenant_name in {{Array(tenant_name)}}
     {% end %}
-    {% if defined(level) and len(level) > 0 %}
-        AND level in {{Array(level)}}
+    {% if defined(client_name) and client_name != [''] %}
+        AND client_name in {{Array(client_name)}}
     {% end %}
-    {% if defined(environment) and environment != [''] %}
-        AND environment in {{Array(environment)}}
-    {% end %}
-    {% if defined(request_method) and request_method != [''] %}
-        AND request_method in {{Array(request_method)}}
-    {% end %}
-    {% if defined(status_code) and status_code != [''] %}
-        AND status_code in {{Array(status_code)}}
-    {% end %}
-    {% if defined(request_path) and request_path != [''] %}
-        AND request_path in {{Array(request_path)}}
+    {% if defined(user_name) and user_name != [''] %}
+        AND user_name in {{Array(user_name)}}
     {% end %}
     {% if defined(user_agent) and user_agent != [''] %}
         AND user_agent in {{Array(user_agent)}}
     {% end %}
+    {% if defined(hostname) and hostname != [''] %}
+        AND hostname in {{Array(hostname)}}
+    {% end %}
+    {% if defined(description) and description != '' %}
+        AND description in {{Array(description)}}
+    {% end %}
+    {% if defined(connection) and connection != [''] %}
+        AND connection in {{Array(connection)}}
+    {% end %}
+    {% if defined(strategy) and strategy != [''] %}
+        AND strategy in {{Array(strategy)}}
+    {% end %}
+    {% if defined(strategy_type) and strategy_type != [''] %}
+        AND strategy_type in {{Array(strategy_type)}}
+    {% end %}
     {% if date_diff_in_hours(start_date, end_date) <= 24 * 7 %}
-        {% if defined(message) and message != '' %}
-            AND multiSearchAnyCaseInsensitive(message, message_patterns)
+        {% if defined(description) and description != '' %}
+            AND multiSearchAnyCaseInsensitive(description, {{split_to_array(String(description, ''), separator='|')}})
         {% end %}
     {% end %}
     GROUP BY date
