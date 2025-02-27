@@ -50,10 +50,6 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
     });
   };
 
-  const formatTime = (ms: number) => {
-    return `${ms}ms`;
-  };
-
   return (
     <div className={cn(
       "fixed top-0 right-0 h-screen w-[600px] bg-[--background-secondary] z-50",
