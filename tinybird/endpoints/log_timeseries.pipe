@@ -71,14 +71,14 @@ SQL >
         {% end %}
         {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
             countMerge(error_count) as error_count,
-            {% if defined(level) and level != 'ERROR' %}
+            {% if defined(level) and level != 'error' %}
                 countMerge(total_requests) as total_requests
             {% else %}
                 0 as total_requests
             {% end %}
         {% else %}
-            countIf(level = 'ERROR') as error_count,
-            countIf(level != 'ERROR') as total_requests
+            countIf(level = 'error') as error_count,
+            countIf(level != 'error') as total_requests
         {% end %}
     FROM
     {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
@@ -112,9 +112,28 @@ SQL >
     {% if defined(request_path) and request_path != [''] %}
         AND request_path in {{Array(request_path)}}
     {% end %}
-    {% if defined(user_agent) and user_agent != [''] %}
-        AND user_agent in {{Array(user_agent)}}
+    {% if defined(host) and host != [''] %}
+        AND host in {{Array(host)}}
     {% end %}
+    {% if defined(path) and path != [''] %}
+        AND path in {{Array(path)}}
+    {% end %}
+    {% if defined(resource) and resource != [''] %}
+        AND resource in {{Array(resource)}}
+    {% end %}
+    {% if defined(request_type) and request_type != [''] %}
+        AND request_type in {{Array(request_type)}}
+    {% end %}
+    {% if defined(vercel_cache) and vercel_cache != [''] %}
+        AND vercel_cache in {{Array(vercel_cache)}}
+    {% end %}
+    {% if defined(branch) and branch != [''] %}
+        AND branch in {{Array(branch)}}
+    {% end %}
+    {% if defined(deployment_id) and deployment_id != [''] %}
+        AND deployment_id in {{Array(deployment_id)}}
+    {% end %}
+    
     {% if date_diff_in_hours(start_date, end_date) <= 24 * 7 %}
         {% if defined(message) and message != '' %}
             AND multiSearchAnyCaseInsensitive(message, message_patterns)
