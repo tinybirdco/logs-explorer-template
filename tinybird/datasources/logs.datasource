@@ -3,22 +3,50 @@ DESCRIPTION >
     Raw logs datasource to store application logs
 
 SCHEMA >
-    `timestamp` DateTime64(3) `json:$.timestamp`,
-    `level` LowCardinality(String) `json:$.level`,
-    `service` LowCardinality(String) `json:$.service`,
-    `message` String `json:$.message`,
-    `request_id` String `json:$.request_id`,
-    `environment` LowCardinality(String) `json:$.environment`,
-    `status_code` UInt16 `json:$.status_code`,
-    `response_time` UInt32 `json:$.response_time`,
-    `request_method` LowCardinality(String) `json:$.request_method`,
-    `request_path` String `json:$.request_path`,
-    `host` LowCardinality(String) `json:$.host`,
-    `user_agent` LowCardinality(String) `json:$.user_agent`
-    
+    `timestamp` DateTime64(3) `json:$.timestamp` DEFAULT now(),
+    `level` LowCardinality(String) `json:$.level` DEFAULT '',
+    `message` String `json:$.message` DEFAULT '',
+    `request_id` String `json:$.request_id` DEFAULT '',
+    `environment` LowCardinality(String) `json:$.environment` DEFAULT '',
+    `status_code` UInt16 `json:$.status_code` DEFAULT 0,
+    `response_time` UInt32 `json:$.response_time` DEFAULT 0,
+    `request_method` LowCardinality(String) `json:$.request_method` DEFAULT '',
+    `request_path` String `json:$.request_path` DEFAULT '',
+    `host` LowCardinality(String) `json:$.host` DEFAULT '',
+    `user_agent` LowCardinality(String) `json:$.user_agent` DEFAULT '',
+    `proxy_userAgent` Array(LowCardinality(String)) `json:$.proxy_userAgent[:]` DEFAULT [],
+    `proxy_clientIp` String `json:$.proxy_clientIp` DEFAULT '',
+    `proxy_host` String `json:$.proxy_host` DEFAULT '',
+    `proxy_method` String `json:$.proxy_method` DEFAULT '',
+    `proxy_path` String `json:$.proxy_path` DEFAULT '',
+    `proxy_region` String `json:$.proxy_region` DEFAULT '',
+    `proxy_scheme` String `json:$.proxy_scheme` DEFAULT '',
+    `proxy_statusCode` UInt16 `json:$.proxy_statusCode` DEFAULT 0,
+    `proxy_timestamp` DateTime64(3) `json:$.proxy_timestamp` DEFAULT now(),
+    `proxy_referer` String `json:$.proxy_referer` DEFAULT '',
+    `proxy_vercelCache` LowCardinality(String) `json:$.proxy_vercelCache` DEFAULT '',
+    `proxy_vercelId` String `json:$.proxy_vercelId` DEFAULT '',
+    `proxy_cacheId` String `json:$.proxy_cacheId` DEFAULT '',
+    `proxy_pathType` LowCardinality(String) `json:$.proxy_pathType` DEFAULT '',
+    `proxy_pathTypeVariant` LowCardinality(String) `json:$.proxy_pathTypeVariant` DEFAULT '',
+    `destination` LowCardinality(String) `json:$.destination` DEFAULT '',
+    `edgeType` LowCardinality(String) `json:$.edgeType` DEFAULT '',
+    `branch` LowCardinality(String) `json:$.branch` DEFAULT '',
+    `statusCode` UInt16 `json:$.statusCode` DEFAULT 0,
+    `ja4Digest` String `json:$.ja4Digest` DEFAULT '',
+    `projectName` LowCardinality(String) `json:$.projectName` DEFAULT '',
+    `executionRegion` LowCardinality(String) `json:$.executionRegion` DEFAULT '',
+    `type` LowCardinality(String) `json:$.type` DEFAULT '',
+    `proxy_lambdaRegion` LowCardinality(String) `json:$.proxy_lambdaRegion` DEFAULT '',
+    `source` LowCardinality(String) `json:$.source` DEFAULT '',
+    `path` String `json:$.path` DEFAULT '',
+    `projectId` String `json:$.projectId` DEFAULT '',
+    `deploymentId` String `json:$.deploymentId` DEFAULT '',
+    `id` String `json:$.id` DEFAULT ''
+
 
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
-ENGINE_SORTING_KEY "timestamp, environment, service, level"
+ENGINE_SORTING_KEY "timestamp, environment, projectName, level"
 ENGINE_TTL "toDateTime(timestamp) + INTERVAL 180 DAY"
         

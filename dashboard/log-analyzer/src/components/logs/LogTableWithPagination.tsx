@@ -30,13 +30,12 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     const filters = {
       start_date: searchParams.get('start_date') || undefined,
       end_date: searchParams.get('end_date') || undefined,
-      service: searchParams.get('service')?.split(',').filter(Boolean) || undefined,
+      projectName: searchParams.get('projectName')?.split(',').filter(Boolean) || undefined,
       level: searchParams.get('level')?.split(',').filter(Boolean) || undefined,
       environment: searchParams.get('environment')?.split(',').filter(Boolean) || undefined,
       request_method: searchParams.get('request_method')?.split(',').filter(Boolean) || undefined,
       status_code: searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined,
       request_path: searchParams.get('request_path')?.split(',').filter(Boolean) || undefined,
-      user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined,
       message: searchParams.get('message') || undefined,
       sort_by: currentSortColumn || undefined,
       order: currentSortOrder || undefined,
@@ -65,7 +64,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const shouldUseExplorerApi = useCallback(async (filters: Record<string, any>) => {
     // First check if only allowed filters are being used
-    const allowedFilters = ['start_date', 'end_date', 'environment', 'service', 'level', 'order', 'sort_by'];
+    const allowedFilters = ['start_date', 'end_date', 'environment', 'projectName', 'level', 'order', 'sort_by'];
     const activeFilters = Object.keys(filters);
     const onlyAllowedFilters = activeFilters.every(filter => allowedFilters.includes(filter));
     

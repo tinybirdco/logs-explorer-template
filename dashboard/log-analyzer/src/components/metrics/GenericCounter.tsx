@@ -59,13 +59,12 @@ export function GenericCounter({
   const [isOpen, setIsOpen] = useState(startOpen);
   const initializedRef = useRef(false);
   const currentParams = searchParams.get(columnName);
-  const service = searchParams.get('service')?.split(',').filter(Boolean) || undefined;
+  const projectName = searchParams.get('projectName')?.split(',').filter(Boolean) || undefined;
   const level = searchParams.get('level')?.split(',').filter(Boolean) || undefined;
   const environment = searchParams.get('environment')?.split(',').filter(Boolean) || undefined;
   const requestMethod = searchParams.get('request_method')?.split(',').filter(Boolean) || undefined;
   const statusCode = searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined;
   const requestPath = searchParams.get('request_path')?.split(',').filter(Boolean) || undefined;
-  const userAgent = searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined;
 
   useDefaultDateRange();
 
@@ -92,13 +91,12 @@ export function GenericCounter({
           column_name: columnName,
           start_date: start_date || format(defaultStartDate, 'yyyy-MM-dd HH:mm:ss'),
           end_date: end_date || format(defaultEndDate, 'yyyy-MM-dd HH:mm:ss'),
-          service: columnName !== 'service' ? service : undefined,
+          projectName: columnName !== 'projectName' ? projectName : undefined,
           level: columnName !== 'level' ? level : undefined,
           environment: columnName !== 'environment' ? environment : undefined,
           request_method: columnName !== 'request_method' ? requestMethod : undefined,
           status_code: columnName !== 'status_code' ? statusCode : undefined,
           request_path: columnName !== 'request_path' ? requestPath : undefined,
-          user_agent: columnName !== 'user_agent' ? userAgent : undefined,
         };
 
         const response = await genericCounterApi(params);
@@ -253,7 +251,7 @@ export function GenericCounter({
                   }}
                 />
                 <span className="cursor-pointer max-w-[150px] truncate">
-                  {capitalizeFirstLetter(category)}
+                  {category}
                 </span>
               </div>
               <span className="text-[12px] leading-[16px] text-text-primary bg-[var(--gray-100)] rounded-sm px-1 font-medium h-5 flex items-center justify-center min-w-[20px] tracking-[1px]">

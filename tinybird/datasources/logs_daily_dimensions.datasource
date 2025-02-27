@@ -3,17 +3,15 @@ DESCRIPTION >
 
 SCHEMA >
     `date` DateTime,
-    `service` LowCardinality(String),
+    `projectName` LowCardinality(String),
     `level` LowCardinality(String),
     `environment` LowCardinality(String),
     `request_method` LowCardinality(String),
     `status_code` UInt16,
     `request_path` String,
-    `user_agent` LowCardinality(String),
-    `host` LowCardinality(String),
     `count` AggregateFunction(count, UInt64)
 
 ENGINE "AggregatingMergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(date)"
-ENGINE_SORTING_KEY "date, environment, service, level, request_method, status_code, host, request_path, user_agent"
-ENGINE_PRIMARY_KEY "date, environment, service, level" 
+ENGINE_SORTING_KEY "date, environment, projectName, level, request_method, status_code, request_path"
+ENGINE_PRIMARY_KEY "date, environment, projectName, level" 

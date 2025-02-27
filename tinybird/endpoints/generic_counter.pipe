@@ -9,8 +9,8 @@ SQL >
     {% if not defined(column_name) %}
         {{ error('column_name (String) query param is required') }}
     {% end %}
-    {% if defined(column_name) and column_name not in ['level', 'status_code', 'service', 'environment', 'request_method', 'request_path', 'host', 'user_agent'] %}
-        {{ error('column_name (String) query param must be one of the following: level, status_code, service, environment, request_method, request_path, host, user_agent') }}
+    {% if defined(column_name) and column_name not in ['level', 'status_code', 'projectName', 'environment', 'request_method', 'request_path'] %}
+        {{ error('column_name (String) query param must be one of the following: level, status_code, projectName, environment, request_method, request_path') }}
     {% end %}
     SELECT
         toString({{column(column_name, 'level')}}) as category,
@@ -35,8 +35,8 @@ SQL >
             AND timestamp <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
         {% end %}
     {% end %}
-    {% if defined(service) and service != [''] %}
-        AND service in {{Array(service)}}
+    {% if defined(projectName) and projectName != [''] %}
+        AND projectName in {{Array(projectName)}}
     {% end %}
     {% if defined(level) and level != [''] %}
         AND level in {{Array(level)}}
@@ -52,9 +52,6 @@ SQL >
     {% end %}
     {% if defined(request_path) and request_path != [''] %}
         AND request_path in {{Array(request_path)}}
-    {% end %}
-    {% if defined(user_agent) and user_agent != [''] %}
-        AND user_agent in {{Array(user_agent)}}
     {% end %}
     {% if defined(start_date) and defined(end_date) and date_diff_in_hours(start_date, end_date) < 10 %}
         {% if defined(message) and message != '' %}

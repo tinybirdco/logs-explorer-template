@@ -28,8 +28,8 @@ SQL >
         {% if defined(environment) and environment != [''] %}
             AND environment in {{ Array(environment) }}
         {% end %}
-        {% if defined(service) and service != [''] %}
-            AND service in {{ Array(service) }}
+        {% if defined(projectName) and projectName != [''] %}
+            AND projectName in {{ Array(projectName) }}
         {% end %}
         {% if defined(level) and level != [''] %}
             AND level in {{ Array(level) }}
@@ -106,17 +106,15 @@ SQL >
         request_id,
         request_method,
         status_code,
-        service,
+        projectName,
         request_path,
         level,
         message,
-        user_agent,
-        response_time,
         environment
     FROM logs
     WHERE 1=1
-        {% if defined(service) and service != [''] %}
-            AND service in {{Array(service)}}
+        {% if defined(projectName) and projectName != [''] %}
+            AND projectName in {{Array(projectName)}}
         {% end %}
         {% if defined(level) and level != [''] %}
             AND level in {{Array(level)}}
