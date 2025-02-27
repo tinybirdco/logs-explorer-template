@@ -1,6 +1,0 @@
-requests
-python-dotenv
-fastapi[all]
-pyyaml 
-ua-parser
-user-agents
