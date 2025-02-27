@@ -50,10 +50,6 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
     });
   };
 
-  const formatTime = (ms: number) => {
-    return `${ms}ms`;
-  };
-
   return (
     <div className={cn(
       "fixed top-0 right-0 h-screen w-[600px] bg-[--background-secondary] z-50",
@@ -120,12 +116,6 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
               <span className="text-sm text-[--text-secondary]">Host</span>
               <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">app.tinybird.co</span>
             </div>
-
-            {/* User Agent */}
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-[--text-secondary]">User Agent</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.user_agent}</span>
-            </div>
           </div>
         </div>
 
@@ -145,19 +135,9 @@ export function LogDetailPanel({ log, onClose, isOpen }: LogDetailPanelProps) {
               <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.environment}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-[--text-secondary]">Service</span>
-              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.service}</span>
+              <span className="text-sm text-[--text-secondary]">Project</span>
+              <span className="text-sm text-[--text-secondary] truncate max-w-[400px]">{log.projectName}</span>
             </div>
-          </div>
-        </div>
-
-        <div className="px-8 mt-6 text-white">
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-[#27F795] border-2 border-white"></div>
-              <span>Request finished</span>
-            </div>
-            <span>{formatTime(log.response_time)}</span>
           </div>
         </div>
       </div>

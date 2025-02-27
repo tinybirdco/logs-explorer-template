@@ -9,13 +9,12 @@ export function cn(...inputs: ClassValue[]) {
 export async function getTotalRowCount(params: {
   start_date?: string;
   end_date?: string;
-  service?: string[];
+  project_name?: string[];
   level?: string[];
   environment?: string[];
   request_method?: string[];
   status_code?: number[];
   request_path?: string[];
-  user_agent?: string[];
 }) {
   try {
     const response = await genericCounterApi({

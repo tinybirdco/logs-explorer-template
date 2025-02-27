@@ -21,13 +21,12 @@ export function SearchBar() {
       const params = {
         start_date: searchParams.get('start_date') || undefined,
         end_date: searchParams.get('end_date') || undefined,
-        service: searchParams.get('service')?.split(',').filter(Boolean) || undefined,
+        project_name: searchParams.get('project_name')?.split(',').filter(Boolean) || undefined,
         level: searchParams.get('level')?.split(',').filter(Boolean) || undefined,
         environment: searchParams.get('environment')?.split(',').filter(Boolean) || undefined,
         request_method: searchParams.get('request_method')?.split(',').filter(Boolean) || undefined,
         status_code: searchParams.get('status_code')?.split(',').filter(Boolean)?.map(Number) || undefined,
         request_path: searchParams.get('request_path')?.split(',').filter(Boolean) || undefined,
-        user_agent: searchParams.get('user_agent')?.split(',').filter(Boolean) || undefined,
       };
 
       const totalCount = await getTotalRowCount(params);

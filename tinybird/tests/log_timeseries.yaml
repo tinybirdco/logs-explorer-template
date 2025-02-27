@@ -34,31 +34,31 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":3,"total_requests":4}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":1,"total_requests":8}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 00:00:00.000","error_count":3,"total_requests":8}
+    {"date":"2025-02-03 00:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 01:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 02:00:00.000","error_count":0,"total_requests":9}
+    {"date":"2025-02-03 02:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 03:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 04:00:00.000","error_count":0,"total_requests":5}
+    {"date":"2025-02-03 04:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 05:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 06:00:00.000","error_count":4,"total_requests":8}
+    {"date":"2025-02-03 06:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 07:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 08:00:00.000","error_count":4,"total_requests":4}
+    {"date":"2025-02-03 08:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 09:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 10:00:00.000","error_count":2,"total_requests":6}
+    {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 11:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 12:00:00.000","error_count":3,"total_requests":5}
+    {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 13:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 14:00:00.000","error_count":2,"total_requests":5}
+    {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 15:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":5}
+    {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 17:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 18:00:00.000","error_count":7,"total_requests":3}
+    {"date":"2025-02-03 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 20:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-03 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 21:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 23:00:00.000","error_count":0,"total_requests":0}
@@ -206,10 +206,10 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":1,"total_requests":2}
-    {"date":"2025-02-02 21:00:00.000","error_count":2,"total_requests":2}
-    {"date":"2025-02-02 22:00:00.000","error_count":1,"total_requests":5}
-    {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":3}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
 
 - name: minute_error_monitoring
   description: Test error monitoring for an hour range with minute granularity
@@ -298,9 +298,9 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":2,"total_requests":0}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 00:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 01:00:00.000","error_count":0,"total_requests":0}
@@ -310,17 +310,17 @@
     {"date":"2025-02-03 05:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 06:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 07:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 08:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-03 08:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 09:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 11:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 12:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 13:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 15:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 17:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 18:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-03 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 19:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 21:00:00.000","error_count":0,"total_requests":0}
@@ -350,10 +350,10 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":1,"total_requests":1}
-    {"date":"2025-02-02 21:00:00.000","error_count":2,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":1,"total_requests":3}
-    {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
 
 - name: level_timeseries
   description: Test timeseries with level filter
@@ -378,9 +378,9 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":1,"total_requests":0}
-    {"date":"2025-02-02 21:00:00.000","error_count":2,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
 
 - name: environment_timeseries
@@ -406,29 +406,29 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":2,"total_requests":2}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":1,"total_requests":2}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 00:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 01:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 02:00:00.000","error_count":0,"total_requests":5}
+    {"date":"2025-02-03 02:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 03:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 04:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-03 04:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 05:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 06:00:00.000","error_count":0,"total_requests":2}
+    {"date":"2025-02-03 06:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 07:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 08:00:00.000","error_count":2,"total_requests":1}
+    {"date":"2025-02-03 08:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 09:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":2}
+    {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 11:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 12:00:00.000","error_count":1,"total_requests":3}
+    {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 13:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 15:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":2}
+    {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 17:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 18:00:00.000","error_count":1,"total_requests":1}
+    {"date":"2025-02-03 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 19:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 21:00:00.000","error_count":0,"total_requests":0}
@@ -458,10 +458,10 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":1,"total_requests":1}
-    {"date":"2025-02-02 21:00:00.000","error_count":2,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":1,"total_requests":3}
-    {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
 
 - name: status_code_timeseries
   description: Test timeseries with status code filter
@@ -500,11 +500,11 @@
     {"date":"2025-02-03 07:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 08:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 09:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 11:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 13:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 15:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 17:00:00.000","error_count":0,"total_requests":0}
@@ -533,7 +533,7 @@
     {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 13:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 15:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-03 15:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 18:00:00.000","error_count":0,"total_requests":0}
@@ -566,10 +566,10 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":1}
-    {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":3}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
+    {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
 
 - name: message_timeseries
   description: Test timeseries with message filter
@@ -594,7 +594,7 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
@@ -622,29 +622,29 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":4}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 00:00:00.000","error_count":0,"total_requests":3}
+    {"date":"2025-02-03 00:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 01:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 02:00:00.000","error_count":0,"total_requests":2}
+    {"date":"2025-02-03 02:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 03:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 04:00:00.000","error_count":0,"total_requests":4}
+    {"date":"2025-02-03 04:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 05:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 06:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 07:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 08:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-03 08:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 09:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":2}
+    {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 11:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":2}
+    {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 13:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":3}
+    {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 15:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":2}
+    {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 17:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 18:00:00.000","error_count":0,"total_requests":1}
+    {"date":"2025-02-03 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 19:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 21:00:00.000","error_count":0,"total_requests":0}
@@ -818,31 +818,31 @@
     {"date":"2025-02-02 17:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 20:00:00.000","error_count":3,"total_requests":0}
+    {"date":"2025-02-02 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 21:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-02 22:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-02 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-02 23:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 00:00:00.000","error_count":3,"total_requests":0}
+    {"date":"2025-02-03 00:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 01:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 02:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 03:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 04:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 05:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 06:00:00.000","error_count":4,"total_requests":0}
+    {"date":"2025-02-03 06:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 07:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 08:00:00.000","error_count":4,"total_requests":0}
+    {"date":"2025-02-03 08:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 09:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 10:00:00.000","error_count":2,"total_requests":0}
+    {"date":"2025-02-03 10:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 11:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 12:00:00.000","error_count":3,"total_requests":0}
+    {"date":"2025-02-03 12:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 13:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 14:00:00.000","error_count":2,"total_requests":0}
+    {"date":"2025-02-03 14:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 15:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 16:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 17:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 18:00:00.000","error_count":7,"total_requests":0}
+    {"date":"2025-02-03 18:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 19:00:00.000","error_count":0,"total_requests":0}
-    {"date":"2025-02-03 20:00:00.000","error_count":1,"total_requests":0}
+    {"date":"2025-02-03 20:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 21:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 22:00:00.000","error_count":0,"total_requests":0}
     {"date":"2025-02-03 23:00:00.000","error_count":0,"total_requests":0}

@@ -5,12 +5,10 @@ export const LogEntrySchema = z.object({
   timestamp: z.string(),
   request_method: z.string(),
   status_code: z.number(),
-  service: z.string(),
+  projectName: z.string(),
   request_path: z.string(),
   level: z.string(),
   message: z.string(),
-  user_agent: z.string(),
-  response_time: z.number(),
   environment: z.string(),
 });
 

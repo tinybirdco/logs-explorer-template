@@ -71,14 +71,14 @@ SQL >
         {% end %}
         {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
             countMerge(error_count) as error_count,
-            {% if defined(level) and level != 'ERROR' %}
+            {% if defined(level) and level != 'error' %}
                 countMerge(total_requests) as total_requests
             {% else %}
                 0 as total_requests
             {% end %}
         {% else %}
-            countIf(level = 'ERROR') as error_count,
-            countIf(level != 'ERROR') as total_requests
+            countIf(level = 'error') as error_count,
+            countIf(level != 'error') as total_requests
         {% end %}
     FROM
     {% if date_diff_in_hours(start_date, end_date) >= 24 * 10 %}
@@ -94,8 +94,8 @@ SQL >
         AND timestamp >= {{DateTime(start_date)}}
         AND timestamp <= {{DateTime(end_date)}}
     {% end %}
-    {% if defined(service) and service != [''] %}
-        AND service in {{Array(service)}}
+    {% if defined(projectName) and projectName != [''] %}
+        AND projectName in {{Array(projectName)}}
     {% end %}
     {% if defined(level) and len(level) > 0 %}
         AND level in {{Array(level)}}
@@ -111,9 +111,6 @@ SQL >
     {% end %}
     {% if defined(request_path) and request_path != [''] %}
         AND request_path in {{Array(request_path)}}
-    {% end %}
-    {% if defined(user_agent) and user_agent != [''] %}
-        AND user_agent in {{Array(user_agent)}}
     {% end %}
     {% if date_diff_in_hours(start_date, end_date) <= 24 * 7 %}
         {% if defined(message) and message != '' %}

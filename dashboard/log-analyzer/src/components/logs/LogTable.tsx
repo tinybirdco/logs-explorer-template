@@ -71,7 +71,7 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
                     Time{renderSortIndicator('timestamp')}
                   </TableHead>
                   <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Level</TableHead>
-                  <TableHead className="w-[12%] whitespace-nowrap px-4 py-3 text-left">Service</TableHead>
+                  <TableHead className="w-[12%] whitespace-nowrap px-4 py-3 text-left">Project</TableHead>
                   <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Method</TableHead>
                   <TableHead className="w-[8%] whitespace-nowrap px-4 py-3 text-left">Status</TableHead>
                   <TableHead className="w-[14%] px-4 py-3 text-left">Path</TableHead>
@@ -112,16 +112,16 @@ export function LogTable({ logs = [], onSort, sortColumn, sortOrder, observerRef
                         </TableCell>
                         <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">
                           <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium
-                            ${log.level === 'ERROR' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
-                              log.level === 'WARN' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
-                              log.level === 'INFO' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
-                              log.level === 'DEBUG' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
+                            ${log.level === 'error' ? 'bg-[var(--bg-pill-error)] text-[var(--text-pill-error)]' : 
+                              log.level === 'warning' ? 'bg-[var(--bg-pill-warn)] text-[var(--text-pill-warn)]' : 
+                              log.level === 'info' ? 'bg-[var(--bg-pill-info)] text-[var(--text-pill-info)]' : 
+                              log.level === 'debug' ? 'bg-[var(--bg-pill-debug)] text-[var(--text-pill-debug)]' : 
                               'bg-[var(--bg-pill-default)] text-[var(--text-pill-default)]'}`
                           }>
                             {log.level}
                           </span>
                         </TableCell>
-                        <TableCell className="w-[12%] whitespace-nowrap px-4 py-3 text-left">{log.service}</TableCell>
+                        <TableCell className="w-[12%] whitespace-nowrap px-4 py-3 text-left">{log.projectName}</TableCell>
                         <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">{log.request_method}</TableCell>
                         <TableCell className="w-[8%] whitespace-nowrap px-4 py-3 text-left">
                           <span className={`inline-flex items-center rounded-sm px-2 py-1 text-xs font-medium

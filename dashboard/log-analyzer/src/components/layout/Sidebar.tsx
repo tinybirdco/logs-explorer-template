@@ -92,9 +92,9 @@ export default function Sidebar() {
               
               {/* Services */}
               <GenericCounter 
-                columnName="service"
-                title="Services"
-                onSelectionChange={createFilterHandler('service')}
+                columnName="projectName"
+                title="Project"
+                onSelectionChange={createFilterHandler('projectName')}
                 shouldRefresh={refreshTrigger}
                 startOpen={true}
               />

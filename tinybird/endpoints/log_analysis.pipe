@@ -14,11 +14,10 @@ SQL >
         request_id,
         request_method,
         status_code,
-        service,
+        projectName,
         request_path,
         level,
         message,
-        user_agent,
         response_time,
         environment
     FROM logs
@@ -29,8 +28,8 @@ SQL >
     {% if defined(end_date) and end_date != '' %}
         AND timestamp <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
     {% end %}
-    {% if defined(service) and service != [''] %}
-        AND service in {{Array(service)}}
+    {% if defined(projectName) and projectName != [''] %}
+        AND projectName in {{Array(projectName)}}
     {% end %}
     {% if defined(level) and level != [''] %}
         AND level in {{Array(level)}}
@@ -46,9 +45,6 @@ SQL >
     {% end %}
     {% if defined(request_path) and request_path != [''] %}
         AND request_path in {{Array(request_path)}}
-    {% end %}
-    {% if defined(user_agent) and user_agent != [''] %}
-        AND user_agent in {{Array(user_agent)}}
     {% end %}
     {% if defined(message) and message != '' %}
         AND multiSearchAnyCaseInsensitive(message, {{split_to_array(String(message, ''), separator='|')}})

@@ -5,7 +5,7 @@ SQL >
         toStartOfFifteenMinutes(timestamp) AS start_ts,
         start_ts + toIntervalMinute(15) AS end_ts,
         environment,
-        service,
+        projectName,
         level,
         countState() AS n_rows
     FROM logs
@@ -13,7 +13,7 @@ SQL >
         start_ts,
         end_ts,
         environment,
-        service,
+        projectName,
         level
 
 TYPE materialized
