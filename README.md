@@ -122,6 +122,14 @@ tb --cloud deploy
 
 Once deployed copy your Tinybird cloud host and `read_pipes` token, [deploy the Next.js application to Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftinybirdco%2Flogs-explorer-template&project-name=tinybird-logs-explorer-template&repository-name=tinybird-logs-explorer-template&demo-description=Custom%20logs%20explorer%20for%20your%20application%20logs%20using%20Tinybird&demo-url=http%3A%2F%2Flogs.tinybird.app&demo-image=//github.com/tinybirdco/logs-explorer-template/blob/main/dashboard/log-analyzer/public/banner.png?raw=true&root-directory=dashboard/log-analyzer) and configure the environment variables.
 
+## Customizing the template
+
+You can use the template as a starting point to build your own logs explorer application or embed components in your own application.
+
+To customize the template, adapt the data sources and pipes in the [tinybird project](./tinybird) and the components in the [Next.js application](./dashboard/log-analyzer).
+
+See how it's done in the [Vercel Log Drains template](https://github.com/alrocar/vercel-logs-explorer-template) and the [Auth0 Log Streams template](https://github.com/tinybirdco/auth0-logs-explorer-template).
+
 ## Contributing
 
 Please open an issue or submit a pull request.
