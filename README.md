@@ -6,11 +6,8 @@ Use this template to bootstrap a multi-tenant, user-facing logs explorer for any
 
 ## Live Demo
 
-[https://logs.tinybird.app](https://logs.tinybird.app)
-
-<video width="100%" controls>
-  <source src="https://tinybird-blog.ghost.io/content/media/2025/02/1-explorer-features-2.mp4" type="video/mp4">
-</video>
+- [https://logs.tinybird.app](https://logs.tinybird.app)
+- [Watch Demo Video](https://tinybird-blog.ghost.io/content/media/2025/02/1-explorer-features-2.mp4)
 
 ## Quick Start
 
