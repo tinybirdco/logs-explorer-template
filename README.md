@@ -4,6 +4,14 @@ This is a template for a Logs Explorer web application. It is built with Next.js
 
 Use this template to bootstrap a multi-tenant, user-facing logs explorer for any software project. Fork it and make it your own!
 
+## Live Demo
+
+[https://logs.tinybird.app](https://logs.tinybird.app)
+
+<video width="100%" controls>
+  <source src="https://tinybird-blog.ghost.io/content/media/2025/02/1-explorer-features-2.mp4" type="video/mp4">
+</video>
+
 ## Quick Start
 
 Deploy the Tinybird and Next.js to the cloud to get started quickly.
@@ -18,12 +26,14 @@ Deploy the Tinybird and Next.js to the cloud to get started quickly.
 
 Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source or stream some mock data.
 
-Configure Environment Variables and you are ready to go:
+Configure this Environment Variables in your Vercel project and you are ready to go:
 
 ```bash
 NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_ADMIN_TOKEN>
 NEXT_PUBLIC_TINYBIRD_API_URL=<YOUR_TINYBIRD_REGION_HOST>
 ```
+
+Get your Tinybird admin token and region host from the Tinybird dashboard.
 
 ## Local Development
 
@@ -50,7 +60,7 @@ cp .env.example .env
 Edit the `.env` file with your Tinybird API key and other configuration.
 
 ```bash
-NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_ADMIN_TOKEN>
+NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_LOCAL_ADMIN_TOKEN>
 NEXT_PUBLIC_TINYBIRD_API_URL=http://localhost:7181
 ```
 
