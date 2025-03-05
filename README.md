@@ -23,7 +23,7 @@ Deploy the Tinybird and Next.js to the cloud to get started quickly.
 
 Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source or stream some mock data.
 
-Configure this Environment Variables in your Vercel project and you are ready to go:
+Configure these Environment Variables in your Vercel project and you are ready to go:
 
 ```bash
 NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_ADMIN_TOKEN>
