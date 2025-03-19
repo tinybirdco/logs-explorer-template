@@ -16,8 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Tinybird CLI
-        run: curl -LsSf https://api.tinybird.co/static/install.sh | sh
-      - name: Authenticate
-        run: tb auth --host https://api.europe-west2.gcp.tinybird.co --token ${{ secrets.TB_ADMIN_TOKEN }}
+        run: curl https://tinybird.co | sh
       - name: Deploy project
-        run: tb --cloud deploy
+        run: tb --cloud --host https://api.europe-west2.gcp.tinybird.co --token ${{ secrets.TB_ADMIN_TOKEN }} deploy
