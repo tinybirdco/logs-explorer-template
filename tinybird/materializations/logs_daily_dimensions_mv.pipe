@@ -13,14 +13,7 @@ SQL >
         request_path,
         user_agent,
         host,
-        countState() as count,
-        avgState(response_time) as avg_response_time,
-        sumState(response_time) as sum_response_time,
-        minState(response_time) as min_response_time,
-        maxState(response_time) as max_response_time,
-        quantileState(0.5)(response_time) as median_response_time,
-        quantileState(0.9)(response_time) as p90_response_time,
-        quantileState(0.99)(response_time) as p99_response_time
+        countState() as count
     FROM logs
     GROUP BY
         date,
