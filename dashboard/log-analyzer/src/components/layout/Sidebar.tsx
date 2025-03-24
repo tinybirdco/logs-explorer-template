@@ -10,37 +10,11 @@ import SplashCursor from '@/components/animations/SplashCursor/SplashCursor'
 import { Star } from "lucide-react";
 import dynamic from 'next/dynamic';
 
-// Dynamically import Clerk components
-const UserButton = dynamic(() => import('@clerk/nextjs').then((mod) => mod.UserButton), {
+// Dynamically import Auth component with no SSR
+const AuthSection = dynamic(() => import('./SidebarAuth'), {
   ssr: false,
   loading: () => null,
 });
-
-const SignInButton = dynamic(() => import('@clerk/nextjs').then((mod) => mod.SignInButton), {
-  ssr: false,
-  loading: () => null,
-});
-
-const SignOutButton = dynamic(() => import('@clerk/nextjs').then((mod) => mod.SignOutButton), {
-  ssr: false,
-  loading: () => null,
-});
-
-const SignedIn = dynamic(() => import('@clerk/nextjs').then((mod) => mod.SignedIn), {
-  ssr: false,
-  loading: () => null,
-});
-
-const SignedOut = dynamic(() => import('@clerk/nextjs').then((mod) => mod.SignedOut), {
-  ssr: false,
-  loading: () => null,
-});
-
-// Check if Clerk is configured
-const isClerkConfigured = !!(
-  typeof window !== 'undefined' && 
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-);
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -229,34 +203,10 @@ export default function Sidebar() {
             </div>
           </div>
           
-          {/* Updated bottom section with conditional Clerk rendering */}
+          {/* Updated bottom section with auth */}
           <div className="p-6 border-t border-gray-200">
             <div className="flex items-center justify-between">
-              {isClerkConfigured && (
-                <>
-                  <UserButton afterSignOutUrl="/" />
-                  <div>
-                    {!isCollapsed && (
-                      <>
-                        <SignedOut>
-                          <SignInButton mode="modal">
-                            <button className="text-sm text-gray-600 hover:text-gray-900 font-bold">
-                              Sign in
-                            </button>
-                          </SignInButton>
-                        </SignedOut>
-                        <SignedIn>
-                          <SignOutButton>
-                            <button className="ml-4 text-sm text-gray-600 hover:text-gray-900 font-bold">
-                              Sign out
-                            </button>
-                          </SignOutButton>
-                        </SignedIn>
-                      </>
-                    )}
-                  </div>
-                </>
-              )}
+              <AuthSection isCollapsed={isCollapsed} />
             </div>
           </div>
         </div>
