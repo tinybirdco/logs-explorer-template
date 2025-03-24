@@ -7,8 +7,34 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CollapseIcon, ExpandIcon } from "@/components/icons";
 import SplashCursor from '@/components/animations/SplashCursor/SplashCursor'
-import { UserButton, SignInButton, SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Star } from "lucide-react";
+import dynamic from 'next/dynamic';
+
+// Dynamically import Clerk components
+const UserButton = dynamic(() => import('@clerk/nextjs').then((mod) => mod.UserButton), {
+  ssr: false,
+  loading: () => null,
+});
+
+const SignInButton = dynamic(() => import('@clerk/nextjs').then((mod) => mod.SignInButton), {
+  ssr: false,
+  loading: () => null,
+});
+
+const SignOutButton = dynamic(() => import('@clerk/nextjs').then((mod) => mod.SignOutButton), {
+  ssr: false,
+  loading: () => null,
+});
+
+const SignedIn = dynamic(() => import('@clerk/nextjs').then((mod) => mod.SignedIn), {
+  ssr: false,
+  loading: () => null,
+});
+
+const SignedOut = dynamic(() => import('@clerk/nextjs').then((mod) => mod.SignedOut), {
+  ssr: false,
+  loading: () => null,
+});
 
 // Check if Clerk is configured
 const isClerkConfigured = !!(
@@ -206,7 +232,7 @@ export default function Sidebar() {
           {/* Updated bottom section with conditional Clerk rendering */}
           <div className="p-6 border-t border-gray-200">
             <div className="flex items-center justify-between">
-              {isClerkConfigured ? (
+              {isClerkConfigured && (
                 <>
                   <UserButton afterSignOutUrl="/" />
                   <div>
@@ -230,7 +256,7 @@ export default function Sidebar() {
                     )}
                   </div>
                 </>
-              ) : null}
+              )}
             </div>
           </div>
         </div>
