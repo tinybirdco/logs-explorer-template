@@ -3,23 +3,22 @@
 import { useSearchParams } from "next/navigation";
 import { TimeSeriesChart } from "@/components/charts/TimeSeriesChart";
 import { useRouter } from "next/navigation";
+import { useTinybirdToken } from "@/app/providers/TinybirdProvider";
 
-interface TimeSeriesChartWrapperProps {
-  token: string | undefined;
-}
-
-export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
+export function TimeSeriesChartWrapper() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { token } = useTinybirdToken();
+  
   const start_date = searchParams.get('start_date');
   const end_date = searchParams.get('end_date');
-  const router = useRouter();
 
   if (!start_date || !end_date) {
     return null;
   }
 
   const params = {
-    ...props,
+    token,
     start_date,
     end_date,
     service: searchParams.get('service')?.split(',').filter(Boolean),

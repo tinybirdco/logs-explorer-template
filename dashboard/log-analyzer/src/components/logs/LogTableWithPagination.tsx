@@ -3,7 +3,7 @@
 import { useCallback, useState, useEffect } from 'react';
 import { LogTable } from "./LogTable";
 import type { LogEntry } from "@/lib/types";
-import { logAnalysisApi, logExplorerApi } from '@/lib/tinybird';
+import { useTinybirdApi } from '@/lib/hooks/useTinybirdApi';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { getTotalRowCount } from "@/lib/utils";
@@ -22,6 +22,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { logExplorerApi, logAnalysisApi } = useTinybirdApi();
 
   const currentSortColumn = searchParams.get('sort_by');
   const currentSortOrder = searchParams.get('order') as 'asc' | 'desc' | null;
@@ -96,9 +97,9 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
         setLogs(response.data || []);
         setPage(0);
         setHasMore(true);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         setError('No logs found');
+        console.error('Error loading initial data:', error);
         setHasMore(false);
       } finally {
         setIsLoading(false);
@@ -106,7 +107,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     };
 
     loadInitialData();
-  }, [searchParams, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi]);
+  }, [searchParams, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi, logExplorerApi, logAnalysisApi]);
 
   const loadMore = useCallback(async () => {
     if (!hasMore || isLoading || isLoadingMore) return;
@@ -140,7 +141,7 @@ export function LogTableWithPagination({ pageSize }: LogTableWithPaginationProps
     } finally {
       setIsLoadingMore(false);
     }
-  }, [page, hasMore, isLoading, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi]);
+  }, [page, hasMore, isLoading, pageSize, getFilters, currentSortColumn, currentSortOrder, shouldUseExplorerApi, logExplorerApi, logAnalysisApi]);
 
   const { observerRef } = useInfiniteScroll(loadMore);
 

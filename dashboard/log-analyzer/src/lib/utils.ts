@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { genericCounterApi } from "@/lib/tinybird";
+import { createGenericCounterApi } from "@/lib/tinybird";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -18,6 +18,7 @@ export async function getTotalRowCount(params: {
   user_agent?: string[];
 }) {
   try {
+    const genericCounterApi = createGenericCounterApi(process.env.NEXT_PUBLIC_TINYBIRD_API_KEY!);
     const response = await genericCounterApi({
       column_name: 'level',
       ...params
