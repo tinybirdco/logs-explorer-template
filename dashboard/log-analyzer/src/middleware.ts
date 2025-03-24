@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
 import * as jose from 'jose'
 import { clerkMiddleware } from "@clerk/nextjs/server"
-import type { NextRequest } from "next/server"
 
 // Check if Clerk environment variables are set
 const isClerkConfigured = !!(
@@ -10,7 +9,7 @@ const isClerkConfigured = !!(
 );
 
 // Create a basic middleware that just sets the Tinybird token
-const basicMiddleware = async (req: NextRequest) => {
+const basicMiddleware = async () => {
   const response = NextResponse.next();
   response.headers.set('x-tinybird-token', process.env.NEXT_PUBLIC_TINYBIRD_API_KEY || '');
   return response;
