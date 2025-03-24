@@ -4,11 +4,7 @@ import TopBar from "@/components/layout/TopBar";
 import { LogTableWithPagination } from "@/components/logs/LogTableWithPagination";
 import { TimeSeriesChartWrapper } from "@/components/charts/TimeSeriesChartWrapper";
 
-export default async function Page() {
-  const params = {
-    token: process.env.NEXT_PUBLIC_TINYBIRD_API_KEY,
-  };
-
+export default function Page() {
   return (
     <main className="flex h-screen bg-[var(--background)]">
       <Suspense fallback={
@@ -32,7 +28,7 @@ export default async function Page() {
         <div className="flex-1 pr-6 py-6 space-y-6 overflow-hidden flex flex-col">
           <Suspense fallback={<div className="animate-pulse bg-muted h-[140px]" />}>
             <div className="bg-card rounded-2xl">
-              <TimeSeriesChartWrapper {...params} />
+              <TimeSeriesChartWrapper />
             </div>
           </Suspense>
           <Suspense fallback={<div className="animate-pulse bg-muted flex-1" />}>

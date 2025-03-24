@@ -1,6 +1,5 @@
 'use client';
 
-import { genericCounterApi } from "@/lib/tinybird";
 import { useEffect, useState, useRef } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -12,6 +11,7 @@ import { useDefaultDateRange } from "@/hooks/useDefaultDateRange";
 import { cn } from "@/lib/utils";
 import { subDays, format } from "date-fns";
 import { TooltipContent, TooltipProvider, TooltipRoot, TooltipTrigger } from "@/components/ui/tooltip";
+import { useTinybirdApi } from "@/lib/hooks/useTinybirdApi";
 
 interface GenericCounterProps {
   columnName: string;
@@ -51,6 +51,7 @@ export function GenericCounter({
   startOpen = false
 }: GenericCounterProps) {
   const searchParams = useSearchParams();
+  const { genericCounterApi } = useTinybirdApi();
   const [data, setData] = useState<CountData[]>(dataCache[columnName] || []);
   const [filteredData, setFilteredData] = useState<CountData[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -114,7 +115,7 @@ export function GenericCounter({
     if (isOpen || shouldRefresh) {
       fetchData();
     }
-  }, [isOpen, shouldRefresh, searchParams]);
+  }, [isOpen, shouldRefresh, searchParams, columnName, service, level, environment, requestMethod, statusCode, requestPath, userAgent, genericCounterApi]);
 
   // Filter data effect
   useEffect(() => {

@@ -7,13 +7,20 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CollapseIcon, ExpandIcon } from "@/components/icons";
 import SplashCursor from '@/components/animations/SplashCursor/SplashCursor'
+import { Star } from "lucide-react";
+import dynamic from 'next/dynamic';
+
+// Dynamically import Auth component with no SSR
+const AuthSection = dynamic(() => import('./SidebarAuth'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   const [showSplashCursor, setShowSplashCursor] = useState(false);
-  const [clickedButtons, setClickedButtons] = useState({ github: false, productHunt: false });
-  const [cacheBuster, setCacheBuster] = useState(() => Date.now());
+  const [starCount, setStarCount] = useState<number | null>(null);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -52,9 +59,18 @@ export default function Sidebar() {
     return () => window.removeEventListener('keydown', handleKeydown);
   }, []);
 
-  // Add this effect to update the cache buster on page refresh
+  // Add this effect to fetch GitHub stars
   useEffect(() => {
-    setCacheBuster(Date.now());
+    const fetchStarCount = async () => {
+      try {
+        const response = await fetch('https://api.github.com/repos/tinybirdco/logs-explorer-template');
+        const data = await response.json();
+        setStarCount(data.stargazers_count);
+      } catch (error) {
+        console.error('Error fetching star count:', error);
+      }
+    };
+    fetchStarCount();
   }, []);
 
   // Update URL with new filters
@@ -79,37 +95,6 @@ export default function Sidebar() {
   const handleCollapse = () => {
     setIsCollapsed(true);
   };
-
-  const handleSocialClick = (type: 'github' | 'productHunt', callback: () => void) => {
-    return () => {
-      const newClickedButtons = { ...clickedButtons, [type]: true };
-      setClickedButtons(newClickedButtons);
-      
-      // Only show splash if both buttons have been clicked
-      if (newClickedButtons.github && newClickedButtons.productHunt) {
-        setShowSplashCursor(true);
-        setTimeout(() => {
-          setShowSplashCursor(false);
-          // Reset the clicks after animation
-          setClickedButtons({ github: false, productHunt: false });
-        }, 30000);
-      }
-      
-      callback();
-    };
-  };
-
-  const handleProductHunt = () => {
-    window.open('https://www.producthunt.com/posts/logs-explorer-template-by-tinybird?utm_source=badge-featured', '_blank');
-  };
-
-  const handleGitHub = () => {
-    window.open('https://github.com/tinybirdco/logs-explorer-template/fork', '_blank');
-  };
-
-  // const handleShowHN = () => {
-  //   window.open('https://news.ycombinator.com/item?id=yourpostid', '_blank');
-  // };
 
   return (
     <aside className={cn("relative transition-all duration-300 ease-in-out p-6 [&_*]:cursor-pointer",
@@ -143,6 +128,23 @@ export default function Sidebar() {
                 onClick={handleCollapse}
               >
                 <CollapseIcon />
+              </Button>
+            </div>
+
+            {/* GitHub Star Button */}
+            <div className="mb-6">
+              <Button
+                variant="outline"
+                className="w-full flex items-center justify-center gap-2 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => window.open('https://github.com/tinybirdco/logs-explorer-template', '_blank')}
+              >
+                <Star className="h-4 w-4" />
+                Star on GitHub
+                {starCount !== null && (
+                  <span className="ml-1 px-2 py-0.5 bg-gray-100 rounded-full text-xs font-semibold">
+                    {starCount}
+                  </span>
+                )}
               </Button>
             </div>
               
@@ -201,45 +203,11 @@ export default function Sidebar() {
             </div>
           </div>
           
-          {/* Updated bottom section */}
-          <div className="p-6 border-t border-gray-200 space-y-3">
-            <a 
-              href="https://www.producthunt.com/posts/logs-explorer-template-by-tinybird?utm_source=badge-featured"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleSocialClick('productHunt', handleProductHunt)}
-              className="block w-full"
-            >
-              <img 
-                src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=logs-explorer-template-by-tinybird&theme=light&cache=${cacheBuster}`}
-                alt="Logs Explorer Template by Tinybird | Product Hunt" 
-                className="w-full"
-              />
-            </a>
-            
-            <a 
-              href="https://github.com/tinybirdco/logs-explorer-template/fork"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleSocialClick('github', handleGitHub)}
-              className="block w-full"
-            >
-              <img 
-                src={`https://img.shields.io/github/stars/tinybirdco/logs-explorer-template?style=for-the-badge&logo=github&label=Fork%20on%20GitHub&logoColor=white&cache=${cacheBuster}`}
-                alt="Fork on GitHub"
-                className="w-full"
-              />
-            </a>
-            
-            {/* <a 
-              href="https://news.ycombinator.com/item?id=yourpostid"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleSocialClick(handleShowHN)}
-              className="flex items-center justify-center w-full bg-[#ff6600] text-white py-1 px-2 rounded hover:bg-[#ff8533] transition-colors"
-            >
-              <span className="text-sm font-medium">Show HN</span>
-            </a> */}
+          {/* Updated bottom section with auth */}
+          <div className="p-6 border-t border-gray-200">
+            <div className="flex items-center justify-between">
+              <AuthSection isCollapsed={isCollapsed} />
+            </div>
           </div>
         </div>
       )}

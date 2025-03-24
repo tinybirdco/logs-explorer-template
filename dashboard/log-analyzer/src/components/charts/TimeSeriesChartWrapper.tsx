@@ -3,25 +3,25 @@
 import { useSearchParams } from "next/navigation";
 import { TimeSeriesChart } from "@/components/charts/TimeSeriesChart";
 import { useRouter } from "next/navigation";
+import { useTinybirdToken } from "@/app/providers/TinybirdProvider";
+import { subDays, format } from "date-fns";
 
-interface TimeSeriesChartWrapperProps {
-  token: string | undefined;
-}
-
-export function TimeSeriesChartWrapper(props: TimeSeriesChartWrapperProps) {
+export function TimeSeriesChartWrapper() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { token } = useTinybirdToken();
+  
   const start_date = searchParams.get('start_date');
   const end_date = searchParams.get('end_date');
-  const router = useRouter();
 
-  if (!start_date || !end_date) {
-    return null;
-  }
-
+  // Default to last 3 days if no dates present
+  const defaultEndDate = new Date();
+  const defaultStartDate = subDays(defaultEndDate, 3);
+  
   const params = {
-    ...props,
-    start_date,
-    end_date,
+    token,
+    start_date: start_date || format(defaultStartDate, 'yyyy-MM-dd HH:mm:ss'),
+    end_date: end_date || format(defaultEndDate, 'yyyy-MM-dd HH:mm:ss'),
     service: searchParams.get('service')?.split(',').filter(Boolean),
     level: searchParams.get('level')?.split(',').filter(Boolean),
     environment: searchParams.get('environment')?.split(',').filter(Boolean),

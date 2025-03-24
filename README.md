@@ -4,6 +4,15 @@ This is a template for a Logs Explorer web application. It is built with Next.js
 
 Use this template to bootstrap a multi-tenant, user-facing logs explorer for any software project. Fork it and make it your own!
 
+Tech Stack:
+- Next.js
+- Tinybird
+- Clerk
+- Vercel
+- zod-bird
+- Tailwind CSS
+- Shadcn UI
+
 ## Live Demo
 
 - [https://logs.tinybird.app](https://logs.tinybird.app)
@@ -76,6 +85,66 @@ http://localhost:3000
 ```
 
 Read the [dashboard/log-analyzer/README.md](./dashboard/log-analyzer/README.md) file for more information on how to use the application and [tinybird/README.md](./tinybird/README.md) for more information on how to customize the template.
+
+## Multi-tenancy
+
+The template is designed to be multi-tenant. It uses Clerk for authentication and user management.
+
+Configure the `.env` file with your Clerk publishable key and secret.
+
+```bash
+CLERK_PUBLISHABLE_KEY=<YOUR_CLERK_PUBLISHABLE_KEY>
+CLERK_SECRET_KEY=<YOUR_CLERK_SECRET_KEY>
+```
+
+Then set the Tinybird JWT secret and workspace ID in the `.env` file.
+
+```bash
+TINYBIRD_JWT_SECRET=<YOUR_TINYBIRD_ADMIN_TOKEN>
+TINYBIRD_WORKSPACE_ID=<YOUR_TINYBIRD_WORKSPACE_ID>
+```
+
+Modify the middleware to adapt the Tinybird token to your tenants.
+
+```typescript
+// dashboard/log-analyzer/src/middleware.ts
+
+const token = await new jose.SignJWT({
+    workspace_id: process.env.TINYBIRD_WORKSPACE_ID,
+    name: `frontend_jwt_user_${userId}`,
+    exp: Math.floor(Date.now() / 1000) + (60 * 15), // 15 minute expiration
+    iat: Math.floor(Date.now() / 1000),
+    scopes: [
+      {
+        type: "PIPES:READ",
+        resource: "log_analysis",
+        fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+      },
+      {
+        type: "PIPES:READ",
+        resource: "log_explorer",
+        fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+      },
+      {
+        type: "PIPES:READ",
+        resource: "generic_counter",
+        fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+      },
+      {
+        type: "PIPES:READ",
+        resource: "log_timeseries",
+        fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+      }
+    ],
+    limits: {
+      rps: 10
+    }
+  })
+    .setProtectedHeader({ alg: 'HS256' })
+    .sign(secret);
+```
+
+Read more about how to integrate Clerk and Tinybird JWT tokens in [this guide](https://www.tinybird.co/docs/publish/api-endpoints/guides/multitenant-real-time-apis-with-clerk-and-tinybird).
 
 ## Instrumenting your application
 
