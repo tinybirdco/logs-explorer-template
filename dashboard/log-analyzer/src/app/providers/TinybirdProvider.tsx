@@ -14,12 +14,14 @@ const TinybirdContext = createContext<TinybirdContextType | undefined>(undefined
 interface TinybirdProviderProps {
   children: ReactNode
   initialToken: string
-  initialOrgName: string
+  initialOrgName?: string
 }
 
-export function TinybirdProvider({ children, initialToken, initialOrgName }: TinybirdProviderProps) {
-  const [token, setToken] = useState(initialToken || process.env.NEXT_PUBLIC_TINYBIRD_API_KEY || '')
-  const [orgName, setOrgName] = useState(initialOrgName)
+export function TinybirdProvider({ children, initialToken, initialOrgName = '' }: TinybirdProviderProps) {
+  // If no token is provided, use the public API key
+  const defaultToken = initialToken || process.env.NEXT_PUBLIC_TINYBIRD_API_KEY || '';
+  const [token, setToken] = useState(defaultToken);
+  const [orgName, setOrgName] = useState(initialOrgName);
 
   return (
     <TinybirdContext.Provider value={{ token, orgName, setToken, setOrgName }}>

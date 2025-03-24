@@ -10,6 +10,12 @@ import SplashCursor from '@/components/animations/SplashCursor/SplashCursor'
 import { UserButton, SignInButton, SignOutButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Star } from "lucide-react";
 
+// Check if Clerk is configured
+const isClerkConfigured = !!(
+  typeof window !== 'undefined' && 
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+);
+
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
@@ -197,30 +203,34 @@ export default function Sidebar() {
             </div>
           </div>
           
-          {/* Updated bottom section */}
+          {/* Updated bottom section with conditional Clerk rendering */}
           <div className="p-6 border-t border-gray-200">
             <div className="flex items-center justify-between">
-              <UserButton afterSignOutUrl="/" />
-              <div>
-                {!isCollapsed && (
-                  <>
-                    <SignedOut>
-                      <SignInButton mode="modal">
-                        <button className="text-sm text-gray-600 hover:text-gray-900 font-bold">
-                          Sign in
-                        </button>
-                      </SignInButton>
-                    </SignedOut>
-                    <SignedIn>
-                      <SignOutButton>
-                        <button className="ml-4 text-sm text-gray-600 hover:text-gray-900 font-bold">
-                          Sign out
-                      </button>
-                      </SignOutButton>
-                    </SignedIn>
-                  </>
-                )}
-              </div>
+              {isClerkConfigured ? (
+                <>
+                  <UserButton afterSignOutUrl="/" />
+                  <div>
+                    {!isCollapsed && (
+                      <>
+                        <SignedOut>
+                          <SignInButton mode="modal">
+                            <button className="text-sm text-gray-600 hover:text-gray-900 font-bold">
+                              Sign in
+                            </button>
+                          </SignInButton>
+                        </SignedOut>
+                        <SignedIn>
+                          <SignOutButton>
+                            <button className="ml-4 text-sm text-gray-600 hover:text-gray-900 font-bold">
+                              Sign out
+                            </button>
+                          </SignOutButton>
+                        </SignedIn>
+                      </>
+                    )}
+                  </div>
+                </>
+              ) : null}
             </div>
           </div>
         </div>
