@@ -115,7 +115,7 @@ export function GenericCounter({
     if (isOpen || shouldRefresh) {
       fetchData();
     }
-  }, [isOpen, shouldRefresh, searchParams, columnName, service, level, environment, requestMethod, statusCode, requestPath, userAgent, genericCounterApi]);
+  }, [isOpen, shouldRefresh, searchParams, columnName, genericCounterApi]);
 
   // Filter data effect
   useEffect(() => {
