@@ -11,5 +11,3 @@ ENGINE_PARTITION_KEY "toYYYYMM(start_ts)"
 ENGINE_SORTING_KEY "start_ts, end_ts, environment, service, level"
 ENGINE_PRIMARY_KEY "start_ts, end_ts, environment"
 
-FORWARD_QUERY >
-    SELECT *

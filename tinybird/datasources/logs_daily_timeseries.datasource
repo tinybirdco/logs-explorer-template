@@ -19,6 +19,3 @@ ENGINE "AggregatingMergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(date)"
 ENGINE_SORTING_KEY "date, environment, service, level, request_method, status_code, request_path, user_agent"
 ENGINE_PRIMARY_KEY "date, environment, service, level"
-
-FORWARD_QUERY >
-    SELECT *
