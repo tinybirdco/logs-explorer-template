@@ -17,7 +17,7 @@ const basicMiddleware = async () => {
 
 // Enhanced middleware with Clerk authentication
 const enhancedMiddleware = clerkMiddleware(async (auth) => {
-  const { userId, sessionId, orgPermissions } = await auth();
+  const { userId, sessionId, orgId } = await auth();
 
   // If user is not authenticated, continue without modification
   if (!userId || !sessionId) {
@@ -28,13 +28,11 @@ const enhancedMiddleware = clerkMiddleware(async (auth) => {
   }
 
   try {
-    const orgName = orgPermissions?.[0]?.split(':').pop() || '';
-
     // Create Tinybird JWT only if the secret is available
     if (!process.env.TINYBIRD_JWT_SECRET || !process.env.TINYBIRD_WORKSPACE_ID) {
       const response = NextResponse.next();
       response.headers.set('x-tinybird-token', process.env.NEXT_PUBLIC_TINYBIRD_API_KEY || '');
-      response.headers.set('x-org-name', orgName);
+      response.headers.set('x-org-name', orgId || '');
       return response;
     }
 
@@ -49,22 +47,22 @@ const enhancedMiddleware = clerkMiddleware(async (auth) => {
         {
           type: "PIPES:READ",
           resource: "log_analysis",
-          fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+          fixed_params: { user_id: userId, org_id: orgId || '', service: "web" }
         },
         {
           type: "PIPES:READ",
           resource: "log_explorer",
-          fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+          fixed_params: { user_id: userId, org_id: orgId || '', service: "web" }
         },
         {
           type: "PIPES:READ",
           resource: "generic_counter",
-          fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+          fixed_params: { user_id: userId, org_id: orgId || '', service: "web" }
         },
         {
           type: "PIPES:READ",
           resource: "log_timeseries",
-          fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+          fixed_params: { user_id: userId, org_id: orgId || '', service: "web" }
         }
       ],
       limits: {
@@ -77,7 +75,7 @@ const enhancedMiddleware = clerkMiddleware(async (auth) => {
     // Clone the response and add token
     const response = NextResponse.next();
     response.headers.set('x-tinybird-token', token);
-    response.headers.set('x-org-name', orgName);
+    response.headers.set('x-org-name', orgId || '');
     return response;
   } catch (error) {
     console.error('Middleware error:', error);
