@@ -2,65 +2,31 @@ This is a template for a Logs Explorer web application. It is built with Next.js
 
 Use this template to bootstrap a multi-tenant, user-facing logs explorer for any software project. Fork it and make it your own!
 
-## Quick Start
+## Set up the project
 
-Deploy the project to [Tinybird](https://app.tinybird.co?starter_kit=https://github.com/tinybirdco/logs-explorer-template/tinybird) and [Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftinybirdco%2Flogs-explorer-template&project-name=tinybird-logs-explorer-template&repository-name=tinybird-logs-explorer-template&demo-description=Custom%20logs%20explorer%20for%20your%20application%20logs%20using%20Tinybird&demo-url=http%3A%2F%2Flogs.tinybird.app&demo-image=//github.com/tinybirdco/logs-explorer-template/blob/main/dashboard/log-analyzer/public/banner.png?raw=true&root-directory=dashboard/log-analyzer) to get started quickly.
+Fork the GitHub repository and deploy the data project to Tinybird.
+
+```bash
+# select or create a new workspace
+tb login
+
+# deploy the template
+tb --cloud deploy https://github.com/tinybirdco/logs-explorer-template/tree/main/tinybird
+
+# copy the dashboard token
+tb --cloud token copy read_pipes
+```
+
+Deploy the [dashboard to Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftinybirdco%2Flogs-explorer-template&project-name=tinybird-logs-explorer-template&repository-name=tinybird-logs-explorer-template&demo-description=Custom%20logs%20explorer%20for%20your%20application%20logs%20using%20Tinybird&demo-url=http%3A%2F%2Flogs.tinybird.app&demo-image=//github.com/tinybirdco/logs-explorer-template/blob/main/dashboard/log-analyzer/public/banner.png?raw=true&root-directory=dashboard/log-analyzer)
 
 Configure your Tinybird environment variables in Vercel:
 
 ```sh
-NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_ADMIN_TOKEN>
+NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_READ_PIPES_TOKEN>
 NEXT_PUBLIC_TINYBIRD_API_URL=<YOUR_TINYBIRD_HOST_REGION>
 ```
 
-Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source or stream some mock data.
-
-## Local Development
-
-Get started by forking the [GitHub repository](https://github.com/tinybirdco/logs-explorer-template) and then customizing it to your needs.
-
-Start Tinybird locally:
-
-```sh
-curl -LsSf https://tbrd.co/fwd | sh
-cd tinybird
-tb local start
-tb login
-tb dev
-token ls  # copy an admin token
-```
-
-Configure the Next.js application:
-
-```sh
-cd dashboard/log-analyzer
-cp .env.example .env
-```
-
-Edit the `.env` file with your Tinybird API key and other configuration.
-
-```sh
-NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_ADMIN_TOKEN>
-NEXT_PUBLIC_TINYBIRD_API_URL=http://localhost:7181
-```
-
-Start the Next.js application:
-
-```sh
-cd dashboard/log-analyzer
-npm install
-npm run dev
-```
-
-Open the application in your browser:
-
-```sh
-http://localhost:3000
-```
-
-Read the [dashboard/log-analyzer/README.md](https://github.com/tinybirdco/logs-explorer-template/blob/main/dashboard/log-analyzer/README.md) file for more information on how to use the application and [tinybird/README.md](https://github.com/tinybirdco/logs-explorer-template/blob/main/tinybird/README.md) for more information on how to customize the template.
-
-## Instrumenting your application
+## Instrument your application
 
 To instrument your application, just send JSON objects to the Tinybird [Events API](https://www.tinybird.co/docs/get-data-in/ingest-apis/events-api).
 
@@ -101,19 +67,6 @@ You can use Vector to collect logs from different sources and send them to a Tin
 
 Check the [examples/vector](https://github.com/tinybirdco/logs-explorer-template/tree/main/examples/vector) folder for an example of how to do this with Vector.
 
-## Deployment
+## Local Development, multi-tenancy and more
 
-Deploy the Tinybird project to the cloud:
-
-```sh
-cd tinybird
-tb --cloud deploy
-```
-
-Once deployed copy your Tinybird cloud host and `read_pipes` token, [deploy the Next.js application to Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftinybirdco%2Flogs-explorer-template&project-name=tinybird-logs-explorer-template&repository-name=tinybird-logs-explorer-template&demo-description=Custom%20logs%20explorer%20for%20your%20application%20logs%20using%20Tinybird&demo-url=http%3A%2F%2Flogs.tinybird.app&demo-image=//github.com/tinybirdco/logs-explorer-template/blob/main/dashboard/log-analyzer/public/banner.png?raw=true&root-directory=dashboard/log-analyzer) and configure the environment variables.
-
-## Customizing the template
-
-You can use the template as a starting point to build your own logs explorer application or embed components in your own application.
-
-See how it's done in the [Vercel Log Drains template](https://github.com/alrocar/vercel-logs-explorer-template) and the [Auth0 Log Streams template](https://github.com/tinybirdco/auth0-logs-explorer-template).
+See the GitHub repository [README.md](https://github.com/tinybirdco/logs-explorer-template)
