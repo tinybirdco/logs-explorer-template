@@ -27,7 +27,7 @@ Deploy the Tinybird and Next.js to the cloud to get started quickly.
 tb login
 
 # deploy the template
-tb --cloud deploy https://github.com/tinybirdco/logs-explorer-template/tree/main/tinybird
+tb --cloud deploy --template https://github.com/tinybirdco/logs-explorer-template/tree/main/tinybird
 
 # copy the dashboard token
 tb --cloud token copy read_pipes
