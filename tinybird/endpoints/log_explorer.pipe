@@ -34,8 +34,17 @@ SQL >
         {% if defined(level) and level != [''] %}
             AND level in {{ Array(level) }}
         {% end %}
-        AND start_ts >= {{ DateTime(start_date, '2025-02-02 00:00:00') }}
-        AND end_ts <= {{ DateTime(end_date, '2025-02-04 00:00:00') }}
+        {% if defined(start_date) and start_date != '' %}
+            AND start_ts >= {{ DateTime(start_date, '2025-02-02 00:00:00') }}
+        {% else %}
+            AND start_ts >= now() - INTERVAL 7 DAY
+        {% end %}
+        {% if defined(end_date) and end_date != '' %}
+            AND end_ts <= {{ DateTime(end_date, '2025-02-04 00:00:00') }}
+            AND start_ts >= {{ DateTime(end_date, '2025-02-04 00:00:00') }} - INTERVAL 6 MONTH
+        {% else %}
+            AND start_ts >= now() - INTERVAL 6 MONTH
+        {% end %}
         group by start_ts, end_ts
     )
     group by start_ts, end_ts, n_rows
@@ -55,7 +64,7 @@ SQL >
 NODE min_ts_range
 SQL >
 %
-with {{ Int32(page, 0)* Int32(page_size, 10) }} as page_start
+with {{ Int32(page, 0) }} * least({{ Int32(page_size, 10) }}, 100) as page_start
 SELECT *
     FROM cummulative_rows
     WHERE _n_rows >= page_start
@@ -65,7 +74,7 @@ SELECT *
 NODE max_ts_range
 SQL >
 %
-with {{ (Int32(page, 0) + 1) * Int32(page_size, 10) }} as page_end
+with ({{ Int32(page, 0) }} + 1) * least({{ Int32(page_size, 10) }}, 100) as page_end
     SELECT *
     FROM cummulative_rows
     WHERE _n_rows >= page_end
@@ -136,7 +145,7 @@ SQL >
     {% else %}
         DESC
     {% end %}
-    LIMIT {{Int32(page_size, 10)}}
-    OFFSET {{Int32(page, 0)}} * {{Int32(page_size, 10)}} - assumeNotNull(previous)
+    LIMIT least({{Int32(page_size, 10)}}, 100)
+    OFFSET {{Int32(page, 0)}} * least({{Int32(page_size, 10)}}, 100) - assumeNotNull(previous)
 
 TYPE endpoint

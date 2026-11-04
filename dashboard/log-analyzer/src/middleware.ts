@@ -48,23 +48,19 @@ const enhancedMiddleware = clerkMiddleware(async (auth) => {
       scopes: [
         {
           type: "PIPES:READ",
-          resource: "log_analysis",
-          fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+          resource: "log_analysis"
         },
         {
           type: "PIPES:READ",
-          resource: "log_explorer",
-          fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+          resource: "log_explorer"
         },
         {
           type: "PIPES:READ",
-          resource: "generic_counter",
-          fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+          resource: "generic_counter"
         },
         {
           type: "PIPES:READ",
-          resource: "log_timeseries",
-          fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+          resource: "log_timeseries"
         }
       ],
       limits: {

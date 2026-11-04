@@ -25,9 +25,14 @@ SQL >
     WHERE 1=1
     {% if defined(start_date) and start_date != '' %}
         AND timestamp >= {{DateTime(start_date, '2024-01-01 00:00:00')}}
+    {% else %}
+        AND timestamp >= now() - INTERVAL 7 DAY
     {% end %}
     {% if defined(end_date) and end_date != '' %}
         AND timestamp <= {{DateTime(end_date, '2024-12-31 23:59:59')}}
+        AND timestamp >= {{DateTime(end_date, '2024-12-31 23:59:59')}} - INTERVAL 6 MONTH
+    {% else %}
+        AND timestamp >= now() - INTERVAL 6 MONTH
     {% end %}
     {% if defined(service) and service != [''] %}
         AND service in {{Array(service)}}
@@ -66,8 +71,8 @@ SQL >
             DESC
         {% end %}
     {% end %}
-    LIMIT {{Int32(page_size, 100)}}
-    OFFSET {{Int32(page, 0)}} * {{Int32(page_size, 100)}}
+    LIMIT least({{Int32(page_size, 100)}}, 100)
+    OFFSET {{Int32(page, 0)}} * least({{Int32(page_size, 100)}}, 100)
 
 TYPE endpoint
         
