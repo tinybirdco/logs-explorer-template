@@ -2,7 +2,7 @@
 
 This is a template for a Logs Explorer web application. It is built with Next.js and [Tinybird](https://tinybird.co).
 
-Use this template to bootstrap a multi-tenant, user-facing logs explorer for any software project. Fork it and make it your own!
+Use this template to bootstrap a user-facing logs explorer for any software project. Fork it and make it your own!
 
 Tech Stack:
 - Next.js
@@ -40,11 +40,11 @@ Append the `tinybird/fixtures/logs.ndjson` file to the `logs` Data Source or str
 Configure these Environment Variables in your Vercel project and you are ready to go:
 
 ```bash
-NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_ADMIN_TOKEN>
+NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_READ_PIPES_TOKEN>
 NEXT_PUBLIC_TINYBIRD_API_URL=<YOUR_TINYBIRD_REGION_HOST>
 ```
 
-Get your Tinybird admin token and region host from the Tinybird dashboard.
+Get your `read_pipes` token and region host from the Tinybird dashboard. Never use an admin token here: `NEXT_PUBLIC_` values are bundled into the client and ship to every browser.
 
 ## Local Development
 
@@ -58,7 +58,7 @@ cd tinybird
 tb local start
 tb login
 tb dev
-token ls  # copy an admin token
+tb token copy read_pipes  # copy the read_pipes token
 ```
 
 Configure the Next.js application:
@@ -71,7 +71,7 @@ cp .env.example .env
 Edit the `.env` file with your Tinybird API key and other configuration.
 
 ```bash
-NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_LOCAL_ADMIN_TOKEN>
+NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_LOCAL_READ_PIPES_TOKEN>
 NEXT_PUBLIC_TINYBIRD_API_URL=http://localhost:7181
 ```
 
@@ -91,9 +91,9 @@ http://localhost:3000
 
 Read the [dashboard/log-analyzer/README.md](./dashboard/log-analyzer/README.md) file for more information on how to use the application and [tinybird/README.md](./tinybird/README.md) for more information on how to customize the template.
 
-## Multi-tenancy
+## Authentication with Clerk (optional)
 
-The template is designed to be multi-tenant. It uses Clerk for authentication and user management.
+The template can use Clerk for sign-in. It does not isolate data between users or organizations: the `logs` Data Source has no tenant column, so every user, signed in or not, sees all logs in the workspace. Visitors who are not signed in use the `read_pipes` token from `NEXT_PUBLIC_TINYBIRD_API_KEY`.
 
 Configure the `.env` file with your Clerk publishable key and secret.
 
@@ -102,14 +102,14 @@ CLERK_PUBLISHABLE_KEY=<YOUR_CLERK_PUBLISHABLE_KEY>
 CLERK_SECRET_KEY=<YOUR_CLERK_SECRET_KEY>
 ```
 
-Then set the Tinybird JWT secret and workspace ID in the `.env` file.
+Then set the Tinybird JWT secret and workspace ID in the `.env` file. These are server-only variables: never prefix them with `NEXT_PUBLIC_`.
 
 ```bash
 TINYBIRD_JWT_SECRET=<YOUR_TINYBIRD_ADMIN_TOKEN>
 TINYBIRD_WORKSPACE_ID=<YOUR_TINYBIRD_WORKSPACE_ID>
 ```
 
-Modify the middleware to adapt the Tinybird token to your tenants.
+With these set, signed-in users get a short-lived JWT (15 minutes, 10 requests per second) that can read the same four endpoints as the `read_pipes` token. It does not restrict which logs they see. To add per-tenant isolation, add a tenant column to the `logs` Data Source, filter by it in every endpoint and pin it with `fixed_params` in the JWT.
 
 ```typescript
 // dashboard/log-analyzer/src/middleware.ts
@@ -122,23 +122,19 @@ const token = await new jose.SignJWT({
     scopes: [
       {
         type: "PIPES:READ",
-        resource: "log_analysis",
-        fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+        resource: "log_analysis"
       },
       {
         type: "PIPES:READ",
-        resource: "log_explorer",
-        fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+        resource: "log_explorer"
       },
       {
         type: "PIPES:READ",
-        resource: "generic_counter",
-        fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+        resource: "generic_counter"
       },
       {
         type: "PIPES:READ",
-        resource: "log_timeseries",
-        fixed_params: { user_id: userId, org_permission: orgName, service: "web" }
+        resource: "log_timeseries"
       }
     ],
     limits: {

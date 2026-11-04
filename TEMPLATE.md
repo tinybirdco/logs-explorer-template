@@ -1,6 +1,6 @@
 This is a template for a Logs Explorer web application. It is built with Next.js and Tinybird.
 
-Use this template to bootstrap a multi-tenant, user-facing logs explorer for any software project. Fork it and make it your own!
+Use this template to bootstrap a user-facing logs explorer for any software project. Fork it and make it your own!
 
 ## Set up the project
 
@@ -25,6 +25,8 @@ Configure your Tinybird environment variables in Vercel:
 NEXT_PUBLIC_TINYBIRD_API_KEY=<YOUR_TINYBIRD_READ_PIPES_TOKEN>
 NEXT_PUBLIC_TINYBIRD_API_URL=<YOUR_TINYBIRD_HOST_REGION>
 ```
+
+Use the `read_pipes` token, never an admin token: `NEXT_PUBLIC_` values ship to every browser.
 
 ## Instrument your application
 
@@ -67,6 +69,6 @@ You can use Vector to collect logs from different sources and send them to a Tin
 
 Check the [examples/vector](https://github.com/tinybirdco/logs-explorer-template/tree/main/examples/vector) folder for an example of how to do this with Vector.
 
-## Local Development, multi-tenancy and more
+## Local Development, authentication and more
 
 See the GitHub repository [README.md](https://github.com/tinybirdco/logs-explorer-template)
